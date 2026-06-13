@@ -2,14 +2,17 @@
 #
 # THE MOST IMPORTANT REQUIREMENT (REQ 4 / EC5): the existing
 # ~/.config/opencode/opencode.jsonc has hand-tuned content that MUST be
-# preserved (permission deny-list, plugin array, agent build/plan blocks,
-# server block, experimental, existing provider.litellm.models map). We never
+# preserved (permission deny-list, plugin array, agent build/plan blocks EXCEPT
+# their model fields which are overridden to the free Zen model, server block,
+# experimental, existing provider.litellm.models map). We never
 # overwrite the live file — we deep-merge ONLY the target keys and write the
 # result to STAGING_DIR for the orchestrator to review/apply later.
 #
 # Merge policy:
 #   (a) ensure provider.opencode with options.apiKey == "{env:OPENCODE_API_KEY}"
-#   (b) set top-level "model" + "small_model" to the FREE Zen model
+#   (b) set top-level "model" + "small_model" to the FREE Zen model;
+#       also set agent.build.model and agent.plan.model to the FREE Zen model
+#       (other agent sub-block fields like mode/description are preserved)
 #   (c) provider.litellm.options.apiKey  -> "{env:OPENAI_API_KEY}"
 #       provider.litellm.options.baseURL -> resolved LITELLM_BASE_URL
 #   (d) union-merge provider.litellm.models with $DISCOVERED_MODELS
@@ -135,6 +138,28 @@ oc_opts["apiKey"] = "{env:OPENCODE_API_KEY}"
 existing["model"] = free_model
 existing["small_model"] = free_model
 
+# (b.1) agent.build.model + agent.plan.model -> FREE Zen model. The live config
+# may pin a PAID model here (e.g. litellm/zai/glm-5.1); without overriding these
+# sub-models the top-level switch is defeated. Other agent sub-block fields
+# (mode, description, etc.) are preserved untouched. Blocks created minimally
+# if absent so we never clobber a hand-tuned agent block.
+agent = existing.setdefault("agent", {})
+if not isinstance(agent, dict):
+    agent = {}
+    existing["agent"] = agent
+agent_build = agent.setdefault("build", {})
+if not isinstance(agent_build, dict):
+    agent_build = {}
+    agent["build"] = agent_build
+agent_plan = agent.setdefault("plan", {})
+if not isinstance(agent_plan, dict):
+    agent_plan = {}
+    agent["plan"] = agent_plan
+agent_build_model_before = agent_build.get("model")
+agent_plan_model_before = agent_plan.get("model")
+agent_build["model"] = free_model
+agent_plan["model"] = free_model
+
 # (c)+(d) provider.litellm — refresh models map + credentials
 ll = provider.setdefault("litellm", {})
 if not isinstance(ll, dict):
@@ -175,6 +200,12 @@ lines.append("OpenCode merge summary")
 lines.append("=" * 40)
 lines.append("top-level model       -> %s" % existing.get("model"))
 lines.append("top-level small_model -> %s" % existing.get("small_model"))
+lines.append("agent.build.model     -> %s" % agent_build.get("model"))
+lines.append("agent.plan.model      -> %s" % agent_plan.get("model"))
+if agent_build_model_before and agent_build_model_before != free_model:
+    lines.append("  (was agent.build.model = %s)" % agent_build_model_before)
+if agent_plan_model_before and agent_plan_model_before != free_model:
+    lines.append("  (was agent.plan.model = %s)" % agent_plan_model_before)
 lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_API_KEY})")
 lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
              % base_url)
@@ -188,10 +219,16 @@ if len(added) > 30:
     lines.append("  ... and %d more" % (len(added) - 30))
 lines.append("")
 preserved_blocks = []
-for key in ("permission", "plugin", "agent", "server", "experimental"):
+for key in ("permission", "plugin", "server", "experimental"):
     if key in existing:
         preserved_blocks.append(key)
 lines.append("Preserved blocks: %s" % ", ".join(preserved_blocks))
+# agent block is PARTIALLY preserved: its model fields are overridden to the
+# free Zen model (see above); all other agent sub-block fields (mode,
+# description, etc.) are kept untouched.
+if "agent" in existing:
+    lines.append("agent block: preserved (other fields) + model overridden -> %s"
+                 % free_model)
 summary = "\n".join(lines)
 with open(diff_path, "w") as f:
     f.write(summary + "\n")
