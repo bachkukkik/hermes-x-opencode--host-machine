@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# NOTE: lib/ holds shell modules — do NOT ignore
 lib64/
 parts/
 sdist/
