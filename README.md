@@ -88,7 +88,7 @@ value — export it or add it to `.env`.
 
 | EC | Description | Mitigation |
 |----|-------------|------------|
-| EC1 | LiteLLM unreachable / empty model list | Falls back to `DEFAULT_MODEL` (zai/glm-5.1) |
+| EC1 | LiteLLM unreachable / empty model list | Falls back to `DEFAULT_MODEL` (zai/glm-5.2) |
 | EC2 | Key redaction in agent shell | All key reads happen in-process via python3; keys never round-trip through shell variables |
 | EC3 | Zen auth failure | OpenCode runtime-fallback plugin handles it; provider config is correct |
 | EC4 | Both providers absent | Generator skips cleanly, staging files still written with available data |

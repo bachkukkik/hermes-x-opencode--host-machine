@@ -99,6 +99,8 @@ def get_limits(model_id):
         return 200000, 4096
     if 'deepseek' in name:
         return 128000, 8192
+    if 'glm-5.2' in name:
+        return 1048576, 131072
     if 'glm' in name:
         return 128000, 8192
     if 'llama_cpp' in model_id:

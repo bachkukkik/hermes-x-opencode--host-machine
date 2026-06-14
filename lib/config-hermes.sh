@@ -73,7 +73,10 @@ except (FileNotFoundError, TypeError):
 # --- Build the merged custom_providers entry (Form B: models map) -----------
 models_map = {}
 for mid in discovered:
-    models_map[mid] = {"context_length": 200000}
+    if 'glm-5.2' in mid:
+        models_map[mid] = {"context_length": 1048576}
+    else:
+        models_map[mid] = {"context_length": 200000}
 
 new_litellm_entry = {
     "name": "litellm",

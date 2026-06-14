@@ -10,7 +10,7 @@
 
 # discover_models — populate $DISCOVERED_MODELS from LiteLLM /v1/models.
 discover_models() {
-    local default_model="${DEFAULT_MODEL:-zai/glm-5.1}"
+    local default_model="${DEFAULT_MODEL:-zai/glm-5.2}"
     local config_path="${CONFIG}"
     local base_url="${LITELLM_BASE_URL}"
     DISCOVERED_MODELS=""
