@@ -35,7 +35,7 @@ LITELLM_BASE_URL="${LITELLM_BASE_URL%/}"
 # --- Model selection defaults ----------------------------------------------
 # Fallback model used when LiteLLM is unreachable/empty (EC1) and seeded into
 # the discovered list so it is always present.
-DEFAULT_MODEL="${DEFAULT_MODEL:-zai/glm-5.1}"
+DEFAULT_MODEL="${DEFAULT_MODEL:-zai/glm-5.2}"
 
 # STRICT USER REQUIREMENT: OpenCode must default to the FREE Zen model so
 # Hermes -> OpenCode delegation burns no paid token quota.
