@@ -132,7 +132,9 @@ resolve_ctx_len() {
 | (unknown, non-default) | `{}` (empty mapping) | Agent self-resolves via `DEFAULT_CONTEXT_LENGTHS` / `models.dev` / endpoint probe |
 | (unknown, IS default model) | 200,000 | Fallback: guarantees overlay has ≥1 explicit `context_length` entry so the active model gets a sane window |
 
-The existing `api_key` is carried forward from the live config. Other `custom_providers` entries are preserved. Model settings (`model.default`, `model.name`) are set to `OPENAI_DEFAULT_MODEL` only if absent.
+The existing `api_key` is carried forward from the live config. Other `custom_providers` entries are preserved.
+
+**Model consistency guarantee:** `model.default` and `model.name` are ALWAYS set to the same value. If `HERMES_DEFAULT_MODEL` is set, both are set to that value. Otherwise, both are set to `OPENAI_DEFAULT_MODEL`. Stale values from the live config are never preserved — this prevents drift where the two fields could silently point to different models.
 
 ### Environment-gated config blocks
 

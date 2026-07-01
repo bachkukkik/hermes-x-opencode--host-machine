@@ -88,7 +88,9 @@ The parent project (Docker stack with full container orchestration, entrypoints,
 
 4. **Fallback Chain** — `OPENCODE_FALLBACK_MODEL` supports comma-separated ordered fallback models; generates `opencode-fallback.jsonc` for the opencode-runtime-fallback plugin
 
-5. **Credential Staging** — Seeds `auth.json` with both opencode (Zen) and litellm (proxy) keys
+5. **Model Consistency** — `model.default` and `model.name` in the Hermes overlay are always set to the same value: either `HERMES_DEFAULT_MODEL` (if set) or `OPENAI_DEFAULT_MODEL` (fallback). Stale values from the live config are never preserved, preventing silent model drift.
+
+6. **Credential Staging** — Seeds `auth.json` with both opencode (Zen) and litellm (proxy) keys
 
 ### 7.3 Model Selection Defaults
 

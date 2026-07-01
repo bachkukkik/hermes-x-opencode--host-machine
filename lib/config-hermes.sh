@@ -190,10 +190,11 @@ if hermes_default:
     model_sec["default"] = hermes_default
     model_sec["name"] = hermes_default
 else:
-    if not model_sec.get("default"):
-        model_sec["default"] = default_model
-    if not model_sec.get("name"):
-        model_sec["name"] = default_model
+    # Always set both fields to default_model — never preserve stale values
+    # from the live config, which would cause model.default and model.name
+    # to diverge (e.g. "deepseek/deepseek-v4-pro" vs "zai/glm-5.2").
+    model_sec["default"] = default_model
+    model_sec["name"] = default_model
 
 # --- Optional config blocks (env-gated) --------------------------------------
 # approvals.mode: off  (when HERMES_YOLO_MODE=1)
