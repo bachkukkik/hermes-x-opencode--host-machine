@@ -10,9 +10,9 @@
 
 # discover_models — populate $DISCOVERED_MODELS from LiteLLM /v1/models.
 discover_models() {
-    local default_model="${DEFAULT_MODEL:-zai/glm-5.2}"
+    local default_model="${OPENAI_DEFAULT_MODEL:-zai/glm-5.2}"
     local config_path="${CONFIG}"
-    local base_url="${LITELLM_BASE_URL}"
+    local base_url="${OPENAI_BASE_URL}"
     DISCOVERED_MODELS=""
 
     echo "== Discovering models from ${base_url}/v1/models ..."

@@ -13,20 +13,56 @@
 # read in-process and carried forward so the overlay is functional on apply;
 # key_env hardening is documented in README.md as an optional step.
 
+# Resolve a model's context length from a small pin table of well-known model
+# families (substring match, longest/most-specific pattern first). Echoes the
+# pinned value, or empty string when the model is unknown — the caller then
+# omits the context_length line so the hermes-agent self-resolves it at runtime
+# via its own DEFAULT_CONTEXT_LENGTHS table / models.dev / endpoint probe.
+#
+# Why pin at all when the agent self-resolves? (1) The DEFAULT model must always
+# carry an explicit context_length (see generate_hermes_overlay) so the overlay
+# has >=1 entry and the active model gets a sane window, and (2) a few families
+# need a defensive correct value — notably glm-5.2, whose true 1M window the
+# agent's "glm" catch-all misreports as 202752. Values mirror the agent's
+# authoritative DEFAULT_CONTEXT_LENGTHS table (agent/model_metadata.py) so a
+# pinned model gets the same value it would self-resolve to.
+resolve_ctx_len() {
+    local model="$1"
+    local m
+    m=$(printf '%s' "$model" | tr '[:upper:]' '[:lower:]')
+    # Longest/most-specific patterns FIRST (first match wins).
+    case "$m" in
+        *glm-5.2*)           echo 1048576 ;;  # agent catch-all gives 202752 (wrong)
+        *claude-opus-4*)     echo 1000000 ;;
+        *claude-sonnet-4.6*) echo 1000000 ;;
+        *gpt-5.4*)           echo 1050000 ;;
+        *gpt-5*)             echo 400000  ;;
+        *gpt-4o*)            echo 128000  ;;
+        *gpt-4.1*)           echo 1047576 ;;
+        *gpt-4*)             echo 128000  ;;
+        *gemini*)            echo 1048576 ;;
+        *deepseek-v4*)       echo 1000000 ;;
+        *minimax-m3*)        echo 1000000 ;;
+        *qwen3.6-27b*q4*)    echo 262144  ;;  # quantized GGUF: 262144 real ctx, not family 1M
+        *qwen3.6*)           echo 1048576 ;;
+        *)                   echo ""      ;;  # unknown -> omit, agent self-resolves
+    esac
+}
+
 # generate_hermes_overlay — merge live config.yaml custom_providers -> STAGING.
 generate_hermes_overlay() {
     mkdir -p "$(dirname "$STAGING_HERMES_OVERLAY")"
 
     local live_cfg="${CONFIG}"
     local staging="${STAGING_HERMES_OVERLAY}"
-    local base_url="${LITELLM_BASE_URL}"
-    local default_model="${DEFAULT_MODEL}"
+    local base_url="${OPENAI_BASE_URL}"
+    local default_model="${OPENAI_DEFAULT_MODEL}"
     local models_file="${STAGING_MODELS}"
 
     # Models are read from $STAGING_MODELS file (avoids stdin/heredoc conflict).
     python3 - \
         "$live_cfg" "$staging" "$base_url" "$default_model" "$models_file" << 'PYEOF'
-import sys, yaml
+import sys, yaml, os
 
 live_path, out_path, base_url, default_model, models_file = (
     sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
@@ -70,13 +106,54 @@ try:
 except (FileNotFoundError, TypeError):
     pass
 
+# --- Python equivalent of resolve_ctx_len() for in-heredoc use -------------
+def resolve_ctx_len(model_id):
+    """Pin table of well-known model families (substring, most-specific first).
+    Returns int or None (None = unknown, agent self-resolves)."""
+    m = model_id.lower()
+    if 'glm-5.2' in m:
+        return 1048576      # agent catch-all gives 202752 (wrong)
+    if 'claude-opus-4' in m:
+        return 1000000
+    if 'claude-sonnet-4.6' in m:
+        return 1000000
+    if 'gpt-5.4' in m:
+        return 1050000
+    if 'gpt-5' in m:
+        return 400000
+    if 'gpt-4o' in m:
+        return 128000
+    if 'gpt-4.1' in m:
+        return 1047576
+    if 'gpt-4' in m:
+        return 128000
+    if 'gemini' in m:
+        return 1048576
+    if 'deepseek-v4' in m:
+        return 1000000
+    if 'minimax-m3' in m:
+        return 1000000
+    if 'qwen3.6-27b' in m and 'q4' in m:
+        return 262144       # quantized GGUF: 262144 real ctx, not family 1M
+    if 'qwen3.6' in m:
+        return 1048576
+    return None             # unknown -> omit, agent self-resolves
+
 # --- Build the merged custom_providers entry (Form B: models map) -----------
 models_map = {}
 for mid in discovered:
-    if 'glm-5.2' in mid:
-        models_map[mid] = {"context_length": 1048576}
-    else:
+    ctx_len = resolve_ctx_len(mid)
+    if ctx_len is not None:
+        # Known family -> pin the accurate context length.
+        models_map[mid] = {"context_length": ctx_len}
+    elif mid == default_model:
+        # Default model ALWAYS gets an explicit context_length so the overlay
+        # has >=1 entry and the active model has a sane window.
         models_map[mid] = {"context_length": 200000}
+    else:
+        # Unknown family -> emit empty mapping so hermes-agent self-resolves
+        # context length at runtime (its own table / models.dev / endpoint probe).
+        models_map[mid] = {}
 
 new_litellm_entry = {
     "name": "litellm",
@@ -107,10 +184,51 @@ model_sec = cfg.setdefault("model", {})
 if not isinstance(model_sec, dict):
     model_sec = {}
     cfg["model"] = model_sec
-if not model_sec.get("default"):
-    model_sec["default"] = default_model
-if not model_sec.get("name"):
-    model_sec["name"] = default_model
+# Allow HERMES_DEFAULT_MODEL to override the default model
+hermes_default = os.environ.get("HERMES_DEFAULT_MODEL", "").strip()
+if hermes_default:
+    model_sec["default"] = hermes_default
+    model_sec["name"] = hermes_default
+else:
+    if not model_sec.get("default"):
+        model_sec["default"] = default_model
+    if not model_sec.get("name"):
+        model_sec["name"] = default_model
+
+# --- Optional config blocks (env-gated) --------------------------------------
+# approvals.mode: off  (when HERMES_YOLO_MODE=1)
+if os.environ.get("HERMES_YOLO_MODE") == "1":
+    cfg["approvals"] = {"mode": "off"}
+
+# goals.max_turns  (default 50)
+goal_max_turns = int(os.environ.get("HERMES_GOAL_MAX_TURNS", "50"))
+cfg["goals"] = {"max_turns": goal_max_turns}
+
+# delegation.max_iterations  (default 50)
+deleg_max_iter = int(os.environ.get("HERMES_DELEGATION_MAX_ITERATIONS", "50"))
+cfg["delegation"] = {"max_iterations": deleg_max_iter}
+
+# context_compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
+_compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
+if _compression_threshold:
+    try:
+        cfg.setdefault("context_compression", {})["threshold"] = float(_compression_threshold)
+    except ValueError:
+        pass
+
+# skills.external_dirs  (if optional-skills dir exists)
+_optional_skills_dir = os.path.expanduser("~/.hermes/hermes-agent/optional-skills")
+if os.path.isdir(_optional_skills_dir):
+    skills_sec = cfg.setdefault("skills", {})
+    if not isinstance(skills_sec, dict):
+        skills_sec = {}
+        cfg["skills"] = skills_sec
+    ext_dirs = skills_sec.setdefault("external_dirs", [])
+    if not isinstance(ext_dirs, list):
+        ext_dirs = []
+        skills_sec["external_dirs"] = ext_dirs
+    if _optional_skills_dir not in ext_dirs:
+        ext_dirs.append(_optional_skills_dir)
 
 # --- Write staging overlay (valid YAML) --------------------------------------
 with open(out_path, "w") as f:

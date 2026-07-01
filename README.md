@@ -82,13 +82,13 @@ value — export it or add it to `.env`.
 | `OPENCODE_ZEN_API_KEY` | OpenCode Zen free models credential | `~/.hermes/.env` |
 | `OPENCODE_API_KEY` | Resolves `{env:OPENCODE_API_KEY}` in opencode.jsonc | Must = `OPENCODE_ZEN_API_KEY` |
 | `OPENAI_API_KEY` | Resolves `{env:OPENAI_API_KEY}` (litellm provider) | `~/.hermes/.env` or config.yaml `model.api_key` |
-| `LITELLM_BASE_URL` | LiteLLM proxy URL (default `http://localhost:4000`) | env override |
+| `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL (default `http://localhost:4000`) | env override |
 
 ## Edge cases handled
 
 | EC | Description | Mitigation |
 |----|-------------|------------|
-| EC1 | LiteLLM unreachable / empty model list | Falls back to `DEFAULT_MODEL` (zai/glm-5.2) |
+| EC1 | LiteLLM unreachable / empty model list | Falls back to `OPENAI_DEFAULT_MODEL` (zai/glm-5.2) |
 | EC2 | Key redaction in agent shell | All key reads happen in-process via python3; keys never round-trip through shell variables |
 | EC3 | Zen auth failure | OpenCode runtime-fallback plugin handles it; provider config is correct |
 | EC4 | Both providers absent | Generator skips cleanly, staging files still written with available data |

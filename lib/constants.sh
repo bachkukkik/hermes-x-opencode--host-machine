@@ -26,16 +26,16 @@ STAGING_AUTH="${STAGING_DIR}/auth.json"
 STAGING_DIFF="${STAGING_DIR}/opencode-merge-summary.txt"
 STAGING_MODELS="${STAGING_DIR}/discovered-models.txt"
 
-# --- LiteLLM proxy ----------------------------------------------------------
+# --- OpenAI-compatible endpoint ----------------------------------------------
 # Strip any trailing slash; the /v1 suffix is appended by clients. Host uses
 # localhost (Docker used host.docker.internal — normalized away on bare metal).
-LITELLM_BASE_URL="${LITELLM_BASE_URL:-http://localhost:4000}"
-LITELLM_BASE_URL="${LITELLM_BASE_URL%/}"
+OPENAI_BASE_URL="${OPENAI_BASE_URL:-http://localhost:4000}"
+OPENAI_BASE_URL="${OPENAI_BASE_URL%/}"
 
 # --- Model selection defaults ----------------------------------------------
 # Fallback model used when LiteLLM is unreachable/empty (EC1) and seeded into
 # the discovered list so it is always present.
-DEFAULT_MODEL="${DEFAULT_MODEL:-zai/glm-5.2}"
+OPENAI_DEFAULT_MODEL="${OPENAI_DEFAULT_MODEL:-zai/glm-5.2}"
 
 # STRICT USER REQUIREMENT: OpenCode must default to the FREE Zen model so
 # Hermes -> OpenCode delegation burns no paid token quota.

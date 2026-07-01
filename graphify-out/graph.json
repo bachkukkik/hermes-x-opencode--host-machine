@@ -1,0 +1,3699 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "generate.sh",
+      "file_type": "code",
+      "source_file": "generate.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "generate",
+      "community": 3,
+      "norm_label": "generate.sh"
+    },
+    {
+      "label": "generate.sh script",
+      "file_type": "code",
+      "source_file": "generate.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
+      "community": 3,
+      "norm_label": "generate.sh script"
+    },
+    {
+      "label": "snapshot_live_checksums()",
+      "file_type": "code",
+      "source_file": "generate.sh",
+      "source_location": "L65",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "generate_snapshot_live_checksums",
+      "community": 3,
+      "norm_label": "snapshot_live_checksums()"
+    },
+    {
+      "label": "verify_live_checksums()",
+      "file_type": "code",
+      "source_file": "generate.sh",
+      "source_location": "L76",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "generate_verify_live_checksums",
+      "community": 3,
+      "norm_label": "verify_live_checksums()"
+    },
+    {
+      "label": "_pass()",
+      "file_type": "code",
+      "source_file": "generate.sh",
+      "source_location": "L131",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "generate_pass",
+      "community": 3,
+      "norm_label": "_pass()"
+    },
+    {
+      "label": "_fail()",
+      "file_type": "code",
+      "source_file": "generate.sh",
+      "source_location": "L132",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "generate_fail",
+      "community": 3,
+      "norm_label": "_fail()"
+    },
+    {
+      "label": "install.sh",
+      "file_type": "code",
+      "source_file": "install.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "install",
+      "community": 8,
+      "norm_label": "install.sh"
+    },
+    {
+      "label": "install.sh script",
+      "file_type": "code",
+      "source_file": "install.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_install_sh__entry",
+      "community": 8,
+      "norm_label": "install.sh script"
+    },
+    {
+      "label": "check_cmd()",
+      "file_type": "code",
+      "source_file": "install.sh",
+      "source_location": "L36",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "install_check_cmd",
+      "community": 8,
+      "norm_label": "check_cmd()"
+    },
+    {
+      "label": "config-hermes.sh",
+      "file_type": "code",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "lib_config_hermes",
+      "community": 6,
+      "norm_label": "config-hermes.sh"
+    },
+    {
+      "label": "config-hermes.sh script",
+      "file_type": "code",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_hermes_sh__entry",
+      "community": 6,
+      "norm_label": "config-hermes.sh script"
+    },
+    {
+      "label": "resolve_ctx_len()",
+      "file_type": "code",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "lib_config_hermes_resolve_ctx_len",
+      "community": 6,
+      "norm_label": "resolve_ctx_len()"
+    },
+    {
+      "label": "generate_hermes_overlay()",
+      "file_type": "code",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L53",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "lib_config_hermes_generate_hermes_overlay",
+      "community": 6,
+      "norm_label": "generate_hermes_overlay()"
+    },
+    {
+      "label": "config-opencode.sh",
+      "file_type": "code",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "lib_config_opencode",
+      "community": 7,
+      "norm_label": "config-opencode.sh"
+    },
+    {
+      "label": "config-opencode.sh script",
+      "file_type": "code",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_opencode_sh__entry",
+      "community": 7,
+      "norm_label": "config-opencode.sh script"
+    },
+    {
+      "label": "_oc_get_limits()",
+      "file_type": "code",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L24",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "lib_config_opencode_oc_get_limits",
+      "community": 7,
+      "norm_label": "_oc_get_limits()"
+    },
+    {
+      "label": "generate_opencode_staging()",
+      "file_type": "code",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "lib_config_opencode_generate_opencode_staging",
+      "community": 7,
+      "norm_label": "generate_opencode_staging()"
+    },
+    {
+      "label": "constants.sh",
+      "file_type": "code",
+      "source_file": "lib/constants.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "lib_constants",
+      "community": 9,
+      "norm_label": "constants.sh"
+    },
+    {
+      "label": "constants.sh script",
+      "file_type": "code",
+      "source_file": "lib/constants.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_constants_sh__entry",
+      "community": 9,
+      "norm_label": "constants.sh script"
+    },
+    {
+      "label": "HERMES_HOME",
+      "file_type": "code",
+      "source_file": "lib/constants.sh",
+      "source_location": "L7",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "id": "lib_constants_hermes_home",
+      "community": 9,
+      "norm_label": "hermes_home"
+    },
+    {
+      "label": "env-auth.sh",
+      "file_type": "code",
+      "source_file": "lib/env-auth.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "lib_env_auth",
+      "community": 10,
+      "norm_label": "env-auth.sh"
+    },
+    {
+      "label": "env-auth.sh script",
+      "file_type": "code",
+      "source_file": "lib/env-auth.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_env_auth_sh__entry",
+      "community": 10,
+      "norm_label": "env-auth.sh script"
+    },
+    {
+      "label": "generate_auth_staging()",
+      "file_type": "code",
+      "source_file": "lib/env-auth.sh",
+      "source_location": "L12",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "lib_env_auth_generate_auth_staging",
+      "community": 10,
+      "norm_label": "generate_auth_staging()"
+    },
+    {
+      "label": "model-discovery.sh",
+      "file_type": "code",
+      "source_file": "lib/model-discovery.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "lib_model_discovery",
+      "community": 11,
+      "norm_label": "model-discovery.sh"
+    },
+    {
+      "label": "model-discovery.sh script",
+      "file_type": "code",
+      "source_file": "lib/model-discovery.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_model_discovery_sh__entry",
+      "community": 11,
+      "norm_label": "model-discovery.sh script"
+    },
+    {
+      "label": "discover_models()",
+      "file_type": "code",
+      "source_file": "lib/model-discovery.sh",
+      "source_location": "L12",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "lib_model_discovery_discover_models",
+      "community": 11,
+      "norm_label": "discover_models()"
+    },
+    {
+      "label": "common.bash",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "id": "test_helper_common",
+      "community": 4,
+      "norm_label": "common.bash"
+    },
+    {
+      "label": "common.bash script",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_tests_e2e_test_helper_common_bash__entry",
+      "community": 4,
+      "norm_label": "common.bash script"
+    },
+    {
+      "label": "setup()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L7",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_setup",
+      "community": 4,
+      "norm_label": "setup()"
+    },
+    {
+      "label": "teardown()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L23",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_teardown",
+      "community": 4,
+      "norm_label": "teardown()"
+    },
+    {
+      "label": "start_mock_llm()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_start_mock_llm",
+      "community": 4,
+      "norm_label": "start_mock_llm()"
+    },
+    {
+      "label": "stop_mock_llm()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L79",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_stop_mock_llm",
+      "community": 4,
+      "norm_label": "stop_mock_llm()"
+    },
+    {
+      "label": "seed_hermes_config()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L88",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_seed_hermes_config",
+      "community": 4,
+      "norm_label": "seed_hermes_config()"
+    },
+    {
+      "label": "seed_opencode_config()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L102",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_seed_opencode_config",
+      "community": 4,
+      "norm_label": "seed_opencode_config()"
+    },
+    {
+      "label": "seed_env_file()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L145",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_seed_env_file",
+      "community": 4,
+      "norm_label": "seed_env_file()"
+    },
+    {
+      "label": "seed_all_configs()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L153",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_seed_all_configs",
+      "community": 4,
+      "norm_label": "seed_all_configs()"
+    },
+    {
+      "label": "seed_empty_configs()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L159",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_seed_empty_configs",
+      "community": 4,
+      "norm_label": "seed_empty_configs()"
+    },
+    {
+      "label": "assert_file_contains()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L170",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_file_contains",
+      "community": 4,
+      "norm_label": "assert_file_contains()"
+    },
+    {
+      "label": "assert_file_not_contains()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L179",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_file_not_contains",
+      "community": 4,
+      "norm_label": "assert_file_not_contains()"
+    },
+    {
+      "label": "assert_json_valid()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L187",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_json_valid",
+      "community": 4,
+      "norm_label": "assert_json_valid()"
+    },
+    {
+      "label": "assert_yaml_valid()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L194",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_yaml_valid",
+      "community": 4,
+      "norm_label": "assert_yaml_valid()"
+    },
+    {
+      "label": "assert_file_exists()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L201",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_file_exists",
+      "community": 4,
+      "norm_label": "assert_file_exists()"
+    },
+    {
+      "label": "assert_file_not_exists()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L208",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_file_not_exists",
+      "community": 4,
+      "norm_label": "assert_file_not_exists()"
+    },
+    {
+      "label": "assert_success()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L215",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_assert_success",
+      "community": 4,
+      "norm_label": "assert_success()"
+    },
+    {
+      "label": "run_generate()",
+      "file_type": "code",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L222",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "id": "test_helper_common_run_generate",
+      "community": 4,
+      "norm_label": "run_generate()"
+    },
+    {
+      "label": "pr-breakdown.md",
+      "file_type": "document",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L1",
+      "id": "plans_pr_breakdown",
+      "community": 5,
+      "norm_label": "pr-breakdown.md"
+    },
+    {
+      "label": "PR Breakdown \u2014 Host Config Generator Gap Bridge",
+      "file_type": "document",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L1",
+      "id": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "community": 5,
+      "norm_label": "pr breakdown \u2014 host config generator gap bridge"
+    },
+    {
+      "label": "Multi-PR Decomposition",
+      "file_type": "document",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L3",
+      "id": "plans_pr_breakdown_multi_pr_decomposition",
+      "community": 5,
+      "norm_label": "multi-pr decomposition"
+    },
+    {
+      "label": "Provisioning Strategy",
+      "file_type": "document",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L18",
+      "id": "plans_pr_breakdown_provisioning_strategy",
+      "community": 5,
+      "norm_label": "provisioning strategy"
+    },
+    {
+      "label": "Verification Chain",
+      "file_type": "document",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L22",
+      "id": "plans_pr_breakdown_verification_chain",
+      "community": 5,
+      "norm_label": "verification chain"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "agents",
+      "community": 0,
+      "norm_label": "agents.md"
+    },
+    {
+      "label": "Hermes \u00d7 OpenCode Host Config Generator \u2014 Agent Instructions",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "agents_hermes_opencode_host_config_generator_agent_instructions",
+      "community": 0,
+      "norm_label": "hermes \u00d7 opencode host config generator \u2014 agent instructions"
+    },
+    {
+      "label": "Architecture",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L5",
+      "id": "agents_architecture",
+      "community": 0,
+      "norm_label": "architecture"
+    },
+    {
+      "label": "Standing Orders (ALWAYS apply)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L32",
+      "id": "agents_standing_orders_always_apply",
+      "community": 0,
+      "norm_label": "standing orders (always apply)"
+    },
+    {
+      "label": "1. MANDATED SKILLS",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L36",
+      "id": "agents_1_mandated_skills",
+      "community": 0,
+      "norm_label": "1. mandated skills"
+    },
+    {
+      "label": "2. Kanban Delegation Rules (coding discipline)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L48",
+      "id": "agents_2_kanban_delegation_rules_coding_discipline",
+      "community": 0,
+      "norm_label": "2. kanban delegation rules (coding discipline)"
+    },
+    {
+      "label": "3. Code Quality Rules",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L54",
+      "id": "agents_3_code_quality_rules",
+      "community": 0,
+      "norm_label": "3. code quality rules"
+    },
+    {
+      "label": "4. Verification Commands",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L64",
+      "id": "agents_4_verification_commands",
+      "community": 0,
+      "norm_label": "4. verification commands"
+    },
+    {
+      "label": "5. File Locations (host paths)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L85",
+      "id": "agents_5_file_locations_host_paths",
+      "community": 0,
+      "norm_label": "5. file locations (host paths)"
+    },
+    {
+      "label": "6. LiteLLM / Model Discovery",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L98",
+      "id": "agents_6_litellm_model_discovery",
+      "community": 0,
+      "norm_label": "6. litellm / model discovery"
+    },
+    {
+      "label": "7. Project-Specific Patterns",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L105",
+      "id": "agents_7_project_specific_patterns",
+      "community": 0,
+      "norm_label": "7. project-specific patterns"
+    },
+    {
+      "label": "8. Agent Capabilities",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L115",
+      "id": "agents_8_agent_capabilities",
+      "community": 0,
+      "norm_label": "8. agent capabilities"
+    },
+    {
+      "label": "Release Phases",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L124",
+      "id": "agents_release_phases",
+      "community": 0,
+      "norm_label": "release phases"
+    },
+    {
+      "label": "PRD.md",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L1",
+      "id": "prd",
+      "community": 1,
+      "norm_label": "prd.md"
+    },
+    {
+      "label": "PRD: Hermes \u00d7 OpenCode Host Config Generator",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L1",
+      "id": "prd_prd_hermes_opencode_host_config_generator",
+      "community": 1,
+      "norm_label": "prd: hermes \u00d7 opencode host config generator"
+    },
+    {
+      "label": "1. Summary",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L3",
+      "id": "prd_1_summary",
+      "community": 1,
+      "norm_label": "1. summary"
+    },
+    {
+      "label": "2. Contacts",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L7",
+      "id": "prd_2_contacts",
+      "community": 1,
+      "norm_label": "2. contacts"
+    },
+    {
+      "label": "3. Background",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L14",
+      "id": "prd_3_background",
+      "community": 1,
+      "norm_label": "3. background"
+    },
+    {
+      "label": "Related Repository",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L20",
+      "id": "prd_related_repository",
+      "community": 1,
+      "norm_label": "related repository"
+    },
+    {
+      "label": "4. Objective",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L24",
+      "id": "prd_4_objective",
+      "community": 1,
+      "norm_label": "4. objective"
+    },
+    {
+      "label": "5. Market Segment",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L36",
+      "id": "prd_5_market_segment",
+      "community": 1,
+      "norm_label": "5. market segment"
+    },
+    {
+      "label": "6. Value Proposition",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L45",
+      "id": "prd_6_value_proposition",
+      "community": 1,
+      "norm_label": "6. value proposition"
+    },
+    {
+      "label": "7. Solution",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L52",
+      "id": "prd_7_solution",
+      "community": 1,
+      "norm_label": "7. solution"
+    },
+    {
+      "label": "7.1 Architecture",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L54",
+      "id": "prd_7_1_architecture",
+      "community": 1,
+      "norm_label": "7.1 architecture"
+    },
+    {
+      "label": "7.2 Key Features",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L74",
+      "id": "prd_7_2_key_features",
+      "community": 1,
+      "norm_label": "7.2 key features"
+    },
+    {
+      "label": "7.3 Model Selection Defaults",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L93",
+      "id": "prd_7_3_model_selection_defaults",
+      "community": 1,
+      "norm_label": "7.3 model selection defaults"
+    },
+    {
+      "label": "7.4 Cross-Agent Delegation",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L103",
+      "id": "prd_7_4_cross_agent_delegation",
+      "community": 1,
+      "norm_label": "7.4 cross-agent delegation"
+    },
+    {
+      "label": "7.5 Assumptions",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L109",
+      "id": "prd_7_5_assumptions",
+      "community": 1,
+      "norm_label": "7.5 assumptions"
+    },
+    {
+      "label": "8. Release",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L117",
+      "id": "prd_8_release",
+      "community": 1,
+      "norm_label": "8. release"
+    },
+    {
+      "label": "Verification Policy",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L124",
+      "id": "prd_verification_policy",
+      "community": 1,
+      "norm_label": "verification policy"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme",
+      "community": 2,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Hermes \u00d7 OpenCode Host Config Generator",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme_hermes_opencode_host_config_generator",
+      "community": 2,
+      "norm_label": "hermes \u00d7 opencode host config generator"
+    },
+    {
+      "label": "Origin / Related",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L7",
+      "id": "readme_origin_related",
+      "community": 2,
+      "norm_label": "origin / related"
+    },
+    {
+      "label": "What it does",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L14",
+      "id": "readme_what_it_does",
+      "community": 2,
+      "norm_label": "what it does"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "id": "readme_usage",
+      "community": 2,
+      "norm_label": "usage"
+    },
+    {
+      "label": "Applying the staging output (manual step)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L43",
+      "id": "readme_applying_the_staging_output_manual_step",
+      "community": 2,
+      "norm_label": "applying the staging output (manual step)"
+    },
+    {
+      "label": "Strict requirement: free Zen model",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L70",
+      "id": "readme_strict_requirement_free_zen_model",
+      "community": 2,
+      "norm_label": "strict requirement: free zen model"
+    },
+    {
+      "label": "Environment variables",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L78",
+      "id": "readme_environment_variables",
+      "community": 2,
+      "norm_label": "environment variables"
+    },
+    {
+      "label": "Edge cases handled",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L87",
+      "id": "readme_edge_cases_handled",
+      "community": 2,
+      "norm_label": "edge cases handled"
+    },
+    {
+      "label": "File layout",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L99",
+      "id": "readme_file_layout",
+      "community": 2,
+      "norm_label": "file layout"
+    },
+    {
+      "label": "01-architecture.md",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L1",
+      "id": "docs_01_architecture",
+      "community": 17,
+      "norm_label": "01-architecture.md"
+    },
+    {
+      "label": "01 \u2014 Architecture",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L1",
+      "id": "docs_01_architecture_01_architecture",
+      "community": 17,
+      "norm_label": "01 \u2014 architecture"
+    },
+    {
+      "label": "What",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L3",
+      "id": "docs_01_architecture_what",
+      "community": 17,
+      "norm_label": "what"
+    },
+    {
+      "label": "Why",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L7",
+      "id": "docs_01_architecture_why",
+      "community": 17,
+      "norm_label": "why"
+    },
+    {
+      "label": "How",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L13",
+      "id": "docs_01_architecture_how",
+      "community": 17,
+      "norm_label": "how"
+    },
+    {
+      "label": "Staging pipeline",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L15",
+      "id": "docs_01_architecture_staging_pipeline",
+      "community": 17,
+      "norm_label": "staging pipeline"
+    },
+    {
+      "label": "MERGE mode vs. Docker OVERWRITE",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L35",
+      "id": "docs_01_architecture_merge_mode_vs_docker_overwrite",
+      "community": 17,
+      "norm_label": "merge mode vs. docker overwrite"
+    },
+    {
+      "label": "File layout",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L45",
+      "id": "docs_01_architecture_file_layout",
+      "community": 17,
+      "norm_label": "file layout"
+    },
+    {
+      "label": "Data flow",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L65",
+      "id": "docs_01_architecture_data_flow",
+      "community": 17,
+      "norm_label": "data flow"
+    },
+    {
+      "label": "Verification",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L69",
+      "id": "docs_01_architecture_verification",
+      "community": 17,
+      "norm_label": "verification"
+    },
+    {
+      "label": "What Works",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L88",
+      "id": "docs_01_architecture_what_works",
+      "community": 17,
+      "norm_label": "what works"
+    },
+    {
+      "label": "What Fails",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L96",
+      "id": "docs_01_architecture_what_fails",
+      "community": 17,
+      "norm_label": "what fails"
+    },
+    {
+      "label": "Resolution",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L102",
+      "id": "docs_01_architecture_resolution",
+      "community": 17,
+      "norm_label": "resolution"
+    },
+    {
+      "label": "Verdict",
+      "file_type": "document",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L108",
+      "id": "docs_01_architecture_verdict",
+      "community": 17,
+      "norm_label": "verdict"
+    },
+    {
+      "label": "02-config-generation.md",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L1",
+      "id": "docs_02_config_generation",
+      "community": 13,
+      "norm_label": "02-config-generation.md"
+    },
+    {
+      "label": "02 \u2014 Config Generation",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L1",
+      "id": "docs_02_config_generation_02_config_generation",
+      "community": 13,
+      "norm_label": "02 \u2014 config generation"
+    },
+    {
+      "label": "What",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L3",
+      "id": "docs_02_config_generation_what",
+      "community": 13,
+      "norm_label": "what"
+    },
+    {
+      "label": "Why",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L7",
+      "id": "docs_02_config_generation_why",
+      "community": 13,
+      "norm_label": "why"
+    },
+    {
+      "label": "How",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L13",
+      "id": "docs_02_config_generation_how",
+      "community": 13,
+      "norm_label": "how"
+    },
+    {
+      "label": "constants.sh paths",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L15",
+      "id": "docs_02_config_generation_constants_sh_paths",
+      "community": 13,
+      "norm_label": "constants.sh paths"
+    },
+    {
+      "label": "config-opencode.sh MERGE strategy",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L31",
+      "id": "docs_02_config_generation_config_opencode_sh_merge_strategy",
+      "community": 13,
+      "norm_label": "config-opencode.sh merge strategy"
+    },
+    {
+      "label": "config-hermes.sh overlay",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L85",
+      "id": "docs_02_config_generation_config_hermes_sh_overlay",
+      "community": 13,
+      "norm_label": "config-hermes.sh overlay"
+    },
+    {
+      "label": "Environment-gated config blocks",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L137",
+      "id": "docs_02_config_generation_environment_gated_config_blocks",
+      "community": 13,
+      "norm_label": "environment-gated config blocks"
+    },
+    {
+      "label": "env-auth.sh credential staging",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L177",
+      "id": "docs_02_config_generation_env_auth_sh_credential_staging",
+      "community": 13,
+      "norm_label": "env-auth.sh credential staging"
+    },
+    {
+      "label": "Environment variable reference",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L186",
+      "id": "docs_02_config_generation_environment_variable_reference",
+      "community": 13,
+      "norm_label": "environment variable reference"
+    },
+    {
+      "label": "Fallback chain",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L195",
+      "id": "docs_02_config_generation_fallback_chain",
+      "community": 13,
+      "norm_label": "fallback chain"
+    },
+    {
+      "label": "Verification",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L207",
+      "id": "docs_02_config_generation_verification",
+      "community": 13,
+      "norm_label": "verification"
+    },
+    {
+      "label": "What Works",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L237",
+      "id": "docs_02_config_generation_what_works",
+      "community": 13,
+      "norm_label": "what works"
+    },
+    {
+      "label": "What Fails",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L245",
+      "id": "docs_02_config_generation_what_fails",
+      "community": 13,
+      "norm_label": "what fails"
+    },
+    {
+      "label": "Resolution",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L251",
+      "id": "docs_02_config_generation_resolution",
+      "community": 13,
+      "norm_label": "resolution"
+    },
+    {
+      "label": "Verdict",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L257",
+      "id": "docs_02_config_generation_verdict",
+      "community": 13,
+      "norm_label": "verdict"
+    },
+    {
+      "label": "03-model-discovery.md",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L1",
+      "id": "docs_03_model_discovery",
+      "community": 15,
+      "norm_label": "03-model-discovery.md"
+    },
+    {
+      "label": "03 \u2014 Model Discovery",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L1",
+      "id": "docs_03_model_discovery_03_model_discovery",
+      "community": 15,
+      "norm_label": "03 \u2014 model discovery"
+    },
+    {
+      "label": "What",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L3",
+      "id": "docs_03_model_discovery_what",
+      "community": 15,
+      "norm_label": "what"
+    },
+    {
+      "label": "Why",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L7",
+      "id": "docs_03_model_discovery_why",
+      "community": 15,
+      "norm_label": "why"
+    },
+    {
+      "label": "How",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L13",
+      "id": "docs_03_model_discovery_how",
+      "community": 15,
+      "norm_label": "how"
+    },
+    {
+      "label": "Discovery pipeline",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L15",
+      "id": "docs_03_model_discovery_discovery_pipeline",
+      "community": 15,
+      "norm_label": "discovery pipeline"
+    },
+    {
+      "label": "Authentication (EC2)",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L33",
+      "id": "docs_03_model_discovery_authentication_ec2",
+      "community": 15,
+      "norm_label": "authentication (ec2)"
+    },
+    {
+      "label": "Filter pipeline",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L58",
+      "id": "docs_03_model_discovery_filter_pipeline",
+      "community": 15,
+      "norm_label": "filter pipeline"
+    },
+    {
+      "label": "Fallback logic (EC1)",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L77",
+      "id": "docs_03_model_discovery_fallback_logic_ec1",
+      "community": 15,
+      "norm_label": "fallback logic (ec1)"
+    },
+    {
+      "label": "Output format",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L88",
+      "id": "docs_03_model_discovery_output_format",
+      "community": 15,
+      "norm_label": "output format"
+    },
+    {
+      "label": "Verification",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L92",
+      "id": "docs_03_model_discovery_verification",
+      "community": 15,
+      "norm_label": "verification"
+    },
+    {
+      "label": "What Works",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L122",
+      "id": "docs_03_model_discovery_what_works",
+      "community": 15,
+      "norm_label": "what works"
+    },
+    {
+      "label": "What Fails",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L131",
+      "id": "docs_03_model_discovery_what_fails",
+      "community": 15,
+      "norm_label": "what fails"
+    },
+    {
+      "label": "Resolution",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L137",
+      "id": "docs_03_model_discovery_resolution",
+      "community": 15,
+      "norm_label": "resolution"
+    },
+    {
+      "label": "Verdict",
+      "file_type": "document",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L143",
+      "id": "docs_03_model_discovery_verdict",
+      "community": 15,
+      "norm_label": "verdict"
+    },
+    {
+      "label": "04-skill-installation.md",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L1",
+      "id": "docs_04_skill_installation",
+      "community": 16,
+      "norm_label": "04-skill-installation.md"
+    },
+    {
+      "label": "04 \u2014 Skill Installation",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L1",
+      "id": "docs_04_skill_installation_04_skill_installation",
+      "community": 16,
+      "norm_label": "04 \u2014 skill installation"
+    },
+    {
+      "label": "What",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L3",
+      "id": "docs_04_skill_installation_what",
+      "community": 16,
+      "norm_label": "what"
+    },
+    {
+      "label": "Why",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L7",
+      "id": "docs_04_skill_installation_why",
+      "community": 16,
+      "norm_label": "why"
+    },
+    {
+      "label": "How",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L13",
+      "id": "docs_04_skill_installation_how",
+      "community": 16,
+      "norm_label": "how"
+    },
+    {
+      "label": "Skill directory layout",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L15",
+      "id": "docs_04_skill_installation_skill_directory_layout",
+      "community": 16,
+      "norm_label": "skill directory layout"
+    },
+    {
+      "label": "install-skills.sh pattern",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L40",
+      "id": "docs_04_skill_installation_install_skills_sh_pattern",
+      "community": 16,
+      "norm_label": "install-skills.sh pattern"
+    },
+    {
+      "label": "Cross-agent skill sharing matrix",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L73",
+      "id": "docs_04_skill_installation_cross_agent_skill_sharing_matrix",
+      "community": 16,
+      "norm_label": "cross-agent skill sharing matrix"
+    },
+    {
+      "label": "Host vs. Docker container differences",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L83",
+      "id": "docs_04_skill_installation_host_vs_docker_container_differences",
+      "community": 16,
+      "norm_label": "host vs. docker container differences"
+    },
+    {
+      "label": "Skill YAML frontmatter",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L93",
+      "id": "docs_04_skill_installation_skill_yaml_frontmatter",
+      "community": 16,
+      "norm_label": "skill yaml frontmatter"
+    },
+    {
+      "label": "Verification",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L113",
+      "id": "docs_04_skill_installation_verification",
+      "community": 16,
+      "norm_label": "verification"
+    },
+    {
+      "label": "What Works",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L143",
+      "id": "docs_04_skill_installation_what_works",
+      "community": 16,
+      "norm_label": "what works"
+    },
+    {
+      "label": "What Fails",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L151",
+      "id": "docs_04_skill_installation_what_fails",
+      "community": 16,
+      "norm_label": "what fails"
+    },
+    {
+      "label": "Resolution",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L157",
+      "id": "docs_04_skill_installation_resolution",
+      "community": 16,
+      "norm_label": "resolution"
+    },
+    {
+      "label": "Verdict",
+      "file_type": "document",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L163",
+      "id": "docs_04_skill_installation_verdict",
+      "community": 16,
+      "norm_label": "verdict"
+    },
+    {
+      "label": "05-cross-agent-delegation.md",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L1",
+      "id": "docs_05_cross_agent_delegation",
+      "community": 14,
+      "norm_label": "05-cross-agent-delegation.md"
+    },
+    {
+      "label": "05 \u2014 Cross-Agent Delegation",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L1",
+      "id": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "community": 14,
+      "norm_label": "05 \u2014 cross-agent delegation"
+    },
+    {
+      "label": "What",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L3",
+      "id": "docs_05_cross_agent_delegation_what",
+      "community": 14,
+      "norm_label": "what"
+    },
+    {
+      "label": "Why",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L7",
+      "id": "docs_05_cross_agent_delegation_why",
+      "community": 14,
+      "norm_label": "why"
+    },
+    {
+      "label": "How",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L13",
+      "id": "docs_05_cross_agent_delegation_how",
+      "community": 14,
+      "norm_label": "how"
+    },
+    {
+      "label": "Delegation matrix",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L15",
+      "id": "docs_05_cross_agent_delegation_delegation_matrix",
+      "community": 14,
+      "norm_label": "delegation matrix"
+    },
+    {
+      "label": "Hermes \u2192 OpenCode delegation",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L36",
+      "id": "docs_05_cross_agent_delegation_hermes_opencode_delegation",
+      "community": 14,
+      "norm_label": "hermes \u2192 opencode delegation"
+    },
+    {
+      "label": "OpenCode \u2192 Hermes delegation",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L52",
+      "id": "docs_05_cross_agent_delegation_opencode_hermes_delegation",
+      "community": 14,
+      "norm_label": "opencode \u2192 hermes delegation"
+    },
+    {
+      "label": "Model selection for delegation",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L72",
+      "id": "docs_05_cross_agent_delegation_model_selection_for_delegation",
+      "community": 14,
+      "norm_label": "model selection for delegation"
+    },
+    {
+      "label": "Fallback chain",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L81",
+      "id": "docs_05_cross_agent_delegation_fallback_chain",
+      "community": 14,
+      "norm_label": "fallback chain"
+    },
+    {
+      "label": "Credential flow",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L98",
+      "id": "docs_05_cross_agent_delegation_credential_flow",
+      "community": 14,
+      "norm_label": "credential flow"
+    },
+    {
+      "label": "Verification",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L113",
+      "id": "docs_05_cross_agent_delegation_verification",
+      "community": 14,
+      "norm_label": "verification"
+    },
+    {
+      "label": "What Works",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L146",
+      "id": "docs_05_cross_agent_delegation_what_works",
+      "community": 14,
+      "norm_label": "what works"
+    },
+    {
+      "label": "What Fails",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L154",
+      "id": "docs_05_cross_agent_delegation_what_fails",
+      "community": 14,
+      "norm_label": "what fails"
+    },
+    {
+      "label": "Resolution",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L160",
+      "id": "docs_05_cross_agent_delegation_resolution",
+      "community": 14,
+      "norm_label": "resolution"
+    },
+    {
+      "label": "Verdict",
+      "file_type": "document",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L166",
+      "id": "docs_05_cross_agent_delegation_verdict",
+      "community": 14,
+      "norm_label": "verdict"
+    },
+    {
+      "label": "06-verification.md",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L1",
+      "id": "docs_06_verification",
+      "community": 12,
+      "norm_label": "06-verification.md"
+    },
+    {
+      "label": "06 \u2014 Verification",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L1",
+      "id": "docs_06_verification_06_verification",
+      "community": 12,
+      "norm_label": "06 \u2014 verification"
+    },
+    {
+      "label": "What",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L3",
+      "id": "docs_06_verification_what",
+      "community": 12,
+      "norm_label": "what"
+    },
+    {
+      "label": "Why",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L7",
+      "id": "docs_06_verification_why",
+      "community": 12,
+      "norm_label": "why"
+    },
+    {
+      "label": "How",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L13",
+      "id": "docs_06_verification_how",
+      "community": 12,
+      "norm_label": "how"
+    },
+    {
+      "label": "Verification layers",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L15",
+      "id": "docs_06_verification_verification_layers",
+      "community": 12,
+      "norm_label": "verification layers"
+    },
+    {
+      "label": "--dry-run mode",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L41",
+      "id": "docs_06_verification_dry_run_mode",
+      "community": 12,
+      "norm_label": "--dry-run mode"
+    },
+    {
+      "label": "bash -n syntax check",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L60",
+      "id": "docs_06_verification_bash_n_syntax_check",
+      "community": 12,
+      "norm_label": "bash -n syntax check"
+    },
+    {
+      "label": "JSON/YAML validity",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L70",
+      "id": "docs_06_verification_json_yaml_validity",
+      "community": 12,
+      "norm_label": "json/yaml validity"
+    },
+    {
+      "label": "Content assertions",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L80",
+      "id": "docs_06_verification_content_assertions",
+      "community": 12,
+      "norm_label": "content assertions"
+    },
+    {
+      "label": "Checksum snapshot",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L93",
+      "id": "docs_06_verification_checksum_snapshot",
+      "community": 12,
+      "norm_label": "checksum snapshot"
+    },
+    {
+      "label": "Applying staging to live (manual step)",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L107",
+      "id": "docs_06_verification_applying_staging_to_live_manual_step",
+      "community": 12,
+      "norm_label": "applying staging to live (manual step)"
+    },
+    {
+      "label": "bats e2e tests",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L136",
+      "id": "docs_06_verification_bats_e2e_tests",
+      "community": 12,
+      "norm_label": "bats e2e tests"
+    },
+    {
+      "label": "Verification",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L162",
+      "id": "docs_06_verification_verification",
+      "community": 12,
+      "norm_label": "verification"
+    },
+    {
+      "label": "What Works",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L200",
+      "id": "docs_06_verification_what_works",
+      "community": 12,
+      "norm_label": "what works"
+    },
+    {
+      "label": "What Fails",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L209",
+      "id": "docs_06_verification_what_fails",
+      "community": 12,
+      "norm_label": "what fails"
+    },
+    {
+      "label": "Resolution",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L215",
+      "id": "docs_06_verification_resolution",
+      "community": 12,
+      "norm_label": "resolution"
+    },
+    {
+      "label": "Verdict",
+      "file_type": "document",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L221",
+      "id": "docs_06_verification_verdict",
+      "community": 12,
+      "norm_label": "verdict"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "docs/README.md",
+      "source_location": "L1",
+      "id": "docs_readme",
+      "community": 18,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Architecture Documentation",
+      "file_type": "document",
+      "source_file": "docs/README.md",
+      "source_location": "L1",
+      "id": "docs_readme_architecture_documentation",
+      "community": 18,
+      "norm_label": "architecture documentation"
+    },
+    {
+      "label": "Document Index",
+      "file_type": "document",
+      "source_file": "docs/README.md",
+      "source_location": "L5",
+      "id": "docs_readme_document_index",
+      "community": 18,
+      "norm_label": "document index"
+    },
+    {
+      "label": "Related Documents",
+      "file_type": "document",
+      "source_file": "docs/README.md",
+      "source_location": "L16",
+      "id": "docs_readme_related_documents",
+      "community": 18,
+      "norm_label": "related documents"
+    },
+    {
+      "label": "Document Conventions",
+      "file_type": "document",
+      "source_file": "docs/README.md",
+      "source_location": "L21",
+      "id": "docs_readme_document_conventions",
+      "community": 18,
+      "norm_label": "document conventions"
+    }
+  ],
+  "links": [
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L132",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "generate",
+      "target": "generate_fail"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L131",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "generate",
+      "target": "generate_pass"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "generate",
+      "target": "generate_snapshot_live_checksums"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "generate",
+      "target": "generate_verify_live_checksums"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "generate",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L139",
+      "weight": 1.0,
+      "context": "call",
+      "confidence_score": 1.0,
+      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
+      "target": "generate_fail"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L137",
+      "weight": 1.0,
+      "context": "call",
+      "confidence_score": 1.0,
+      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
+      "target": "generate_pass"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L98",
+      "weight": 1.0,
+      "context": "call",
+      "confidence_score": 1.0,
+      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
+      "target": "generate_snapshot_live_checksums"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "install.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "install",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_install_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "install.sh",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "install",
+      "target": "install_check_cmd"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "install.sh",
+      "source_location": "L47",
+      "weight": 1.0,
+      "context": "call",
+      "confidence_score": 1.0,
+      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_install_sh__entry",
+      "target": "install_check_cmd"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_config_hermes",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_hermes_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_config_hermes",
+      "target": "lib_config_hermes_generate_hermes_overlay"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_config_hermes",
+      "target": "lib_config_hermes_resolve_ctx_len"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_config_opencode",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_opencode_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_config_opencode",
+      "target": "lib_config_opencode_generate_opencode_staging"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_config_opencode",
+      "target": "lib_config_opencode_oc_get_limits"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/constants.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_constants",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_constants_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/constants.sh",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_constants",
+      "target": "lib_constants_hermes_home"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/env-auth.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_env_auth",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_env_auth_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/env-auth.sh",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_env_auth",
+      "target": "lib_env_auth_generate_auth_staging"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/model-discovery.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_model_discovery",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_model_discovery_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/model-discovery.sh",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_model_discovery",
+      "target": "lib_model_discovery_discover_models"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_tests_e2e_test_helper_common_bash__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L170",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_file_contains",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L201",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_file_exists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L179",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_file_not_contains",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L208",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_file_not_exists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L187",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_json_valid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L194",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_assert_yaml_valid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L222",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_run_generate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_seed_all_configs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_seed_empty_configs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_seed_env_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_seed_hermes_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_seed_opencode_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_start_mock_llm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_stop_mock_llm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "test_helper_common",
+      "target": "test_helper_common_teardown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L24",
+      "weight": 1.0,
+      "context": "call",
+      "source": "test_helper_common_teardown",
+      "target": "test_helper_common_stop_mock_llm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L154",
+      "weight": 1.0,
+      "context": "call",
+      "source": "test_helper_common_seed_all_configs",
+      "target": "test_helper_common_seed_hermes_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L155",
+      "weight": 1.0,
+      "context": "call",
+      "source": "test_helper_common_seed_all_configs",
+      "target": "test_helper_common_seed_opencode_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L156",
+      "weight": 1.0,
+      "context": "call",
+      "source": "test_helper_common_seed_all_configs",
+      "target": "test_helper_common_seed_env_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "plans_pr_breakdown",
+      "target": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "target": "plans_pr_breakdown_multi_pr_decomposition"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "target": "plans_pr_breakdown_provisioning_strategy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".hermes/plans/pr-breakdown.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "target": "plans_pr_breakdown_verification_chain"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents",
+      "target": "agents_hermes_opencode_host_config_generator_agent_instructions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_hermes_opencode_host_config_generator_agent_instructions",
+      "target": "agents_architecture"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_hermes_opencode_host_config_generator_agent_instructions",
+      "target": "agents_release_phases"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_hermes_opencode_host_config_generator_agent_instructions",
+      "target": "agents_standing_orders_always_apply"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_1_mandated_skills"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_2_kanban_delegation_rules_coding_discipline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_3_code_quality_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_4_verification_commands"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_5_file_locations_host_paths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_6_litellm_model_discovery"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L105",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_7_project_specific_patterns"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_standing_orders_always_apply",
+      "target": "agents_8_agent_capabilities"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd",
+      "target": "prd_prd_hermes_opencode_host_config_generator"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_1_summary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_2_contacts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_3_background"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_4_objective"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_5_market_segment"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_6_value_proposition"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_7_solution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_8_release"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_3_background",
+      "target": "prd_related_repository"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_7_solution",
+      "target": "prd_7_1_architecture"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_7_solution",
+      "target": "prd_7_2_key_features"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_7_solution",
+      "target": "prd_7_3_model_selection_defaults"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_7_solution",
+      "target": "prd_7_4_cross_agent_delegation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_7_solution",
+      "target": "prd_7_5_assumptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "prd_8_release",
+      "target": "prd_verification_policy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme",
+      "target": "readme_hermes_opencode_host_config_generator"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_applying_the_staging_output_manual_step"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_edge_cases_handled"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_environment_variables"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_file_layout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_origin_related"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_strict_requirement_free_zen_model"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_usage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_hermes_opencode_host_config_generator",
+      "target": "readme_what_it_does"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_01_architecture",
+      "target": "docs_01_architecture_01_architecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_how",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_verdict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_what",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_what_fails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_what_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "docs_01_architecture_01_architecture",
+      "target": "docs_01_architecture_why",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "docs_01_architecture_how",
+      "target": "docs_01_architecture_data_flow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "docs_01_architecture_how",
+      "target": "docs_01_architecture_file_layout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "docs_01_architecture_how",
+      "target": "docs_01_architecture_merge_mode_vs_docker_overwrite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/01-architecture.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_01_architecture_how",
+      "target": "docs_01_architecture_staging_pipeline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_02_config_generation",
+      "target": "docs_02_config_generation_02_config_generation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_how",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L251",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L257",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_verdict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L207",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_what",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L245",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_what_fails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L237",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_what_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_02_config_generation",
+      "target": "docs_02_config_generation_why",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_config_hermes_sh_overlay",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_config_opencode_sh_merge_strategy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_constants_sh_paths",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L177",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_env_auth_sh_credential_staging",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_environment_gated_config_blocks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L186",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_environment_variable_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_fallback_chain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery",
+      "target": "docs_03_model_discovery_03_model_discovery",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_how",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_verdict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_what",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_what_fails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L122",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_what_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_03_model_discovery",
+      "target": "docs_03_model_discovery_why",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_how",
+      "target": "docs_03_model_discovery_authentication_ec2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_how",
+      "target": "docs_03_model_discovery_discovery_pipeline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_how",
+      "target": "docs_03_model_discovery_fallback_logic_ec1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_how",
+      "target": "docs_03_model_discovery_filter_pipeline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/03-model-discovery.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "docs_03_model_discovery_how",
+      "target": "docs_03_model_discovery_output_format",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation",
+      "target": "docs_04_skill_installation_04_skill_installation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_how",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L163",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_verdict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_what",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_what_fails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_what_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_04_skill_installation",
+      "target": "docs_04_skill_installation_why",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_how",
+      "target": "docs_04_skill_installation_cross_agent_skill_sharing_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_how",
+      "target": "docs_04_skill_installation_host_vs_docker_container_differences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_how",
+      "target": "docs_04_skill_installation_install_skills_sh_pattern",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_how",
+      "target": "docs_04_skill_installation_skill_directory_layout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/04-skill-installation.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "docs_04_skill_installation_how",
+      "target": "docs_04_skill_installation_skill_yaml_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_how",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L160",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_verdict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_what",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_what_fails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L146",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_what_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "target": "docs_05_cross_agent_delegation_why",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_how",
+      "target": "docs_05_cross_agent_delegation_credential_flow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_how",
+      "target": "docs_05_cross_agent_delegation_delegation_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_how",
+      "target": "docs_05_cross_agent_delegation_fallback_chain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_how",
+      "target": "docs_05_cross_agent_delegation_hermes_opencode_delegation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_how",
+      "target": "docs_05_cross_agent_delegation_model_selection_for_delegation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/05-cross-agent-delegation.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "docs_05_cross_agent_delegation_how",
+      "target": "docs_05_cross_agent_delegation_opencode_hermes_delegation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_06_verification",
+      "target": "docs_06_verification_06_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_how",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_resolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_verdict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_what",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L209",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_what_fails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L200",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_what_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "docs_06_verification_06_verification",
+      "target": "docs_06_verification_why",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_applying_staging_to_live_manual_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_bash_n_syntax_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L136",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_bats_e2e_tests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_checksum_snapshot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_content_assertions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_dry_run_mode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_json_yaml_validity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/06-verification.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "docs_06_verification_how",
+      "target": "docs_06_verification_verification_layers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_readme_architecture_documentation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "docs_readme_architecture_documentation",
+      "target": "docs_readme_document_conventions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "docs_readme_architecture_documentation",
+      "target": "docs_readme_document_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "docs_readme_architecture_documentation",
+      "target": "docs_readme_related_documents",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "2e8c9478b46e25e6eb779e16ef84444483b867e8"
+}
