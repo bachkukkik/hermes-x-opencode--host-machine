@@ -21,13 +21,13 @@ load test_helper/common
     assert_yaml_valid "${GEN_DIR}/staging/config-hermes-overlay.yaml"
 }
 
-@test "staging/opencode.jsonc has provider.opencode with {env:OPENCODE_API_KEY}" {
+@test "staging/opencode.jsonc has provider.opencode with {env:OPENCODE_ZEN_API_KEY}" {
     seed_all_configs
     start_mock_llm 14023 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
     run_generate
     [ "$status" -eq 0 ]
 
-    assert_file_contains "${GEN_DIR}/staging/opencode.jsonc" "\"apiKey\": \"{env:OPENCODE_API_KEY}\""
+    assert_file_contains "${GEN_DIR}/staging/opencode.jsonc" "\"apiKey\": \"{env:OPENCODE_ZEN_API_KEY}\""
 }
 
 @test "staging/opencode.jsonc top-level model = opencode/deepseek-v4-flash-free" {

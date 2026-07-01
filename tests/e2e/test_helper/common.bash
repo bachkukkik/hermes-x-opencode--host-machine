@@ -126,7 +126,7 @@ seed_opencode_config() {
   "server": {"port": 4096},
   "provider": {
     "opencode": {
-      "options": {"apiKey": "{env:OPENCODE_API_KEY}"}
+      "options": {"apiKey": "{env:OPENCODE_ZEN_API_KEY}"}
     },
     "litellm": {
       "options": {"apiKey": "{env:OPENAI_API_KEY}", "baseURL": "http://localhost:4000"},
@@ -144,7 +144,7 @@ JEOF
 
 seed_env_file() {
     cat > "${FAKE_HOME}/.hermes/.env" << 'ENVEOF'
-OPENCODE_API_KEY=sk-zen...-abc
+OPENCODE_ZEN_API_KEY=sk-zen...-abc
 OPENAI_API_KEY=sk-mock-test-key-2345
 ENVEOF
 }

@@ -209,6 +209,16 @@ cfg["goals"] = {"max_turns": goal_max_turns}
 deleg_max_iter = int(os.environ.get("HERMES_DELEGATION_MAX_ITERATIONS", "50"))
 cfg["delegation"] = {"max_iterations": deleg_max_iter}
 
+# delegation.model  (when HERMES_DELEGATION_MODEL is set)
+_delegation_model = os.environ.get("HERMES_DELEGATION_MODEL", "").strip()
+if _delegation_model:
+    cfg["delegation"]["model"] = _delegation_model
+
+# delegation.provider  (when HERMES_DELEGATION_PROVIDER is set)
+_delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
+if _delegation_provider:
+    cfg["delegation"]["provider"] = _delegation_provider
+
 # context_compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
 if _compression_threshold:

@@ -21,7 +21,7 @@ Layer 1: Static checks
 └── python3 yaml.safe_load() on staging/config-hermes-overlay.yaml
 
 Layer 2: Content assertions
-├── provider.opencode with {env:OPENCODE_API_KEY} present
+├── provider.opencode with {env:OPENCODE_ZEN_API_KEY} present
 ├── model = opencode/deepseek-v4-flash-free
 ├── custom_providers has >1 model entries
 └── Preserved blocks (permission, plugin, agent, server) present
@@ -82,7 +82,7 @@ python3 -c "import yaml; yaml.safe_load(open('staging/config-hermes-overlay.yaml
 | Test | Check | Command |
 |------|-------|---------|
 | TC1 | bash -n on all scripts | `bash -n "$script"` per file |
-| TC2 | provider.opencode present | `grep -q '"apiKey": "{env:OPENCODE_API_KEY}"' staging/opencode.jsonc` |
+| TC2 | provider.opencode present | `grep -q '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' staging/opencode.jsonc` |
 | TC3 | custom_providers models count > 1 | `grep -c 'context_length' staging/config-hermes-overlay.yaml` |
 | TC4 | opencode.jsonc valid JSON | `python3 -m json.tool staging/opencode.jsonc` |
 | TC5 | Hermes overlay valid YAML | `python3 -c "import yaml; yaml.safe_load(...)"` |
@@ -126,7 +126,7 @@ cp "$STAGING/config-hermes-overlay.yaml" ~/.hermes/config.yaml
 cp "$STAGING/auth.json" ~/.local/share/opencode/auth.json
 
 # 4. Set env var
-export OPENCODE_API_KEY=***
+export OPENCODE_ZEN_API_KEY=***
 
 # 5. Verify agents work
 opencode run --model opencode/deepseek-v4-flash-free -q "say hello"
@@ -159,6 +159,18 @@ Planned for Phase 2. The test structure follows the Docker reference:
 }
 ```
 
+## Per-Delegation Model Routing (PR #68)
+
+`HERMES_DELEGATION_MODEL` and `HERMES_DELEGATION_PROVIDER` allow routing subagent conversations to a different model/provider than the parent. When set, these appear in the staging overlay under `delegation:`. This is useful for using a cheaper/faster model for delegated tasks while keeping the parent model unchanged.
+
+## Credential Resolution (PR #66 / CA-30-A)
+
+The auth.json staging follows an **OR guard contract**: the litellm credential seeds when `OPENAI_API_KEY` is set in `~/.hermes/.env` **OR** falls back to the inline `api_key` in `~/.hermes/config.yaml`. Both opencode and litellm providers are independent — an empty `auth.json` is a valid state when the user has not configured either provider yet.
+
+The opencode (Zen) credential seeds from `OPENCODE_ZEN_API_KEY` in `~/.hermes/.env` with no fallback — it must be explicitly configured. This naming aligns with the official Hermes agent convention (hermes config, hermes doctor, opencode-zen provider plugin).
+
+This contract prevents regression where both providers silently fail to seed. The test suite (CRED1-CRED3 in `tests/e2e/22-ctx-pin-and-credentials.bats`) enforces this invariant.
+
 ## Verification
 
 ```bash
@@ -175,7 +187,7 @@ bash generate.sh --dry-run
 #   [PASS] bash -n env-auth.sh
 #   [PASS] staging/opencode.jsonc valid JSON
 #   [PASS] staging/config-hermes-overlay.yaml valid YAML
-#   [PASS] opencode.jsonc has provider.opencode ({env:OPENCODE_API_KEY})
+#   [PASS] opencode.jsonc has provider.opencode ({env:OPENCODE_ZEN_API_KEY})
 #   [PASS] opencode.jsonc model = opencode/deepseek-v4-flash-free
 #   [PASS] Hermes overlay custom_providers has N models
 #   [PASS] opencode.jsonc preserves 'permission' block
