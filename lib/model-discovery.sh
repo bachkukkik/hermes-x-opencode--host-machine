@@ -21,7 +21,7 @@ discover_models() {
     # so the api_key is never exposed as a shell variable.
     local result
     result=$(python3 - "$config_path" "$base_url" "$default_model" << 'PYEOF'
-import sys, json, re, urllib.request
+import sys, json, os, re, urllib.request
 
 config_path, base_url, default_model = sys.argv[1], sys.argv[2], sys.argv[3]
 
@@ -47,6 +47,14 @@ try:
                         and cp["api_key"].strip():
                     api_key = cp["api_key"].strip()
                     break
+        # Fallback: resolve key_env from environment
+        if not api_key:
+            for cp in (data.get("custom_providers") or []):
+                if isinstance(cp, dict) and isinstance(cp.get("key_env"), str):
+                    env_var = cp["key_env"].strip()
+                    api_key = os.environ.get(env_var, "")
+                    if api_key:
+                        break
 except Exception:
     pass
 
