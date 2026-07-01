@@ -77,11 +77,22 @@ value — export it or add it to `.env`.
 
 ## Environment variables
 
-| Variable | Purpose | Source |
+| Variable | Purpose | Default |
 |----------|---------|--------|
-| `OPENCODE_ZEN_API_KEY` | OpenCode Zen free models credential + `{env:OPENCODE_ZEN_API_KEY}` resolution | `~/.hermes/.env` |
-| `OPENAI_API_KEY` | Resolves `{env:OPENAI_API_KEY}` (litellm provider) | `~/.hermes/.env` or config.yaml `model.api_key` |
-| `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL (default `http://localhost:4000`) | env override |
+| `OPENAI_API_KEY` | LiteLLM proxy API key for model discovery and litellm provider | required (in ~/.hermes/.env or config.yaml) |
+| `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL | http://localhost:4000 |
+| `OPENAI_DEFAULT_MODEL` | Fallback model when LiteLLM unreachable; controls model.default/model.name | zai/glm-5.2 |
+| `HERMES_DEFAULT_MODEL` | Override for Hermes active model (overrides OPENAI_DEFAULT_MODEL) | unset |
+| `OPENCODE_DEFAULT_MODEL` | Free Zen model for OpenCode delegation tasks | opencode/deepseek-v4-flash-free |
+| `OPENCODE_SMALL_MODEL` | Small model for lightweight OpenCode tasks | same as OPENCODE_DEFAULT_MODEL |
+| `OPENCODE_FALLBACK_MODEL` | Comma-separated ordered fallback chain for opencode-runtime-fallback plugin | unset |
+| `OPENCODE_ZEN_API_KEY` | OpenCode Zen free models credential + {env:OPENCODE_ZEN_API_KEY} resolution | required (in ~/.hermes/.env) |
+| `HERMES_YOLO_MODE` | When set to 1, emits approvals.mode:off in staging overlay | unset |
+| `HERMES_DELEGATION_MAX_ITERATIONS` | Max iterations for delegated subagent conversations | 50 |
+| `HERMES_DELEGATION_MODEL` | Model for delegated subagent conversations (overrides parent model) | unset (inherits parent) |
+| `HERMES_DELEGATION_PROVIDER` | Provider for delegated subagent conversations | unset (inherits parent) |
+| `HERMES_GOAL_MAX_TURNS` | Max turns for goal-mode tasks | 50 |
+| `HERMES_COMPRESSION_THRESHOLD` | Context compression threshold (0.0-1.0) | unset |
 
 ## Edge cases handled
 
