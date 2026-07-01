@@ -110,7 +110,7 @@ The parent project (Docker stack with full container orchestration, entrypoints,
 
 - OpenAI-compatible endpoint is reachable at `http://localhost:4000` (or `OPENAI_BASE_URL`)
 - `~/.hermes/config.yaml` exists with valid `api_key` for the proxy
-- `~/.hermes/.env` exists with `OPENCODE_ZEN_API_KEY`
+- `~/.hermes/.env` exists with `OPENCODE_API_KEY`
 - `~/.config/opencode/opencode.jsonc` exists (or will be created from scratch if absent)
 - `python3-yaml` is installed (`pip install pyyaml`)
 

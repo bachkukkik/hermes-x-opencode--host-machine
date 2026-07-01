@@ -144,7 +144,7 @@ JEOF
 
 seed_env_file() {
     cat > "${FAKE_HOME}/.hermes/.env" << 'ENVEOF'
-OPENCODE_ZEN_API_KEY=sk-zen-test-key-abc
+OPENCODE_API_KEY=sk-zen...-abc
 OPENAI_API_KEY=sk-mock-test-key-2345
 ENVEOF
 }

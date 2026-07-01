@@ -26,7 +26,7 @@ The single source of truth for all filesystem paths and defaults:
 | `STAGING_DIR` | `${HERMES_HOME}/host-config-gen/staging` | Output directory |
 | `OPENAI_BASE_URL` | `http://localhost:4000` | OpenAI-compatible endpoint (env-overridable) |
 | `OPENAI_DEFAULT_MODEL` | `zai/glm-5.2` | Fallback model (EC1) |
-| `OPENCODE_FREE_MODEL` | `opencode/deepseek-v4-flash-free` | Zero-cost Zen model for delegation |
+| `OPENCODE_DEFAULT_MODEL` | `opencode/deepseek-v4-flash-free` | Zero-cost Zen model for delegation |
 
 ### config-opencode.sh MERGE strategy
 
@@ -76,7 +76,7 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
 | Target key | Action | Rationale |
 |-----------|--------|-----------|
 | `provider.opencode` | Ensure present with `{env:OPENCODE_API_KEY}` | Free Zen auth for delegation |
-| `model`, `small_model` | Set to `OPENCODE_FREE_MODEL` | Zero paid quota for coding subagents |
+| `model`, `small_model` | Set to `OPENCODE_DEFAULT_MODEL` | Zero paid quota for coding subagents |
 | `agent.build.model`, `agent.plan.model` | Override to free Zen model | Defeats paid-model pinning in sub-agents |
 | `agent.*` (other fields) | Preserve | Mode, description, etc. survive |
 | `provider.litellm.models` | Union-merge discovered models | Existing limits preserved; new models added |
@@ -180,15 +180,14 @@ Seeds `auth.json` with two providers:
 
 | Provider | Key source | Fallback |
 |----------|-----------|----------|
-| `opencode` (Zen) | `OPENCODE_ZEN_API_KEY` from `~/.hermes/.env` | None — must be present |
+| `opencode` (Zen) | `OPENCODE_API_KEY` from `~/.hermes/.env` | None — must be present |
 | `litellm` (proxy) | `OPENAI_API_KEY` from `~/.hermes/.env` | `model.api_key` from `config.yaml` |
 
 ### Environment variable reference
 
 | Variable | Purpose | Set in | Referenced by |
 |----------|---------|--------|---------------|
-| `OPENCODE_ZEN_API_KEY` | OpenCode Zen free-tier credential | `~/.hermes/.env` | `env-auth.sh` (read in-process) |
-| `OPENCODE_API_KEY` | Resolves `{env:OPENCODE_API_KEY}` in opencode.jsonc | Shell env or `~/.hermes/.env` | OpenCode runtime |
+| `OPENCODE_API_KEY` | OpenCode Zen free-tier credential | `~/.hermes/.env` | `env-auth.sh` (read in-process)<br>OpenCode runtime via `{env:OPENCODE_API_KEY}` |
 | `OPENAI_API_KEY` | LiteLLM proxy credential | `~/.hermes/.env` or `config.yaml` `model.api_key` | `{env:OPENAI_API_KEY}` in opencode.jsonc |
 | `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL | Shell env (default `http://localhost:4000`) | All modules |
 
@@ -245,15 +244,15 @@ grep -q '"litellm"' staging/auth.json && echo "litellm provider seeded"
 ## What Fails
 
 - **Corrupt live JSONC:** If `opencode.jsonc` contains unparseable content, the generator starts from an empty base — all custom blocks are lost in staging.
-- **Missing Zen key:** If `OPENCODE_ZEN_API_KEY` is absent from `~/.hermes/.env`, the `opencode` provider in `auth.json` is not seeded — OpenCode Zen auth fails at runtime.
+- **Missing Zen key:** If `OPENCODE_API_KEY` is absent from `~/.hermes/.env`, the `opencode` provider in `auth.json` is not seeded — OpenCode Zen auth fails at runtime.
 - **Agent sub-block model pin:** If the live config pins a paid model in `agent.build.model` or `agent.plan.model` and the MERGE doesn't override it, the free-mission objective is defeated. The generator explicitly overrides these sub-block models.
 
 ## Resolution
 
 - **Corrupt live JSONC:** Run `python3 -m json.tool` on the live config after manually fixing the syntax. The tolerant JSONC parser strips comments; issues are typically trailing commas or unclosed braces.
-- **Missing Zen key:** Add `OPENCODE_ZEN_API_KEY=<your-key>` to `~/.hermes/.env`. Then export `OPENCODE_API_KEY` with the same value so `{env:OPENCODE_API_KEY}` resolves correctly.
+- **Missing Zen key:** Add `OPENCODE_API_KEY=<your-key>` to `~/.hermes/.env`.
 - **Agent sub-block model pin:** The generator overrides `agent.build.model` and `agent.plan.model` to the free Zen model. Other agent fields (mode, description) are preserved. If the override fails, check the staging diff in `staging/opencode-merge-summary.txt`.
 
 ## Verdict
 
-The MERGE strategy correctly balances model-list refresh with config preservation. The surgical merge targets (provider blocks, model references, credentials) are well-isolated from hand-tuned content. The two-env-var credential pattern (`OPENCODE_ZEN_API_KEY` + `OPENCODE_API_KEY`) is a necessary redundancy for OpenCode's `{env:VAR}` resolution mechanism.
+The MERGE strategy correctly balances model-list refresh with config preservation. The surgical merge targets (provider blocks, model references, credentials) are well-isolated from hand-tuned content. The single-env-var credential pattern (`OPENCODE_API_KEY`) directly feeds both `{env:OPENCODE_API_KEY}` resolution and the `auth.json` opencode provider.

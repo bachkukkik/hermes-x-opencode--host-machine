@@ -99,7 +99,7 @@ The fallback chain activates when the primary Zen model is unavailable. Models a
 
 ```
 ~/.hermes/.env
-├── OPENCODE_ZEN_API_KEY=<zen-key>        ──► env-auth.sh reads in-process
+├── OPENCODE_API_KEY=<zen-key>            ──► env-auth.sh reads in-process
 └── OPENAI_API_KEY=<proxy-key>             ──► env-auth.sh reads in-process
          │
          ▼
@@ -134,7 +134,7 @@ import os, re
 env_file = os.path.expanduser('~/.hermes/.env')
 with open(env_file) as f:
     for line in f:
-        m = re.match(r'^OPENCODE_ZEN_API_KEY=(.*)$', line.strip())
+        m = re.match(r'^OPENCODE_API_KEY=(.*)$', line.strip())
         if m:
             print('Zen key found (length: {})'.format(len(m.group(1).strip('\"\\''))))
             break
@@ -153,13 +153,13 @@ with open(env_file) as f:
 
 ## What Fails
 
-- **Zen auth failure (EC3):** If `OPENCODE_API_KEY` is not exported or differs from `OPENCODE_ZEN_API_KEY`, the `{env:OPENCODE_API_KEY}` reference in `opencode.jsonc` resolves to empty or wrong value. OpenCode cannot authenticate with the Zen provider.
+- **Zen auth failure (EC3):** If `OPENCODE_API_KEY` is not in `~/.hermes/.env`, the `{env:OPENCODE_API_KEY}` reference in `opencode.jsonc` resolves to empty. OpenCode cannot authenticate with the Zen provider.
 - **OpenCode not installed:** The `opencode` skill's `opencode run` command fails silently. Hermes cannot delegate coding tasks.
 - **Model mismatch in sub-agents:** If `agent.build.model` or `agent.plan.model` is not overridden to the free Zen model, sub-agents run on the paid model pinned in the live config, defeating the cost-saving objective.
 
 ## Resolution
 
-- **Zen auth failure:** Export `OPENCODE_API_KEY` with the same value as `OPENCODE_ZEN_API_KEY`. Add `OPENCODE_API_KEY=<your-zen-key>` to `~/.hermes/.env`. Both keys must have identical values.
+- **Zen auth failure:** Export `OPENCODE_API_KEY` with the Zen key. Add `OPENCODE_API_KEY=<your-zen-key>` to `~/.hermes/.env`.
 - **OpenCode not installed:** Install OpenCode CLI via `npm install -g opencode-ai` or the project's install script. The `install.sh` prerequisite check warns if `opencode` is missing.
 - **Model mismatch in sub-agents:** The config generator explicitly overrides `agent.build.model` and `agent.plan.model` to `opencode/deepseek-v4-flash-free`. Verify the override with `grep -A2 '"build"' staging/opencode.jsonc`.
 

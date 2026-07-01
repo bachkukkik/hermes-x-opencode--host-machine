@@ -126,7 +126,7 @@ cp "$STAGING/config-hermes-overlay.yaml" ~/.hermes/config.yaml
 cp "$STAGING/auth.json" ~/.local/share/opencode/auth.json
 
 # 4. Set env var
-export OPENCODE_API_KEY="$OPENCODE_ZEN_API_KEY"
+export OPENCODE_API_KEY=***
 
 # 5. Verify agents work
 opencode run --model opencode/deepseek-v4-flash-free -q "say hello"

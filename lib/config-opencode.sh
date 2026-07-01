@@ -30,17 +30,17 @@ generate_opencode_staging() {
 
     local live_cfg="${OPENCODE_CONFIG}"
     local staging="${STAGING_OPENCODE}"
-    local free_model="${OPENCODE_FREE_MODEL}"
+    local default_model="${OPENCODE_DEFAULT_MODEL}"
     local base_url="${OPENAI_BASE_URL}"
     local diff_file="${STAGING_DIFF}"
     local models_file="${STAGING_MODELS}"
 
     python3 - \
-        "$live_cfg" "$staging" "$free_model" "$base_url" "$diff_file" \
+        "$live_cfg" "$staging" "$default_model" "$base_url" "$diff_file" \
         "$models_file" << 'PYEOF'
 import sys, json, re, os
 
-live_path, out_path, free_model, base_url, diff_path, models_file = (
+live_path, out_path, default_model, base_url, diff_path, models_file = (
     sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
     sys.argv[6],
 )
@@ -154,11 +154,13 @@ if not isinstance(oc_opts, dict):
     oc["options"] = oc_opts
 oc_opts["apiKey"] = "{env:OPENCODE_API_KEY}"
 
-# (b) top-level model + small_model -> FREE Zen model (saves paid quota)
-existing["model"] = free_model
-# Allow OPENAI_SMALL_MODEL to override small_model
-_small_model = os.environ.get("OPENAI_SMALL_MODEL", "").strip()
-existing["small_model"] = _small_model if _small_model else free_model
+# (b) top-level model + small_model -> default model (saves paid quota)
+existing["model"] = default_model
+# Allow OPENCODE_SMALL_MODEL to override small_model, fall back to OPENCODE_DEFAULT_MODEL
+_small_model = os.environ.get("OPENCODE_SMALL_MODEL", "").strip()
+if not _small_model:
+    _small_model = os.environ.get("OPENCODE_DEFAULT_MODEL", "").strip()
+existing["small_model"] = _small_model if _small_model else default_model
 
 # (b.1) agent.build.model + agent.plan.model -> FREE Zen model. The live config
 # may pin a PAID model here (e.g. litellm/zai/glm-5.1); without overriding these
@@ -179,8 +181,8 @@ if not isinstance(agent_plan, dict):
     agent["plan"] = agent_plan
 agent_build_model_before = agent_build.get("model")
 agent_plan_model_before = agent_plan.get("model")
-agent_build["model"] = free_model
-agent_plan["model"] = free_model
+agent_build["model"] = default_model
+agent_plan["model"] = default_model
 
 # (c)+(d) provider.litellm — refresh models map + credentials
 ll = provider.setdefault("litellm", {})
@@ -231,9 +233,9 @@ lines.append("top-level model       -> %s" % existing.get("model"))
 lines.append("top-level small_model -> %s" % existing.get("small_model"))
 lines.append("agent.build.model     -> %s" % agent_build.get("model"))
 lines.append("agent.plan.model      -> %s" % agent_plan.get("model"))
-if agent_build_model_before and agent_build_model_before != free_model:
+if agent_build_model_before and agent_build_model_before != default_model:
     lines.append("  (was agent.build.model = %s)" % agent_build_model_before)
-if agent_plan_model_before and agent_plan_model_before != free_model:
+if agent_plan_model_before and agent_plan_model_before != default_model:
     lines.append("  (was agent.plan.model = %s)" % agent_plan_model_before)
 lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_API_KEY})")
 lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
@@ -260,7 +262,7 @@ lines.append("Preserved blocks: %s" % ", ".join(preserved_blocks))
 # description, etc.) are kept untouched.
 if "agent" in existing:
     lines.append("agent block: preserved (other fields) + model overridden -> %s"
-                 % free_model)
+                 % default_model)
 summary = "\n".join(lines)
 with open(diff_path, "w") as f:
     f.write(summary + "\n")

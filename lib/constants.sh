@@ -39,7 +39,10 @@ OPENAI_DEFAULT_MODEL="${OPENAI_DEFAULT_MODEL:-zai/glm-5.2}"
 
 # STRICT USER REQUIREMENT: OpenCode must default to the FREE Zen model so
 # Hermes -> OpenCode delegation burns no paid token quota.
-OPENCODE_FREE_MODEL="opencode/deepseek-v4-flash-free"
+OPENCODE_DEFAULT_MODEL="${OPENCODE_DEFAULT_MODEL:-opencode/deepseek-v4-flash-free}"
+
+# Small model for lightweight OpenCode tasks — defaults to OPENCODE_DEFAULT_MODEL.
+OPENCODE_SMALL_MODEL="${OPENCODE_SMALL_MODEL:-${OPENCODE_DEFAULT_MODEL}}"
 
 # Environment variable names referenced by {env:VAR} in opencode.jsonc.
 OPENCODE_API_KEY_ENV="OPENCODE_API_KEY"
