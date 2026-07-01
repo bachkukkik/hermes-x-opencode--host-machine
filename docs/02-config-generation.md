@@ -26,7 +26,7 @@ The single source of truth for all filesystem paths and defaults:
 | `STAGING_DIR` | `${HERMES_HOME}/host-config-gen/staging` | Output directory |
 | `OPENAI_BASE_URL` | `http://localhost:4000` | OpenAI-compatible endpoint (env-overridable) |
 | `OPENAI_DEFAULT_MODEL` | `zai/glm-5.2` | Fallback model (EC1) |
-| `OPENCODE_DEFAULT_MODEL` | `opencode/deepseek-v4-flash-free` | Zero-cost Zen model for delegation |
+| `OPENCODE_DEFAULT_MODEL` | `$OPENCODE_DEFAULT_MODEL` | Dynamic — defaults in `.env.example`; overrides hard-coded Zen model |
 
 ### config-opencode.sh MERGE strategy
 
@@ -45,11 +45,11 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
 
 // AFTER (staging — note what changed vs. what survived)
 {
-  "model": "opencode/deepseek-v4-flash-free",           // ← injected (free Zen)
-  "small_model": "opencode/deepseek-v4-flash-free",     // ← injected
+  "model": "<$OPENCODE_DEFAULT_MODEL>",                  // ← injected from OPENCODE_DEFAULT_MODEL
+  "small_model": "<$OPENCODE_DEFAULT_MODEL>",            // ← injected from OPENCODE_DEFAULT_MODEL
   "provider": {
     "opencode": {
-      "options": { "apiKey": "{env:OPENCODE_API_KEY}" } // ← injected
+      "options": { "apiKey": "{env:OPENCODE_ZEN_API_KEY}" } // ← injected
     },
     "litellm": {
       "options": {
@@ -65,8 +65,8 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
   "permission": { "deny": ["rm", "sudo"] },             // ← preserved
   "plugin": ["my-custom-plugin"],                        // ← preserved
   "agent": {
-    "build": { "model": "opencode/deepseek-v4-flash-free", "mode": "fast" },  // model overridden, mode preserved
-    "plan": { "model": "opencode/deepseek-v4-flash-free", "mode": "deep" }    // model overridden, mode preserved
+    "build": { "model": "<$OPENCODE_DEFAULT_MODEL>", "mode": "fast" },  // model overridden, mode preserved
+    "plan": { "model": "<$OPENCODE_DEFAULT_MODEL>", "mode": "deep" }    // model overridden, mode preserved
   }
 }
 ```
@@ -75,7 +75,7 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
 
 | Target key | Action | Rationale |
 |-----------|--------|-----------|
-| `provider.opencode` | Ensure present with `{env:OPENCODE_API_KEY}` | Free Zen auth for delegation |
+| `provider.opencode` | Ensure present with `{env:OPENCODE_ZEN_API_KEY}` | Free Zen auth for delegation |
 | `model`, `small_model` | Set to `OPENCODE_DEFAULT_MODEL` | Zero paid quota for coding subagents |
 | `agent.build.model`, `agent.plan.model` | Override to free Zen model | Defeats paid-model pinning in sub-agents |
 | `agent.*` (other fields) | Preserve | Mode, description, etc. survive |
@@ -144,6 +144,8 @@ Beyond the `custom_providers` overlay, `config-hermes.sh` emits optional YAML bl
 |---------|---------|-----------------------|--------|
 | `HERMES_YOLO_MODE` | *(off)* | `approvals:\n  mode: off` | Only when set to `"1"`. Skips the manual approval prompt before dangerous shell commands — equivalent to launching Hermes with `--yolo`. |
 | `HERMES_DELEGATION_MAX_ITERATIONS` | `50` | `delegation:\n  max_iterations: <N>` | Caps how many iterations a `delegate_task` subagent loop may run. Always present (default 50). |
+| `HERMES_DELEGATION_MODEL` | *(unset)* | `delegation:\n  model: <model_id>` | Only when set. Routes subagent conversations to a different model (typically cheaper/faster) than the parent. |
+| `HERMES_DELEGATION_PROVIDER` | *(unset)* | `delegation:\n  provider: <provider_name>` | Only when set alongside `HERMES_DELEGATION_MODEL`. Routes subagents to a different provider. If only model is set, subagents inherit the parent's provider. |
 | `HERMES_GOAL_MAX_TURNS` | `50` | `goals:\n  max_turns: <N>` | Caps how many turns a goal-driven task may run. Always present (default 50). |
 | `HERMES_COMPRESSION_THRESHOLD` | *(unset)* | `context_compression:\n  threshold: <float>` | Only when set to a parseable float. Triggers context compression when token usage exceeds this fraction (0.0–1.0). |
 
@@ -161,6 +163,16 @@ cfg["goals"] = {"max_turns": goal_max_turns}
 # delegation.max_iterations  (default 50)
 deleg_max_iter = int(os.environ.get("HERMES_DELEGATION_MAX_ITERATIONS", "50"))
 cfg["delegation"] = {"max_iterations": deleg_max_iter}
+
+# delegation.model  (when HERMES_DELEGATION_MODEL is set)
+_delegation_model = os.environ.get("HERMES_DELEGATION_MODEL", "").strip()
+if _delegation_model:
+    cfg["delegation"]["model"] = _delegation_model
+
+# delegation.provider  (when HERMES_DELEGATION_PROVIDER is set)
+_delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
+if _delegation_provider:
+    cfg["delegation"]["provider"] = _delegation_provider
 
 # context_compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
@@ -182,14 +194,14 @@ Seeds `auth.json` with two providers:
 
 | Provider | Key source | Fallback |
 |----------|-----------|----------|
-| `opencode` (Zen) | `OPENCODE_API_KEY` from `~/.hermes/.env` | None — must be present |
+| `opencode` (Zen) | `OPENCODE_ZEN_API_KEY` from `~/.hermes/.env` | None — must be present |
 | `litellm` (proxy) | `OPENAI_API_KEY` from `~/.hermes/.env` | `model.api_key` from `config.yaml` |
 
 ### Environment variable reference
 
 | Variable | Purpose | Set in | Referenced by |
 |----------|---------|--------|---------------|
-| `OPENCODE_API_KEY` | OpenCode Zen free-tier credential | `~/.hermes/.env` | `env-auth.sh` (read in-process)<br>OpenCode runtime via `{env:OPENCODE_API_KEY}` |
+| `OPENCODE_ZEN_API_KEY` | OpenCode Zen free-tier credential | `~/.hermes/.env` | `env-auth.sh` (read in-process)<br>OpenCode runtime via `{env:OPENCODE_ZEN_API_KEY}` |
 | `OPENAI_API_KEY` | LiteLLM proxy credential | `~/.hermes/.env` or `config.yaml` `model.api_key` | `{env:OPENAI_API_KEY}` in opencode.jsonc |
 | `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL | Shell env (default `http://localhost:4000`) | All modules |
 
@@ -216,9 +228,9 @@ bash generate.sh --dry-run
 grep -q '"permission"' staging/opencode.jsonc && echo "permission block preserved"
 grep -q '"plugin"' staging/opencode.jsonc && echo "plugin block preserved"
 
-# Confirm free Zen model is applied correctly
-grep -q '"model": "opencode/deepseek-v4-flash-free"' staging/opencode.jsonc
-grep -q '"apiKey": "{env:OPENCODE_API_KEY}"' staging/opencode.jsonc
+# Confirm OPENCODE_DEFAULT_MODEL is applied correctly
+grep -q "\"model\": \"${OPENCODE_DEFAULT_MODEL}\"" staging/opencode.jsonc
+grep -q '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' staging/opencode.jsonc
 
 # Verify Hermes overlay has model entries
 python3 -c "
@@ -246,15 +258,15 @@ grep -q '"litellm"' staging/auth.json && echo "litellm provider seeded"
 ## What Fails
 
 - **Corrupt live JSONC:** If `opencode.jsonc` contains unparseable content, the generator starts from an empty base — all custom blocks are lost in staging.
-- **Missing Zen key:** If `OPENCODE_API_KEY` is absent from `~/.hermes/.env`, the `opencode` provider in `auth.json` is not seeded — OpenCode Zen auth fails at runtime.
+- **Missing Zen key:** If `OPENCODE_ZEN_API_KEY` is absent from `~/.hermes/.env`, the `opencode` provider in `auth.json` is not seeded — OpenCode Zen auth fails at runtime.
 - **Agent sub-block model pin:** If the live config pins a paid model in `agent.build.model` or `agent.plan.model` and the MERGE doesn't override it, the free-mission objective is defeated. The generator explicitly overrides these sub-block models.
 
 ## Resolution
 
 - **Corrupt live JSONC:** Run `python3 -m json.tool` on the live config after manually fixing the syntax. The tolerant JSONC parser strips comments; issues are typically trailing commas or unclosed braces.
-- **Missing Zen key:** Add `OPENCODE_API_KEY=<your-key>` to `~/.hermes/.env`.
+- **Missing Zen key:** Add `OPENCODE_ZEN_API_KEY=<your-key>` to `~/.hermes/.env`.
 - **Agent sub-block model pin:** The generator overrides `agent.build.model` and `agent.plan.model` to the free Zen model. Other agent fields (mode, description) are preserved. If the override fails, check the staging diff in `staging/opencode-merge-summary.txt`.
 
 ## Verdict
 
-The MERGE strategy correctly balances model-list refresh with config preservation. The surgical merge targets (provider blocks, model references, credentials) are well-isolated from hand-tuned content. The single-env-var credential pattern (`OPENCODE_API_KEY`) directly feeds both `{env:OPENCODE_API_KEY}` resolution and the `auth.json` opencode provider.
+The MERGE strategy correctly balances model-list refresh with config preservation. The surgical merge targets (provider blocks, model references, credentials) are well-isolated from hand-tuned content. The single-env-var credential pattern (`OPENCODE_ZEN_API_KEY`) directly feeds both `{env:OPENCODE_ZEN_API_KEY}` resolution and the `auth.json` opencode provider.

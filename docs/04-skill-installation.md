@@ -79,6 +79,7 @@ ln -sfn "${HERMES_SKILLS}/autonomous-ai-agents/opencode" \
 | `karpathy-guidelines` | `~/.hermes/skills/software-development/karpathy-guidelines/` | `~/.config/opencode/skills/karpathy-guidelines/` | Symlink or dual-install |
 | `opencode-plan-build-orchestrator` | `~/.hermes/skills/autonomous-ai-agents/opencode-plan-build-orchestrator/` | `~/.config/opencode/skills/` | Hermes-only (orchestrator runs in Hermes) |
 | `coding-agents-docs-guideline` | `~/.hermes/skills/software-development/coding-agents-docs-guideline/` | `~/.config/opencode/skills/coding-agents-docs-guideline/` | Symlink or dual-install |
+| `hermes` (delegation) | N/A | N/A | Terminal tool — OpenCode→Hermes uses `HERMES_DEFAULT_MODEL`; Hermes→subagent uses `HERMES_DELEGATION_MODEL` |
 
 ### Host vs. Docker container differences
 

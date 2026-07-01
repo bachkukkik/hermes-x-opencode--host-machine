@@ -21,16 +21,16 @@ load test_helper/common
     assert_yaml_valid "${GEN_DIR}/staging/config-hermes-overlay.yaml"
 }
 
-@test "staging/opencode.jsonc has provider.opencode with {env:OPENCODE_API_KEY}" {
+@test "staging/opencode.jsonc has provider.opencode with {env:OPENCODE_ZEN_API_KEY}" {
     seed_all_configs
     start_mock_llm 14023 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
     run_generate
     [ "$status" -eq 0 ]
 
-    assert_file_contains "${GEN_DIR}/staging/opencode.jsonc" "\"apiKey\": \"{env:OPENCODE_API_KEY}\""
+    assert_file_contains "${GEN_DIR}/staging/opencode.jsonc" "\"apiKey\": \"{env:OPENCODE_ZEN_API_KEY}\""
 }
 
-@test "staging/opencode.jsonc top-level model = opencode/deepseek-v4-flash-free" {
+@test "staging/opencode.jsonc top-level model = OPENCODE_DEFAULT_MODEL" {
     seed_all_configs
     start_mock_llm 14024 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
     run_generate
@@ -38,17 +38,19 @@ load test_helper/common
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
-    # Verify the top-level model is the free Zen model
+    # Verify the top-level model matches the configured default
+    export OPENCODE_DEFAULT_MODEL
     python3 -c "
-import json
+import json, os
+expected = os.environ['OPENCODE_DEFAULT_MODEL']
 c = json.load(open('${staging}'))
-assert c.get('model') == 'opencode/deepseek-v4-flash-free', f\"model={c.get('model')}\"
-assert c.get('small_model') == 'opencode/deepseek-v4-flash-free', f\"small_model={c.get('small_model')}\"
-print('OK: model + small_model = opencode/deepseek-v4-flash-free')
+assert c.get('model') == expected, f\"model={c.get('model')}, expected={expected}\"
+assert c.get('small_model') == expected, f\"small_model={c.get('small_model')}, expected={expected}\"
+print(f'OK: model + small_model = {expected}')
 "
 }
 
-@test "staging/opencode.jsonc agent.build.model and agent.plan.model = free Zen model" {
+@test "staging/opencode.jsonc agent.build.model and agent.plan.model = OPENCODE_DEFAULT_MODEL" {
     seed_all_configs
     start_mock_llm 14025 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
     run_generate
@@ -56,14 +58,16 @@ print('OK: model + small_model = opencode/deepseek-v4-flash-free')
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
+    export OPENCODE_DEFAULT_MODEL
     python3 -c "
-import json
+import json, os
+expected = os.environ['OPENCODE_DEFAULT_MODEL']
 c = json.load(open('${staging}'))
 abm = c.get('agent', {}).get('build', {}).get('model')
 apm = c.get('agent', {}).get('plan', {}).get('model')
-assert abm == 'opencode/deepseek-v4-flash-free', f'agent.build.model={abm}'
-assert apm == 'opencode/deepseek-v4-flash-free', f'agent.plan.model={apm}'
-print('OK: agent sub-models pinned to free Zen model')
+assert abm == expected, f'agent.build.model={abm}, expected={expected}'
+assert apm == expected, f'agent.plan.model={apm}, expected={expected}'
+print(f'OK: agent sub-models pinned to {expected}')
 "
 }
 

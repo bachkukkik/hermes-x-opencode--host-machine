@@ -140,6 +140,14 @@ sort -f staging/discovered-models.txt | uniq -di | grep . && echo "DUPLICATES FO
 - **Empty model list:** Configure models in the LiteLLM proxy. The generator falls back to `OPENAI_DEFAULT_MODEL` transparently; basic functionality survives.
 - **No api_key in config:** Add `model.api_key` to `~/.hermes/config.yaml`. Without authentication, LiteLLM may return a restricted subset or reject the request entirely.
 
+### Quantized GGUF context-length pin (PR #66 / CA-31-A)
+
+The `resolve_ctx_len()` function uses a longest-match-first pin table. A critical ordering rule: **specific quantized pins must appear BEFORE family wildcards** so the most-specific match wins first.
+
+For example, `*qwen3.6-27b*q4*` (quantized GGUF, real ctx 262,144) sits before `*qwen3.6*` (family wildcard, 1,048,576). Without this ordering, a quantized model like `llama_cpp/qwen3.6-27b-q4_k_m` would incorrectly resolve to the family's 1M window instead of its true 262K limit.
+
+This is the **first-match-wins** principle applied at the pattern level — the same rule that keeps `*gpt-5.4*` from being swallowed by `*gpt-5*`.
+
 ## Verdict
 
 The discovery pipeline faithfully replicates the Docker reference while adding the critical in-process key safety guarantee. The 15-pattern filter list covers all known non-chat model categories from major providers. The fallback to `OPENAI_DEFAULT_MODEL` ensures the pipeline never produces an empty model list, even under total proxy failure.

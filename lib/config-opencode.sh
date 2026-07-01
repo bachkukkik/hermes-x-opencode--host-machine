@@ -9,7 +9,7 @@
 # result to STAGING_DIR for the orchestrator to review/apply later.
 #
 # Merge policy:
-#   (a) ensure provider.opencode with options.apiKey == "{env:OPENCODE_API_KEY}"
+#   (a) ensure provider.opencode with options.apiKey == "{env:OPENCODE_ZEN_API_KEY}"
 #   (b) set top-level "model" + "small_model" to the FREE Zen model;
 #       also set agent.build.model and agent.plan.model to the FREE Zen model
 #       (other agent sub-block fields like mode/description are preserved)
@@ -104,6 +104,9 @@ def get_limits(model_id):
     if 'glm' in name:
         return 128000, 8192
     if 'llama_cpp' in model_id:
+        # Quantized qwen3.6-27b GGUF has 256K real context, not the 200K default
+        if 'qwen3.6-27b' in name:
+            return 262144, 32768
         return 200000, 32768
     if 'gemini' in name:
         return 1048576, 65536
@@ -152,7 +155,7 @@ oc_opts = oc.setdefault("options", {})
 if not isinstance(oc_opts, dict):
     oc_opts = {}
     oc["options"] = oc_opts
-oc_opts["apiKey"] = "{env:OPENCODE_API_KEY}"
+oc_opts["apiKey"] = "{env:OPENCODE_ZEN_API_KEY}"
 
 # (b) top-level model + small_model -> default model (saves paid quota)
 existing["model"] = default_model
@@ -237,7 +240,7 @@ if agent_build_model_before and agent_build_model_before != default_model:
     lines.append("  (was agent.build.model = %s)" % agent_build_model_before)
 if agent_plan_model_before and agent_plan_model_before != default_model:
     lines.append("  (was agent.plan.model = %s)" % agent_plan_model_before)
-lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_API_KEY})")
+lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_ZEN_API_KEY})")
 lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
              % base_url)
 lines.append("litellm.models total  -> %d (%d preserved + %d newly added)"

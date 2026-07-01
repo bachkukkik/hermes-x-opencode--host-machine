@@ -17,7 +17,7 @@ build scripts) lives at <https://github.com/bachkukkik/hermes-x-opencode>.
    proxy), applies the Docker filter pipeline (drops embed/whisper/tts/image/
    wildcard/etc.), dedupes, and caches the result.
 2. **OpenCode config merge** — loads the existing `opencode.jsonc`, injects:
-   - `provider.opencode` with `{env:OPENCODE_API_KEY}` (free Zen auth)
+   - `provider.opencode` with `{env:OPENCODE_ZEN_API_KEY}` (free Zen auth)
    - top-level `model` = `opencode/deepseek-v4-flash-free` (FREE — saves quota)
    - `provider.litellm.models` refreshed from discovered models
    - **preserves** all existing blocks (permission deny-list, plugins, agent
@@ -57,10 +57,10 @@ cp "$STAGING/opencode.jsonc" ~/.config/opencode/opencode.jsonc
 cp "$STAGING/config-hermes-overlay.yaml" ~/.hermes/config.yaml
 cp "$STAGING/auth.json" ~/.local/share/opencode/auth.json
 
-# 3. Set the env var for {env:OPENCODE_API_KEY} resolution
-export OPENCODE_API_KEY="<your-zen-key>"
+# 3. Set the env var for {env:OPENCODE_ZEN_API_KEY} resolution
+export OPENCODE_ZEN_API_KEY="<your-zen-key>"
 # Or add to ~/.hermes/.env:
-#   echo 'OPENCODE_API_KEY=<your-zen-key>' >> ~/.hermes/.env
+#   echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> ~/.hermes/.env
 
 # 4. Verify
 opencode run --model opencode/deepseek-v4-flash-free -q "say hello"
@@ -71,15 +71,15 @@ hermes config check
 
 OpenCode defaults to `opencode/deepseek-v4-flash-free` so that Hermes can
 delegate coding tasks via the `opencode` skill **without burning paid token
-quota**. The credential is `OPENCODE_API_KEY` (already in `~/.hermes/.env`).
-The `{env:OPENCODE_API_KEY}` ref in `opencode.jsonc` must resolve to the same
+quota**. The credential is `OPENCODE_ZEN_API_KEY` (already in `~/.hermes/.env`).
+The `{env:OPENCODE_ZEN_API_KEY}` ref in `opencode.jsonc` must resolve to the same
 value — export it or add it to `.env`.
 
 ## Environment variables
 
 | Variable | Purpose | Source |
 |----------|---------|--------|
-| `OPENCODE_API_KEY` | OpenCode Zen free models credential + `{env:OPENCODE_API_KEY}` resolution | `~/.hermes/.env` |
+| `OPENCODE_ZEN_API_KEY` | OpenCode Zen free models credential + `{env:OPENCODE_ZEN_API_KEY}` resolution | `~/.hermes/.env` |
 | `OPENAI_API_KEY` | Resolves `{env:OPENAI_API_KEY}` (litellm provider) | `~/.hermes/.env` or config.yaml `model.api_key` |
 | `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL (default `http://localhost:4000`) | env override |
 

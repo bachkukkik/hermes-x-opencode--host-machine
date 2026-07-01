@@ -1,7 +1,7 @@
 # lib/env-auth.sh — environment variable resolution + auth.json staging
 #
 # Resolves credentials for the dual-provider setup:
-#   - opencode (Zen free models): OPENCODE_API_KEY from ~/.hermes/.env
+#   - opencode (Zen free models): OPENCODE_ZEN_API_KEY from ~/.hermes/.env
 #   - litellm (proxy):            api_key from ~/.hermes/config.yaml
 #
 # Produces a STAGING auth.json (~/.local/share/opencode/auth.json format) that
@@ -21,7 +21,7 @@ import sys, os, re, json, yaml
 
 env_path, config_path, out_path = sys.argv[1], sys.argv[2], sys.argv[3]
 
-# --- Read OPENCODE_API_KEY from .env (EC2: in-process, never shell var) ------
+# --- Read OPENCODE_ZEN_API_KEY from .env (EC2: in-process, never shell var) ------
 def read_env_file(path):
     vals = {}
     try:
@@ -39,7 +39,7 @@ def read_env_file(path):
     return vals
 
 env_vals = read_env_file(env_path)
-opencode_key = env_vals.get("OPENCODE_API_KEY", "")
+opencode_key = env_vals.get("OPENCODE_ZEN_API_KEY", "")
 openai_key = env_vals.get("OPENAI_API_KEY", "")
 
 # --- Read litellm key from config.yaml as fallback for OPENAI_API_KEY --------
@@ -63,6 +63,12 @@ if not openai_key:
 # OpenCode auth.json stores per-provider API keys. The {env:VAR} refs in
 # opencode.jsonc resolve at runtime, but auth.json is a FALLBACK credential
 # store (Docker pattern: seed both providers as belt-and-suspenders).
+#
+# CONTRACT (PR #66 / CA-30-A): The OR guard — litellm credential seeds when
+# OPENAI_API_KEY is set in .env OR falls back to inline api_key in config.yaml.
+# The opencode credential seeds when OPENCODE_ZEN_API_KEY is set in .env.
+# Both are independent — an empty auth.json (neither seeded) is a valid state
+# only when the user has not configured either provider yet.
 auth = {}
 if opencode_key:
     auth["opencode"] = {"apiKey": opencode_key}
@@ -77,13 +83,13 @@ with open(out_path, "w") as f:
 lines = [
     "auth.json staging summary",
     "=" * 40,
-    "OPENCODE_API_KEY      -> %s" % ("found in .env (opencode provider seeded)" if opencode_key else "NOT FOUND in .env"),
+    "OPENCODE_ZEN_API_KEY   -> %s" % ("found in .env (opencode provider seeded)" if opencode_key else "NOT FOUND in .env"),
     "OPENAI_API_KEY        -> %s" % ("found (litellm provider seeded)" if openai_key else "resolved from config.yaml (litellm provider seeded)" if openai_key else "NOT FOUND"),
     "",
     "ACTION REQUIRED for opencode/deepseek-v4-flash-free (free Zen model):",
-    "  The opencode provider block uses {env:OPENCODE_API_KEY}. You must",
-    "  export OPENCODE_API_KEY in your environment or add it to ~/.hermes/.env:",
-    "    echo 'OPENCODE_API_KEY=<your-zen-key>' >> ~/.hermes/.env",
+    "  The opencode provider block uses {env:OPENCODE_ZEN_API_KEY}. You must",
+    "  export OPENCODE_ZEN_API_KEY in your environment or add it to ~/.hermes/.env:",
+    "    echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> ~/.hermes/.env",
     "",
     "Staging auth.json written to: %s" % out_path,
 ]
