@@ -14,7 +14,7 @@
 #       also set agent.build.model and agent.plan.model to the FREE Zen model
 #       (other agent sub-block fields like mode/description are preserved)
 #   (c) provider.litellm.options.apiKey  -> "{env:OPENAI_API_KEY}"
-#       provider.litellm.options.baseURL -> resolved LITELLM_BASE_URL
+#       provider.litellm.options.baseURL -> resolved OPENAI_BASE_URL
 #   (d) union-merge provider.litellm.models with $DISCOVERED_MODELS
 #       (existing hand-tuned limits are PRESERVED; newly discovered models are
 #        added with computed get_limits() heuristics — surgical, lossless)
@@ -31,14 +31,14 @@ generate_opencode_staging() {
     local live_cfg="${OPENCODE_CONFIG}"
     local staging="${STAGING_OPENCODE}"
     local free_model="${OPENCODE_FREE_MODEL}"
-    local base_url="${LITELLM_BASE_URL}"
+    local base_url="${OPENAI_BASE_URL}"
     local diff_file="${STAGING_DIFF}"
     local models_file="${STAGING_MODELS}"
 
     python3 - \
         "$live_cfg" "$staging" "$free_model" "$base_url" "$diff_file" \
         "$models_file" << 'PYEOF'
-import sys, json, re
+import sys, json, re, os
 
 live_path, out_path, free_model, base_url, diff_path, models_file = (
     sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
@@ -120,6 +120,24 @@ try:
 except (FileNotFoundError, TypeError):
     pass
 
+# --- Read fallback model chain from env ------------------------------------
+fallback_chain = []
+fallback_raw = os.environ.get("OPENCODE_FALLBACK_MODEL", "")
+if fallback_raw:
+    for entry in fallback_raw.split(","):
+        fb = entry.strip()
+        if not fb:
+            continue
+        # Resolve provider prefix
+        if fb.startswith("opencode/"):
+            fb_full = fb
+        elif fb.startswith("litellm/"):
+            fb_full = fb
+        else:
+            # Bare model -> prefix with litellm/ (proxy is available)
+            fb_full = "litellm/" + fb
+        fallback_chain.append(fb_full)
+
 # --- Apply the merge (only target keys) -------------------------------------
 # (a) provider.opencode — free Zen auth
 provider = existing.setdefault("provider", {})
@@ -138,7 +156,9 @@ oc_opts["apiKey"] = "{env:OPENCODE_API_KEY}"
 
 # (b) top-level model + small_model -> FREE Zen model (saves paid quota)
 existing["model"] = free_model
-existing["small_model"] = free_model
+# Allow OPENAI_SMALL_MODEL to override small_model
+_small_model = os.environ.get("OPENAI_SMALL_MODEL", "").strip()
+existing["small_model"] = _small_model if _small_model else free_model
 
 # (b.1) agent.build.model + agent.plan.model -> FREE Zen model. The live config
 # may pin a PAID model here (e.g. litellm/zai/glm-5.1); without overriding these
@@ -194,6 +214,13 @@ with open(out_path, "w") as f:
     json.dump(existing, f, indent=2)
     f.write("\n")
 
+# --- Write fallback staging file -------------------------------------------
+fallback_path = os.path.join(os.path.dirname(out_path), "opencode-fallback.jsonc")
+if fallback_chain:
+    with open(fallback_path, "w") as ff:
+        json.dump({"fallback_models": fallback_chain}, ff, indent=2)
+        ff.write("\n")
+
 # --- Emit diff/merge summary -----------------------------------------------
 total_models = len(models_map)
 existing_count = total_models - len(added)
@@ -213,6 +240,9 @@ lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
              % base_url)
 lines.append("litellm.models total  -> %d (%d preserved + %d newly added)"
              % (total_models, existing_count, len(added)))
+if fallback_chain:
+    lines.append("fallback chain        -> [%s]" % ", ".join(fallback_chain))
+    lines.append("  (written to opencode-fallback.jsonc in staging dir)")
 lines.append("")
 lines.append("Newly added models (first 30):")
 for m in added[:30]:

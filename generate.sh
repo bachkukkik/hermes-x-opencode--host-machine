@@ -55,7 +55,7 @@ source "${LIB_DIR}/env-auth.sh"
 echo "============================================================"
 echo " Hermes x OpenCode host config generator"
 echo " Mode: $([ "$DRY_RUN" = true ] && echo 'DRY-RUN (staging + validation)' || echo 'GENERATE (staging only)')"
-echo " LiteLLM:  ${LITELLM_BASE_URL}"
+echo " OpenAI:   ${OPENAI_BASE_URL}"
 echo " Free model: ${OPENCODE_FREE_MODEL}"
 echo "============================================================"
 echo

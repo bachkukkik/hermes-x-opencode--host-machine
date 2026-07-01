@@ -6,7 +6,7 @@
 #   bash install.sh --no-run    # install only, don't run generator
 #
 # Prerequisites: bash, python3, python3-yaml, hermes, opencode (optional),
-# and a reachable LiteLLM proxy at http://localhost:4000 (or LITELLM_BASE_URL).
+# and a reachable OpenAI-compatible endpoint at http://localhost:4000 (or OPENAI_BASE_URL).
 
 set -euo pipefail
 
