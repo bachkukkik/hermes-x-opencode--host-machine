@@ -160,10 +160,10 @@ if grep -q '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' "${STAGING_OPENCODE}" 2>/dev
 else
     _fail "opencode.jsonc has provider.opencode ({env:OPENCODE_ZEN_API_KEY})"
 fi
-if grep -q '"model": "opencode/deepseek-v4-flash-free"' "${STAGING_OPENCODE}" 2>/dev/null; then
-    _pass "opencode.jsonc model = opencode/deepseek-v4-flash-free"
+if grep -q "\"model\": \"${OPENCODE_DEFAULT_MODEL}\"" "${STAGING_OPENCODE}" 2>/dev/null; then
+    _pass "opencode.jsonc model = ${OPENCODE_DEFAULT_MODEL}"
 else
-    _fail "opencode.jsonc model = opencode/deepseek-v4-flash-free"
+    _fail "opencode.jsonc model = ${OPENCODE_DEFAULT_MODEL}"
 fi
 
 # TC3: Hermes overlay custom_providers has >1 model (line-count the models map)

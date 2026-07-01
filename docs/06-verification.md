@@ -22,7 +22,7 @@ Layer 1: Static checks
 
 Layer 2: Content assertions
 ├── provider.opencode with {env:OPENCODE_ZEN_API_KEY} present
-├── model = opencode/deepseek-v4-flash-free
+├── model = $OPENCODE_DEFAULT_MODEL (dynamic)
 ├── custom_providers has >1 model entries
 └── Preserved blocks (permission, plugin, agent, server) present
 
@@ -86,7 +86,7 @@ python3 -c "import yaml; yaml.safe_load(open('staging/config-hermes-overlay.yaml
 | TC3 | custom_providers models count > 1 | `grep -c 'context_length' staging/config-hermes-overlay.yaml` |
 | TC4 | opencode.jsonc valid JSON | `python3 -m json.tool staging/opencode.jsonc` |
 | TC5 | Hermes overlay valid YAML | `python3 -c "import yaml; yaml.safe_load(...)"` |
-| TC6 | free Zen model as default | `grep -q 'opencode/deepseek-v4-flash-free' staging/opencode.jsonc` |
+| TC6 | OPENCODE_DEFAULT_MODEL as default | `grep -q "$OPENCODE_DEFAULT_MODEL" staging/opencode.jsonc` |
 | TC7 | agent sub-block models overridden | `grep -A2 '"build"' staging/opencode.jsonc` |
 | TC8 | Preserved blocks in opencode.jsonc | `grep -q '"permission"\|"plugin"\|"agent"\|"server"' staging/opencode.jsonc` |
 
@@ -129,7 +129,7 @@ cp "$STAGING/auth.json" ~/.local/share/opencode/auth.json
 export OPENCODE_ZEN_API_KEY=***
 
 # 5. Verify agents work
-opencode run --model opencode/deepseek-v4-flash-free -q "say hello"
+opencode run --model ${OPENCODE_DEFAULT_MODEL} -q "say hello"
 hermes config check
 ```
 
@@ -155,7 +155,7 @@ Planned for Phase 2. The test structure follows the Docker reference:
 }
 
 @test "default model is present in discovery" {
-    grep -qi 'zai/glm-5.2' staging/discovered-models.txt
+    grep -qi "${OPENCODE_DEFAULT_MODEL}" staging/discovered-models.txt
 }
 ```
 
@@ -188,7 +188,7 @@ bash generate.sh --dry-run
 #   [PASS] staging/opencode.jsonc valid JSON
 #   [PASS] staging/config-hermes-overlay.yaml valid YAML
 #   [PASS] opencode.jsonc has provider.opencode ({env:OPENCODE_ZEN_API_KEY})
-#   [PASS] opencode.jsonc model = opencode/deepseek-v4-flash-free
+#   [PASS] opencode.jsonc model = $OPENCODE_DEFAULT_MODEL
 #   [PASS] Hermes overlay custom_providers has N models
 #   [PASS] opencode.jsonc preserves 'permission' block
 #   [PASS] opencode.jsonc preserves 'plugin' block

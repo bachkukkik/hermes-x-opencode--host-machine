@@ -39,15 +39,15 @@ Hermes delegates coding tasks via the `opencode` skill. The skill invokes `openc
 
 ```bash
 # Inside the opencode skill definition
-opencode run --model opencode/deepseek-v4-flash-free \
+opencode run --model ${OPENCODE_DEFAULT_MODEL:-opencode/deepseek-v4-flash-free} \
   --agent plan -s "$SESSION_ID" \
   "Implement the fix for issue #42"
 ```
 
-The free model is enforced at two levels:
+The default model is enforced at two levels:
 
 1. **Config level:** `provider.opencode` with `{env:OPENCODE_ZEN_API_KEY}` is injected into `opencode.jsonc` by the config generator.
-2. **Top-level model pin:** `model` and `small_model` are set to `opencode/deepseek-v4-flash-free`, ensuring all OpenCode sessions default to the free tier.
+2. **Top-level model pin:** `model` and `small_model` are set to `$OPENCODE_DEFAULT_MODEL` (defaults to `opencode/deepseek-v4-flash-free`), ensuring all OpenCode sessions default to the configured model.
 
 ### OpenCode → Hermes delegation
 
@@ -73,10 +73,11 @@ When OpenCode needs capabilities outside its scope (web search, browser automati
 
 | Delegation direction | Model | Provider | Cost | Rationale |
 |---------------------|-------|----------|------|-----------|
-| Hermes → OpenCode (coding) | `opencode/deepseek-v4-flash-free` | opencode (Zen) | FREE | Coding is high-token; free tier saves quota |
-| Hermes → OpenCode (planning) | `opencode/deepseek-v4-flash-free` | opencode (Zen) | FREE | Plan agents also benefit from free tier |
-| OpenCode → Hermes (non-coding) | `zai/glm-5.2` (Hermes default) | litellm (proxy) | Paid | Non-coding tasks use Hermes' configured model |
-| Hermes (direct use) | `zai/glm-5.2` | litellm (proxy) | Paid | Orchestrator needs reliable, capable model |
+| Hermes → OpenCode (coding) | `$OPENCODE_DEFAULT_MODEL` (default: `opencode/deepseek-v4-flash-free`) | opencode (Zen) | FREE by default | Coding is high-token; free tier saves quota |
+| Hermes → OpenCode (planning) | `$OPENCODE_DEFAULT_MODEL` | opencode (Zen) | FREE by default | Plan agents also benefit from free tier |
+| OpenCode → Hermes (non-coding) | `$HERMES_DEFAULT_MODEL` (default: `deepseek/deepseek-v4-pro`) | litellm (proxy) | Paid | Non-coding tasks use Hermes' configured model |
+| Hermes (direct use) | `$HERMES_DEFAULT_MODEL` | litellm (proxy) | Paid | Orchestrator needs reliable, capable model |
+| Hermes → subagent (delegated) | `$HERMES_DELEGATION_MODEL` (default: `openai/gpt-4o-mini`) | inherits parent or `$HERMES_DELEGATION_PROVIDER` | Configurable | Cheaper/faster model for delegated tasks |
 
 ### Fallback chain
 
@@ -114,10 +115,10 @@ opencode.jsonc {env:OPENAI_API_KEY}        ──► resolves at OpenCode runtim
 
 ```bash
 # Test Hermes → OpenCode delegation (requires opencode CLI)
-opencode run --model opencode/deepseek-v4-flash-free -q "say hello" 2>&1
+opencode run --model ${OPENCODE_DEFAULT_MODEL} -q "say hello" 2>&1
 
-# Verify the free Zen model is configured
-grep '"model": "opencode/deepseek-v4-flash-free"' ~/.hermes/host-config-gen/staging/opencode.jsonc
+# Verify OPENCODE_DEFAULT_MODEL is configured
+grep -q "\"model\": \"${OPENCODE_DEFAULT_MODEL}\"" ~/.hermes/host-config-gen/staging/opencode.jsonc
 
 # Verify provider.opencode has {env:OPENCODE_ZEN_API_KEY}
 grep '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' ~/.hermes/host-config-gen/staging/opencode.jsonc
@@ -126,7 +127,7 @@ grep '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' ~/.hermes/host-config-gen/staging/
 # Run from opencode: hermes ask "what time is it?"
 
 # Verify fallback chain configuration
-echo "OPENCODE_FALLBACK_MODEL=opencode/deepseek-v4-flash-free,litellm/zai/glm-5.2"
+echo "OPENCODE_FALLBACK_MODEL=litellm/${OPENAI_DEFAULT_MODEL:-zai/glm-5.2}"
 
 # Confirm Zen auth resolves
 python3 -c "
@@ -161,7 +162,7 @@ with open(env_file) as f:
 
 - **Zen auth failure:** Export `OPENCODE_ZEN_API_KEY` with the Zen key. Add `OPENCODE_ZEN_API_KEY=<your-zen-key>` to `~/.hermes/.env`.
 - **OpenCode not installed:** Install OpenCode CLI via `npm install -g opencode-ai` or the project's install script. The `install.sh` prerequisite check warns if `opencode` is missing.
-- **Model mismatch in sub-agents:** The config generator explicitly overrides `agent.build.model` and `agent.plan.model` to `opencode/deepseek-v4-flash-free`. Verify the override with `grep -A2 '"build"' staging/opencode.jsonc`.
+- **Model mismatch in sub-agents:** The config generator explicitly overrides `agent.build.model` and `agent.plan.model` to `$OPENCODE_DEFAULT_MODEL`. Verify the override with `grep -A2 '"build"' staging/opencode.jsonc`.
 
 ## Verdict
 

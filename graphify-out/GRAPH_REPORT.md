@@ -1,16 +1,16 @@
 # Graph Report - hermes-x-opencode--host-machine  (2026-07-01)
 
 ## Corpus Check
-- 21 files · ~16,549 words
+- 20 files · ~16,603 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 224 nodes · 211 edges · 22 communities (16 shown, 6 thin omitted)
+- 223 nodes · 211 edges · 21 communities (15 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `04876f32`
+- Built from commit: `c6c4aff8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -55,7 +55,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (22 total, 6 thin omitted)
+## Communities (21 total, 6 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.15

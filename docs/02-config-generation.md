@@ -26,7 +26,7 @@ The single source of truth for all filesystem paths and defaults:
 | `STAGING_DIR` | `${HERMES_HOME}/host-config-gen/staging` | Output directory |
 | `OPENAI_BASE_URL` | `http://localhost:4000` | OpenAI-compatible endpoint (env-overridable) |
 | `OPENAI_DEFAULT_MODEL` | `zai/glm-5.2` | Fallback model (EC1) |
-| `OPENCODE_DEFAULT_MODEL` | `opencode/deepseek-v4-flash-free` | Zero-cost Zen model for delegation |
+| `OPENCODE_DEFAULT_MODEL` | `$OPENCODE_DEFAULT_MODEL` | Dynamic — defaults in `.env.example`; overrides hard-coded Zen model |
 
 ### config-opencode.sh MERGE strategy
 
@@ -45,8 +45,8 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
 
 // AFTER (staging — note what changed vs. what survived)
 {
-  "model": "opencode/deepseek-v4-flash-free",           // ← injected (free Zen)
-  "small_model": "opencode/deepseek-v4-flash-free",     // ← injected
+  "model": "<$OPENCODE_DEFAULT_MODEL>",                  // ← injected from OPENCODE_DEFAULT_MODEL
+  "small_model": "<$OPENCODE_DEFAULT_MODEL>",            // ← injected from OPENCODE_DEFAULT_MODEL
   "provider": {
     "opencode": {
       "options": { "apiKey": "{env:OPENCODE_ZEN_API_KEY}" } // ← injected
@@ -65,8 +65,8 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
   "permission": { "deny": ["rm", "sudo"] },             // ← preserved
   "plugin": ["my-custom-plugin"],                        // ← preserved
   "agent": {
-    "build": { "model": "opencode/deepseek-v4-flash-free", "mode": "fast" },  // model overridden, mode preserved
-    "plan": { "model": "opencode/deepseek-v4-flash-free", "mode": "deep" }    // model overridden, mode preserved
+    "build": { "model": "<$OPENCODE_DEFAULT_MODEL>", "mode": "fast" },  // model overridden, mode preserved
+    "plan": { "model": "<$OPENCODE_DEFAULT_MODEL>", "mode": "deep" }    // model overridden, mode preserved
   }
 }
 ```
@@ -228,8 +228,8 @@ bash generate.sh --dry-run
 grep -q '"permission"' staging/opencode.jsonc && echo "permission block preserved"
 grep -q '"plugin"' staging/opencode.jsonc && echo "plugin block preserved"
 
-# Confirm free Zen model is applied correctly
-grep -q '"model": "opencode/deepseek-v4-flash-free"' staging/opencode.jsonc
+# Confirm OPENCODE_DEFAULT_MODEL is applied correctly
+grep -q "\"model\": \"${OPENCODE_DEFAULT_MODEL}\"" staging/opencode.jsonc
 grep -q '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' staging/opencode.jsonc
 
 # Verify Hermes overlay has model entries

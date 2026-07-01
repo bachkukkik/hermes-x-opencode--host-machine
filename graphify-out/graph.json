@@ -4,15 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": ".graphify_detect.json",
-      "file_type": "code",
-      "source_file": ".graphify_detect.json",
-      "source_location": "L1",
-      "id": "graphify_detect",
-      "community": 21,
-      "norm_label": ".graphify_detect.json"
-    },
-    {
       "label": "generate.sh",
       "file_type": "code",
       "source_file": "generate.sh",
@@ -1771,7 +1762,7 @@
       "label": "Host vs. Docker container differences",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L83",
+      "source_location": "L84",
       "id": "docs_04_skill_installation_host_vs_docker_container_differences",
       "community": 16,
       "norm_label": "host vs. docker container differences"
@@ -1780,7 +1771,7 @@
       "label": "Skill YAML frontmatter",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L93",
+      "source_location": "L94",
       "id": "docs_04_skill_installation_skill_yaml_frontmatter",
       "community": 16,
       "norm_label": "skill yaml frontmatter"
@@ -1789,7 +1780,7 @@
       "label": "Verification",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L113",
+      "source_location": "L114",
       "id": "docs_04_skill_installation_verification",
       "community": 16,
       "norm_label": "verification"
@@ -1798,7 +1789,7 @@
       "label": "What Works",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L143",
+      "source_location": "L144",
       "id": "docs_04_skill_installation_what_works",
       "community": 16,
       "norm_label": "what works"
@@ -1807,7 +1798,7 @@
       "label": "What Fails",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L151",
+      "source_location": "L152",
       "id": "docs_04_skill_installation_what_fails",
       "community": 16,
       "norm_label": "what fails"
@@ -1816,7 +1807,7 @@
       "label": "Resolution",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L157",
+      "source_location": "L158",
       "id": "docs_04_skill_installation_resolution",
       "community": 16,
       "norm_label": "resolution"
@@ -1825,7 +1816,7 @@
       "label": "Verdict",
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L163",
+      "source_location": "L164",
       "id": "docs_04_skill_installation_verdict",
       "community": 16,
       "norm_label": "verdict"
@@ -1915,7 +1906,7 @@
       "label": "Fallback chain",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L81",
+      "source_location": "L82",
       "id": "docs_05_cross_agent_delegation_fallback_chain",
       "community": 14,
       "norm_label": "fallback chain"
@@ -1924,7 +1915,7 @@
       "label": "Credential flow",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L98",
+      "source_location": "L99",
       "id": "docs_05_cross_agent_delegation_credential_flow",
       "community": 14,
       "norm_label": "credential flow"
@@ -1933,7 +1924,7 @@
       "label": "Verification",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L113",
+      "source_location": "L114",
       "id": "docs_05_cross_agent_delegation_verification",
       "community": 14,
       "norm_label": "verification"
@@ -1942,7 +1933,7 @@
       "label": "What Works",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L146",
+      "source_location": "L147",
       "id": "docs_05_cross_agent_delegation_what_works",
       "community": 14,
       "norm_label": "what works"
@@ -1951,7 +1942,7 @@
       "label": "What Fails",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L154",
+      "source_location": "L155",
       "id": "docs_05_cross_agent_delegation_what_fails",
       "community": 14,
       "norm_label": "what fails"
@@ -1960,7 +1951,7 @@
       "label": "Resolution",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L160",
+      "source_location": "L161",
       "id": "docs_05_cross_agent_delegation_resolution",
       "community": 14,
       "norm_label": "resolution"
@@ -1969,7 +1960,7 @@
       "label": "Verdict",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L166",
+      "source_location": "L167",
       "id": "docs_05_cross_agent_delegation_verdict",
       "community": 14,
       "norm_label": "verdict"
@@ -2665,9 +2656,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan",
-      "target": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan"
     },
     {
       "relation": "contains",
@@ -2675,9 +2666,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
-      "target": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_hard_gate_plan_1_output"
     },
     {
       "relation": "contains",
@@ -2685,9 +2676,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
-      "target": "plans_bridge_gap_plan_wave_decomposition",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_wave_decomposition"
     },
     {
       "relation": "contains",
@@ -2695,9 +2686,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_assumptions",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_assumptions"
     },
     {
       "relation": "contains",
@@ -2705,9 +2696,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_changes_summary",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_changes_summary"
     },
     {
       "relation": "contains",
@@ -2715,9 +2706,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L56",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_pr_breakdown",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_pr_breakdown"
     },
     {
       "relation": "contains",
@@ -2725,9 +2716,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_scope",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_scope"
     },
     {
       "relation": "contains",
@@ -2735,9 +2726,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_success_criteria",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_success_criteria"
     },
     {
       "relation": "contains",
@@ -2745,9 +2736,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_docs_content_updates",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_docs_content_updates"
     },
     {
       "relation": "contains",
@@ -2755,9 +2746,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68"
     },
     {
       "relation": "contains",
@@ -2765,9 +2756,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68"
     },
     {
       "relation": "contains",
@@ -2775,9 +2766,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66"
     },
     {
       "relation": "contains",
@@ -2785,9 +2776,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_tests_new_files",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_tests_new_files"
     },
     {
       "relation": "contains",
@@ -2795,9 +2786,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_wave_decomposition",
-      "target": "plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents"
     },
     {
       "relation": "contains",
@@ -2805,9 +2796,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_wave_decomposition",
-      "target": "plans_bridge_gap_plan_wave_2_tests_3_independent_subagents",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_wave_2_tests_3_independent_subagents"
     },
     {
       "relation": "contains",
@@ -2815,9 +2806,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plans_bridge_gap_plan_wave_decomposition",
-      "target": "plans_bridge_gap_plan_wave_3_docs_3_independent_subagents",
-      "confidence_score": 1.0
+      "target": "plans_bridge_gap_plan_wave_3_docs_3_independent_subagents"
     },
     {
       "relation": "contains",
@@ -2995,9 +2986,9 @@
       "source_file": "PRD.md",
       "source_location": "L228",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_10_documentation_and_testing_gaps",
-      "confidence_score": 1.0
+      "target": "prd_10_documentation_and_testing_gaps"
     },
     {
       "relation": "contains",
@@ -3005,9 +2996,9 @@
       "source_file": "PRD.md",
       "source_location": "L245",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_11_ci_cd_pipeline_phase_4",
-      "confidence_score": 1.0
+      "target": "prd_11_ci_cd_pipeline_phase_4"
     },
     {
       "relation": "contains",
@@ -3095,9 +3086,9 @@
       "source_file": "PRD.md",
       "source_location": "L136",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "confidence_score": 1.0
+      "target": "prd_9_cross_repo_gap_bridge_host_docker_reference"
     },
     {
       "relation": "contains",
@@ -3175,9 +3166,9 @@
       "source_file": "PRD.md",
       "source_location": "L138",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_1_gap_inventory",
-      "confidence_score": 1.0
+      "target": "prd_9_1_gap_inventory"
     },
     {
       "relation": "contains",
@@ -3185,9 +3176,9 @@
       "source_file": "PRD.md",
       "source_location": "L148",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_2_feature_parity_matrix",
-      "confidence_score": 1.0
+      "target": "prd_9_2_feature_parity_matrix"
     },
     {
       "relation": "contains",
@@ -3195,9 +3186,9 @@
       "source_file": "PRD.md",
       "source_location": "L169",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68",
-      "confidence_score": 1.0
+      "target": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68"
     },
     {
       "relation": "contains",
@@ -3205,9 +3196,9 @@
       "source_file": "PRD.md",
       "source_location": "L188",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68",
-      "confidence_score": 1.0
+      "target": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68"
     },
     {
       "relation": "contains",
@@ -3215,9 +3206,9 @@
       "source_file": "PRD.md",
       "source_location": "L203",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66",
-      "confidence_score": 1.0
+      "target": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66"
     },
     {
       "relation": "contains",
@@ -3225,9 +3216,9 @@
       "source_file": "PRD.md",
       "source_location": "L212",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_6_test_additions",
-      "confidence_score": 1.0
+      "target": "prd_9_6_test_additions"
     },
     {
       "relation": "contains",
@@ -3235,9 +3226,9 @@
       "source_file": "PRD.md",
       "source_location": "L220",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_7_documentation_updates",
-      "confidence_score": 1.0
+      "target": "prd_9_7_documentation_updates"
     },
     {
       "relation": "contains",
@@ -3245,9 +3236,9 @@
       "source_file": "PRD.md",
       "source_location": "L230",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_1_missing_docs_phase_2_items",
-      "confidence_score": 1.0
+      "target": "prd_10_1_missing_docs_phase_2_items"
     },
     {
       "relation": "contains",
@@ -3255,9 +3246,9 @@
       "source_file": "PRD.md",
       "source_location": "L235",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_2_missing_tests_phase_2_items",
-      "confidence_score": 1.0
+      "target": "prd_10_2_missing_tests_phase_2_items"
     },
     {
       "relation": "contains",
@@ -3265,9 +3256,9 @@
       "source_file": "PRD.md",
       "source_location": "L240",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_3_knowledge_layer_phase_3_items",
-      "confidence_score": 1.0
+      "target": "prd_10_3_knowledge_layer_phase_3_items"
     },
     {
       "relation": "contains",
@@ -3795,9 +3786,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_resolution",
-      "target": "docs_03_model_discovery_quantized_gguf_context_length_pin_pr_66_ca_31_a",
-      "confidence_score": 1.0
+      "target": "docs_03_model_discovery_quantized_gguf_context_length_pin_pr_66_ca_31_a"
     },
     {
       "relation": "contains",
@@ -4105,9 +4096,9 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_credential_resolution_pr_66_ca_30_a",
-      "confidence_score": 1.0
+      "target": "docs_06_verification_credential_resolution_pr_66_ca_30_a"
     },
     {
       "relation": "contains",
@@ -4125,9 +4116,9 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L162",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_per_delegation_model_routing_pr_68",
-      "confidence_score": 1.0
+      "target": "docs_06_verification_per_delegation_model_routing_pr_68"
     },
     {
       "relation": "contains",
@@ -4321,5 +4312,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "04876f32b7a5188ea36cac03821ce1060ad45314"
+  "built_at_commit": "c6c4aff8a026bc652e4cbdb98e809f502ad4f7ad"
 }

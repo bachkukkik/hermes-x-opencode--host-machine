@@ -49,8 +49,10 @@ print('OK: plugin array preserved')
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
+    export OPENCODE_DEFAULT_MODEL
     python3 -c "
-import json
+import json, os
+expected = os.environ['OPENCODE_DEFAULT_MODEL']
 c = json.load(open('${staging}'))
 ab = c.get('agent', {}).get('build', {})
 ap = c.get('agent', {}).get('plan', {})
@@ -59,10 +61,10 @@ assert ab.get('mode') == 'interactive', f'agent.build.mode={ab.get(\"mode\")}'
 assert ab.get('description') == 'Build agent for coding tasks', f'agent.build.description={ab.get(\"description\")}'
 assert ap.get('mode') == 'interactive', f'agent.plan.mode={ap.get(\"mode\")}'
 assert ap.get('description') == 'Planning agent for strategy', f'agent.plan.description={ap.get(\"description\")}'
-# model fields should be overridden to free Zen
-assert ab.get('model') == 'opencode/deepseek-v4-flash-free', f'agent.build.model={ab.get(\"model\")}'
-assert ap.get('model') == 'opencode/deepseek-v4-flash-free', f'agent.plan.model={ap.get(\"model\")}'
-print('OK: agent sub-block fields preserved, model overridden')
+# model fields should be overridden to OPENCODE_DEFAULT_MODEL
+assert ab.get('model') == expected, f'agent.build.model={ab.get(\"model\")}, expected={expected}'
+assert ap.get('model') == expected, f'agent.plan.model={ap.get(\"model\")}, expected={expected}'
+print('OK: agent sub-block fields preserved, model overridden to ' + expected)
 "
 }
 

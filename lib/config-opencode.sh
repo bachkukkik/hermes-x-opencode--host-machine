@@ -104,6 +104,9 @@ def get_limits(model_id):
     if 'glm' in name:
         return 128000, 8192
     if 'llama_cpp' in model_id:
+        # Quantized qwen3.6-27b GGUF has 256K real context, not the 200K default
+        if 'qwen3.6-27b' in name:
+            return 262144, 32768
         return 200000, 32768
     if 'gemini' in name:
         return 1048576, 65536
