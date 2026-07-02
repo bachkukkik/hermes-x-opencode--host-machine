@@ -1,6 +1,6 @@
 {
   "generate.sh": {
-    "mtime": 1782906017.8122878,
+    "mtime": 1782911271.8166165,
     "ast_hash": "f297246b5b7da98c501e8258566988e4",
     "semantic_hash": ""
   },
@@ -10,22 +10,22 @@
     "semantic_hash": ""
   },
   "lib/config-hermes.sh": {
-    "mtime": 1782900878.1622107,
+    "mtime": 1782911271.8206167,
     "ast_hash": "c89cb0864c4c8f161134a4677635221d",
     "semantic_hash": ""
   },
   "lib/config-opencode.sh": {
-    "mtime": 1782906902.469876,
-    "ast_hash": "ba9cc3b72fcda6b2ad5c59b242d23a1e",
+    "mtime": 1782971956.2262585,
+    "ast_hash": "865aee20fe7450ec34495eb8f6bcfd8c",
     "semantic_hash": ""
   },
   "lib/constants.sh": {
-    "mtime": 1782901927.8670185,
+    "mtime": 1782911271.8206167,
     "ast_hash": "78f017008e00ea1afb677499451f3acb",
     "semantic_hash": ""
   },
   "lib/env-auth.sh": {
-    "mtime": 1782901377.5824664,
+    "mtime": 1782911271.8206167,
     "ast_hash": "e146f0c5110249ea153412e154dc949f",
     "semantic_hash": ""
   },
@@ -40,62 +40,62 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1782901999.268601,
+    "mtime": 1782911271.8126166,
     "ast_hash": "400439dfbf12f045d92dd1bb643ef8bb",
     "semantic_hash": ""
   },
   "PRD.md": {
-    "mtime": 1782901999.268601,
+    "mtime": 1782911271.8126166,
     "ast_hash": "1f93f83dee96b895843a235b5a7e211b",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1782901999.268601,
+    "mtime": 1782911271.8126166,
     "ast_hash": "abc87f351e3dc8f6d717567e74fcbd10",
     "semantic_hash": ""
   },
   "tests/e2e/test_helper/common.bash": {
-    "mtime": 1782902497.5640128,
+    "mtime": 1782911271.8206167,
     "ast_hash": "fcaa48d988e7ca52d23f7a1242e8750d",
     "semantic_hash": ""
   },
   "docs/01-architecture.md": {
-    "mtime": 1782885515.5547185,
-    "ast_hash": "3f423d6cb3d80aad71fd1945d56ba8f0",
+    "mtime": 1782972115.6221313,
+    "ast_hash": "524e0ff61cbd9194b86049c0fdf8b826",
     "semantic_hash": ""
   },
   "docs/02-config-generation.md": {
-    "mtime": 1782909419.1499045,
-    "ast_hash": "5bebc956150fa4476273d9cab6f2c323",
+    "mtime": 1782971845.743574,
+    "ast_hash": "87a4b9605562bc53c403678315715182",
     "semantic_hash": ""
   },
   "docs/03-model-discovery.md": {
-    "mtime": 1782902630.099117,
+    "mtime": 1782911271.8126166,
     "ast_hash": "1d60c3fe87bf71954a6f33cb8fb93d7d",
     "semantic_hash": ""
   },
   "docs/04-skill-installation.md": {
-    "mtime": 1782911121.5610418,
+    "mtime": 1782911271.8166165,
     "ast_hash": "3e288982bc1922c7818ba5951bb9fc47",
     "semantic_hash": ""
   },
   "docs/05-cross-agent-delegation.md": {
-    "mtime": 1782910001.0715265,
-    "ast_hash": "74e2884cb08c0e3a768561d8b5b4ca86",
+    "mtime": 1782972135.3385837,
+    "ast_hash": "a106dca30274abb073c67c434e26c274",
     "semantic_hash": ""
   },
   "docs/06-verification.md": {
-    "mtime": 1782910504.3826034,
-    "ast_hash": "92d81ebdfa5124bf5249b0ecba1ad67e",
+    "mtime": 1782972098.8737245,
+    "ast_hash": "e259dc57bdbb7b87de3b747a4f3f7a2e",
     "semantic_hash": ""
   },
   "docs/README.md": {
-    "mtime": 1782885515.5587184,
-    "ast_hash": "1ff08b0e2ac4a03a5072f7604afa08cf",
+    "mtime": 1782972161.0671709,
+    "ast_hash": "c5d78a1b6e1b0ea2fc8e41df07bfa47b",
     "semantic_hash": ""
   },
   ".hermes/plans/bridge-gap-plan.md": {
-    "mtime": 1782901999.268601,
+    "mtime": 1782911271.8126166,
     "ast_hash": "a3d81b0e3916de98a49f17a99230b58e",
     "semantic_hash": ""
   }

@@ -89,6 +89,8 @@ python3 -c "import yaml; yaml.safe_load(open('staging/config-hermes-overlay.yaml
 | TC6 | OPENCODE_DEFAULT_MODEL as default | `grep -q "$OPENCODE_DEFAULT_MODEL" staging/opencode.jsonc` |
 | TC7 | agent sub-block models overridden | `grep -A2 '"build"' staging/opencode.jsonc` |
 | TC8 | Preserved blocks in opencode.jsonc | `grep -q '"permission"\|"plugin"\|"agent"\|"server"' staging/opencode.jsonc` |
+| TC9 | provider.llama_cpp present with correct npm | `grep -q '"llama_cpp"' staging/opencode.jsonc && grep -q '"@ai-sdk/openai-compatible"' staging/opencode.jsonc` |
+| TC10 | provider.llama_cpp.models populated | Python check: `provider.llama_cpp.models` is non-empty dict with `name`+`limit` per entry |
 
 ### Checksum snapshot
 

@@ -182,6 +182,64 @@ print(f'OK: {ok}/{len(models)} models have context_length > 1000')
     [ "$(resolve_ctx_len "GEMINI/2.0-FLASH")" = "1048576" ]
 }
 
+# --- provider.llama_cpp tests ------------------------------------------------
+
+@test "staging/opencode.jsonc has provider.llama_cpp with correct options" {
+    seed_all_configs
+    start_mock_llm 14035 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "llama_cpp/qwen3.6-27b-q4_k_m"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local staging="${GEN_DIR}/staging/opencode.jsonc"
+
+    python3 -c "
+import json
+c = json.load(open('${staging}'))
+lc = c.get('provider', {}).get('llama_cpp', {})
+assert lc, 'provider.llama_cpp missing'
+assert lc.get('npm') == '@ai-sdk/openai-compatible', f'npm wrong: {lc.get(\"npm\")}'
+opts = lc.get('options', {})
+assert opts.get('apiKey') == '{env:OPENAI_API_KEY}', f'apiKey wrong: {opts.get(\"apiKey\")}'
+assert 'baseURL' in opts, 'baseURL missing'
+assert opts.get('timeout') == 600000, f'timeout wrong: {opts.get(\"timeout\")}'
+assert opts.get('setCacheKey') == True, f'setCacheKey wrong: {opts.get(\"setCacheKey\")}'
+print('OK: provider.llama_cpp present with correct options')
+"
+}
+
+@test "staging/opencode.jsonc provider.llama_cpp.models contains llama_cpp models" {
+    seed_all_configs
+    start_mock_llm 14036 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "llama_cpp/qwen3.6-27b-q4_k_m"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local staging="${GEN_DIR}/staging/opencode.jsonc"
+
+    python3 -c "
+import json
+c = json.load(open('${staging}'))
+lc_models = c.get('provider', {}).get('llama_cpp', {}).get('models', {})
+assert len(lc_models) > 0, 'llama_cpp.models is empty'
+assert 'qwen3.6-27b-q4_k_m' in lc_models, f'qwen3.6-27b-q4_k_m not in llama_cpp.models: {list(lc_models.keys())}'
+entry = lc_models['qwen3.6-27b-q4_k_m']
+assert entry.get('name') == 'llama_cpp/qwen3.6-27b-q4_k_m', f'name wrong: {entry.get(\"name\")}'
+assert entry.get('limit', {}).get('context') == 262144, f'context wrong: {entry.get(\"limit\")}'
+print(f'OK: {len(lc_models)} llama_cpp model(s) with correct limits')
+"
+}
+
+@test "merge summary includes provider.llama_cpp line" {
+    seed_all_configs
+    start_mock_llm 14037 "mock-model" "zai/glm-5.2" "llama_cpp/qwen3.6-27b-q4_k_m"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local summary="${GEN_DIR}/staging/opencode-merge-summary.txt"
+    assert_file_exists "$summary"
+    assert_file_contains "$summary" "provider.llama_cpp"
+    assert_file_contains "$summary" "llama_cpp.models total"
+}
+
 # --- HERMES_YOLO_MODE tests -------------------------------------------------
 
 @test "HERMES_YOLO_MODE=1 emits approvals.mode:off in staging overlay" {

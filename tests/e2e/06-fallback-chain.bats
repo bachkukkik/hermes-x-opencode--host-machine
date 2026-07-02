@@ -53,7 +53,7 @@ c = json.load(open('${fallback_file}'))
 fm = c['fallback_models']
 assert len(fm) == 2, f'expected 2 entries, got {len(fm)}: {fm}'
 assert fm[0] == 'litellm/z.ai/glm-5.2', f'index 0 wrong: {fm[0]}'
-assert fm[1] == 'litellm/llama_cpp/qwen3.6-27b-q4_k_m', f'index 1 wrong: {fm[1]}'
+assert fm[1] == 'llama_cpp/qwen3.6-27b-q4_k_m', f'index 1 wrong: {fm[1]}'
 print('OK: ordered 2-element fallback chain')
 "
 }
@@ -115,7 +115,7 @@ c = json.load(open('${fallback_file}'))
 fm = c['fallback_models']
 assert len(fm) == 2, f'expected 2 entries, got {len(fm)}: {fm}'
 assert fm[0] == 'litellm/z.ai/glm-5.2', f'index 0 wrong: {fm[0]}'
-assert fm[1] == 'litellm/llama_cpp/qwen3.6-27b-q4_k_m', f'index 1 wrong: {fm[1]}'
+assert fm[1] == 'llama_cpp/qwen3.6-27b-q4_k_m', f'index 1 wrong: {fm[1]}'
 print('OK: whitespace-tolerant fallback chain')
 "
 }
@@ -136,7 +136,7 @@ c = json.load(open('${fallback_file}'))
 fm = c['fallback_models']
 assert len(fm) == 2, f'expected 2 entries, got {len(fm)}: {fm}'
 assert fm[0] == 'opencode/deepseek-v4-flash-free', f'index 0 wrong: {fm[0]}'
-assert fm[1] == 'litellm/llama_cpp/qwen3.6-27b-q4_k_m', f'index 1 wrong: {fm[1]}'
+assert fm[1] == 'llama_cpp/qwen3.6-27b-q4_k_m', f'index 1 wrong: {fm[1]}'
 print('OK: hybrid cross-provider chain')
 "
 }
@@ -170,7 +170,7 @@ import json
 c = json.load(open('${fallback_file}'))
 fm = c['fallback_models']
 assert len(fm) == 1, f'expected 1 entry, got {len(fm)}: {fm}'
-assert fm[0] == 'litellm/llama_cpp/qwen3.6-27b-q4_k_m', f'got: {fm[0]}'
+assert fm[0] == 'llama_cpp/qwen3.6-27b-q4_k_m', f'got: {fm[0]}'
 print('OK: single-value backward-compatible 1-element chain')
 "
 }
