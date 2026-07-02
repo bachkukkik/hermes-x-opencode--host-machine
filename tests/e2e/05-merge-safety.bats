@@ -43,16 +43,16 @@ print('OK: plugin array preserved')
 
 @test "MERGE mode preserves agent sub-block fields (mode, description)" {
     seed_all_configs
-    start_mock_llm 14063 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
-    run_generate
+    start_mock_llm 14045 "mock-model" "zai/glm-5.2" "openai/gpt-4o"
+    OPENCODE_DEFAULT_MODEL="mock-model" run_generate
     [ "$status" -eq 0 ]
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
-    export OPENCODE_DEFAULT_MODEL
+    expected_model="mock-model"
     python3 -c "
-import json, os
-expected = os.environ['OPENCODE_DEFAULT_MODEL']
+import json
+expected = '${expected_model}'
 c = json.load(open('${staging}'))
 ab = c.get('agent', {}).get('build', {})
 ap = c.get('agent', {}).get('plan', {})

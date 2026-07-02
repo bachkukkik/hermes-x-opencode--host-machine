@@ -33,16 +33,17 @@ load test_helper/common
 @test "staging/opencode.jsonc top-level model = OPENCODE_DEFAULT_MODEL" {
     seed_all_configs
     start_mock_llm 14024 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
-    run_generate
-    [ "$status" -eq 0 ]
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
     # Verify the top-level model matches the configured default
-    export OPENCODE_DEFAULT_MODEL
+    # (OPENCODE_DEFAULT_MODEL was unset in setup() — test must provide its own)
+    expected_model="mock-model"
+    OPENCODE_DEFAULT_MODEL="${expected_model}" run_generate
+    [ "$status" -eq 0 ]
     python3 -c "
-import json, os
-expected = os.environ['OPENCODE_DEFAULT_MODEL']
+import json
+expected = '${expected_model}'
 c = json.load(open('${staging}'))
 assert c.get('model') == expected, f\"model={c.get('model')}, expected={expected}\"
 assert c.get('small_model') == expected, f\"small_model={c.get('small_model')}, expected={expected}\"
@@ -53,15 +54,15 @@ print(f'OK: model + small_model = {expected}')
 @test "staging/opencode.jsonc agent.build.model and agent.plan.model = OPENCODE_DEFAULT_MODEL" {
     seed_all_configs
     start_mock_llm 14025 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
-    run_generate
-    [ "$status" -eq 0 ]
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
-    export OPENCODE_DEFAULT_MODEL
+    expected_model="mock-model"
+    OPENCODE_DEFAULT_MODEL="${expected_model}" run_generate
+    [ "$status" -eq 0 ]
     python3 -c "
-import json, os
-expected = os.environ['OPENCODE_DEFAULT_MODEL']
+import json
+expected = '${expected_model}'
 c = json.load(open('${staging}'))
 abm = c.get('agent', {}).get('build', {}).get('model')
 apm = c.get('agent', {}).get('plan', {}).get('model')
