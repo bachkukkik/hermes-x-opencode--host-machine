@@ -28,6 +28,40 @@ The single source of truth for all filesystem paths and defaults:
 | `OPENAI_DEFAULT_MODEL` | `zai/glm-5.2` | Fallback model (EC1) |
 | `OPENCODE_DEFAULT_MODEL` | `$OPENCODE_DEFAULT_MODEL` | Dynamic — defaults in `.env.example`; overrides hard-coded Zen model |
 
+### Multi-provider OPENCODE_*_MODEL routing
+
+Three environment variables control which model OpenCode uses, and each accepts an optional provider prefix that routes the request through the correct auth block:
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `OPENCODE_DEFAULT_MODEL` | Top-level `model`, `small_model`, and agent sub-block models | `opencode/deepseek-v4-flash-free` |
+| `OPENCODE_SMALL_MODEL` | Lightweight tasks (summarization, formatting). Falls back to `OPENCODE_DEFAULT_MODEL` if unset | Same as `OPENCODE_DEFAULT_MODEL` |
+| `OPENCODE_FALLBACK_MODEL` | Comma-separated chain tried in order when default/small fail. Bare models (no prefix) auto-get `litellm/` | *(unset)* |
+
+**Provider prefixes:**
+
+| Prefix | Provider block in opencode.jsonc | Auth source | Example |
+|--------|----------------------------------|-------------|---------|
+| `opencode/<model>` | `provider.opencode` | `{env:OPENCODE_ZEN_API_KEY}` | `opencode/deepseek-v4-flash-free` |
+| `litellm/<model>` | `provider.litellm` | `{env:OPENAI_API_KEY}` + `baseURL` | `litellm/openai/gpt-4o-mini` |
+| `llama_cpp/<model>` | `provider.llama_cpp` | `{env:OPENAI_API_KEY}` + `baseURL` + `timeout: 600000` | `llama_cpp/qwen3.6-27b-q4_k_m` |
+| *(none)* | Auto-resolves to `litellm/<model>` | `{env:OPENAI_API_KEY}` | `zai/glm-5.2` → `litellm/zai/glm-5.2` |
+
+The generator passes these values through verbatim — it does not rewrite prefixes. The only transformation is auto-prefixing bare models in `OPENCODE_FALLBACK_MODEL` with `litellm/`. This means a model like `litellm/deepseek/deepseek-v4-pro` (nested provider path) works as-is.
+
+**Fallback chain generation** (`opencode-fallback.jsonc`):
+
+```
+OPENCODE_FALLBACK_MODEL=litellm/zai/glm-5.2,llama_cpp/qwen3.6-27b-q4_k_m,zai/glm-5.2
+                                          │               │
+                                          ▼               ▼ (bare → litellm auto-prefix)
+fallback_models = [
+  "litellm/zai/glm-5.2",
+  "llama_cpp/qwen3.6-27b-q4_k_m",
+  "litellm/zai/glm-5.2"
+]
+```
+
 ### config-opencode.sh MERGE strategy
 
 The OpenCode config generator does NOT replace the live file. It reads the existing `opencode.jsonc` (tolerant JSONC parser strips `//` and `/**/` comments), applies a surgical merge, and writes only to staging:
