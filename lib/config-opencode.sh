@@ -49,6 +49,50 @@ live_path, out_path, default_model, base_url, diff_path, models_file = (
 )
 
 # --- Tolerant JSONC input parser -------------------------------------------
+# String-aware: walks char-by-char so // inside quoted strings (e.g. https://)
+# are preserved, while real comments are stripped.
+def _strip_jsonc_comments(text):
+    result = []
+    i = 0
+    in_string = False
+    escape = False
+    while i < len(text):
+        ch = text[i]
+        if escape:
+            result.append(ch)
+            escape = False
+            i += 1
+            continue
+        if in_string:
+            result.append(ch)
+            if ch == '\\':
+                escape = True
+            elif ch == '"':
+                in_string = False
+            i += 1
+            continue
+        # Outside of a string
+        if ch == '"':
+            in_string = True
+            result.append(ch)
+            i += 1
+            continue
+        if ch == '/' and i + 1 < len(text) and text[i + 1] == '/':
+            # Line comment — skip to end of line
+            while i < len(text) and text[i] != '\n':
+                i += 1
+            continue
+        if ch == '/' and i + 1 < len(text) and text[i + 1] == '*':
+            # Block comment — skip to */
+            i += 2
+            while i + 1 < len(text) and not (text[i] == '*' and text[i + 1] == '/'):
+                i += 1
+            i += 2
+            continue
+        result.append(ch)
+        i += 1
+    return ''.join(result)
+
 def load_jsonc(path):
     with open(path) as f:
         text = f.read()
@@ -56,10 +100,8 @@ def load_jsonc(path):
         return json.loads(text)
     except json.JSONDecodeError:
         pass
-    # Strip // line comments and /* */ block comments (naive but safe for
-    # config files — no model id legitimately contains these sequences).
-    stripped = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
-    stripped = re.sub(r'(?m)//.*$', '', stripped)
+    # String-aware comment stripping (preserves // inside quoted strings)
+    stripped = _strip_jsonc_comments(text)
     stripped = re.sub(r',\s*([}\]])', r'\1', stripped)  # trailing commas
     return json.loads(stripped)
 

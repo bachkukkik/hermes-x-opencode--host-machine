@@ -241,17 +241,84 @@ regression where both opencode and litellm providers are silently empty.
 All existing docs/ files are present. Gaps are content-level updates needed to match new features
 (Section 9.7 above) plus structural completeness against the codebase.
 
-### 10.2 Missing Tests (Phase 2 items)
+### 10.2 Test Coverage (Phase 2 items)
 
-Current tests cover: install, generate, config validity, model discovery, merge safety, fallback chain.
-Missing: zen API key rename, delegation model routing, ctx pin + credential resolution tests.
+All Phase 2 tests are present and passing:
+- `tests/e2e/01-install.bats` — install.sh deployment + prerequisite checks
+- `tests/e2e/02-generate.bats` — generate.sh output + exit codes
+- `tests/e2e/03-config-validity.bats` — JSON/YAML validity, model fields, resolve_ctx_len, env-gated blocks
+- `tests/e2e/04-model-discovery.bats` — model fetch, filter, wildcard, EC1 fallback
+- `tests/e2e/05-merge-safety.bats` — MERGE mode preservation, dry-run checksum safety
+- `tests/e2e/06-fallback-chain.bats` — fallback chain generation + formatting
+- `tests/e2e/20-zen-api-key.bats` — AC34: OPENCODE_ZEN_API_KEY in opencode.jsonc + auth.json
+- `tests/e2e/21-delegation-model.bats` — AC35: delegation.model/provider in staging overlay
+- `tests/e2e/22-ctx-pin-and-credentials.bats` — CTX1-3: quantized GGUF ctx pin, CRED1-3: auth.json OR guard
 
 ### 10.3 Knowledge Layer (Phase 3 items)
 
 - `graphify-out/` needs regeneration after code changes
 - `llm-wiki` at `~/wiki/` needs wiki pages for this project
 
-## 11. CI/CD Pipeline (Phase 4)
+## 11. Multi-Provider Model Routing (Phase 1.5 — bridge gap)
+
+### 11.1 Problem
+
+The current host generator was designed around a Zen-first assumption: OpenCode defaults to
+`opencode/deepseek-v4-flash-free` (free tier) to avoid burning paid quota on delegation.
+However, the user's actual `.env` shows:
+
+```
+OPENCODE_DEFAULT_MODEL=llama_cpp/qwen3.6-27b-q4_k_m       # Local llama.cpp model
+OPENCODE_SMALL_MODEL=opencode/deepseek-v4-flash-free        # Zen free tier
+OPENCODE_FALLBACK_MODEL=llama_cpp/qwen3.6-27b-q4_k_m        # Local fallback
+HERMES_DEFAULT_MODEL=deepseek/deepseek-v4-pro               # Paid proxy model
+OPENAI_DEFAULT_MODEL=llama_cpp/qwen3.6-27b-q4_k_m           # Local default
+```
+
+The user freely mixes providers: `opencode/` (Zen), `litellm/` (proxy), `llama_cpp/` (local),
+and bare model IDs. The generator must handle ALL combinations without assuming any default.
+
+### 11.2 Requirements
+
+| ID | Requirement | Source |
+|----|-------------|--------|
+| MR-1 | `OPENCODE_DEFAULT_MODEL` may be ANY provider prefix (opencode/litellm/llama_cpp/bare) | User .env |
+| MR-2 | `OPENCODE_SMALL_MODEL` may be ANY provider prefix, independent of default | User .env |
+| MR-3 | `OPENCODE_FALLBACK_MODEL` comma-separated chain, each entry independently resolved | Upstream #59 |
+| MR-4 | Provider resolution must be consistent: same prefix rules for default, small, fallback, agent sub-models | Upstream config-opencode.sh `_resolve_provider_prefix` |
+| MR-5 | When default model is non-Zen (e.g. llama_cpp/*), agent.build/plan model must still route correctly | User intent |
+| MR-6 | No "Zen-first" bias in docs or comments — treat all providers equally | User intent |
+| MR-7 | Existing uncommitted changes (string-aware JSONC parser, env isolation, dynamic preserved blocks) must be committed | Git status |
+
+### 11.3 Gap Matrix (Intended vs Implemented)
+
+| Gap ID | Intended (upstream/doc) | Implemented (host) | Impact | Severity |
+|--------|------------------------|-------------------|--------|----------|
+| G-01 | Upstream `_strip_provider_prefix` on default+small model | Host sets `existing["model"] = default_model` without stripping | If user sets `OPENCODE_DEFAULT_MODEL=llama_cpp/qwen3.6-27b`, top-level model gets double-prefix `llama_cpp/llama_cpp/...` in provider block — **actually safe** because the host writes the raw model ID (already prefixed) directly to the top-level field, and the provider routing resolves it. NO bug here — the host's approach is simpler and correct. | Low (cosmetic) |
+| G-02 | Upstream resolves provider prefix PER model (default, small, fallback) independently | Host resolves fallback per-entry but treats default model as-is | When `OPENCODE_DEFAULT_MODEL=opencode/deepseek-v4-flash-free`, host writes this directly — correct. When `llama_cpp/...`, host also writes directly — correct. **No gap** for top-level model fields. | None |
+| G-03 | Upstream `generate_opencode_config` writes direct config (OVERWRITE mode) | Host `generate_opencode_staging` MERGE mode | Architectural difference by design (staging-only safety). No gap to bridge. | None |
+| G-04 | Upstream `.env.example` documents multi-provider fallback chains with examples | Host `.env.example` shows only single-model fallback | User cannot discover the multi-model fallback feature | Medium |
+| G-05 | Upstream config-opencode.sh has `_strip_provider_prefix` + `_resolve_provider_prefix` for model fields | Host lacks explicit strip/resolve for `OPENCODE_DEFAULT_MODEL` in `model`/`small_model` fields | The host writes raw prefixed model IDs directly, which works because OpenCode reads the prefix from the model string. **No functional bug** — but the upstream's explicit resolution is safer for edge cases. | Low |
+| G-06 | Upstream `OPENCODE_SECURITY_MODE` env var controls permission blocks | Host has no security mode concept (staging-only, doesn't generate permission blocks) | N/A for host (host uses MERGE mode, preserves existing permission block) | None |
+| G-07 | Upstream seeds auth.json for both user and root | Host stages auth.json only | By design (host never writes to live paths). No gap. | None |
+| G-08 | Uncommitted changes in PRD/generate.sh/config-opencode.sh/common.bash not committed | Working tree dirty | Code review/PR cannot proceed | High |
+
+### 11.4 Acceptance Criteria
+
+| AC# | Criteria | Verification |
+|-----|----------|--------------|
+| AC40 | `OPENCODE_DEFAULT_MODEL=llama_cpp/qwen3.6-27b-q4_k_m` produces valid opencode.jsonc with correct top-level model field | `grep '"model"' staging/opencode.jsonc` |
+| AC41 | `OPENCODE_DEFAULT_MODEL=opencode/deepseek-v4-flash-free` produces correct Zen routing | Same grep |
+| AC42 | `OPENCODE_DEFAULT_MODEL=litellm/deepseek/deepseek-v4-pro` routes through litellm provider | Check provider block presence |
+| AC43 | `OPENCODE_SMALL_MODEL` independent of `OPENCODE_DEFAULT_MODEL` — both can differ | Set both to different providers, verify both fields |
+| AC44 | `OPENCODE_FALLBACK_MODEL=z.ai/glm-5.2,llama_cpp/qwen3.6-27b` produces correct multi-provider chain | Check opencode-fallback.jsonc |
+| AC45 | `.env.example` documents multi-provider usage with examples (opencode/litellm/llama_cpp) | Read .env.example |
+| AC46 | All uncommitted changes committed to feature branch | `git status` clean after commit |
+| AC47 | `bash generate.sh --dry-run` passes ALL validations with real .env | Run dry-run, check exit code 0 |
+| AC48 | Generated configs produce callable LLM settings (model actually routes) | `opencode run` smoke test with generated config |
+| AC49 | Generated Hermes overlay routes correctly with `hermes` CLI | Config validation |
+
+## 12. CI/CD Pipeline (Phase 4)
 
 No `.github/workflows/` in host repo. The Docker stack has `.github/workflows/e2e.yml` but it
 runs Docker-based bats tests which are N/A for host config generator.

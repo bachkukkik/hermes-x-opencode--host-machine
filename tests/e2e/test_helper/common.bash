@@ -15,6 +15,11 @@ setup() {
     GEN_DIR="${FAKE_HOME}/.hermes/host-config-gen"
     export GEN_DIR
     mkdir -p "${GEN_DIR}/lib"
+    # Clean environment — prevent repo .env from leaking test defaults
+    unset HERMES_YOLO_MODE HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER
+    unset HERMES_GOAL_MAX_TURNS HERMES_COMPRESSION_THRESHOLD
+    unset OPENAI_DEFAULT_MODEL OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_FALLBACK_MODEL
+    unset HERMES_DELEGATION_MAX_ITERATIONS
     cp "${REPO_DIR}/generate.sh" "${GEN_DIR}/"
     cp "${REPO_DIR}/lib/"*.sh     "${GEN_DIR}/lib/"
     chmod +x "${GEN_DIR}/generate.sh"

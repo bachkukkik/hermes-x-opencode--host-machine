@@ -174,8 +174,38 @@ else
     _fail "Hermes overlay custom_providers has ${_oc_models} models (expected >1)"
 fi
 
-# TC8: preserved blocks in opencode.jsonc
-for blk in permission plugin agent server; do
+# TC8: preserved blocks in opencode.jsonc (only check blocks that existed in source)
+_preserve_blocks="permission plugin agent"
+if [ -f "${OPENCODE_CONFIG}" ]; then
+    _extra_blocks=$(python3 -c "
+import json, re, sys
+try:
+    with open(sys.argv[1]) as f:
+        text = f.read()
+    stripped = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
+    # String-aware // strip
+    result = []; i = 0; in_str = False; esc = False
+    while i < len(stripped):
+        ch = stripped[i]
+        if esc: result.append(ch); esc = False; i += 1; continue
+        if in_str:
+            result.append(ch)
+            if ch == '\\\\': esc = True
+            elif ch == '\"': in_str = False
+            i += 1; continue
+        if ch == '\"': in_str = True; result.append(ch); i += 1; continue
+        if ch == '/' and i+1 < len(stripped) and stripped[i+1] == '/':
+            while i < len(stripped) and stripped[i] != '\n': i += 1
+            continue
+        result.append(ch); i += 1
+    cfg = json.loads(''.join(result))
+    for k in ('server', 'experimental'):
+        if k in cfg: print(k)
+except: pass
+" "${OPENCODE_CONFIG}" 2>/dev/null || true)
+    _preserve_blocks="${_preserve_blocks} ${_extra_blocks}"
+fi
+for blk in $_preserve_blocks; do
     if grep -q "\"${blk}\"" "${STAGING_OPENCODE}" 2>/dev/null; then
         _pass "opencode.jsonc preserves '${blk}' block"
     else
