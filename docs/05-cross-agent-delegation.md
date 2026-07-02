@@ -78,6 +78,7 @@ When OpenCode needs capabilities outside its scope (web search, browser automati
 | OpenCode → Hermes (non-coding) | `$HERMES_DEFAULT_MODEL` (default: `deepseek/deepseek-v4-pro`) | litellm (proxy) | Paid | Non-coding tasks use Hermes' configured model |
 | Hermes (direct use) | `$HERMES_DEFAULT_MODEL` | litellm (proxy) | Paid | Orchestrator needs reliable, capable model |
 | Hermes → subagent (delegated) | `$HERMES_DELEGATION_MODEL` (default: `openai/gpt-4o-mini`) | inherits parent or `$HERMES_DELEGATION_PROVIDER` | Configurable | Cheaper/faster model for delegated tasks |
+| Fallback chain (llama_cpp) | `llama_cpp/qwen3.6-27b-q4_k_m` etc. | llama_cpp (separate provider, same proxy) | Free (local) | Quantized GGUF models route through `provider.llama_cpp` with `@ai-sdk/openai-compatible` npm — NOT through litellm prefix |
 
 ### Fallback chain
 

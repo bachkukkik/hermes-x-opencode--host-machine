@@ -18,7 +18,10 @@
 #   (d) union-merge provider.litellm.models with $DISCOVERED_MODELS
 #       (existing hand-tuned limits are PRESERVED; newly discovered models are
 #        added with computed get_limits() heuristics — surgical, lossless)
-#   (e) everything else untouched
+#   (e) create provider.llama_cpp with @ai-sdk/openai-compatible npm, same
+#       credentials/baseURL as litellm, and a separate models map for
+#       llama_cpp/* models (without this, OpenCode throws ProviderModelNotFoundError)
+#   (f) everything else untouched
 
 # get_limits heuristics (ported verbatim from Docker config-opencode.sh).
 _oc_get_limits() { :; }  # implemented in python below for fidelity
@@ -136,6 +139,9 @@ if fallback_raw:
             fb_full = fb
         elif fb.startswith("litellm/"):
             fb_full = fb
+        elif fb.startswith("llama_cpp/"):
+            # llama_cpp/* models have their own provider block now
+            fb_full = fb
         else:
             # Bare model -> prefix with litellm/ (proxy is available)
             fb_full = "litellm/" + fb
@@ -204,6 +210,41 @@ if not isinstance(models_map, dict):
     models_map = {}
     ll["models"] = models_map
 
+# (e) provider.llama_cpp — route llama_cpp/* models through the same LiteLLM
+#     proxy. Models like llama_cpp/qwen3.6-27b-q4_k_m are served via wildcard
+#     routing in LiteLLM (not listed by /v1/models but routable). Without this
+#     block, opencode resolves "llama_cpp/xxx" -> looks for provider.llama_cpp,
+#     finds none, and throws ProviderModelNotFoundError.
+lc = provider.setdefault("llama_cpp", {})
+if not isinstance(lc, dict):
+    lc = {}
+    provider["llama_cpp"] = lc
+lc["npm"] = "@ai-sdk/openai-compatible"
+lc_opts = lc.setdefault("options", {})
+if not isinstance(lc_opts, dict):
+    lc_opts = {}
+    lc["options"] = lc_opts
+lc_opts["apiKey"] = "{env:OPENAI_API_KEY}"
+lc_opts["baseURL"] = base_url
+lc_opts["timeout"] = 600000
+lc_opts["setCacheKey"] = True
+# Populate models map with discovered llama_cpp/* models
+lc_models_map = lc.setdefault("models", {})
+if not isinstance(lc_models_map, dict):
+    lc_models_map = {}
+    lc["models"] = lc_models_map
+lc_added = []
+for mid in discovered:
+    if mid.startswith("llama_cpp/"):
+        bare = mid[len("llama_cpp/"):]
+        if bare not in lc_models_map:
+            ctx, out = get_limits(mid)
+            lc_models_map[bare] = {
+                "name": mid,
+                "limit": {"context": ctx, "output": out},
+            }
+            lc_added.append(bare)
+
 added = []
 for mid in discovered:
     if mid not in models_map:
@@ -245,6 +286,13 @@ lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
              % base_url)
 lines.append("litellm.models total  -> %d (%d preserved + %d newly added)"
              % (total_models, existing_count, len(added)))
+# llama_cpp provider summary
+lc_total = len(lc_models_map)
+lc_existing_count = lc_total - len(lc_added)
+lines.append("provider.llama_cpp    -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
+             % base_url)
+lines.append("llama_cpp.models total-> %d (%d preserved + %d newly added)"
+             % (lc_total, lc_existing_count, len(lc_added)))
 if fallback_chain:
     lines.append("fallback chain        -> [%s]" % ", ".join(fallback_chain))
     lines.append("  (written to opencode-fallback.jsonc in staging dir)")

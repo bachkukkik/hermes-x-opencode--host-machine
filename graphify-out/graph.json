@@ -12,6 +12,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "generate",
       "community": 3,
       "norm_label": "generate.sh"
@@ -25,7 +26,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
+      "_origin": "ast",
+      "id": "generate_sh__entry",
       "community": 3,
       "norm_label": "generate.sh script"
     },
@@ -38,6 +40,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "generate_snapshot_live_checksums",
       "community": 3,
       "norm_label": "snapshot_live_checksums()"
@@ -51,6 +54,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "generate_verify_live_checksums",
       "community": 3,
       "norm_label": "verify_live_checksums()"
@@ -64,6 +68,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "generate_pass",
       "community": 3,
       "norm_label": "_pass()"
@@ -77,6 +82,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "generate_fail",
       "community": 3,
       "norm_label": "_fail()"
@@ -90,6 +96,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "install",
       "community": 8,
       "norm_label": "install.sh"
@@ -103,7 +110,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_install_sh__entry",
+      "_origin": "ast",
+      "id": "install_sh__entry",
       "community": 8,
       "norm_label": "install.sh script"
     },
@@ -116,6 +124,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "install_check_cmd",
       "community": 8,
       "norm_label": "check_cmd()"
@@ -129,6 +138,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "lib_config_hermes",
       "community": 6,
       "norm_label": "config-hermes.sh"
@@ -142,7 +152,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_hermes_sh__entry",
+      "_origin": "ast",
+      "id": "lib_config_hermes_sh__entry",
       "community": 6,
       "norm_label": "config-hermes.sh script"
     },
@@ -155,6 +166,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "lib_config_hermes_resolve_ctx_len",
       "community": 6,
       "norm_label": "resolve_ctx_len()"
@@ -168,6 +180,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "lib_config_hermes_generate_hermes_overlay",
       "community": 6,
       "norm_label": "generate_hermes_overlay()"
@@ -181,6 +194,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "lib_config_opencode",
       "community": 7,
       "norm_label": "config-opencode.sh"
@@ -194,7 +208,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_opencode_sh__entry",
+      "_origin": "ast",
+      "id": "lib_config_opencode_sh__entry",
       "community": 7,
       "norm_label": "config-opencode.sh script"
     },
@@ -202,11 +217,12 @@
       "label": "_oc_get_limits()",
       "file_type": "code",
       "source_file": "lib/config-opencode.sh",
-      "source_location": "L24",
+      "source_location": "L27",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "lib_config_opencode_oc_get_limits",
       "community": 7,
       "norm_label": "_oc_get_limits()"
@@ -215,11 +231,12 @@
       "label": "generate_opencode_staging()",
       "file_type": "code",
       "source_file": "lib/config-opencode.sh",
-      "source_location": "L28",
+      "source_location": "L31",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "lib_config_opencode_generate_opencode_staging",
       "community": 7,
       "norm_label": "generate_opencode_staging()"
@@ -233,6 +250,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "lib_constants",
       "community": 9,
       "norm_label": "constants.sh"
@@ -246,7 +264,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_constants_sh__entry",
+      "_origin": "ast",
+      "id": "lib_constants_sh__entry",
       "community": 9,
       "norm_label": "constants.sh script"
     },
@@ -259,6 +278,7 @@
         "language": "bash",
         "kind": "code"
       },
+      "_origin": "ast",
       "id": "lib_constants_hermes_home",
       "community": 9,
       "norm_label": "hermes_home"
@@ -272,6 +292,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "lib_env_auth",
       "community": 10,
       "norm_label": "env-auth.sh"
@@ -285,7 +306,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_env_auth_sh__entry",
+      "_origin": "ast",
+      "id": "lib_env_auth_sh__entry",
       "community": 10,
       "norm_label": "env-auth.sh script"
     },
@@ -298,6 +320,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "lib_env_auth_generate_auth_staging",
       "community": 10,
       "norm_label": "generate_auth_staging()"
@@ -311,6 +334,7 @@
         "language": "bash",
         "kind": "file"
       },
+      "_origin": "ast",
       "id": "lib_model_discovery",
       "community": 11,
       "norm_label": "model-discovery.sh"
@@ -324,7 +348,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_model_discovery_sh__entry",
+      "_origin": "ast",
+      "id": "lib_model_discovery_sh__entry",
       "community": 11,
       "norm_label": "model-discovery.sh script"
     },
@@ -337,6 +362,7 @@
         "language": "bash",
         "kind": "bash_function"
       },
+      "_origin": "ast",
       "id": "lib_model_discovery_discover_models",
       "community": 11,
       "norm_label": "discover_models()"
@@ -350,9 +376,10 @@
         "language": "bash",
         "kind": "file"
       },
-      "id": "test_helper_common",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "common.bash"
+      "norm_label": "common.bash",
+      "id": "tests_e2e_test_helper_common"
     },
     {
       "label": "common.bash script",
@@ -363,7 +390,8 @@
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "id": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_tests_e2e_test_helper_common_bash__entry",
+      "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_bash__entry",
       "community": 4,
       "norm_label": "common.bash script"
     },
@@ -376,9 +404,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_setup",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "setup()"
+      "norm_label": "setup()",
+      "id": "tests_e2e_test_helper_common_setup"
     },
     {
       "label": "teardown()",
@@ -389,9 +418,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_teardown",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "teardown()"
+      "norm_label": "teardown()",
+      "id": "tests_e2e_test_helper_common_teardown"
     },
     {
       "label": "start_mock_llm()",
@@ -402,9 +432,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_start_mock_llm",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "start_mock_llm()"
+      "norm_label": "start_mock_llm()",
+      "id": "tests_e2e_test_helper_common_start_mock_llm"
     },
     {
       "label": "stop_mock_llm()",
@@ -415,9 +446,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_stop_mock_llm",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "stop_mock_llm()"
+      "norm_label": "stop_mock_llm()",
+      "id": "tests_e2e_test_helper_common_stop_mock_llm"
     },
     {
       "label": "seed_hermes_config()",
@@ -428,9 +460,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_seed_hermes_config",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "seed_hermes_config()"
+      "norm_label": "seed_hermes_config()",
+      "id": "tests_e2e_test_helper_common_seed_hermes_config"
     },
     {
       "label": "seed_opencode_config()",
@@ -441,9 +474,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_seed_opencode_config",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "seed_opencode_config()"
+      "norm_label": "seed_opencode_config()",
+      "id": "tests_e2e_test_helper_common_seed_opencode_config"
     },
     {
       "label": "seed_env_file()",
@@ -454,9 +488,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_seed_env_file",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "seed_env_file()"
+      "norm_label": "seed_env_file()",
+      "id": "tests_e2e_test_helper_common_seed_env_file"
     },
     {
       "label": "seed_all_configs()",
@@ -467,9 +502,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_seed_all_configs",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "seed_all_configs()"
+      "norm_label": "seed_all_configs()",
+      "id": "tests_e2e_test_helper_common_seed_all_configs"
     },
     {
       "label": "seed_empty_configs()",
@@ -480,9 +516,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_seed_empty_configs",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "seed_empty_configs()"
+      "norm_label": "seed_empty_configs()",
+      "id": "tests_e2e_test_helper_common_seed_empty_configs"
     },
     {
       "label": "assert_file_contains()",
@@ -493,9 +530,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_file_contains",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_file_contains()"
+      "norm_label": "assert_file_contains()",
+      "id": "tests_e2e_test_helper_common_assert_file_contains"
     },
     {
       "label": "assert_file_not_contains()",
@@ -506,9 +544,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_file_not_contains",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_file_not_contains()"
+      "norm_label": "assert_file_not_contains()",
+      "id": "tests_e2e_test_helper_common_assert_file_not_contains"
     },
     {
       "label": "assert_json_valid()",
@@ -519,9 +558,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_json_valid",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_json_valid()"
+      "norm_label": "assert_json_valid()",
+      "id": "tests_e2e_test_helper_common_assert_json_valid"
     },
     {
       "label": "assert_yaml_valid()",
@@ -532,9 +572,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_yaml_valid",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_yaml_valid()"
+      "norm_label": "assert_yaml_valid()",
+      "id": "tests_e2e_test_helper_common_assert_yaml_valid"
     },
     {
       "label": "assert_file_exists()",
@@ -545,9 +586,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_file_exists",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_file_exists()"
+      "norm_label": "assert_file_exists()",
+      "id": "tests_e2e_test_helper_common_assert_file_exists"
     },
     {
       "label": "assert_file_not_exists()",
@@ -558,9 +600,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_file_not_exists",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_file_not_exists()"
+      "norm_label": "assert_file_not_exists()",
+      "id": "tests_e2e_test_helper_common_assert_file_not_exists"
     },
     {
       "label": "assert_success()",
@@ -571,9 +614,10 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_assert_success",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "assert_success()"
+      "norm_label": "assert_success()",
+      "id": "tests_e2e_test_helper_common_assert_success"
     },
     {
       "label": "run_generate()",
@@ -584,213 +628,237 @@
         "language": "bash",
         "kind": "bash_function"
       },
-      "id": "test_helper_common_run_generate",
+      "_origin": "ast",
       "community": 4,
-      "norm_label": "run_generate()"
+      "norm_label": "run_generate()",
+      "id": "tests_e2e_test_helper_common_run_generate"
     },
     {
       "label": "bridge-gap-plan.md",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L1",
-      "id": "plans_bridge_gap_plan",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "bridge-gap-plan.md"
+      "norm_label": "bridge-gap-plan.md",
+      "id": "hermes_plans_bridge_gap_plan"
     },
     {
       "label": "Cross-Repo Bridge Gap Implementation Plan",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L1",
-      "id": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "cross-repo bridge gap implementation plan"
+      "norm_label": "cross-repo bridge gap implementation plan",
+      "id": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan"
     },
     {
       "label": "HARD Gate: PLAN-1 Output",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L3",
-      "id": "plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "hard gate: plan-1 output"
+      "norm_label": "hard gate: plan-1 output",
+      "id": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output"
     },
     {
       "label": "Scope",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L5",
-      "id": "plans_bridge_gap_plan_scope",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "scope"
+      "norm_label": "scope",
+      "id": "hermes_plans_bridge_gap_plan_scope"
     },
     {
       "label": "Changes Summary",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L8",
-      "id": "plans_bridge_gap_plan_changes_summary",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "changes summary"
+      "norm_label": "changes summary",
+      "id": "hermes_plans_bridge_gap_plan_changes_summary"
     },
     {
       "label": "Feature 1: OPENCODE_ZEN_API_KEY \u2192 OPENCODE_ZEN_API_KEY rename (PR #68)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L10",
-      "id": "plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "feature 1: opencode_zen_api_key \u2192 opencode_zen_api_key rename (pr #68)"
+      "norm_label": "feature 1: opencode_zen_api_key \u2192 opencode_zen_api_key rename (pr #68)",
+      "id": "hermes_plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68"
     },
     {
       "label": "Feature 2: Per-delegation model routing (PR #68)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L19",
-      "id": "plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "feature 2: per-delegation model routing (pr #68)"
+      "norm_label": "feature 2: per-delegation model routing (pr #68)",
+      "id": "hermes_plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68"
     },
     {
       "label": "Feature 3: auth.json OR guard contract (PR #66)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L25",
-      "id": "plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "feature 3: auth.json or guard contract (pr #66)"
+      "norm_label": "feature 3: auth.json or guard contract (pr #66)",
+      "id": "hermes_plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66"
     },
     {
       "label": "Tests (new files)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L30",
-      "id": "plans_bridge_gap_plan_tests_new_files",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "tests (new files)"
+      "norm_label": "tests (new files)",
+      "id": "hermes_plans_bridge_gap_plan_tests_new_files"
     },
     {
       "label": "Docs (content updates)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L37",
-      "id": "plans_bridge_gap_plan_docs_content_updates",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "docs (content updates)"
+      "norm_label": "docs (content updates)",
+      "id": "hermes_plans_bridge_gap_plan_docs_content_updates"
     },
     {
       "label": "Assumptions",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L44",
-      "id": "plans_bridge_gap_plan_assumptions",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "assumptions"
+      "norm_label": "assumptions",
+      "id": "hermes_plans_bridge_gap_plan_assumptions"
     },
     {
       "label": "Success Criteria",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L49",
-      "id": "plans_bridge_gap_plan_success_criteria",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "success criteria"
+      "norm_label": "success criteria",
+      "id": "hermes_plans_bridge_gap_plan_success_criteria"
     },
     {
       "label": "PR Breakdown",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L56",
-      "id": "plans_bridge_gap_plan_pr_breakdown",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "pr breakdown"
+      "norm_label": "pr breakdown",
+      "id": "hermes_plans_bridge_gap_plan_pr_breakdown"
     },
     {
       "label": "Wave Decomposition",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L62",
-      "id": "plans_bridge_gap_plan_wave_decomposition",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "wave decomposition"
+      "norm_label": "wave decomposition",
+      "id": "hermes_plans_bridge_gap_plan_wave_decomposition"
     },
     {
       "label": "Wave 1: Code changes (3 independent subagents)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L64",
-      "id": "plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "wave 1: code changes (3 independent subagents)"
+      "norm_label": "wave 1: code changes (3 independent subagents)",
+      "id": "hermes_plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents"
     },
     {
       "label": "Wave 2: Tests (3 independent subagents)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L72",
-      "id": "plans_bridge_gap_plan_wave_2_tests_3_independent_subagents",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "wave 2: tests (3 independent subagents)"
+      "norm_label": "wave 2: tests (3 independent subagents)",
+      "id": "hermes_plans_bridge_gap_plan_wave_2_tests_3_independent_subagents"
     },
     {
       "label": "Wave 3: Docs (3 independent subagents)",
       "file_type": "document",
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L77",
-      "id": "plans_bridge_gap_plan_wave_3_docs_3_independent_subagents",
+      "_origin": "ast",
       "community": 19,
-      "norm_label": "wave 3: docs (3 independent subagents)"
+      "norm_label": "wave 3: docs (3 independent subagents)",
+      "id": "hermes_plans_bridge_gap_plan_wave_3_docs_3_independent_subagents"
     },
     {
       "label": "pr-breakdown.md",
       "file_type": "document",
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L1",
-      "id": "plans_pr_breakdown",
+      "_origin": "ast",
       "community": 5,
-      "norm_label": "pr-breakdown.md"
+      "norm_label": "pr-breakdown.md",
+      "id": "hermes_plans_pr_breakdown"
     },
     {
       "label": "PR Breakdown \u2014 Host Config Generator Gap Bridge",
       "file_type": "document",
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L1",
-      "id": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "_origin": "ast",
       "community": 5,
-      "norm_label": "pr breakdown \u2014 host config generator gap bridge"
+      "norm_label": "pr breakdown \u2014 host config generator gap bridge",
+      "id": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge"
     },
     {
       "label": "Multi-PR Decomposition",
       "file_type": "document",
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L3",
-      "id": "plans_pr_breakdown_multi_pr_decomposition",
+      "_origin": "ast",
       "community": 5,
-      "norm_label": "multi-pr decomposition"
+      "norm_label": "multi-pr decomposition",
+      "id": "hermes_plans_pr_breakdown_multi_pr_decomposition"
     },
     {
       "label": "Provisioning Strategy",
       "file_type": "document",
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L18",
-      "id": "plans_pr_breakdown_provisioning_strategy",
+      "_origin": "ast",
       "community": 5,
-      "norm_label": "provisioning strategy"
+      "norm_label": "provisioning strategy",
+      "id": "hermes_plans_pr_breakdown_provisioning_strategy"
     },
     {
       "label": "Verification Chain",
       "file_type": "document",
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L22",
-      "id": "plans_pr_breakdown_verification_chain",
+      "_origin": "ast",
       "community": 5,
-      "norm_label": "verification chain"
+      "norm_label": "verification chain",
+      "id": "hermes_plans_pr_breakdown_verification_chain"
     },
     {
       "label": "AGENTS.md",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "agents",
       "community": 0,
       "norm_label": "agents.md"
@@ -800,6 +868,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "agents_hermes_opencode_host_config_generator_agent_instructions",
       "community": 0,
       "norm_label": "hermes \u00d7 opencode host config generator \u2014 agent instructions"
@@ -809,6 +878,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L5",
+      "_origin": "ast",
       "id": "agents_architecture",
       "community": 0,
       "norm_label": "architecture"
@@ -818,6 +888,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L32",
+      "_origin": "ast",
       "id": "agents_standing_orders_always_apply",
       "community": 0,
       "norm_label": "standing orders (always apply)"
@@ -827,6 +898,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L36",
+      "_origin": "ast",
       "id": "agents_1_mandated_skills",
       "community": 0,
       "norm_label": "1. mandated skills"
@@ -836,6 +908,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L48",
+      "_origin": "ast",
       "id": "agents_2_kanban_delegation_rules_coding_discipline",
       "community": 0,
       "norm_label": "2. kanban delegation rules (coding discipline)"
@@ -845,6 +918,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L54",
+      "_origin": "ast",
       "id": "agents_3_code_quality_rules",
       "community": 0,
       "norm_label": "3. code quality rules"
@@ -854,6 +928,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L64",
+      "_origin": "ast",
       "id": "agents_4_verification_commands",
       "community": 0,
       "norm_label": "4. verification commands"
@@ -863,6 +938,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L85",
+      "_origin": "ast",
       "id": "agents_5_file_locations_host_paths",
       "community": 0,
       "norm_label": "5. file locations (host paths)"
@@ -872,6 +948,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L98",
+      "_origin": "ast",
       "id": "agents_6_litellm_model_discovery",
       "community": 0,
       "norm_label": "6. litellm / model discovery"
@@ -881,6 +958,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L105",
+      "_origin": "ast",
       "id": "agents_7_project_specific_patterns",
       "community": 0,
       "norm_label": "7. project-specific patterns"
@@ -890,6 +968,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L115",
+      "_origin": "ast",
       "id": "agents_8_agent_capabilities",
       "community": 0,
       "norm_label": "8. agent capabilities"
@@ -899,6 +978,7 @@
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L124",
+      "_origin": "ast",
       "id": "agents_release_phases",
       "community": 0,
       "norm_label": "release phases"
@@ -908,8 +988,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "prd",
-      "community": 1,
+      "community": 18,
       "norm_label": "prd.md"
     },
     {
@@ -917,6 +998,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "prd_prd_hermes_opencode_host_config_generator",
       "community": 1,
       "norm_label": "prd: hermes \u00d7 opencode host config generator"
@@ -926,6 +1008,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "prd_1_summary",
       "community": 1,
       "norm_label": "1. summary"
@@ -935,6 +1018,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "prd_2_contacts",
       "community": 1,
       "norm_label": "2. contacts"
@@ -944,6 +1028,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L14",
+      "_origin": "ast",
       "id": "prd_3_background",
       "community": 1,
       "norm_label": "3. background"
@@ -953,6 +1038,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L20",
+      "_origin": "ast",
       "id": "prd_related_repository",
       "community": 1,
       "norm_label": "related repository"
@@ -962,6 +1048,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L24",
+      "_origin": "ast",
       "id": "prd_4_objective",
       "community": 1,
       "norm_label": "4. objective"
@@ -971,6 +1058,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L36",
+      "_origin": "ast",
       "id": "prd_5_market_segment",
       "community": 1,
       "norm_label": "5. market segment"
@@ -980,6 +1068,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L45",
+      "_origin": "ast",
       "id": "prd_6_value_proposition",
       "community": 1,
       "norm_label": "6. value proposition"
@@ -989,8 +1078,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L52",
+      "_origin": "ast",
       "id": "prd_7_solution",
-      "community": 1,
+      "community": 20,
       "norm_label": "7. solution"
     },
     {
@@ -998,8 +1088,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L54",
+      "_origin": "ast",
       "id": "prd_7_1_architecture",
-      "community": 1,
+      "community": 20,
       "norm_label": "7.1 architecture"
     },
     {
@@ -1007,8 +1098,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L74",
+      "_origin": "ast",
       "id": "prd_7_2_key_features",
-      "community": 1,
+      "community": 20,
       "norm_label": "7.2 key features"
     },
     {
@@ -1016,8 +1108,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L95",
+      "_origin": "ast",
       "id": "prd_7_3_model_selection_defaults",
-      "community": 1,
+      "community": 20,
       "norm_label": "7.3 model selection defaults"
     },
     {
@@ -1025,8 +1118,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L105",
+      "_origin": "ast",
       "id": "prd_7_4_cross_agent_delegation",
-      "community": 1,
+      "community": 20,
       "norm_label": "7.4 cross-agent delegation"
     },
     {
@@ -1034,8 +1128,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L111",
+      "_origin": "ast",
       "id": "prd_7_5_assumptions",
-      "community": 1,
+      "community": 20,
       "norm_label": "7.5 assumptions"
     },
     {
@@ -1043,6 +1138,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L119",
+      "_origin": "ast",
       "id": "prd_8_release",
       "community": 1,
       "norm_label": "8. release"
@@ -1052,6 +1148,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L126",
+      "_origin": "ast",
       "id": "prd_verification_policy",
       "community": 1,
       "norm_label": "verification policy"
@@ -1061,8 +1158,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L136",
+      "_origin": "ast",
       "id": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "community": 20,
+      "community": 1,
       "norm_label": "9. cross-repo gap bridge (host \u2190 docker reference)"
     },
     {
@@ -1070,8 +1168,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L138",
+      "_origin": "ast",
       "id": "prd_9_1_gap_inventory",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.1 gap inventory"
     },
     {
@@ -1079,8 +1178,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L148",
+      "_origin": "ast",
       "id": "prd_9_2_feature_parity_matrix",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.2 feature parity matrix"
     },
     {
@@ -1088,8 +1188,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L169",
+      "_origin": "ast",
       "id": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.3 port details: opencode_zen_api_key (from pr #68)"
     },
     {
@@ -1097,8 +1198,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L188",
+      "_origin": "ast",
       "id": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.4 port details: per-delegation model routing (from pr #68)"
     },
     {
@@ -1106,8 +1208,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L203",
+      "_origin": "ast",
       "id": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.5 port details: auth.json or guard contract (from pr #66)"
     },
     {
@@ -1115,8 +1218,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L212",
+      "_origin": "ast",
       "id": "prd_9_6_test_additions",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.6 test additions"
     },
     {
@@ -1124,8 +1228,9 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L220",
+      "_origin": "ast",
       "id": "prd_9_7_documentation_updates",
-      "community": 20,
+      "community": 1,
       "norm_label": "9.7 documentation updates"
     },
     {
@@ -1133,6 +1238,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L228",
+      "_origin": "ast",
       "id": "prd_10_documentation_and_testing_gaps",
       "community": 1,
       "norm_label": "10. documentation and testing gaps"
@@ -1142,6 +1248,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L230",
+      "_origin": "ast",
       "id": "prd_10_1_missing_docs_phase_2_items",
       "community": 1,
       "norm_label": "10.1 missing docs (phase 2 items)"
@@ -1151,6 +1258,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L235",
+      "_origin": "ast",
       "id": "prd_10_2_missing_tests_phase_2_items",
       "community": 1,
       "norm_label": "10.2 missing tests (phase 2 items)"
@@ -1160,6 +1268,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L240",
+      "_origin": "ast",
       "id": "prd_10_3_knowledge_layer_phase_3_items",
       "community": 1,
       "norm_label": "10.3 knowledge layer (phase 3 items)"
@@ -1169,6 +1278,7 @@
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L245",
+      "_origin": "ast",
       "id": "prd_11_ci_cd_pipeline_phase_4",
       "community": 1,
       "norm_label": "11. ci/cd pipeline (phase 4)"
@@ -1178,6 +1288,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "readme",
       "community": 2,
       "norm_label": "readme.md"
@@ -1187,6 +1298,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "readme_hermes_opencode_host_config_generator",
       "community": 2,
       "norm_label": "hermes \u00d7 opencode host config generator"
@@ -1196,6 +1308,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "readme_origin_related",
       "community": 2,
       "norm_label": "origin / related"
@@ -1205,6 +1318,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L14",
+      "_origin": "ast",
       "id": "readme_what_it_does",
       "community": 2,
       "norm_label": "what it does"
@@ -1214,6 +1328,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L33",
+      "_origin": "ast",
       "id": "readme_usage",
       "community": 2,
       "norm_label": "usage"
@@ -1223,6 +1338,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L43",
+      "_origin": "ast",
       "id": "readme_applying_the_staging_output_manual_step",
       "community": 2,
       "norm_label": "applying the staging output (manual step)"
@@ -1232,6 +1348,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L70",
+      "_origin": "ast",
       "id": "readme_strict_requirement_free_zen_model",
       "community": 2,
       "norm_label": "strict requirement: free zen model"
@@ -1241,6 +1358,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L78",
+      "_origin": "ast",
       "id": "readme_environment_variables",
       "community": 2,
       "norm_label": "environment variables"
@@ -1250,6 +1368,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L86",
+      "_origin": "ast",
       "id": "readme_edge_cases_handled",
       "community": 2,
       "norm_label": "edge cases handled"
@@ -1259,6 +1378,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L98",
+      "_origin": "ast",
       "id": "readme_file_layout",
       "community": 2,
       "norm_label": "file layout"
@@ -1268,6 +1388,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_01_architecture",
       "community": 17,
       "norm_label": "01-architecture.md"
@@ -1277,6 +1398,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_01_architecture_01_architecture",
       "community": 17,
       "norm_label": "01 \u2014 architecture"
@@ -1286,6 +1408,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "docs_01_architecture_what",
       "community": 17,
       "norm_label": "what"
@@ -1295,6 +1418,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "docs_01_architecture_why",
       "community": 17,
       "norm_label": "why"
@@ -1304,6 +1428,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L13",
+      "_origin": "ast",
       "id": "docs_01_architecture_how",
       "community": 17,
       "norm_label": "how"
@@ -1313,6 +1438,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L15",
+      "_origin": "ast",
       "id": "docs_01_architecture_staging_pipeline",
       "community": 17,
       "norm_label": "staging pipeline"
@@ -1322,6 +1448,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L35",
+      "_origin": "ast",
       "id": "docs_01_architecture_merge_mode_vs_docker_overwrite",
       "community": 17,
       "norm_label": "merge mode vs. docker overwrite"
@@ -1331,6 +1458,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L45",
+      "_origin": "ast",
       "id": "docs_01_architecture_file_layout",
       "community": 17,
       "norm_label": "file layout"
@@ -1340,6 +1468,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L65",
+      "_origin": "ast",
       "id": "docs_01_architecture_data_flow",
       "community": 17,
       "norm_label": "data flow"
@@ -1349,6 +1478,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L69",
+      "_origin": "ast",
       "id": "docs_01_architecture_verification",
       "community": 17,
       "norm_label": "verification"
@@ -1358,6 +1488,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L88",
+      "_origin": "ast",
       "id": "docs_01_architecture_what_works",
       "community": 17,
       "norm_label": "what works"
@@ -1367,6 +1498,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L96",
+      "_origin": "ast",
       "id": "docs_01_architecture_what_fails",
       "community": 17,
       "norm_label": "what fails"
@@ -1376,6 +1508,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L102",
+      "_origin": "ast",
       "id": "docs_01_architecture_resolution",
       "community": 17,
       "norm_label": "resolution"
@@ -1385,6 +1518,7 @@
       "file_type": "document",
       "source_file": "docs/01-architecture.md",
       "source_location": "L108",
+      "_origin": "ast",
       "id": "docs_01_architecture_verdict",
       "community": 17,
       "norm_label": "verdict"
@@ -1394,8 +1528,9 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_02_config_generation",
-      "community": 13,
+      "community": 18,
       "norm_label": "02-config-generation.md"
     },
     {
@@ -1403,6 +1538,7 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_02_config_generation_02_config_generation",
       "community": 13,
       "norm_label": "02 \u2014 config generation"
@@ -1412,6 +1548,7 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "docs_02_config_generation_what",
       "community": 13,
       "norm_label": "what"
@@ -1421,6 +1558,7 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "docs_02_config_generation_why",
       "community": 13,
       "norm_label": "why"
@@ -1430,6 +1568,7 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L13",
+      "_origin": "ast",
       "id": "docs_02_config_generation_how",
       "community": 13,
       "norm_label": "how"
@@ -1439,6 +1578,7 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L15",
+      "_origin": "ast",
       "id": "docs_02_config_generation_constants_sh_paths",
       "community": 13,
       "norm_label": "constants.sh paths"
@@ -1448,6 +1588,7 @@
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L31",
+      "_origin": "ast",
       "id": "docs_02_config_generation_config_opencode_sh_merge_strategy",
       "community": 13,
       "norm_label": "config-opencode.sh merge strategy"
@@ -1456,7 +1597,8 @@
       "label": "config-hermes.sh overlay",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L85",
+      "source_location": "L98",
+      "_origin": "ast",
       "id": "docs_02_config_generation_config_hermes_sh_overlay",
       "community": 13,
       "norm_label": "config-hermes.sh overlay"
@@ -1465,7 +1607,8 @@
       "label": "Environment-gated config blocks",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L139",
+      "source_location": "L152",
+      "_origin": "ast",
       "id": "docs_02_config_generation_environment_gated_config_blocks",
       "community": 13,
       "norm_label": "environment-gated config blocks"
@@ -1474,7 +1617,8 @@
       "label": "env-auth.sh credential staging",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L191",
+      "source_location": "L204",
+      "_origin": "ast",
       "id": "docs_02_config_generation_env_auth_sh_credential_staging",
       "community": 13,
       "norm_label": "env-auth.sh credential staging"
@@ -1483,7 +1627,8 @@
       "label": "Environment variable reference",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L200",
+      "source_location": "L213",
+      "_origin": "ast",
       "id": "docs_02_config_generation_environment_variable_reference",
       "community": 13,
       "norm_label": "environment variable reference"
@@ -1492,7 +1637,8 @@
       "label": "Fallback chain",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L208",
+      "source_location": "L221",
+      "_origin": "ast",
       "id": "docs_02_config_generation_fallback_chain",
       "community": 13,
       "norm_label": "fallback chain"
@@ -1501,7 +1647,8 @@
       "label": "Verification",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L220",
+      "source_location": "L233",
+      "_origin": "ast",
       "id": "docs_02_config_generation_verification",
       "community": 13,
       "norm_label": "verification"
@@ -1510,7 +1657,8 @@
       "label": "What Works",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L250",
+      "source_location": "L263",
+      "_origin": "ast",
       "id": "docs_02_config_generation_what_works",
       "community": 13,
       "norm_label": "what works"
@@ -1519,7 +1667,8 @@
       "label": "What Fails",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L258",
+      "source_location": "L272",
+      "_origin": "ast",
       "id": "docs_02_config_generation_what_fails",
       "community": 13,
       "norm_label": "what fails"
@@ -1528,7 +1677,8 @@
       "label": "Resolution",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L264",
+      "source_location": "L278",
+      "_origin": "ast",
       "id": "docs_02_config_generation_resolution",
       "community": 13,
       "norm_label": "resolution"
@@ -1537,7 +1687,8 @@
       "label": "Verdict",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L270",
+      "source_location": "L284",
+      "_origin": "ast",
       "id": "docs_02_config_generation_verdict",
       "community": 13,
       "norm_label": "verdict"
@@ -1547,6 +1698,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_03_model_discovery",
       "community": 15,
       "norm_label": "03-model-discovery.md"
@@ -1556,6 +1708,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_03_model_discovery",
       "community": 15,
       "norm_label": "03 \u2014 model discovery"
@@ -1565,6 +1718,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_what",
       "community": 15,
       "norm_label": "what"
@@ -1574,6 +1728,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_why",
       "community": 15,
       "norm_label": "why"
@@ -1583,6 +1738,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L13",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_how",
       "community": 15,
       "norm_label": "how"
@@ -1592,6 +1748,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L15",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_discovery_pipeline",
       "community": 15,
       "norm_label": "discovery pipeline"
@@ -1601,6 +1758,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L33",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_authentication_ec2",
       "community": 15,
       "norm_label": "authentication (ec2)"
@@ -1610,6 +1768,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L58",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_filter_pipeline",
       "community": 15,
       "norm_label": "filter pipeline"
@@ -1619,6 +1778,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L77",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_fallback_logic_ec1",
       "community": 15,
       "norm_label": "fallback logic (ec1)"
@@ -1628,6 +1788,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L88",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_output_format",
       "community": 15,
       "norm_label": "output format"
@@ -1637,6 +1798,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L92",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_verification",
       "community": 15,
       "norm_label": "verification"
@@ -1646,6 +1808,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L122",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_what_works",
       "community": 15,
       "norm_label": "what works"
@@ -1655,6 +1818,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L131",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_what_fails",
       "community": 15,
       "norm_label": "what fails"
@@ -1664,6 +1828,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L137",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_resolution",
       "community": 15,
       "norm_label": "resolution"
@@ -1673,6 +1838,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L143",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_quantized_gguf_context_length_pin_pr_66_ca_31_a",
       "community": 15,
       "norm_label": "quantized gguf context-length pin (pr #66 / ca-31-a)"
@@ -1682,6 +1848,7 @@
       "file_type": "document",
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L151",
+      "_origin": "ast",
       "id": "docs_03_model_discovery_verdict",
       "community": 15,
       "norm_label": "verdict"
@@ -1691,8 +1858,9 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_04_skill_installation",
-      "community": 16,
+      "community": 18,
       "norm_label": "04-skill-installation.md"
     },
     {
@@ -1700,6 +1868,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_04_skill_installation",
       "community": 16,
       "norm_label": "04 \u2014 skill installation"
@@ -1709,6 +1878,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_what",
       "community": 16,
       "norm_label": "what"
@@ -1718,6 +1888,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_why",
       "community": 16,
       "norm_label": "why"
@@ -1727,6 +1898,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L13",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_how",
       "community": 16,
       "norm_label": "how"
@@ -1736,6 +1908,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L15",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_skill_directory_layout",
       "community": 16,
       "norm_label": "skill directory layout"
@@ -1745,6 +1918,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L40",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_install_skills_sh_pattern",
       "community": 16,
       "norm_label": "install-skills.sh pattern"
@@ -1754,6 +1928,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L73",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_cross_agent_skill_sharing_matrix",
       "community": 16,
       "norm_label": "cross-agent skill sharing matrix"
@@ -1763,6 +1938,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L84",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_host_vs_docker_container_differences",
       "community": 16,
       "norm_label": "host vs. docker container differences"
@@ -1772,6 +1948,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L94",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_skill_yaml_frontmatter",
       "community": 16,
       "norm_label": "skill yaml frontmatter"
@@ -1781,6 +1958,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L114",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_verification",
       "community": 16,
       "norm_label": "verification"
@@ -1790,6 +1968,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L144",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_what_works",
       "community": 16,
       "norm_label": "what works"
@@ -1799,6 +1978,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L152",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_what_fails",
       "community": 16,
       "norm_label": "what fails"
@@ -1808,6 +1988,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L158",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_resolution",
       "community": 16,
       "norm_label": "resolution"
@@ -1817,6 +1998,7 @@
       "file_type": "document",
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L164",
+      "_origin": "ast",
       "id": "docs_04_skill_installation_verdict",
       "community": 16,
       "norm_label": "verdict"
@@ -1826,6 +2008,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation",
       "community": 14,
       "norm_label": "05-cross-agent-delegation.md"
@@ -1835,6 +2018,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
       "community": 14,
       "norm_label": "05 \u2014 cross-agent delegation"
@@ -1844,6 +2028,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_what",
       "community": 14,
       "norm_label": "what"
@@ -1853,6 +2038,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_why",
       "community": 14,
       "norm_label": "why"
@@ -1862,6 +2048,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L13",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_how",
       "community": 14,
       "norm_label": "how"
@@ -1871,6 +2058,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L15",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_delegation_matrix",
       "community": 14,
       "norm_label": "delegation matrix"
@@ -1880,6 +2068,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L36",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_hermes_opencode_delegation",
       "community": 14,
       "norm_label": "hermes \u2192 opencode delegation"
@@ -1889,6 +2078,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L52",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_opencode_hermes_delegation",
       "community": 14,
       "norm_label": "opencode \u2192 hermes delegation"
@@ -1898,6 +2088,7 @@
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L72",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_model_selection_for_delegation",
       "community": 14,
       "norm_label": "model selection for delegation"
@@ -1906,7 +2097,8 @@
       "label": "Fallback chain",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L82",
+      "source_location": "L83",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_fallback_chain",
       "community": 14,
       "norm_label": "fallback chain"
@@ -1915,7 +2107,8 @@
       "label": "Credential flow",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L99",
+      "source_location": "L100",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_credential_flow",
       "community": 14,
       "norm_label": "credential flow"
@@ -1924,7 +2117,8 @@
       "label": "Verification",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L114",
+      "source_location": "L115",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_verification",
       "community": 14,
       "norm_label": "verification"
@@ -1933,7 +2127,8 @@
       "label": "What Works",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L147",
+      "source_location": "L148",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_what_works",
       "community": 14,
       "norm_label": "what works"
@@ -1942,7 +2137,8 @@
       "label": "What Fails",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L155",
+      "source_location": "L156",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_what_fails",
       "community": 14,
       "norm_label": "what fails"
@@ -1951,7 +2147,8 @@
       "label": "Resolution",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L161",
+      "source_location": "L162",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_resolution",
       "community": 14,
       "norm_label": "resolution"
@@ -1960,7 +2157,8 @@
       "label": "Verdict",
       "file_type": "document",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L167",
+      "source_location": "L168",
+      "_origin": "ast",
       "id": "docs_05_cross_agent_delegation_verdict",
       "community": 14,
       "norm_label": "verdict"
@@ -1970,8 +2168,9 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_06_verification",
-      "community": 12,
+      "community": 18,
       "norm_label": "06-verification.md"
     },
     {
@@ -1979,6 +2178,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_06_verification_06_verification",
       "community": 12,
       "norm_label": "06 \u2014 verification"
@@ -1988,6 +2188,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L3",
+      "_origin": "ast",
       "id": "docs_06_verification_what",
       "community": 12,
       "norm_label": "what"
@@ -1997,6 +2198,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L7",
+      "_origin": "ast",
       "id": "docs_06_verification_why",
       "community": 12,
       "norm_label": "why"
@@ -2006,6 +2208,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L13",
+      "_origin": "ast",
       "id": "docs_06_verification_how",
       "community": 12,
       "norm_label": "how"
@@ -2015,6 +2218,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L15",
+      "_origin": "ast",
       "id": "docs_06_verification_verification_layers",
       "community": 12,
       "norm_label": "verification layers"
@@ -2024,6 +2228,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L41",
+      "_origin": "ast",
       "id": "docs_06_verification_dry_run_mode",
       "community": 12,
       "norm_label": "--dry-run mode"
@@ -2033,6 +2238,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L60",
+      "_origin": "ast",
       "id": "docs_06_verification_bash_n_syntax_check",
       "community": 12,
       "norm_label": "bash -n syntax check"
@@ -2042,6 +2248,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L70",
+      "_origin": "ast",
       "id": "docs_06_verification_json_yaml_validity",
       "community": 12,
       "norm_label": "json/yaml validity"
@@ -2051,6 +2258,7 @@
       "file_type": "document",
       "source_file": "docs/06-verification.md",
       "source_location": "L80",
+      "_origin": "ast",
       "id": "docs_06_verification_content_assertions",
       "community": 12,
       "norm_label": "content assertions"
@@ -2059,7 +2267,8 @@
       "label": "Checksum snapshot",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L93",
+      "source_location": "L95",
+      "_origin": "ast",
       "id": "docs_06_verification_checksum_snapshot",
       "community": 12,
       "norm_label": "checksum snapshot"
@@ -2068,7 +2277,8 @@
       "label": "Applying staging to live (manual step)",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L107",
+      "source_location": "L109",
+      "_origin": "ast",
       "id": "docs_06_verification_applying_staging_to_live_manual_step",
       "community": 12,
       "norm_label": "applying staging to live (manual step)"
@@ -2077,7 +2287,8 @@
       "label": "bats e2e tests",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L136",
+      "source_location": "L138",
+      "_origin": "ast",
       "id": "docs_06_verification_bats_e2e_tests",
       "community": 12,
       "norm_label": "bats e2e tests"
@@ -2086,7 +2297,8 @@
       "label": "Per-Delegation Model Routing (PR #68)",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L162",
+      "source_location": "L164",
+      "_origin": "ast",
       "id": "docs_06_verification_per_delegation_model_routing_pr_68",
       "community": 12,
       "norm_label": "per-delegation model routing (pr #68)"
@@ -2095,7 +2307,8 @@
       "label": "Credential Resolution (PR #66 / CA-30-A)",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L166",
+      "source_location": "L168",
+      "_origin": "ast",
       "id": "docs_06_verification_credential_resolution_pr_66_ca_30_a",
       "community": 12,
       "norm_label": "credential resolution (pr #66 / ca-30-a)"
@@ -2104,7 +2317,8 @@
       "label": "Verification",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L174",
+      "source_location": "L176",
+      "_origin": "ast",
       "id": "docs_06_verification_verification",
       "community": 12,
       "norm_label": "verification"
@@ -2113,7 +2327,8 @@
       "label": "What Works",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L212",
+      "source_location": "L214",
+      "_origin": "ast",
       "id": "docs_06_verification_what_works",
       "community": 12,
       "norm_label": "what works"
@@ -2122,7 +2337,8 @@
       "label": "What Fails",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L221",
+      "source_location": "L223",
+      "_origin": "ast",
       "id": "docs_06_verification_what_fails",
       "community": 12,
       "norm_label": "what fails"
@@ -2131,7 +2347,8 @@
       "label": "Resolution",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L227",
+      "source_location": "L229",
+      "_origin": "ast",
       "id": "docs_06_verification_resolution",
       "community": 12,
       "norm_label": "resolution"
@@ -2140,7 +2357,8 @@
       "label": "Verdict",
       "file_type": "document",
       "source_file": "docs/06-verification.md",
-      "source_location": "L233",
+      "source_location": "L235",
+      "_origin": "ast",
       "id": "docs_06_verification_verdict",
       "community": 12,
       "norm_label": "verdict"
@@ -2150,6 +2368,7 @@
       "file_type": "document",
       "source_file": "docs/README.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_readme",
       "community": 18,
       "norm_label": "readme.md"
@@ -2159,6 +2378,7 @@
       "file_type": "document",
       "source_file": "docs/README.md",
       "source_location": "L1",
+      "_origin": "ast",
       "id": "docs_readme_architecture_documentation",
       "community": 18,
       "norm_label": "architecture documentation"
@@ -2168,6 +2388,7 @@
       "file_type": "document",
       "source_file": "docs/README.md",
       "source_location": "L5",
+      "_origin": "ast",
       "id": "docs_readme_document_index",
       "community": 18,
       "norm_label": "document index"
@@ -2177,6 +2398,7 @@
       "file_type": "document",
       "source_file": "docs/README.md",
       "source_location": "L16",
+      "_origin": "ast",
       "id": "docs_readme_related_documents",
       "community": 18,
       "norm_label": "related documents"
@@ -2186,6 +2408,7 @@
       "file_type": "document",
       "source_file": "docs/README.md",
       "source_location": "L21",
+      "_origin": "ast",
       "id": "docs_readme_document_conventions",
       "community": 18,
       "norm_label": "document conventions"
@@ -2198,9 +2421,9 @@
       "source_file": "generate.sh",
       "source_location": "L132",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "generate",
-      "target": "generate_fail"
+      "target": "generate_fail",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2208,29 +2431,9 @@
       "source_file": "generate.sh",
       "source_location": "L131",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "generate",
-      "target": "generate_pass"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "generate.sh",
-      "source_location": "L65",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "generate",
-      "target": "generate_snapshot_live_checksums"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "generate.sh",
-      "source_location": "L76",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "generate",
-      "target": "generate_verify_live_checksums"
+      "target": "generate_pass",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2238,9 +2441,29 @@
       "source_file": "generate.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "generate",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry"
+      "target": "generate_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "generate",
+      "target": "generate_snapshot_live_checksums",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "generate.sh",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "generate",
+      "target": "generate_verify_live_checksums",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2249,9 +2472,9 @@
       "source_location": "L139",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
-      "target": "generate_fail"
+      "source": "generate_sh__entry",
+      "target": "generate_fail",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2260,9 +2483,9 @@
       "source_location": "L137",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
-      "target": "generate_pass"
+      "source": "generate_sh__entry",
+      "target": "generate_pass",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2271,19 +2494,9 @@
       "source_location": "L98",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_generate_sh__entry",
-      "target": "generate_snapshot_live_checksums"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "install.sh",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "install",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_install_sh__entry"
+      "source": "generate_sh__entry",
+      "target": "generate_snapshot_live_checksums",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2291,9 +2504,19 @@
       "source_file": "install.sh",
       "source_location": "L36",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "install",
-      "target": "install_check_cmd"
+      "target": "install_check_cmd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "install.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "install",
+      "target": "install_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2302,19 +2525,9 @@
       "source_location": "L47",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_install_sh__entry",
-      "target": "install_check_cmd"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/config-hermes.sh",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_config_hermes",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_hermes_sh__entry"
+      "source": "install_sh__entry",
+      "target": "install_check_cmd",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2322,9 +2535,9 @@
       "source_file": "lib/config-hermes.sh",
       "source_location": "L53",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "lib_config_hermes",
-      "target": "lib_config_hermes_generate_hermes_overlay"
+      "target": "lib_config_hermes_generate_hermes_overlay",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2332,9 +2545,39 @@
       "source_file": "lib/config-hermes.sh",
       "source_location": "L29",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "lib_config_hermes",
-      "target": "lib_config_hermes_resolve_ctx_len"
+      "target": "lib_config_hermes_resolve_ctx_len",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-hermes.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_config_hermes",
+      "target": "lib_config_hermes_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "lib_config_opencode",
+      "target": "lib_config_opencode_generate_opencode_staging",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/config-opencode.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "lib_config_opencode",
+      "target": "lib_config_opencode_oc_get_limits",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2342,39 +2585,9 @@
       "source_file": "lib/config-opencode.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "lib_config_opencode",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_config_opencode_sh__entry"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/config-opencode.sh",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_config_opencode",
-      "target": "lib_config_opencode_generate_opencode_staging"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/config-opencode.sh",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_config_opencode",
-      "target": "lib_config_opencode_oc_get_limits"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/constants.sh",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_constants",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_constants_sh__entry"
+      "target": "lib_config_opencode_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2382,19 +2595,19 @@
       "source_file": "lib/constants.sh",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "lib_constants",
-      "target": "lib_constants_hermes_home"
+      "target": "lib_constants_hermes_home",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "lib/env-auth.sh",
+      "source_file": "lib/constants.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_env_auth",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_env_auth_sh__entry"
+      "source": "lib_constants",
+      "target": "lib_constants_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2402,19 +2615,19 @@
       "source_file": "lib/env-auth.sh",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "lib_env_auth",
-      "target": "lib_env_auth_generate_auth_staging"
+      "target": "lib_env_auth_generate_auth_staging",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "lib/model-discovery.sh",
+      "source_file": "lib/env-auth.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_model_discovery",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_lib_model_discovery_sh__entry"
+      "source": "lib_env_auth",
+      "target": "lib_env_auth_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2422,19 +2635,19 @@
       "source_file": "lib/model-discovery.sh",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "lib_model_discovery",
-      "target": "lib_model_discovery_discover_models"
+      "target": "lib_model_discovery_discover_models",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_file": "lib/model-discovery.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "home_bachkukkik_archives_github_repo_sandbox_hermes_x_opencode_host_machine_tests_e2e_test_helper_common_bash__entry"
+      "source": "lib_model_discovery",
+      "target": "lib_model_discovery_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2442,9 +2655,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L170",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_file_contains"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_file_contains",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2452,9 +2665,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L201",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_file_exists"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_file_exists",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2462,9 +2675,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L179",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_file_not_contains"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_file_not_contains",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2472,9 +2685,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L208",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_file_not_exists"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_file_not_exists",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2482,9 +2695,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L187",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_json_valid"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_json_valid",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2492,9 +2705,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L215",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_success"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_success",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2502,9 +2715,19 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L194",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_assert_yaml_valid"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_assert_yaml_valid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/e2e/test_helper/common.bash",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_bash__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2512,9 +2735,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L222",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_run_generate"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_run_generate",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2522,9 +2745,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L153",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_seed_all_configs"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_seed_all_configs",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2532,9 +2755,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L159",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_seed_empty_configs"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_seed_empty_configs",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2542,9 +2765,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L145",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_seed_env_file"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_seed_env_file",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2552,9 +2775,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L88",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_seed_hermes_config"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_seed_hermes_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2562,9 +2785,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L102",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_seed_opencode_config"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_seed_opencode_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2572,9 +2795,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_setup"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_setup",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2582,9 +2805,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L31",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_start_mock_llm"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_start_mock_llm",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2592,9 +2815,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L79",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_stop_mock_llm"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_stop_mock_llm",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -2602,9 +2825,9 @@
       "source_file": "tests/e2e/test_helper/common.bash",
       "source_location": "L23",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_helper_common",
-      "target": "test_helper_common_teardown"
+      "source": "tests_e2e_test_helper_common",
+      "target": "tests_e2e_test_helper_common_teardown",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2613,9 +2836,9 @@
       "source_location": "L24",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "test_helper_common_teardown",
-      "target": "test_helper_common_stop_mock_llm"
+      "source": "tests_e2e_test_helper_common_teardown",
+      "target": "tests_e2e_test_helper_common_stop_mock_llm",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2624,9 +2847,9 @@
       "source_location": "L154",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "test_helper_common_seed_all_configs",
-      "target": "test_helper_common_seed_hermes_config"
+      "source": "tests_e2e_test_helper_common_seed_all_configs",
+      "target": "tests_e2e_test_helper_common_seed_hermes_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2635,9 +2858,9 @@
       "source_location": "L155",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "test_helper_common_seed_all_configs",
-      "target": "test_helper_common_seed_opencode_config"
+      "source": "tests_e2e_test_helper_common_seed_all_configs",
+      "target": "tests_e2e_test_helper_common_seed_opencode_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -2646,9 +2869,9 @@
       "source_location": "L156",
       "weight": 1.0,
       "context": "call",
-      "confidence_score": 1.0,
-      "source": "test_helper_common_seed_all_configs",
-      "target": "test_helper_common_seed_env_file"
+      "source": "tests_e2e_test_helper_common_seed_all_configs",
+      "target": "tests_e2e_test_helper_common_seed_env_file",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2656,9 +2879,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan",
-      "target": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan"
+      "source": "hermes_plans_bridge_gap_plan",
+      "target": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2666,9 +2889,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
-      "target": "plans_bridge_gap_plan_hard_gate_plan_1_output"
+      "source": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
+      "target": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2676,9 +2899,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L62",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
-      "target": "plans_bridge_gap_plan_wave_decomposition"
+      "source": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
+      "target": "hermes_plans_bridge_gap_plan_wave_decomposition",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2686,9 +2909,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_assumptions"
+      "source": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "target": "hermes_plans_bridge_gap_plan_assumptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2696,9 +2919,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_changes_summary"
+      "source": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "target": "hermes_plans_bridge_gap_plan_changes_summary",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2706,9 +2929,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L56",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_pr_breakdown"
+      "source": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "target": "hermes_plans_bridge_gap_plan_pr_breakdown",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2716,9 +2939,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_scope"
+      "source": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "target": "hermes_plans_bridge_gap_plan_scope",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2726,9 +2949,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L49",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "target": "plans_bridge_gap_plan_success_criteria"
+      "source": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
+      "target": "hermes_plans_bridge_gap_plan_success_criteria",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2736,9 +2959,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L37",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_docs_content_updates"
+      "source": "hermes_plans_bridge_gap_plan_changes_summary",
+      "target": "hermes_plans_bridge_gap_plan_docs_content_updates",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2746,9 +2969,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68"
+      "source": "hermes_plans_bridge_gap_plan_changes_summary",
+      "target": "hermes_plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2756,9 +2979,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68"
+      "source": "hermes_plans_bridge_gap_plan_changes_summary",
+      "target": "hermes_plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2766,9 +2989,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L25",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66"
+      "source": "hermes_plans_bridge_gap_plan_changes_summary",
+      "target": "hermes_plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2776,9 +2999,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L30",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_changes_summary",
-      "target": "plans_bridge_gap_plan_tests_new_files"
+      "source": "hermes_plans_bridge_gap_plan_changes_summary",
+      "target": "hermes_plans_bridge_gap_plan_tests_new_files",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2786,9 +3009,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L64",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_wave_decomposition",
-      "target": "plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents"
+      "source": "hermes_plans_bridge_gap_plan_wave_decomposition",
+      "target": "hermes_plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2796,9 +3019,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L72",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_wave_decomposition",
-      "target": "plans_bridge_gap_plan_wave_2_tests_3_independent_subagents"
+      "source": "hermes_plans_bridge_gap_plan_wave_decomposition",
+      "target": "hermes_plans_bridge_gap_plan_wave_2_tests_3_independent_subagents",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2806,9 +3029,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L77",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_bridge_gap_plan_wave_decomposition",
-      "target": "plans_bridge_gap_plan_wave_3_docs_3_independent_subagents"
+      "source": "hermes_plans_bridge_gap_plan_wave_decomposition",
+      "target": "hermes_plans_bridge_gap_plan_wave_3_docs_3_independent_subagents",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2816,9 +3039,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_pr_breakdown",
-      "target": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge"
+      "source": "hermes_plans_pr_breakdown",
+      "target": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2826,9 +3049,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
-      "target": "plans_pr_breakdown_multi_pr_decomposition"
+      "source": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "target": "hermes_plans_pr_breakdown_multi_pr_decomposition",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2836,9 +3059,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
-      "target": "plans_pr_breakdown_provisioning_strategy"
+      "source": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "target": "hermes_plans_pr_breakdown_provisioning_strategy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2846,9 +3069,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L22",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
-      "target": "plans_pr_breakdown_verification_chain"
+      "source": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
+      "target": "hermes_plans_pr_breakdown_verification_chain",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2856,9 +3079,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents",
-      "target": "agents_hermes_opencode_host_config_generator_agent_instructions"
+      "target": "agents_hermes_opencode_host_config_generator_agent_instructions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2866,9 +3089,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_hermes_opencode_host_config_generator_agent_instructions",
-      "target": "agents_architecture"
+      "target": "agents_architecture",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2876,9 +3099,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L124",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_hermes_opencode_host_config_generator_agent_instructions",
-      "target": "agents_release_phases"
+      "target": "agents_release_phases",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2886,9 +3109,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_hermes_opencode_host_config_generator_agent_instructions",
-      "target": "agents_standing_orders_always_apply"
+      "target": "agents_standing_orders_always_apply",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2896,9 +3119,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L36",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_1_mandated_skills"
+      "target": "agents_1_mandated_skills",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2906,9 +3129,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L48",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_2_kanban_delegation_rules_coding_discipline"
+      "target": "agents_2_kanban_delegation_rules_coding_discipline",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2916,9 +3139,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L54",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_3_code_quality_rules"
+      "target": "agents_3_code_quality_rules",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2926,9 +3149,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L64",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_4_verification_commands"
+      "target": "agents_4_verification_commands",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2936,9 +3159,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L85",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_5_file_locations_host_paths"
+      "target": "agents_5_file_locations_host_paths",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2946,9 +3169,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L98",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_6_litellm_model_discovery"
+      "target": "agents_6_litellm_model_discovery",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2956,9 +3179,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L105",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_7_project_specific_patterns"
+      "target": "agents_7_project_specific_patterns",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2966,9 +3189,19 @@
       "source_file": "AGENTS.md",
       "source_location": "L115",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_standing_orders_always_apply",
-      "target": "agents_8_agent_capabilities"
+      "target": "agents_8_agent_capabilities",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "prd",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2976,9 +3209,9 @@
       "source_file": "PRD.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd",
-      "target": "prd_prd_hermes_opencode_host_config_generator"
+      "target": "prd_prd_hermes_opencode_host_config_generator",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2986,9 +3219,9 @@
       "source_file": "PRD.md",
       "source_location": "L228",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_10_documentation_and_testing_gaps"
+      "target": "prd_10_documentation_and_testing_gaps",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2996,9 +3229,9 @@
       "source_file": "PRD.md",
       "source_location": "L245",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_11_ci_cd_pipeline_phase_4"
+      "target": "prd_11_ci_cd_pipeline_phase_4",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3006,9 +3239,9 @@
       "source_file": "PRD.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_1_summary"
+      "target": "prd_1_summary",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3016,9 +3249,9 @@
       "source_file": "PRD.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_2_contacts"
+      "target": "prd_2_contacts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3026,9 +3259,9 @@
       "source_file": "PRD.md",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_3_background"
+      "target": "prd_3_background",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3036,9 +3269,9 @@
       "source_file": "PRD.md",
       "source_location": "L24",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_4_objective"
+      "target": "prd_4_objective",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3046,9 +3279,9 @@
       "source_file": "PRD.md",
       "source_location": "L36",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_5_market_segment"
+      "target": "prd_5_market_segment",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3056,9 +3289,9 @@
       "source_file": "PRD.md",
       "source_location": "L45",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_6_value_proposition"
+      "target": "prd_6_value_proposition",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3066,19 +3299,19 @@
       "source_file": "PRD.md",
       "source_location": "L52",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_7_solution"
+      "target": "prd_7_solution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L117",
+      "source_location": "L119",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_8_release"
+      "target": "prd_8_release",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3086,9 +3319,9 @@
       "source_file": "PRD.md",
       "source_location": "L136",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_9_cross_repo_gap_bridge_host_docker_reference"
+      "target": "prd_9_cross_repo_gap_bridge_host_docker_reference",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3096,9 +3329,9 @@
       "source_file": "PRD.md",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_3_background",
-      "target": "prd_related_repository"
+      "target": "prd_related_repository",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3106,9 +3339,9 @@
       "source_file": "PRD.md",
       "source_location": "L54",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_7_solution",
-      "target": "prd_7_1_architecture"
+      "target": "prd_7_1_architecture",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3116,49 +3349,49 @@
       "source_file": "PRD.md",
       "source_location": "L74",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_7_solution",
-      "target": "prd_7_2_key_features"
+      "target": "prd_7_2_key_features",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L93",
+      "source_location": "L95",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_7_solution",
-      "target": "prd_7_3_model_selection_defaults"
+      "target": "prd_7_3_model_selection_defaults",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L103",
+      "source_location": "L105",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_7_solution",
-      "target": "prd_7_4_cross_agent_delegation"
+      "target": "prd_7_4_cross_agent_delegation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L109",
+      "source_location": "L111",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_7_solution",
-      "target": "prd_7_5_assumptions"
+      "target": "prd_7_5_assumptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L124",
+      "source_location": "L126",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_8_release",
-      "target": "prd_verification_policy"
+      "target": "prd_verification_policy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3166,9 +3399,9 @@
       "source_file": "PRD.md",
       "source_location": "L138",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_1_gap_inventory"
+      "target": "prd_9_1_gap_inventory",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3176,9 +3409,9 @@
       "source_file": "PRD.md",
       "source_location": "L148",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_2_feature_parity_matrix"
+      "target": "prd_9_2_feature_parity_matrix",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3186,9 +3419,9 @@
       "source_file": "PRD.md",
       "source_location": "L169",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68"
+      "target": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3196,9 +3429,9 @@
       "source_file": "PRD.md",
       "source_location": "L188",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68"
+      "target": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3206,9 +3439,9 @@
       "source_file": "PRD.md",
       "source_location": "L203",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66"
+      "target": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3216,9 +3449,9 @@
       "source_file": "PRD.md",
       "source_location": "L212",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_6_test_additions"
+      "target": "prd_9_6_test_additions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3226,9 +3459,9 @@
       "source_file": "PRD.md",
       "source_location": "L220",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_7_documentation_updates"
+      "target": "prd_9_7_documentation_updates",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3236,9 +3469,9 @@
       "source_file": "PRD.md",
       "source_location": "L230",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_1_missing_docs_phase_2_items"
+      "target": "prd_10_1_missing_docs_phase_2_items",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3246,9 +3479,9 @@
       "source_file": "PRD.md",
       "source_location": "L235",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_2_missing_tests_phase_2_items"
+      "target": "prd_10_2_missing_tests_phase_2_items",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3256,9 +3489,19 @@
       "source_file": "PRD.md",
       "source_location": "L240",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_3_knowledge_layer_phase_3_items"
+      "target": "prd_10_3_knowledge_layer_phase_3_items",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "readme",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3266,9 +3509,9 @@
       "source_file": "README.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_hermes_opencode_host_config_generator"
+      "target": "readme_hermes_opencode_host_config_generator",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3276,19 +3519,19 @@
       "source_file": "README.md",
       "source_location": "L43",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_applying_the_staging_output_manual_step"
+      "target": "readme_applying_the_staging_output_manual_step",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L87",
+      "source_location": "L86",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_edge_cases_handled"
+      "target": "readme_edge_cases_handled",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3296,19 +3539,19 @@
       "source_file": "README.md",
       "source_location": "L78",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_environment_variables"
+      "target": "readme_environment_variables",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L99",
+      "source_location": "L98",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_file_layout"
+      "target": "readme_file_layout",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3316,9 +3559,9 @@
       "source_file": "README.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_origin_related"
+      "target": "readme_origin_related",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3326,9 +3569,9 @@
       "source_file": "README.md",
       "source_location": "L70",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_strict_requirement_free_zen_model"
+      "target": "readme_strict_requirement_free_zen_model",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3336,9 +3579,9 @@
       "source_file": "README.md",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_usage"
+      "target": "readme_usage",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3346,9 +3589,9 @@
       "source_file": "README.md",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
-      "target": "readme_what_it_does"
+      "target": "readme_what_it_does",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3356,9 +3599,19 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture",
-      "target": "docs_01_architecture_01_architecture"
+      "target": "docs_01_architecture_01_architecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_01_architecture",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3366,9 +3619,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_how"
+      "target": "docs_01_architecture_how",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3376,9 +3629,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L102",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_resolution"
+      "target": "docs_01_architecture_resolution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3386,9 +3639,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L108",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_verdict"
+      "target": "docs_01_architecture_verdict",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3396,9 +3649,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L69",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_verification"
+      "target": "docs_01_architecture_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3406,9 +3659,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_what"
+      "target": "docs_01_architecture_what",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3416,9 +3669,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L96",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_what_fails"
+      "target": "docs_01_architecture_what_fails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3426,9 +3679,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L88",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_what_works"
+      "target": "docs_01_architecture_what_works",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3436,9 +3689,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_01_architecture",
-      "target": "docs_01_architecture_why"
+      "target": "docs_01_architecture_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3446,9 +3699,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L65",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_how",
-      "target": "docs_01_architecture_data_flow"
+      "target": "docs_01_architecture_data_flow",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3456,9 +3709,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L45",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_how",
-      "target": "docs_01_architecture_file_layout"
+      "target": "docs_01_architecture_file_layout",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3466,9 +3719,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L35",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_how",
-      "target": "docs_01_architecture_merge_mode_vs_docker_overwrite"
+      "target": "docs_01_architecture_merge_mode_vs_docker_overwrite",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3476,9 +3729,9 @@
       "source_file": "docs/01-architecture.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_01_architecture_how",
-      "target": "docs_01_architecture_staging_pipeline"
+      "target": "docs_01_architecture_staging_pipeline",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3486,9 +3739,19 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation",
-      "target": "docs_02_config_generation_02_config_generation"
+      "target": "docs_02_config_generation_02_config_generation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_02_config_generation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3496,39 +3759,39 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_how"
+      "target": "docs_02_config_generation_how",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L251",
+      "source_location": "L278",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_resolution"
+      "target": "docs_02_config_generation_resolution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L257",
+      "source_location": "L284",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_verdict"
+      "target": "docs_02_config_generation_verdict",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L207",
+      "source_location": "L233",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_verification"
+      "target": "docs_02_config_generation_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3536,29 +3799,29 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_what"
+      "target": "docs_02_config_generation_what",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L245",
+      "source_location": "L272",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_what_fails"
+      "target": "docs_02_config_generation_what_fails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L237",
+      "source_location": "L263",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_what_works"
+      "target": "docs_02_config_generation_what_works",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3566,19 +3829,19 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
-      "target": "docs_02_config_generation_why"
+      "target": "docs_02_config_generation_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L85",
+      "source_location": "L98",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_config_hermes_sh_overlay"
+      "target": "docs_02_config_generation_config_hermes_sh_overlay",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3586,9 +3849,9 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": "L31",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_config_opencode_sh_merge_strategy"
+      "target": "docs_02_config_generation_config_opencode_sh_merge_strategy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3596,49 +3859,49 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_constants_sh_paths"
+      "target": "docs_02_config_generation_constants_sh_paths",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L177",
+      "source_location": "L204",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_env_auth_sh_credential_staging"
+      "target": "docs_02_config_generation_env_auth_sh_credential_staging",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L137",
+      "source_location": "L152",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_environment_gated_config_blocks"
+      "target": "docs_02_config_generation_environment_gated_config_blocks",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L186",
+      "source_location": "L213",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_environment_variable_reference"
+      "target": "docs_02_config_generation_environment_variable_reference",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L195",
+      "source_location": "L221",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_02_config_generation_how",
-      "target": "docs_02_config_generation_fallback_chain"
+      "target": "docs_02_config_generation_fallback_chain",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3646,9 +3909,19 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery",
-      "target": "docs_03_model_discovery_03_model_discovery"
+      "target": "docs_03_model_discovery_03_model_discovery",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_03_model_discovery",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3656,9 +3929,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_how"
+      "target": "docs_03_model_discovery_how",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3666,19 +3939,19 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L137",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_resolution"
+      "target": "docs_03_model_discovery_resolution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/03-model-discovery.md",
-      "source_location": "L143",
+      "source_location": "L151",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_verdict"
+      "target": "docs_03_model_discovery_verdict",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3686,9 +3959,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L92",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_verification"
+      "target": "docs_03_model_discovery_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3696,9 +3969,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_what"
+      "target": "docs_03_model_discovery_what",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3706,9 +3979,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L131",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_what_fails"
+      "target": "docs_03_model_discovery_what_fails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3716,9 +3989,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L122",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_what_works"
+      "target": "docs_03_model_discovery_what_works",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3726,9 +3999,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_03_model_discovery",
-      "target": "docs_03_model_discovery_why"
+      "target": "docs_03_model_discovery_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3736,9 +4009,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_how",
-      "target": "docs_03_model_discovery_authentication_ec2"
+      "target": "docs_03_model_discovery_authentication_ec2",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3746,9 +4019,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_how",
-      "target": "docs_03_model_discovery_discovery_pipeline"
+      "target": "docs_03_model_discovery_discovery_pipeline",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3756,9 +4029,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L77",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_how",
-      "target": "docs_03_model_discovery_fallback_logic_ec1"
+      "target": "docs_03_model_discovery_fallback_logic_ec1",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3766,9 +4039,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L58",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_how",
-      "target": "docs_03_model_discovery_filter_pipeline"
+      "target": "docs_03_model_discovery_filter_pipeline",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3776,9 +4049,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L88",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_how",
-      "target": "docs_03_model_discovery_output_format"
+      "target": "docs_03_model_discovery_output_format",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3786,9 +4059,9 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": "L143",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_03_model_discovery_resolution",
-      "target": "docs_03_model_discovery_quantized_gguf_context_length_pin_pr_66_ca_31_a"
+      "target": "docs_03_model_discovery_quantized_gguf_context_length_pin_pr_66_ca_31_a",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3796,9 +4069,19 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation",
-      "target": "docs_04_skill_installation_04_skill_installation"
+      "target": "docs_04_skill_installation_04_skill_installation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_04_skill_installation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3806,39 +4089,39 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_how"
+      "target": "docs_04_skill_installation_how",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L157",
+      "source_location": "L158",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_resolution"
+      "target": "docs_04_skill_installation_resolution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L163",
+      "source_location": "L164",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_verdict"
+      "target": "docs_04_skill_installation_verdict",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L113",
+      "source_location": "L114",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_verification"
+      "target": "docs_04_skill_installation_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3846,29 +4129,29 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_what"
+      "target": "docs_04_skill_installation_what",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L151",
+      "source_location": "L152",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_what_fails"
+      "target": "docs_04_skill_installation_what_fails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L143",
+      "source_location": "L144",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_what_works"
+      "target": "docs_04_skill_installation_what_works",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3876,9 +4159,9 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_04_skill_installation",
-      "target": "docs_04_skill_installation_why"
+      "target": "docs_04_skill_installation_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3886,19 +4169,19 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L73",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_how",
-      "target": "docs_04_skill_installation_cross_agent_skill_sharing_matrix"
+      "target": "docs_04_skill_installation_cross_agent_skill_sharing_matrix",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_how",
-      "target": "docs_04_skill_installation_host_vs_docker_container_differences"
+      "target": "docs_04_skill_installation_host_vs_docker_container_differences",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3906,9 +4189,9 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L40",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_how",
-      "target": "docs_04_skill_installation_install_skills_sh_pattern"
+      "target": "docs_04_skill_installation_install_skills_sh_pattern",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3916,19 +4199,19 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_how",
-      "target": "docs_04_skill_installation_skill_directory_layout"
+      "target": "docs_04_skill_installation_skill_directory_layout",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/04-skill-installation.md",
-      "source_location": "L93",
+      "source_location": "L94",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_04_skill_installation_how",
-      "target": "docs_04_skill_installation_skill_yaml_frontmatter"
+      "target": "docs_04_skill_installation_skill_yaml_frontmatter",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3936,9 +4219,19 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_05_cross_agent_delegation"
+      "target": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_05_cross_agent_delegation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3946,39 +4239,39 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_how"
+      "target": "docs_05_cross_agent_delegation_how",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L160",
+      "source_location": "L162",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_resolution"
+      "target": "docs_05_cross_agent_delegation_resolution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L166",
+      "source_location": "L168",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_verdict"
+      "target": "docs_05_cross_agent_delegation_verdict",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L113",
+      "source_location": "L115",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_verification"
+      "target": "docs_05_cross_agent_delegation_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3986,29 +4279,29 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_what"
+      "target": "docs_05_cross_agent_delegation_what",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L154",
+      "source_location": "L156",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_what_fails"
+      "target": "docs_05_cross_agent_delegation_what_fails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L146",
+      "source_location": "L148",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_what_works"
+      "target": "docs_05_cross_agent_delegation_what_works",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4016,19 +4309,19 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_05_cross_agent_delegation",
-      "target": "docs_05_cross_agent_delegation_why"
+      "target": "docs_05_cross_agent_delegation_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L98",
+      "source_location": "L100",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_how",
-      "target": "docs_05_cross_agent_delegation_credential_flow"
+      "target": "docs_05_cross_agent_delegation_credential_flow",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4036,19 +4329,19 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_how",
-      "target": "docs_05_cross_agent_delegation_delegation_matrix"
+      "target": "docs_05_cross_agent_delegation_delegation_matrix",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/05-cross-agent-delegation.md",
-      "source_location": "L81",
+      "source_location": "L83",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_how",
-      "target": "docs_05_cross_agent_delegation_fallback_chain"
+      "target": "docs_05_cross_agent_delegation_fallback_chain",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4056,9 +4349,9 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L36",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_how",
-      "target": "docs_05_cross_agent_delegation_hermes_opencode_delegation"
+      "target": "docs_05_cross_agent_delegation_hermes_opencode_delegation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4066,9 +4359,9 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L72",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_how",
-      "target": "docs_05_cross_agent_delegation_model_selection_for_delegation"
+      "target": "docs_05_cross_agent_delegation_model_selection_for_delegation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4076,9 +4369,9 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": "L52",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_05_cross_agent_delegation_how",
-      "target": "docs_05_cross_agent_delegation_opencode_hermes_delegation"
+      "target": "docs_05_cross_agent_delegation_opencode_hermes_delegation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4086,19 +4379,29 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification",
-      "target": "docs_06_verification_06_verification"
+      "target": "docs_06_verification_06_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "docs_readme",
+      "target": "docs_06_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L166",
+      "source_location": "L168",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_credential_resolution_pr_66_ca_30_a"
+      "target": "docs_06_verification_credential_resolution_pr_66_ca_30_a",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4106,49 +4409,49 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_how"
+      "target": "docs_06_verification_how",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L162",
+      "source_location": "L164",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_per_delegation_model_routing_pr_68"
+      "target": "docs_06_verification_per_delegation_model_routing_pr_68",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L215",
+      "source_location": "L229",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_resolution"
+      "target": "docs_06_verification_resolution",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L221",
+      "source_location": "L235",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_verdict"
+      "target": "docs_06_verification_verdict",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L162",
+      "source_location": "L176",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_verification"
+      "target": "docs_06_verification_verification",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4156,29 +4459,29 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_what"
+      "target": "docs_06_verification_what",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L209",
+      "source_location": "L223",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_what_fails"
+      "target": "docs_06_verification_what_fails",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L200",
+      "source_location": "L214",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_what_works"
+      "target": "docs_06_verification_what_works",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4186,19 +4489,19 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_06_verification",
-      "target": "docs_06_verification_why"
+      "target": "docs_06_verification_why",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L107",
+      "source_location": "L109",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_applying_staging_to_live_manual_step"
+      "target": "docs_06_verification_applying_staging_to_live_manual_step",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4206,29 +4509,29 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L60",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_bash_n_syntax_check"
+      "target": "docs_06_verification_bash_n_syntax_check",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L136",
+      "source_location": "L138",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_bats_e2e_tests"
+      "target": "docs_06_verification_bats_e2e_tests",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/06-verification.md",
-      "source_location": "L93",
+      "source_location": "L95",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_checksum_snapshot"
+      "target": "docs_06_verification_checksum_snapshot",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4236,9 +4539,9 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L80",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_content_assertions"
+      "target": "docs_06_verification_content_assertions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4246,9 +4549,9 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L41",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_dry_run_mode"
+      "target": "docs_06_verification_dry_run_mode",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4256,9 +4559,9 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L70",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_json_yaml_validity"
+      "target": "docs_06_verification_json_yaml_validity",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4266,9 +4569,9 @@
       "source_file": "docs/06-verification.md",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_06_verification_how",
-      "target": "docs_06_verification_verification_layers"
+      "target": "docs_06_verification_verification_layers",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4276,9 +4579,9 @@
       "source_file": "docs/README.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_readme",
-      "target": "docs_readme_architecture_documentation"
+      "target": "docs_readme_architecture_documentation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4286,9 +4589,9 @@
       "source_file": "docs/README.md",
       "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_readme_architecture_documentation",
-      "target": "docs_readme_document_conventions"
+      "target": "docs_readme_document_conventions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4296,9 +4599,9 @@
       "source_file": "docs/README.md",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_readme_architecture_documentation",
-      "target": "docs_readme_document_index"
+      "target": "docs_readme_document_index",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4306,11 +4609,11 @@
       "source_file": "docs/README.md",
       "source_location": "L16",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "docs_readme_architecture_documentation",
-      "target": "docs_readme_related_documents"
+      "target": "docs_readme_related_documents",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c6c4aff8a026bc652e4cbdb98e809f502ad4f7ad"
+  "built_at_commit": "07fd08a1697e52b2903803d21e9bb8cb4e445016"
 }

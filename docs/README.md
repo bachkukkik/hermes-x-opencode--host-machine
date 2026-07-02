@@ -7,10 +7,10 @@ Comprehensive technical documentation for the Hermes × OpenCode Host Config Gen
 | # | Document | Subsystem |
 |---|----------|-----------|
 | 01 | [Architecture](01-architecture.md) | Staging pipeline, MERGE mode, file layout, data flow, Docker vs. host comparison |
-| 02 | [Config Generation](02-config-generation.md) | constants.sh paths, config-opencode.sh MERGE strategy, config-hermes.sh overlay, env-auth.sh credential staging, env var reference table, fallback chain |
+| 02 | [Config Generation](02-config-generation.md) | constants.sh paths, config-opencode.sh MERGE strategy (provider.opencode + litellm + llama_cpp), config-hermes.sh overlay, env-auth.sh credential staging, env var reference table, fallback chain |
 | 03 | [Model Discovery](03-model-discovery.md) | LiteLLM /v1/models endpoint, filter pipeline (15 regex patterns), case-insensitive dedup, EC1 fallback, in-process key safety (EC2) |
 | 04 | [Skill Installation](04-skill-installation.md) | Host skill layout vs. Docker container, cross-agent skill sharing (Hermes → OpenCode), install-skills.sh pattern, YAML frontmatter, symlink lifecycle |
-| 05 | [Cross-Agent Delegation](05-cross-agent-delegation.md) | Hermes→OpenCode via opencode skill (free Zen model), OpenCode→Hermes via hermes terminal tool (LiteLLM proxy), model selection matrix, fallback chain, credential flow |
+| 05 | [Cross-Agent Delegation](05-cross-agent-delegation.md) | Hermes→OpenCode via opencode skill (free Zen model), OpenCode→Hermes via hermes terminal tool (LiteLLM proxy), llama_cpp fallback routing, model selection matrix, credential flow |
 | 06 | [Verification](06-verification.md) | Four-layer verification design, --dry-run checksum snapshot, bash -n / JSON / YAML validation, content assertions, bats e2e test plan, manual apply procedure |
 
 ## Related Documents

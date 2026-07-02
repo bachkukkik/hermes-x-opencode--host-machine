@@ -58,7 +58,19 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
       },
       "models": {                                        // ← union-merged
         "zai/glm-5.2": { "name": "zai/glm-5.2", "limit": {"context": 1048576, "output": 131072} }
-        // ... all discovered models
+        // ... all discovered models (non-llama_cpp)
+      }
+    },
+    "llama_cpp": {                                       // ← injected (separate provider for llama_cpp/* models)
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "{env:OPENAI_API_KEY}",               // ← injected
+        "baseURL": "http://localhost:4000",
+        "timeout": 600000,
+        "setCacheKey": true
+      },
+      "models": {                                        // ← llama_cpp/* discovered models
+        "qwen3.6-27b-q4_k_m": { "name": "llama_cpp/qwen3.6-27b-q4_k_m", "limit": {"context": 262144, "output": 32768} }
       }
     }
   },
@@ -80,6 +92,7 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
 | `agent.build.model`, `agent.plan.model` | Override to free Zen model | Defeats paid-model pinning in sub-agents |
 | `agent.*` (other fields) | Preserve | Mode, description, etc. survive |
 | `provider.litellm.models` | Union-merge discovered models | Existing limits preserved; new models added |
+| `provider.llama_cpp` | Ensure present with `@ai-sdk/openai-compatible` npm, same baseURL/credentials as litellm, and own models map for `llama_cpp/*` models | OpenCode requires a separate provider block for `llama_cpp/` prefix — otherwise ProviderModelNotFoundError |
 | `permission`, `plugin`, `server`, `experimental` | Preserve | Hand-tuned blocks untouched |
 
 ### config-hermes.sh overlay
@@ -252,6 +265,7 @@ grep -q '"litellm"' staging/auth.json && echo "litellm provider seeded"
 - OpenCode MERGE preserves all hand-tuned blocks (permission, plugin, server, experimental, agent mode/description)
 - Top-level `model`/`small_model` and agent sub-block models are overridden to the free Zen model
 - Existing `provider.litellm.models` entries are preserved; new models are union-merged with `get_limits()` heuristics
+- `provider.llama_cpp` block is created with `@ai-sdk/openai-compatible` npm, same credentials/baseURL as litellm, and a separate models map for `llama_cpp/*` models
 - Hermes overlay carries forward all non-litellm `custom_providers` entries
 - Both provider credentials are seeded in staging `auth.json` from `.env` with `config.yaml` fallback
 
