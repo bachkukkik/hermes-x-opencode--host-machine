@@ -118,8 +118,8 @@ The parent project (Docker stack with full container orchestration, entrypoints,
 
 ## 8. Release
 
-**Phase 1 (current):** Core config generation — model discovery, OpenCode MERGE, Hermes overlay
-**Phase 2 (next):** Documentation parity — docs/ with architecture deep-dives, tests/ with bats e2e
+**Phase 1 (completed ✓):** Core config generation — model discovery, OpenCode MERGE, Hermes overlay
+**Phase 2 (completed ✓):** Documentation parity — docs/ with architecture deep-dives, tests/ with bats e2e
 **Phase 3:** Knowledge layer — graphify knowledge graph, llm-wiki durable documentation
 **Phase 4:** CI/CD — GitHub Actions e2e test pipeline
 
@@ -149,14 +149,14 @@ Gaps are classified as:
 
 | Feature | Reference PR | Host Status | Action |
 |---------|-------------|-------------|--------|
-| OPENCODE_ZEN_API_KEY → OPENCODE_ZEN_API_KEY rename | #68 | MISSING | PORT |
-| Per-delegation model routing (HERMES_DELEGATION_MODEL/PROVIDER) | #68 | MISSING | PORT |
+| OPENCODE_ZEN_API_KEY → OPENCODE_ZEN_API_KEY rename | #68 | ALREADY-PRESENT | PORTED ✓ |
+| Per-delegation model routing (HERMES_DELEGATION_MODEL/PROVIDER) | #68 | ALREADY-PRESENT | PORTED ✓ |
 | Quantized GGUF ctx pin (*qwen3.6-27b*q4* → 262144) | #66 | ALREADY-PRESENT | verified |
 | HERMES_COMPRESSION_THRESHOLD transport | #66 | ALREADY-PRESENT | verified |
-| auth.json OR guard contract comment | #66 | MISSING | PORT |
-| .env.example alignment with reference naming | #68 | PARTIAL | PORT |
-| DELEGATION_MODEL test (AC34 equivalent) | #68 | MISSING | PORT |
-| Ctx pin + credential resolution tests | #66 | MISSING | PORT |
+| auth.json OR guard contract comment | #66 | ALREADY-PRESENT | PORTED ✓ |
+| .env.example alignment with reference naming | #68 | ALREADY-PRESENT | PORTED ✓ |
+| DELEGATION_MODEL test (AC34 equivalent) | #68 | ALREADY-PRESENT | PORTED ✓ |
+| Ctx pin + credential resolution tests | #66 | ALREADY-PRESENT | PORTED ✓ |
 | Dockerfile/build pipeline | — | SKIP (Docker-only) | SKIP |
 | docker-compose.yml | — | SKIP (Docker-only) | SKIP |
 | Entrypoint/service lifecycle | — | SKIP (Docker-only) | SKIP |
@@ -166,14 +166,15 @@ Gaps are classified as:
 | Wiki init (container path) | #64 | SKIP (Docker-only) | SKIP |
 | Skill installation (Docker build-time) | #67 | SKIP (Docker-only) | SKIP |
 
-### 9.3 Port Details: OPENCODE_ZEN_API_KEY (from PR #68)
+### 9.3 Port Details: OPENCODE_ZEN_API_KEY (from PR #68) — PORTED ✓
 
-**Scope:** Rename `OPENCODE_ZEN_API_KEY` → `OPENCODE_ZEN_API_KEY` across all host files to align with
-official Hermes agent convention (hermes config, hermes doctor, opencode-zen provider plugin).
+**Scope:** Rename `OPENCODE_API_KEY` (unqualified) → `OPENCODE_ZEN_API_KEY` (with ZEN qualifier)
+across all host files to align with official Hermes agent convention (hermes config, hermes doctor,
+opencode-zen provider plugin).
 
 **Changes:**
-- `.env.example`: rename variable, update comment
-- `lib/config-opencode.sh`: `{env:OPENCODE_ZEN_API_KEY}` → `{env:OPENCODE_ZEN_API_KEY}` (2 references)
+- `.env.example`: rename `OPENCODE_API_KEY` → `OPENCODE_ZEN_API_KEY`, update comment
+- `lib/config-opencode.sh`: `{env:OPENCODE_API_KEY}` → `{env:OPENCODE_ZEN_API_KEY}` (2 references)
 - `lib/env-auth.sh`: read `OPENCODE_ZEN_API_KEY` from .env; update summary text
 - `lib/constants.sh`: update any default/fallback references
 - `docs/`: update all references
@@ -183,13 +184,15 @@ official Hermes agent convention (hermes config, hermes doctor, opencode-zen pro
 - `generate.sh --dry-run` produces staging with `{env:OPENCODE_ZEN_API_KEY}` in opencode.jsonc
 - auth.json seeds opencode provider from `OPENCODE_ZEN_API_KEY` env var
 - All bats tests pass with new naming
-- Zero references to `OPENCODE_ZEN_API_KEY` remain (grep check)
+- Zero references to old unqualified `OPENCODE_API_KEY` remain (grep check)
 
-### 9.4 Port Details: Per-Delegation Model Routing (from PR #68)
+### 9.4 Port Details: Per-Delegation Model Routing (from PR #68) — PORTED ✓
 
 **Scope:** Add `HERMES_DELEGATION_MODEL` and `HERMES_DELEGATION_PROVIDER` env vars that
 conditionally write `delegation.model` and `delegation.provider` under the `delegation:` block
 in the Hermes config overlay, enabling different models for parent vs subagent conversations.
+
+**Status:** Already implemented — `lib/config-hermes.sh` contains HERMES_DELEGATION_MODEL + PROVIDER logic.
 
 **Changes:**
 - `.env.example`: add `HERMES_DELEGATION_MODEL` and `HERMES_DELEGATION_PROVIDER` (commented)
@@ -200,16 +203,20 @@ in the Hermes config overlay, enabling different models for parent vs subagent c
 - When `HERMES_DELEGATION_PROVIDER=litellm` is set, staging overlay contains `delegation.provider: litellm`
 - When unset, delegation block only contains `max_iterations` (no model/provider fields)
 
-### 9.5 Port Details: auth.json OR Guard Contract (from PR #66)
+### 9.5 Port Details: auth.json OR Guard Contract (from PR #66) — PORTED ✓
 
 **Scope:** Add contract comment to `lib/env-auth.sh` documenting the OR logic: litellm credential
 seeds from OPENAI_API_KEY, which falls back to config.yaml inline key. The OR guard prevents
 regression where both opencode and litellm providers are silently empty.
 
+**Status:** Already implemented — `lib/env-auth.sh` contains the OR guard contract comment.
+
 **Changes:**
 - `lib/env-auth.sh`: add contract comment above auth.json building section
 
-### 9.6 Test Additions
+### 9.6 Test Additions — PORTED ✓
+
+**Status:** Already implemented — test files exist under `tests/e2e/`.
 
 | Test file | Tests | Maps to |
 |-----------|-------|---------|
@@ -217,7 +224,9 @@ regression where both opencode and litellm providers are silently empty.
 | `tests/e2e/21-delegation-model.bats` | AC35: delegation.model/provider in staging overlay | PR #68 |
 | `tests/e2e/22-ctx-pin-and-credentials.bats` | CTX1-3: quantized GGUF ctx pin, CRED1-2: auth.json OR guard | PR #66 |
 
-### 9.7 Documentation Updates
+### 9.7 Documentation Updates — PORTED ✓
+
+**Status:** Already implemented — docs updated to reflect new features.
 
 | Doc | Update |
 |-----|--------|
