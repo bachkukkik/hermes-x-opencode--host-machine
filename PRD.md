@@ -318,12 +318,20 @@ and bare model IDs. The generator must handle ALL combinations without assuming 
 | AC48 | Generated configs produce callable LLM settings (model actually routes) | `opencode run` smoke test with generated config |
 | AC49 | Generated Hermes overlay routes correctly with `hermes` CLI | Config validation |
 
-## 12. CI/CD Pipeline (Phase 4)
+## 12. CI/CD Pipeline (Phase 4 — in progress)
 
-No `.github/workflows/` in host repo. The Docker stack has `.github/workflows/e2e.yml` but it
-runs Docker-based bats tests which are N/A for host config generator.
+### 12.1 Files Added
 
-**Host-specific CI considerations:**
-- Host tests run directly via `bats` (no Docker dependency)
-- Tests exercise `generate.sh --dry-run` + lib modules directly
-- No container healthcheck needed — just shell script execution + staging output validation
+| File | Purpose | Source |
+|------|---------|--------|
+| `.github/workflows/e2e.yml` | GitHub Actions CI: install bats + pyyaml, run generate.sh --dry-run, bats tests/e2e/*.bats | PORTED from Docker ref (host-adapted: no Docker, no compose, no healthcheck) |
+| `tests/run.sh` | Test orchestrator: discovers all tests/e2e/*.bats, runs via bats, reports PASS/FAIL | PORTED from Docker ref |
+| `tests/mock-llm-server.sh` | Lightweight mock LLM API server for offline testing | PORTED from Docker ref |
+
+### 12.2 CI Design
+
+- Runs on `ubuntu-latest`, no Docker dependency
+- Installs `bats` from apt + `pyyaml` from pip
+- Runs `generate.sh --dry-run` (sources .env.example as fixture)
+- Runs `tests/run.sh` (full test suite)
+- Expected runtime: ~2-3 minutes (no container build needed)

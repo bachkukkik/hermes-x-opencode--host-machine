@@ -93,6 +93,57 @@ bash generate.sh         →  sources ${SCRIPT_DIR}/.env — reads the .env sitt
 
 **Key convention:** Never source `.env` from `~/.hermes/.env` inside `generate.sh` or `install.sh`. The `.env` that matters is always the one colocated with the script (`${SCRIPT_DIR}/.env`).
 
+### Section-Based .env Sync (sync-env.sh)
+
+`sync_env_to_hermes()` in `lib/sync-env.sh` manages a delimited section in `~/.hermes/.env`, replacing only the block controlled by the repo while preserving everything else — Hermes auto-generated entries, user-added keys, and third-party tool configs.
+
+**Marker format:**
+
+```
+# >>> hermes-x-opencode-host-config begin >>>
+... repo-managed entries ...
+# <<< hermes-x-opencode-host-config end <<<
+```
+
+**Behavior:**
+
+| Scenario | Action |
+|----------|--------|
+| Destination `~/.hermes/.env` exists with markers | Replace content between markers with source section |
+| Destination exists without markers | Append source section (including markers) |
+| Destination does not exist | Create file with source section, set `600` permissions |
+| Source `.env` has no markers | Abort with error — markers required |
+
+**Workflow:**
+
+```
+Edit .env in repo (source of truth)
+       │
+       ▼
+bash install.sh          →  calls sync_env_to_hermes()
+       │
+       ▼
+~/.hermes/.env managed section updated
+       │
+       ▼
+Hermes picks up new env vars on next session
+```
+
+**Verification:**
+
+```bash
+# Confirm markers present in both files
+grep -cF '# >>> hermes-x-opencode-host-config begin >>>' .env ~/.hermes/.env
+
+# Verify managed section replaced, user entries preserved
+grep -A1 'hermes-x-opencode-host-config begin' ~/.hermes/.env
+```
+
+Key behaviors:
+- **Non-destructive by design.** Hermes writes its own entries (API keys, auto-comments) to `~/.hermes/.env`. The section-based approach prevents `sync_env_to_hermes()` from clobbering them.
+- **Source of truth is the repo.** The managed section in the repo's `.env` is the authoritative copy. Changes in the live `~/.hermes/.env` managed section are overwritten on each sync.
+- **Idempotent.** Running `sync_env_to_hermes()` multiple times produces the same result — the managed section matches the source, non-managed content is untouched.
+
 ### config-opencode.sh MERGE strategy
 
 The OpenCode config generator does NOT replace the live file. It reads the existing `opencode.jsonc` (tolerant JSONC parser strips `//` and `/**/` comments), applies a surgical merge, and writes only to staging:
