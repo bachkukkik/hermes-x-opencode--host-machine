@@ -80,6 +80,9 @@ mkdir -p "${DEST}/lib"
 cp "${SCRIPT_DIR}/generate.sh" "${DEST}/"
 cp "${SCRIPT_DIR}/README.md"   "${DEST}/"
 cp "${SCRIPT_DIR}/lib/"*.sh    "${DEST}/lib/"
+# Copy .env so generate.sh can source it from its own directory.
+# (Silent skip if .env does not exist — user may configure later.)
+cp "${SCRIPT_DIR}/.env"        "${DEST}/.env" 2>/dev/null || true
 
 chmod +x "${DEST}/generate.sh"
 

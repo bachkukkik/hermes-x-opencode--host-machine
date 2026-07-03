@@ -45,10 +45,10 @@ done
 source "${LIB_DIR}/constants.sh"
 
 # --- Source user env vars (model selection, API keys, optional settings) -----
-# Mirrors the Docker entrypoint.sh pattern. Uses 2>/dev/null so the script
-# still works when .env is absent (e.g. deployed via install.sh --no-run
-# before the user has configured credentials).
-source "${HERMES_HOME}/.env" 2>/dev/null || true
+# Sources .env from the script's directory (repo or install location), NOT
+# ~/.hermes/.env. The repo's .env is the single source of truth for config
+# generation. 2>/dev/null so the script works when .env is absent.
+source "${SCRIPT_DIR}/.env" 2>/dev/null || true
 # shellcheck source=lib/model-discovery.sh
 source "${LIB_DIR}/model-discovery.sh"
 # shellcheck source=lib/config-opencode.sh
