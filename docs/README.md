@@ -11,7 +11,7 @@ Comprehensive technical documentation for the Hermes × OpenCode Host Config Gen
 | 03 | [Model Discovery](03-model-discovery.md) | LiteLLM /v1/models endpoint, filter pipeline (15 regex patterns), case-insensitive dedup, EC1 fallback, in-process key safety (EC2) |
 | 04 | [Skill Installation](04-skill-installation.md) | Host skill layout vs. Docker container, cross-agent skill sharing (Hermes → OpenCode), install-skills.sh pattern, YAML frontmatter, symlink lifecycle |
 | 05 | [Cross-Agent Delegation](05-cross-agent-delegation.md) | Hermes→OpenCode via opencode skill (free Zen model), OpenCode→Hermes via hermes terminal tool (LiteLLM proxy), llama_cpp fallback routing, model selection matrix, credential flow |
-| 06 | [Verification](06-verification.md) | Four-layer verification design, --dry-run checksum snapshot, bash -n / JSON / YAML validation, content assertions, bats e2e test plan, manual apply procedure |
+| 06 | [Verification](06-verification.md) | Four-layer verification design, --dry-run checksum snapshot, bash -n / JSON / YAML validation, content assertions, bats e2e test plan, --apply flag for live deployment |
 
 ## Related Documents
 

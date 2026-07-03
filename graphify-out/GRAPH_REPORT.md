@@ -1,16 +1,16 @@
 # Graph Report - hermes-x-opencode--host-machine  (2026-07-03)
 
 ## Corpus Check
-- 23 files · ~20,106 words
+- 23 files · ~21,943 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 240 nodes · 233 edges · 23 communities (14 shown, 9 thin omitted)
+- 250 nodes · 244 edges · 24 communities (15 shown, 9 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5da3d11e`
+- Built from commit: `b301af36`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -38,10 +38,11 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_mock-llm-server.sh|mock-llm-server.sh]]
 - [[_COMMUNITY_run.sh|run.sh]]
+- [[_COMMUNITY_13. Agent Model Override — .env-Driven Independent Routing|13. Agent Model Override — .env-Driven Independent Routing]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `PRD: Hermes × OpenCode Host Config Generator` - 13 edges
-2. `How` - 11 edges
+1. `PRD: Hermes × OpenCode Host Config Generator` - 14 edges
+2. `How` - 13 edges
 3. `06 — Verification` - 11 edges
 4. `Standing Orders (ALWAYS apply)` - 9 edges
 5. `Hermes × OpenCode Host Config Generator` - 9 edges
@@ -57,7 +58,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (23 total, 9 thin omitted)
+## Communities (24 total, 9 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.15
@@ -69,7 +70,7 @@ Nodes (28): 10.1 Missing Docs (Phase 2 items), 10.2 Test Coverage (Phase 2 items
 
 ### Community 2 - "Community 2"
 Cohesion: 0.11
-Nodes (13): Architecture Documentation, Document Conventions, Document Index, Related Documents, Applying the staging output (manual step), Edge cases handled, Environment variables, File layout (+5 more)
+Nodes (13): Architecture Documentation, Document Conventions, Document Index, Related Documents, Applying configs, Edge cases handled, Environment variables, File layout (+5 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.53
@@ -85,11 +86,11 @@ Nodes (4): Multi-PR Decomposition, PR Breakdown — Host Config Generator Gap Br
 
 ### Community 12 - "Community 12"
 Cohesion: 0.11
-Nodes (19): 06 — Verification, Applying staging to live (manual step), bash -n syntax check, bats e2e tests, Checksum snapshot, Content assertions, Credential Resolution (PR #66 / CA-30-A), --dry-run mode (+11 more)
+Nodes (19): 06 — Verification, Applying staging to live (`--apply`), bash -n syntax check, bats e2e tests, Checksum snapshot, Content assertions, Credential Resolution (PR #66 / CA-30-A), --dry-run mode (+11 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.11
-Nodes (19): 02 — Config Generation, config-hermes.sh overlay, config-opencode.sh MERGE strategy, constants.sh paths, env-auth.sh credential staging, Environment-gated config blocks, Environment variable reference, Fallback chain (+11 more)
+Cohesion: 0.09
+Nodes (21): 02 — Config Generation, --apply flag (staging → live deployment), config-hermes.sh overlay, config-opencode.sh MERGE strategy, constants.sh paths, env-auth.sh credential staging, Environment-gated config blocks, Environment variable export (Python subprocess bridge) (+13 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.12
@@ -100,7 +101,7 @@ Cohesion: 0.12
 Nodes (15): 03 — Model Discovery, Authentication (EC2), Discovery pipeline, Fallback logic (EC1), Filter pipeline, How, Output format, Quantized GGUF context-length pin (PR #66 / CA-31-A) (+7 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.13
+Cohesion: 0.14
 Nodes (14): 04 — Skill Installation, Cross-agent skill sharing matrix, Host vs. Docker container differences, How, install-skills.sh pattern, Resolution, Skill directory layout, Skill YAML frontmatter (+6 more)
 
 ### Community 17 - "Community 17"
@@ -115,25 +116,29 @@ Nodes (8): 9.1 Gap Inventory, 9.2 Feature Parity Matrix, 9.3 Port Details: OPENC
 Cohesion: 0.12
 Nodes (16): Assumptions, Changes Summary, Cross-Repo Bridge Gap Implementation Plan, Docs (content updates), Feature 1: OPENCODE_ZEN_API_KEY → OPENCODE_ZEN_API_KEY rename (PR #68), Feature 2: Per-delegation model routing (PR #68), Feature 3: auth.json OR guard contract (PR #66), HARD Gate: PLAN-1 Output (+8 more)
 
+### Community 23 - "13. Agent Model Override — .env-Driven Independent Routing"
+Cohesion: 0.33
+Nodes (6): 13.1 Problem, 13.2 Requirements, 13.3 Acceptance Criteria, 13.4 Implementation Scope, 13.5 Assumptions, 13. Agent Model Override — .env-Driven Independent Routing
+
 ## Knowledge Gaps
-- **156 isolated node(s):** `config-hermes.sh script`, `config-opencode.sh script`, `constants.sh script`, `HERMES_HOME`, `env-auth.sh script` (+151 more)
+- **162 isolated node(s):** `config-hermes.sh script`, `config-opencode.sh script`, `constants.sh script`, `HERMES_HOME`, `env-auth.sh script` (+157 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PRD: Hermes × OpenCode Host Config Generator` connect `Community 1` to `Community 2`, `Community 18`?**
-  _High betweenness centrality (0.163) - this node is a cross-community bridge._
+- **Why does `PRD: Hermes × OpenCode Host Config Generator` connect `Community 1` to `Community 2`, `Community 18`, `13. Agent Model Override — .env-Driven Independent Routing`?**
+  _High betweenness centrality (0.182) - this node is a cross-community bridge._
 - **Why does `06 — Verification` connect `Community 12` to `Community 2`?**
-  _High betweenness centrality (0.089) - this node is a cross-community bridge._
-- **Why does `02 — Config Generation` connect `Community 13` to `Community 2`?**
-  _High betweenness centrality (0.088) - this node is a cross-community bridge._
+  _High betweenness centrality (0.087) - this node is a cross-community bridge._
 - **What connects `config-hermes.sh script`, `config-opencode.sh script`, `constants.sh script` to the rest of the system?**
-  _156 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _162 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
 - **Should `Community 4` be split into smaller, more focused modules?**
   _Cohesion score 0.1286549707602339 - nodes in this community are weakly interconnected._
+- **Should `Community 12` be split into smaller, more focused modules?**
+  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._

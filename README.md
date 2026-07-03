@@ -36,36 +36,26 @@ never touched.**
 # Dry-run: generate staging + run validation + verify no live files changed
 bash ~/.hermes/host-config-gen/generate.sh --dry-run
 
-# Generate staging only
+# Generate staging only (no changes to live configs)
 bash ~/.hermes/host-config-gen/generate.sh
+
+# Generate + apply to live configs (with .bak backups)
+bash ~/.hermes/host-config-gen/generate.sh --apply
+
+# Preview what --apply would do (no writes)
+bash ~/.hermes/host-config-gen/generate.sh --apply --dry-run
 ```
 
-## Applying the staging output (manual step)
+## Applying configs
 
-The generator only writes to staging. To apply:
+The `--apply` flag copies staging output to live paths with automatic
+`.bak` backups.
 
-```bash
-STAGING=~/.hermes/host-config-gen/staging
-
-# 1. Back up live configs
-cp ~/.config/opencode/opencode.jsonc{,.bak}
-cp ~/.hermes/config.yaml{,.bak}
-cp ~/.local/share/opencode/auth.json{,.bak}
-
-# 2. Apply (review the diffs first!)
-cp "$STAGING/opencode.jsonc" ~/.config/opencode/opencode.jsonc
-cp "$STAGING/config-hermes-overlay.yaml" ~/.hermes/config.yaml
-cp "$STAGING/auth.json" ~/.local/share/opencode/auth.json
-
-# 3. Set the env var for {env:OPENCODE_ZEN_API_KEY} resolution
-export OPENCODE_ZEN_API_KEY="<your-zen-key>"
-# Or add to ~/.hermes/.env:
-#   echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> ~/.hermes/.env
-
-# 4. Verify
-opencode run --model opencode/deepseek-v4-flash-free -q "say hello"
-hermes config check
-```
+| Staging file | Live destination |
+|---|---|
+| `staging/opencode.jsonc` | `~/.config/opencode/opencode.jsonc` |
+| `staging/config-hermes-overlay.yaml` | `~/.hermes/config.yaml` |
+| `staging/auth.json` | `~/.local/share/opencode/auth.json` |
 
 ## Strict requirement: free Zen model
 
@@ -110,7 +100,7 @@ value — export it or add it to `.env`.
 
 ```
 ~/.hermes/host-config-gen/
-├── generate.sh                    # main orchestrator (--dry-run flag)
+├── generate.sh                    # main orchestrator (--apply, --dry-run flags)
 ├── README.md                      # this file
 ├── lib/
 │   ├── constants.sh               # host paths + defaults

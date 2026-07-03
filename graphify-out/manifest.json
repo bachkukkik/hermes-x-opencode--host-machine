@@ -1,7 +1,7 @@
 {
   "generate.sh": {
-    "mtime": 1783044384.9428408,
-    "ast_hash": "d9da0b94b812a1101a7069625fffcb3f",
+    "mtime": 1783097581.9367034,
+    "ast_hash": "6ec4549d4aa0d21b953fc0e22b14fbed",
     "semantic_hash": ""
   },
   "install.sh": {
@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "lib/config-opencode.sh": {
-    "mtime": 1783022103.8730812,
-    "ast_hash": "1254adc8c4bbb9cc6e9e6ede216b64af",
+    "mtime": 1783095781.5870435,
+    "ast_hash": "8813770690b8507082e46870b5baa951",
     "semantic_hash": ""
   },
   "lib/constants.sh": {
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "lib/env-auth.sh": {
-    "mtime": 1782911271.8206167,
-    "ast_hash": "e146f0c5110249ea153412e154dc949f",
+    "mtime": 1783096926.1391125,
+    "ast_hash": "16514815420d42b4b362ea03566e1509",
     "semantic_hash": ""
   },
   "lib/model-discovery.sh": {
@@ -45,13 +45,13 @@
     "semantic_hash": ""
   },
   "PRD.md": {
-    "mtime": 1783085426.1023052,
-    "ast_hash": "41256b6f6b3d62e7db1dfcc6b69b9243",
+    "mtime": 1783095316.059054,
+    "ast_hash": "d320e79e33389f2be0ff61d185449d02",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1782974735.0396092,
-    "ast_hash": "c5cc281fc489ed7dfada8adfb32b69fe",
+    "mtime": 1783097666.5145757,
+    "ast_hash": "99e4c084371adcc8966eb6f3cb983c2e",
     "semantic_hash": ""
   },
   "tests/e2e/test_helper/common.bash": {
@@ -60,13 +60,13 @@
     "semantic_hash": ""
   },
   "docs/01-architecture.md": {
-    "mtime": 1782974735.0396092,
-    "ast_hash": "524e0ff61cbd9194b86049c0fdf8b826",
+    "mtime": 1783097897.3277662,
+    "ast_hash": "ff6b9ab8f5e6e565e859f78de993bb5f",
     "semantic_hash": ""
   },
   "docs/02-config-generation.md": {
-    "mtime": 1783085989.611346,
-    "ast_hash": "94bab28c7264b6341c2173dcbac538b7",
+    "mtime": 1783097930.3005154,
+    "ast_hash": "e93b1d37bcc3748bdcf9bef2afe87f6d",
     "semantic_hash": ""
   },
   "docs/03-model-discovery.md": {
@@ -85,13 +85,13 @@
     "semantic_hash": ""
   },
   "docs/06-verification.md": {
-    "mtime": 1782974735.0396092,
-    "ast_hash": "e259dc57bdbb7b87de3b747a4f3f7a2e",
+    "mtime": 1783097890.1956043,
+    "ast_hash": "8f8c6385c785729fdc852b111bc1570f",
     "semantic_hash": ""
   },
   "docs/README.md": {
-    "mtime": 1782974735.0396092,
-    "ast_hash": "c5d78a1b6e1b0ea2fc8e41df07bfa47b",
+    "mtime": 1783097906.8319821,
+    "ast_hash": "a74fe6c793f1b59341c8c6bd63d703b6",
     "semantic_hash": ""
   },
   ".hermes/plans/bridge-gap-plan.md": {
@@ -105,18 +105,18 @@
     "semantic_hash": ""
   },
   "tests/mock-llm-server.sh": {
-    "mtime": 1783085775.438383,
-    "ast_hash": "d0a31fb5d15e42e013808099e84ad1ab",
+    "mtime": 1783086972.1314743,
+    "ast_hash": "c7bf8b77ce689936170ba9abeaffa3b0",
     "semantic_hash": ""
   },
   "tests/run.sh": {
-    "mtime": 1783085740.7055788,
-    "ast_hash": "98f54fb56625fd7ad4e17d2a1f49bd38",
+    "mtime": 1783086972.1314743,
+    "ast_hash": "5ec82ebf06a49b4f33b2c819297afb0a",
     "semantic_hash": ""
   },
   ".github/workflows/e2e.yml": {
-    "mtime": 1783085740.7055788,
-    "ast_hash": "497600d83cfd488627b2ac500b577798",
+    "mtime": 1783086972.127474,
+    "ast_hash": "dcd4995ec256eff1940c7718cf846d99",
     "semantic_hash": ""
   }
 }

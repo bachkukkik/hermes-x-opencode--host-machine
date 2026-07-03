@@ -335,3 +335,52 @@ and bare model IDs. The generator must handle ALL combinations without assuming 
 - Runs `generate.sh --dry-run` (sources .env.example as fixture)
 - Runs `tests/run.sh` (full test suite)
 - Expected runtime: ~2-3 minutes (no container build needed)
+
+## 13. Agent Model Override — .env-Driven Independent Routing
+
+### 13.1 Problem
+
+The current generator ties `agent.build.model` and `agent.plan.model` to
+`OPENCODE_DEFAULT_MODEL`. This means agent sub-block models cannot be
+independently configured — the user cannot route agent delegation tasks to a
+different provider than the top-level `model`. When
+`OPENCODE_DEFAULT_MODEL=llama_cpp/qwen3.6-27b-q4_k_m` (local), all agent
+sub-model routing also uses the local model, which may not be desirable for
+agent operations that benefit from a faster cloud model.
+
+### 13.2 Requirements
+
+| ID | Requirement | Source |
+|----|-------------|--------|
+| AM-1 | New env var `OPENCODE_AGENT_MODEL` controls `agent.build.model` and `agent.plan.model` independently | User request |
+| AM-2 | When `OPENCODE_AGENT_MODEL` is set, both agent sub-model fields use its value | User request |
+| AM-3 | When `OPENCODE_AGENT_MODEL` is unset, agent sub-models fall back to `OPENCODE_DEFAULT_MODEL` (current behavior preserved) | Backward compat |
+| AM-4 | `OPENCODE_AGENT_MODEL` supports any provider prefix (opencode/litellm/llama_cpp/bare) — same resolution rules as other OPENCODE_*_MODEL vars | MR-1 through MR-6 |
+| AM-5 | `.env.example` documents `OPENCODE_AGENT_MODEL` with usage guidance | AM-5 |
+| AM-6 | Merge summary output reflects the agent model source (env var or default) | EC5 |
+
+### 13.3 Acceptance Criteria
+
+| AC# | Criteria | Verification |
+|-----|----------|--------------|
+| AC50 | `OPENCODE_AGENT_MODEL=litellm/deepseek/deepseek-v4-flash` → staging opencode.jsonc has `agent.build.model` and `agent.plan.model` set to `litellm/deepseek/deepseek-v4-flash` | `grep '"model"' staging/opencode.jsonc` in agent sub-blocks |
+| AC51 | `OPENCODE_AGENT_MODEL` unset → agent sub-models fall back to `OPENCODE_DEFAULT_MODEL` (backward compat) | Same grep, verify matches OPENCODE_DEFAULT_MODEL |
+| AC52 | `OPENCODE_AGENT_MODEL=llama_cpp/qwen3.6-27b` → routes through llama_cpp provider in generated config | Check provider block presence |
+| AC53 | `.env.example` contains `OPENCODE_AGENT_MODEL` with comment and example value | `grep OPENCODE_AGENT_MODEL .env.example` |
+| AC54 | `bash generate.sh --dry-run` passes all validations with new env var | Exit code 0, all checks green |
+| AC55 | Merge summary in staging shows agent model source clearly | `grep "agent" staging/opencode-merge-summary.txt` |
+| AC56 | Summary preserved blocks lists only `permission, plugin` (user preference) | `grep "Preserved blocks" staging/opencode-merge-summary.txt` |
+
+### 13.4 Implementation Scope
+
+Files to modify:
+- `lib/config-opencode.sh` — read `OPENCODE_AGENT_MODEL` from environment, apply to agent sub-blocks; update preserved-blocks summary
+- `.env.example` — add `OPENCODE_AGENT_MODEL` documentation
+- `lib/constants.sh` — add default constant (optional, env-driven is sufficient)
+
+### 13.5 Assumptions
+
+- `OPENCODE_AGENT_MODEL` env var naming follows the existing `OPENCODE_*_MODEL` convention
+- Agent sub-models (build, plan) share the same override — no need for per-sub-block granularity
+- No new bats tests are required for this phase (covered by existing dry-run verification + manual grep checks)
+- The preserved blocks summary preference (permission, plugin only) is cosmetic — "server" and "experimental" blocks remain fully functional in generated config

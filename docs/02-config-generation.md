@@ -93,6 +93,38 @@ bash generate.sh         →  sources ${SCRIPT_DIR}/.env — reads the .env sitt
 
 **Key convention:** Never source `.env` from `~/.hermes/.env` inside `generate.sh` or `install.sh`. The `.env` that matters is always the one colocated with the script (`${SCRIPT_DIR}/.env`).
 
+### Environment variable export (Python subprocess bridge)
+
+The `.env` file uses `KEY=value` syntax (not `export KEY=value`), so `source .env` creates **shell variables** only — Python subprocesses cannot see them via `os.environ.get()`. The `generate.sh` bridges this gap:
+
+```bash
+source "${SCRIPT_DIR}/.env" 2>/dev/null || true
+export OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_AGENT_MODEL
+export OPENCODE_FALLBACK_MODEL OPENAI_DEFAULT_MODEL HERMES_DEFAULT_MODEL
+export HERMES_YOLO_MODE HERMES_GOAL_MAX_TURNS HERMES_DELEGATION_MAX_ITERATIONS
+export HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER HERMES_COMPRESSION_THRESHOLD
+```
+
+The `export` statements promote the shell variables to environment variables so Python's `os.environ.get()` sees the correct values. This is why `.env` changes take effect without needing `export` inside the `.env` file itself.
+
+### --apply flag (staging → live deployment)
+
+The `--apply` flag copies staging output to live config paths with automatic `.bak` backups:
+
+| Flag | Behavior |
+|------|----------|
+| (none) | Staging-only — no live files touched |
+| `--dry-run` | Generate + validate + checksum verify no mutation |
+| `--apply` | Generate + copy staging → live with `.bak` backups |
+| `--apply --dry-run` | Generate + validate staging files + show apply plan (no writes) |
+
+**Backup locations:**
+- `~/.config/opencode/opencode.jsonc.bak`
+- `~/.hermes/config.yaml.bak`
+- `~/.local/share/opencode/auth.json.bak`
+
+The apply step is an explicit opt-in — the default (no flags) remains staging-only per the safety guarantee.
+
 ### Section-Based .env Sync (sync-env.sh)
 
 `sync_env_to_hermes()` in `lib/sync-env.sh` manages a delimited section in `~/.hermes/.env`, replacing only the block controlled by the repo while preserving everything else — Hermes auto-generated entries, user-added keys, and third-party tool configs.

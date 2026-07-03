@@ -106,34 +106,26 @@ The `--dry-run` flag takes a pre-generation snapshot and verifies it post-genera
 
 Any checksum mismatch after generation is a **hard failure** — exit code non-zero.
 
-### Applying staging to live (manual step)
+### Applying staging to live (`--apply`)
 
-The generator never applies staging automatically. The user reviews diffs and applies:
+After reviewing the staging output, apply to live configs with one command.
+The generator automatically creates `.bak` backups before overwriting:
 
 ```bash
-STAGING=~/.hermes/host-config-gen/staging
-
-# 1. Back up live configs
-cp ~/.config/opencode/opencode.jsonc{,.bak}
-cp ~/.hermes/config.yaml{,.bak}
-cp ~/.local/share/opencode/auth.json{,.bak}
-
-# 2. Review diffs
-diff ~/.config/opencode/opencode.jsonc "$STAGING/opencode.jsonc" || true
-diff ~/.hermes/config.yaml "$STAGING/config-hermes-overlay.yaml" || true
-
-# 3. Apply
-cp "$STAGING/opencode.jsonc" ~/.config/opencode/opencode.jsonc
-cp "$STAGING/config-hermes-overlay.yaml" ~/.hermes/config.yaml
-cp "$STAGING/auth.json" ~/.local/share/opencode/auth.json
-
-# 4. Set env var
-export OPENCODE_ZEN_API_KEY=***
-
-# 5. Verify agents work
-opencode run --model ${OPENCODE_DEFAULT_MODEL} -q "say hello"
-hermes config check
+bash ~/.hermes/host-config-gen/generate.sh --apply
 ```
+
+Preview what would be copied without writing:
+
+```bash
+bash ~/.hermes/host-config-gen/generate.sh --apply --dry-run
+```
+
+| Staging file | Live destination |
+|---|---|
+| `staging/opencode.jsonc` | `~/.config/opencode/opencode.jsonc` |
+| `staging/config-hermes-overlay.yaml` | `~/.hermes/config.yaml` |
+| `staging/auth.json` | `~/.local/share/opencode/auth.json` |
 
 ### bats e2e tests
 
