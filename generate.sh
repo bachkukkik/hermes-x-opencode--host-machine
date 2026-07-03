@@ -43,6 +43,12 @@ done
 # --- Source lib modules ------------------------------------------------------
 # shellcheck source=lib/constants.sh
 source "${LIB_DIR}/constants.sh"
+
+# --- Source user env vars (model selection, API keys, optional settings) -----
+# Mirrors the Docker entrypoint.sh pattern. Uses 2>/dev/null so the script
+# still works when .env is absent (e.g. deployed via install.sh --no-run
+# before the user has configured credentials).
+source "${HERMES_HOME}/.env" 2>/dev/null || true
 # shellcheck source=lib/model-discovery.sh
 source "${LIB_DIR}/model-discovery.sh"
 # shellcheck source=lib/config-opencode.sh
