@@ -30,6 +30,9 @@ jobs:
           OPENCODE_ZEN_API_KEY=mock-zen-key
           EOF
 
+      - name: Install to staging directory
+        run: bash install.sh --no-run
+
       - name: Start mock LLM server
         run: |
           bash tests/mock-llm-server.sh &
@@ -37,7 +40,9 @@ jobs:
           curl -sf http://localhost:4000/health
 
       - name: Run generate.sh --dry-run
-        run: bash generate.sh --dry-run
+        run: |
+          cd ~/.hermes/host-config-gen
+          bash generate.sh --dry-run
 
       - name: Run bats e2e tests
         run: bats tests/e2e/
