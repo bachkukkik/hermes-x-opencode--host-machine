@@ -62,6 +62,37 @@ fallback_models = [
 ]
 ```
 
+### Portable .env sourcing
+
+The repo uses a **portable .env pattern** — scripts source environment variables relative to their own location, not from a fixed home-directory path. This makes the repository the single source of truth and enables clean install-to-deploy workflows.
+
+**How it works:**
+
+| Script | Behavior |
+|--------|----------|
+| `generate.sh` | Sources `${SCRIPT_DIR}/.env` (computed via `SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)`) — not `~/.hermes/.env` |
+| `install.sh` | Copies `.env` from the repo alongside `generate.sh` into the deployed directory |
+
+**Workflow:**
+
+```
+Edit .env in repo
+       │
+       ▼
+bash install.sh          →  copies .env + scripts to deployed location (e.g., ~/.hermes/host-config-gen/)
+       │
+       ▼
+bash generate.sh         →  sources ${SCRIPT_DIR}/.env — reads the .env sitting next to it
+```
+
+**Why this matters:**
+
+- **Repo is the source of truth.** `.env` lives in the repo, under version control (gitignored for secrets, but `.env.example` is tracked). Users edit it once and propagate via `install.sh`.
+- **No home-directory coupling.** `generate.sh` does not hardcode `~/.hermes/.env` — it sources from whatever directory it was deployed to. This means you can deploy to any path and the scripts still find their `.env`.
+- **Idempotent installs.** Running `install.sh` again copies the latest `.env` from the repo, so changes made in the repo flow to the deployed location without manual file syncing.
+
+**Key convention:** Never source `.env` from `~/.hermes/.env` inside `generate.sh` or `install.sh`. The `.env` that matters is always the one colocated with the script (`${SCRIPT_DIR}/.env`).
+
 ### config-opencode.sh MERGE strategy
 
 The OpenCode config generator does NOT replace the live file. It reads the existing `opencode.jsonc` (tolerant JSONC parser strips `//` and `/**/` comments), applies a surgical merge, and writes only to staging:
