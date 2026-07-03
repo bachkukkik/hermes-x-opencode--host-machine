@@ -30,11 +30,32 @@ jobs:
           OPENCODE_ZEN_API_KEY=mock-zen-key
           EOF
 
+      - name: Seed live config fixtures
+        run: |
+          # opencode.jsonc: minimal fixture so TC8 (preserved blocks) passes
+          mkdir -p ~/.config/opencode
+          cat > ~/.config/opencode/opencode.jsonc << 'EOF'
+          {
+            "permission": { "read": { "*": "allow" } },
+            "plugin": ["example-plugin"],
+            "agent": {}
+          }
+          EOF
+          # config.yaml: minimal fixture so model-discovery reads api_key
+          mkdir -p ~/.hermes
+          cat > ~/.hermes/config.yaml << 'EOF'
+          custom_providers:
+            - name: litellm
+              api_key: mock-key
+          EOF
+
       - name: Install to staging directory
         run: bash install.sh --no-run
 
-      - name: Start mock LLM server
+      - name: Start mock LLM server (3+ models for TC3)
         run: |
+          export MOCK_MODELS='[{"id":"zai/glm-5.2"},{"id":"openai/gpt-4o"},{"id":"anthropic/claude-sonnet-4.6"}]'
+          # Wait for mock server and health check
           bash tests/mock-llm-server.sh &
           sleep 2
           curl -sf http://localhost:4000/health
