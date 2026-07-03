@@ -35,7 +35,7 @@
       "label": "snapshot_live_checksums()",
       "file_type": "code",
       "source_file": "generate.sh",
-      "source_location": "L65",
+      "source_location": "L71",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
@@ -49,7 +49,7 @@
       "label": "verify_live_checksums()",
       "file_type": "code",
       "source_file": "generate.sh",
-      "source_location": "L76",
+      "source_location": "L82",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
@@ -63,7 +63,7 @@
       "label": "_pass()",
       "file_type": "code",
       "source_file": "generate.sh",
-      "source_location": "L131",
+      "source_location": "L137",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
@@ -77,7 +77,7 @@
       "label": "_fail()",
       "file_type": "code",
       "source_file": "generate.sh",
-      "source_location": "L132",
+      "source_location": "L138",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
@@ -368,6 +368,48 @@
       "norm_label": "discover_models()"
     },
     {
+      "label": "sync-env.sh",
+      "file_type": "code",
+      "source_file": "lib/sync-env.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "lib_sync_env",
+      "community": 20,
+      "norm_label": "sync-env.sh"
+    },
+    {
+      "label": "sync-env.sh script",
+      "file_type": "code",
+      "source_file": "lib/sync-env.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "lib_sync_env_sh__entry",
+      "community": 20,
+      "norm_label": "sync-env.sh script"
+    },
+    {
+      "label": "sync_env_to_hermes()",
+      "file_type": "code",
+      "source_file": "lib/sync-env.sh",
+      "source_location": "L18",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "lib_sync_env_sync_env_to_hermes",
+      "community": 20,
+      "norm_label": "sync_env_to_hermes()"
+    },
+    {
       "label": "common.bash",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
@@ -377,9 +419,9 @@
         "kind": "file"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common",
       "community": 4,
-      "norm_label": "common.bash",
-      "id": "tests_e2e_test_helper_common"
+      "norm_label": "common.bash"
     },
     {
       "label": "common.bash script",
@@ -405,233 +447,289 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_setup",
       "community": 4,
-      "norm_label": "setup()",
-      "id": "tests_e2e_test_helper_common_setup"
+      "norm_label": "setup()"
     },
     {
       "label": "teardown()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L23",
+      "source_location": "L28",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_teardown",
       "community": 4,
-      "norm_label": "teardown()",
-      "id": "tests_e2e_test_helper_common_teardown"
+      "norm_label": "teardown()"
     },
     {
       "label": "start_mock_llm()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L31",
+      "source_location": "L36",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_start_mock_llm",
       "community": 4,
-      "norm_label": "start_mock_llm()",
-      "id": "tests_e2e_test_helper_common_start_mock_llm"
+      "norm_label": "start_mock_llm()"
     },
     {
       "label": "stop_mock_llm()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L79",
+      "source_location": "L84",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_stop_mock_llm",
       "community": 4,
-      "norm_label": "stop_mock_llm()",
-      "id": "tests_e2e_test_helper_common_stop_mock_llm"
+      "norm_label": "stop_mock_llm()"
     },
     {
       "label": "seed_hermes_config()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L88",
+      "source_location": "L93",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_seed_hermes_config",
       "community": 4,
-      "norm_label": "seed_hermes_config()",
-      "id": "tests_e2e_test_helper_common_seed_hermes_config"
+      "norm_label": "seed_hermes_config()"
     },
     {
       "label": "seed_opencode_config()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L102",
+      "source_location": "L107",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_seed_opencode_config",
       "community": 4,
-      "norm_label": "seed_opencode_config()",
-      "id": "tests_e2e_test_helper_common_seed_opencode_config"
+      "norm_label": "seed_opencode_config()"
     },
     {
       "label": "seed_env_file()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L145",
+      "source_location": "L150",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_seed_env_file",
       "community": 4,
-      "norm_label": "seed_env_file()",
-      "id": "tests_e2e_test_helper_common_seed_env_file"
+      "norm_label": "seed_env_file()"
     },
     {
       "label": "seed_all_configs()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L153",
+      "source_location": "L158",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_seed_all_configs",
       "community": 4,
-      "norm_label": "seed_all_configs()",
-      "id": "tests_e2e_test_helper_common_seed_all_configs"
+      "norm_label": "seed_all_configs()"
     },
     {
       "label": "seed_empty_configs()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L159",
+      "source_location": "L164",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_seed_empty_configs",
       "community": 4,
-      "norm_label": "seed_empty_configs()",
-      "id": "tests_e2e_test_helper_common_seed_empty_configs"
+      "norm_label": "seed_empty_configs()"
     },
     {
       "label": "assert_file_contains()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L170",
+      "source_location": "L175",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_file_contains",
       "community": 4,
-      "norm_label": "assert_file_contains()",
-      "id": "tests_e2e_test_helper_common_assert_file_contains"
+      "norm_label": "assert_file_contains()"
     },
     {
       "label": "assert_file_not_contains()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L179",
+      "source_location": "L184",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_file_not_contains",
       "community": 4,
-      "norm_label": "assert_file_not_contains()",
-      "id": "tests_e2e_test_helper_common_assert_file_not_contains"
+      "norm_label": "assert_file_not_contains()"
     },
     {
       "label": "assert_json_valid()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L187",
+      "source_location": "L192",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_json_valid",
       "community": 4,
-      "norm_label": "assert_json_valid()",
-      "id": "tests_e2e_test_helper_common_assert_json_valid"
+      "norm_label": "assert_json_valid()"
     },
     {
       "label": "assert_yaml_valid()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L194",
+      "source_location": "L199",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_yaml_valid",
       "community": 4,
-      "norm_label": "assert_yaml_valid()",
-      "id": "tests_e2e_test_helper_common_assert_yaml_valid"
+      "norm_label": "assert_yaml_valid()"
     },
     {
       "label": "assert_file_exists()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L201",
+      "source_location": "L206",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_file_exists",
       "community": 4,
-      "norm_label": "assert_file_exists()",
-      "id": "tests_e2e_test_helper_common_assert_file_exists"
+      "norm_label": "assert_file_exists()"
     },
     {
       "label": "assert_file_not_exists()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L208",
+      "source_location": "L213",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_file_not_exists",
       "community": 4,
-      "norm_label": "assert_file_not_exists()",
-      "id": "tests_e2e_test_helper_common_assert_file_not_exists"
+      "norm_label": "assert_file_not_exists()"
     },
     {
       "label": "assert_success()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L215",
+      "source_location": "L220",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_assert_success",
       "community": 4,
-      "norm_label": "assert_success()",
-      "id": "tests_e2e_test_helper_common_assert_success"
+      "norm_label": "assert_success()"
     },
     {
       "label": "run_generate()",
       "file_type": "code",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L222",
+      "source_location": "L227",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "id": "tests_e2e_test_helper_common_run_generate",
       "community": 4,
-      "norm_label": "run_generate()",
-      "id": "tests_e2e_test_helper_common_run_generate"
+      "norm_label": "run_generate()"
+    },
+    {
+      "label": "mock-llm-server.sh",
+      "file_type": "code",
+      "source_file": "tests/mock-llm-server.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "tests_mock_llm_server",
+      "community": 21,
+      "norm_label": "mock-llm-server.sh"
+    },
+    {
+      "label": "mock-llm-server.sh script",
+      "file_type": "code",
+      "source_file": "tests/mock-llm-server.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "tests_mock_llm_server_sh__entry",
+      "community": 21,
+      "norm_label": "mock-llm-server.sh script"
+    },
+    {
+      "label": "run.sh",
+      "file_type": "code",
+      "source_file": "tests/run.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "tests_run",
+      "community": 22,
+      "norm_label": "run.sh"
+    },
+    {
+      "label": "run.sh script",
+      "file_type": "code",
+      "source_file": "tests/run.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "tests_run_sh__entry",
+      "community": 22,
+      "norm_label": "run.sh script"
     },
     {
       "label": "bridge-gap-plan.md",
@@ -639,9 +737,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan",
       "community": 19,
-      "norm_label": "bridge-gap-plan.md",
-      "id": "hermes_plans_bridge_gap_plan"
+      "norm_label": "bridge-gap-plan.md"
     },
     {
       "label": "Cross-Repo Bridge Gap Implementation Plan",
@@ -649,9 +747,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
       "community": 19,
-      "norm_label": "cross-repo bridge gap implementation plan",
-      "id": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan"
+      "norm_label": "cross-repo bridge gap implementation plan"
     },
     {
       "label": "HARD Gate: PLAN-1 Output",
@@ -659,9 +757,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L3",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
       "community": 19,
-      "norm_label": "hard gate: plan-1 output",
-      "id": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output"
+      "norm_label": "hard gate: plan-1 output"
     },
     {
       "label": "Scope",
@@ -669,9 +767,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L5",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_scope",
       "community": 19,
-      "norm_label": "scope",
-      "id": "hermes_plans_bridge_gap_plan_scope"
+      "norm_label": "scope"
     },
     {
       "label": "Changes Summary",
@@ -679,9 +777,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L8",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_changes_summary",
       "community": 19,
-      "norm_label": "changes summary",
-      "id": "hermes_plans_bridge_gap_plan_changes_summary"
+      "norm_label": "changes summary"
     },
     {
       "label": "Feature 1: OPENCODE_ZEN_API_KEY \u2192 OPENCODE_ZEN_API_KEY rename (PR #68)",
@@ -689,9 +787,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L10",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68",
       "community": 19,
-      "norm_label": "feature 1: opencode_zen_api_key \u2192 opencode_zen_api_key rename (pr #68)",
-      "id": "hermes_plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68"
+      "norm_label": "feature 1: opencode_zen_api_key \u2192 opencode_zen_api_key rename (pr #68)"
     },
     {
       "label": "Feature 2: Per-delegation model routing (PR #68)",
@@ -699,9 +797,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L19",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68",
       "community": 19,
-      "norm_label": "feature 2: per-delegation model routing (pr #68)",
-      "id": "hermes_plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68"
+      "norm_label": "feature 2: per-delegation model routing (pr #68)"
     },
     {
       "label": "Feature 3: auth.json OR guard contract (PR #66)",
@@ -709,9 +807,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L25",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66",
       "community": 19,
-      "norm_label": "feature 3: auth.json or guard contract (pr #66)",
-      "id": "hermes_plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66"
+      "norm_label": "feature 3: auth.json or guard contract (pr #66)"
     },
     {
       "label": "Tests (new files)",
@@ -719,9 +817,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L30",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_tests_new_files",
       "community": 19,
-      "norm_label": "tests (new files)",
-      "id": "hermes_plans_bridge_gap_plan_tests_new_files"
+      "norm_label": "tests (new files)"
     },
     {
       "label": "Docs (content updates)",
@@ -729,9 +827,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L37",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_docs_content_updates",
       "community": 19,
-      "norm_label": "docs (content updates)",
-      "id": "hermes_plans_bridge_gap_plan_docs_content_updates"
+      "norm_label": "docs (content updates)"
     },
     {
       "label": "Assumptions",
@@ -739,9 +837,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L44",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_assumptions",
       "community": 19,
-      "norm_label": "assumptions",
-      "id": "hermes_plans_bridge_gap_plan_assumptions"
+      "norm_label": "assumptions"
     },
     {
       "label": "Success Criteria",
@@ -749,9 +847,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L49",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_success_criteria",
       "community": 19,
-      "norm_label": "success criteria",
-      "id": "hermes_plans_bridge_gap_plan_success_criteria"
+      "norm_label": "success criteria"
     },
     {
       "label": "PR Breakdown",
@@ -759,9 +857,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L56",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_pr_breakdown",
       "community": 19,
-      "norm_label": "pr breakdown",
-      "id": "hermes_plans_bridge_gap_plan_pr_breakdown"
+      "norm_label": "pr breakdown"
     },
     {
       "label": "Wave Decomposition",
@@ -769,9 +867,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L62",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_wave_decomposition",
       "community": 19,
-      "norm_label": "wave decomposition",
-      "id": "hermes_plans_bridge_gap_plan_wave_decomposition"
+      "norm_label": "wave decomposition"
     },
     {
       "label": "Wave 1: Code changes (3 independent subagents)",
@@ -779,9 +877,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L64",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents",
       "community": 19,
-      "norm_label": "wave 1: code changes (3 independent subagents)",
-      "id": "hermes_plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents"
+      "norm_label": "wave 1: code changes (3 independent subagents)"
     },
     {
       "label": "Wave 2: Tests (3 independent subagents)",
@@ -789,9 +887,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L72",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_wave_2_tests_3_independent_subagents",
       "community": 19,
-      "norm_label": "wave 2: tests (3 independent subagents)",
-      "id": "hermes_plans_bridge_gap_plan_wave_2_tests_3_independent_subagents"
+      "norm_label": "wave 2: tests (3 independent subagents)"
     },
     {
       "label": "Wave 3: Docs (3 independent subagents)",
@@ -799,9 +897,9 @@
       "source_file": ".hermes/plans/bridge-gap-plan.md",
       "source_location": "L77",
       "_origin": "ast",
+      "id": "hermes_plans_bridge_gap_plan_wave_3_docs_3_independent_subagents",
       "community": 19,
-      "norm_label": "wave 3: docs (3 independent subagents)",
-      "id": "hermes_plans_bridge_gap_plan_wave_3_docs_3_independent_subagents"
+      "norm_label": "wave 3: docs (3 independent subagents)"
     },
     {
       "label": "pr-breakdown.md",
@@ -809,9 +907,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "hermes_plans_pr_breakdown",
       "community": 5,
-      "norm_label": "pr-breakdown.md",
-      "id": "hermes_plans_pr_breakdown"
+      "norm_label": "pr-breakdown.md"
     },
     {
       "label": "PR Breakdown \u2014 Host Config Generator Gap Bridge",
@@ -819,9 +917,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
       "community": 5,
-      "norm_label": "pr breakdown \u2014 host config generator gap bridge",
-      "id": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge"
+      "norm_label": "pr breakdown \u2014 host config generator gap bridge"
     },
     {
       "label": "Multi-PR Decomposition",
@@ -829,9 +927,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L3",
       "_origin": "ast",
+      "id": "hermes_plans_pr_breakdown_multi_pr_decomposition",
       "community": 5,
-      "norm_label": "multi-pr decomposition",
-      "id": "hermes_plans_pr_breakdown_multi_pr_decomposition"
+      "norm_label": "multi-pr decomposition"
     },
     {
       "label": "Provisioning Strategy",
@@ -839,9 +937,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L18",
       "_origin": "ast",
+      "id": "hermes_plans_pr_breakdown_provisioning_strategy",
       "community": 5,
-      "norm_label": "provisioning strategy",
-      "id": "hermes_plans_pr_breakdown_provisioning_strategy"
+      "norm_label": "provisioning strategy"
     },
     {
       "label": "Verification Chain",
@@ -849,9 +947,9 @@
       "source_file": ".hermes/plans/pr-breakdown.md",
       "source_location": "L22",
       "_origin": "ast",
+      "id": "hermes_plans_pr_breakdown_verification_chain",
       "community": 5,
-      "norm_label": "verification chain",
-      "id": "hermes_plans_pr_breakdown_verification_chain"
+      "norm_label": "verification chain"
     },
     {
       "label": "AGENTS.md",
@@ -990,7 +1088,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "prd",
-      "community": 18,
+      "community": 2,
       "norm_label": "prd.md"
     },
     {
@@ -1080,7 +1178,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "prd_7_solution",
-      "community": 20,
+      "community": 1,
       "norm_label": "7. solution"
     },
     {
@@ -1090,7 +1188,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "prd_7_1_architecture",
-      "community": 20,
+      "community": 1,
       "norm_label": "7.1 architecture"
     },
     {
@@ -1100,7 +1198,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "prd_7_2_key_features",
-      "community": 20,
+      "community": 1,
       "norm_label": "7.2 key features"
     },
     {
@@ -1110,7 +1208,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "prd_7_3_model_selection_defaults",
-      "community": 20,
+      "community": 1,
       "norm_label": "7.3 model selection defaults"
     },
     {
@@ -1120,7 +1218,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "prd_7_4_cross_agent_delegation",
-      "community": 20,
+      "community": 1,
       "norm_label": "7.4 cross-agent delegation"
     },
     {
@@ -1130,7 +1228,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "prd_7_5_assumptions",
-      "community": 20,
+      "community": 1,
       "norm_label": "7.5 assumptions"
     },
     {
@@ -1160,7 +1258,7 @@
       "source_location": "L136",
       "_origin": "ast",
       "id": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "community": 1,
+      "community": 18,
       "norm_label": "9. cross-repo gap bridge (host \u2190 docker reference)"
     },
     {
@@ -1170,7 +1268,7 @@
       "source_location": "L138",
       "_origin": "ast",
       "id": "prd_9_1_gap_inventory",
-      "community": 1,
+      "community": 18,
       "norm_label": "9.1 gap inventory"
     },
     {
@@ -1180,64 +1278,64 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "prd_9_2_feature_parity_matrix",
-      "community": 1,
+      "community": 18,
       "norm_label": "9.2 feature parity matrix"
     },
     {
-      "label": "9.3 Port Details: OPENCODE_ZEN_API_KEY (from PR #68)",
+      "label": "9.3 Port Details: OPENCODE_ZEN_API_KEY (from PR #68) \u2014 PORTED \u2713",
       "file_type": "document",
       "source_file": "PRD.md",
       "source_location": "L169",
       "_origin": "ast",
-      "id": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68",
-      "community": 1,
-      "norm_label": "9.3 port details: opencode_zen_api_key (from pr #68)"
+      "id": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68_ported",
+      "community": 18,
+      "norm_label": "9.3 port details: opencode_zen_api_key (from pr #68) \u2014 ported \u2713"
     },
     {
-      "label": "9.4 Port Details: Per-Delegation Model Routing (from PR #68)",
+      "label": "9.4 Port Details: Per-Delegation Model Routing (from PR #68) \u2014 PORTED \u2713",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L188",
+      "source_location": "L189",
       "_origin": "ast",
-      "id": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68",
-      "community": 1,
-      "norm_label": "9.4 port details: per-delegation model routing (from pr #68)"
+      "id": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68_ported",
+      "community": 18,
+      "norm_label": "9.4 port details: per-delegation model routing (from pr #68) \u2014 ported \u2713"
     },
     {
-      "label": "9.5 Port Details: auth.json OR Guard Contract (from PR #66)",
+      "label": "9.5 Port Details: auth.json OR Guard Contract (from PR #66) \u2014 PORTED \u2713",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L203",
+      "source_location": "L206",
       "_origin": "ast",
-      "id": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66",
-      "community": 1,
-      "norm_label": "9.5 port details: auth.json or guard contract (from pr #66)"
+      "id": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66_ported",
+      "community": 18,
+      "norm_label": "9.5 port details: auth.json or guard contract (from pr #66) \u2014 ported \u2713"
     },
     {
-      "label": "9.6 Test Additions",
+      "label": "9.6 Test Additions \u2014 PORTED \u2713",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L212",
+      "source_location": "L217",
       "_origin": "ast",
-      "id": "prd_9_6_test_additions",
-      "community": 1,
-      "norm_label": "9.6 test additions"
+      "id": "prd_9_6_test_additions_ported",
+      "community": 18,
+      "norm_label": "9.6 test additions \u2014 ported \u2713"
     },
     {
-      "label": "9.7 Documentation Updates",
+      "label": "9.7 Documentation Updates \u2014 PORTED \u2713",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L220",
+      "source_location": "L227",
       "_origin": "ast",
-      "id": "prd_9_7_documentation_updates",
-      "community": 1,
-      "norm_label": "9.7 documentation updates"
+      "id": "prd_9_7_documentation_updates_ported",
+      "community": 18,
+      "norm_label": "9.7 documentation updates \u2014 ported \u2713"
     },
     {
       "label": "10. Documentation and Testing Gaps",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L228",
+      "source_location": "L237",
       "_origin": "ast",
       "id": "prd_10_documentation_and_testing_gaps",
       "community": 1,
@@ -1247,41 +1345,111 @@
       "label": "10.1 Missing Docs (Phase 2 items)",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L230",
+      "source_location": "L239",
       "_origin": "ast",
       "id": "prd_10_1_missing_docs_phase_2_items",
       "community": 1,
       "norm_label": "10.1 missing docs (phase 2 items)"
     },
     {
-      "label": "10.2 Missing Tests (Phase 2 items)",
+      "label": "10.2 Test Coverage (Phase 2 items)",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L235",
+      "source_location": "L244",
       "_origin": "ast",
-      "id": "prd_10_2_missing_tests_phase_2_items",
+      "id": "prd_10_2_test_coverage_phase_2_items",
       "community": 1,
-      "norm_label": "10.2 missing tests (phase 2 items)"
+      "norm_label": "10.2 test coverage (phase 2 items)"
     },
     {
       "label": "10.3 Knowledge Layer (Phase 3 items)",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L240",
+      "source_location": "L257",
       "_origin": "ast",
       "id": "prd_10_3_knowledge_layer_phase_3_items",
       "community": 1,
       "norm_label": "10.3 knowledge layer (phase 3 items)"
     },
     {
-      "label": "11. CI/CD Pipeline (Phase 4)",
+      "label": "11. Multi-Provider Model Routing (Phase 1.5 \u2014 bridge gap)",
       "file_type": "document",
       "source_file": "PRD.md",
-      "source_location": "L245",
+      "source_location": "L262",
       "_origin": "ast",
-      "id": "prd_11_ci_cd_pipeline_phase_4",
+      "id": "prd_11_multi_provider_model_routing_phase_1_5_bridge_gap",
       "community": 1,
-      "norm_label": "11. ci/cd pipeline (phase 4)"
+      "norm_label": "11. multi-provider model routing (phase 1.5 \u2014 bridge gap)"
+    },
+    {
+      "label": "11.1 Problem",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L264",
+      "_origin": "ast",
+      "id": "prd_11_1_problem",
+      "community": 1,
+      "norm_label": "11.1 problem"
+    },
+    {
+      "label": "11.2 Requirements",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L281",
+      "_origin": "ast",
+      "id": "prd_11_2_requirements",
+      "community": 1,
+      "norm_label": "11.2 requirements"
+    },
+    {
+      "label": "11.3 Gap Matrix (Intended vs Implemented)",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L293",
+      "_origin": "ast",
+      "id": "prd_11_3_gap_matrix_intended_vs_implemented",
+      "community": 1,
+      "norm_label": "11.3 gap matrix (intended vs implemented)"
+    },
+    {
+      "label": "11.4 Acceptance Criteria",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L306",
+      "_origin": "ast",
+      "id": "prd_11_4_acceptance_criteria",
+      "community": 1,
+      "norm_label": "11.4 acceptance criteria"
+    },
+    {
+      "label": "12. CI/CD Pipeline (Phase 4 \u2014 in progress)",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L321",
+      "_origin": "ast",
+      "id": "prd_12_ci_cd_pipeline_phase_4_in_progress",
+      "community": 1,
+      "norm_label": "12. ci/cd pipeline (phase 4 \u2014 in progress)"
+    },
+    {
+      "label": "12.1 Files Added",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L323",
+      "_origin": "ast",
+      "id": "prd_12_1_files_added",
+      "community": 1,
+      "norm_label": "12.1 files added"
+    },
+    {
+      "label": "12.2 CI Design",
+      "file_type": "document",
+      "source_file": "PRD.md",
+      "source_location": "L331",
+      "_origin": "ast",
+      "id": "prd_12_2_ci_design",
+      "community": 1,
+      "norm_label": "12.2 ci design"
     },
     {
       "label": "README.md",
@@ -1367,7 +1535,7 @@
       "label": "Edge cases handled",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L86",
+      "source_location": "L97",
       "_origin": "ast",
       "id": "readme_edge_cases_handled",
       "community": 2,
@@ -1377,7 +1545,7 @@
       "label": "File layout",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L98",
+      "source_location": "L109",
       "_origin": "ast",
       "id": "readme_file_layout",
       "community": 2,
@@ -1530,7 +1698,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_02_config_generation",
-      "community": 18,
+      "community": 2,
       "norm_label": "02-config-generation.md"
     },
     {
@@ -1584,10 +1752,40 @@
       "norm_label": "constants.sh paths"
     },
     {
-      "label": "config-opencode.sh MERGE strategy",
+      "label": "Multi-provider OPENCODE_*_MODEL routing",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
       "source_location": "L31",
+      "_origin": "ast",
+      "id": "docs_02_config_generation_multi_provider_opencode_model_routing",
+      "community": 13,
+      "norm_label": "multi-provider opencode_*_model routing"
+    },
+    {
+      "label": "Portable .env sourcing",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L65",
+      "_origin": "ast",
+      "id": "docs_02_config_generation_portable_env_sourcing",
+      "community": 13,
+      "norm_label": "portable .env sourcing"
+    },
+    {
+      "label": "Section-Based .env Sync (sync-env.sh)",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L96",
+      "_origin": "ast",
+      "id": "docs_02_config_generation_section_based_env_sync_sync_env_sh",
+      "community": 13,
+      "norm_label": "section-based .env sync (sync-env.sh)"
+    },
+    {
+      "label": "config-opencode.sh MERGE strategy",
+      "file_type": "document",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L147",
       "_origin": "ast",
       "id": "docs_02_config_generation_config_opencode_sh_merge_strategy",
       "community": 13,
@@ -1597,7 +1795,7 @@
       "label": "config-hermes.sh overlay",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L98",
+      "source_location": "L214",
       "_origin": "ast",
       "id": "docs_02_config_generation_config_hermes_sh_overlay",
       "community": 13,
@@ -1607,7 +1805,7 @@
       "label": "Environment-gated config blocks",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L152",
+      "source_location": "L268",
       "_origin": "ast",
       "id": "docs_02_config_generation_environment_gated_config_blocks",
       "community": 13,
@@ -1617,7 +1815,7 @@
       "label": "env-auth.sh credential staging",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L204",
+      "source_location": "L320",
       "_origin": "ast",
       "id": "docs_02_config_generation_env_auth_sh_credential_staging",
       "community": 13,
@@ -1627,7 +1825,7 @@
       "label": "Environment variable reference",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L213",
+      "source_location": "L329",
       "_origin": "ast",
       "id": "docs_02_config_generation_environment_variable_reference",
       "community": 13,
@@ -1637,7 +1835,7 @@
       "label": "Fallback chain",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L221",
+      "source_location": "L337",
       "_origin": "ast",
       "id": "docs_02_config_generation_fallback_chain",
       "community": 13,
@@ -1647,7 +1845,7 @@
       "label": "Verification",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L233",
+      "source_location": "L349",
       "_origin": "ast",
       "id": "docs_02_config_generation_verification",
       "community": 13,
@@ -1657,7 +1855,7 @@
       "label": "What Works",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L263",
+      "source_location": "L379",
       "_origin": "ast",
       "id": "docs_02_config_generation_what_works",
       "community": 13,
@@ -1667,7 +1865,7 @@
       "label": "What Fails",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L272",
+      "source_location": "L388",
       "_origin": "ast",
       "id": "docs_02_config_generation_what_fails",
       "community": 13,
@@ -1677,7 +1875,7 @@
       "label": "Resolution",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L278",
+      "source_location": "L394",
       "_origin": "ast",
       "id": "docs_02_config_generation_resolution",
       "community": 13,
@@ -1687,7 +1885,7 @@
       "label": "Verdict",
       "file_type": "document",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L284",
+      "source_location": "L400",
       "_origin": "ast",
       "id": "docs_02_config_generation_verdict",
       "community": 13,
@@ -1860,7 +2058,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_04_skill_installation",
-      "community": 18,
+      "community": 16,
       "norm_label": "04-skill-installation.md"
     },
     {
@@ -2170,7 +2368,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_06_verification",
-      "community": 18,
+      "community": 2,
       "norm_label": "06-verification.md"
     },
     {
@@ -2370,7 +2568,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_readme",
-      "community": 18,
+      "community": 2,
       "norm_label": "readme.md"
     },
     {
@@ -2380,7 +2578,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_readme_architecture_documentation",
-      "community": 18,
+      "community": 2,
       "norm_label": "architecture documentation"
     },
     {
@@ -2390,7 +2588,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "docs_readme_document_index",
-      "community": 18,
+      "community": 2,
       "norm_label": "document index"
     },
     {
@@ -2400,7 +2598,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "docs_readme_related_documents",
-      "community": 18,
+      "community": 2,
       "norm_label": "related documents"
     },
     {
@@ -2410,7 +2608,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "docs_readme_document_conventions",
-      "community": 18,
+      "community": 2,
       "norm_label": "document conventions"
     }
   ],
@@ -2419,7 +2617,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L132",
+      "source_location": "L138",
       "weight": 1.0,
       "source": "generate",
       "target": "generate_fail",
@@ -2429,7 +2627,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L131",
+      "source_location": "L137",
       "weight": 1.0,
       "source": "generate",
       "target": "generate_pass",
@@ -2449,7 +2647,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L65",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "generate",
       "target": "generate_snapshot_live_checksums",
@@ -2459,7 +2657,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L76",
+      "source_location": "L82",
       "weight": 1.0,
       "source": "generate",
       "target": "generate_verify_live_checksums",
@@ -2469,7 +2667,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L139",
+      "source_location": "L145",
       "weight": 1.0,
       "context": "call",
       "source": "generate_sh__entry",
@@ -2480,7 +2678,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L137",
+      "source_location": "L143",
       "weight": 1.0,
       "context": "call",
       "source": "generate_sh__entry",
@@ -2491,7 +2689,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "generate.sh",
-      "source_location": "L98",
+      "source_location": "L104",
       "weight": 1.0,
       "context": "call",
       "source": "generate_sh__entry",
@@ -2650,10 +2848,30 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/sync-env.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_sync_env",
+      "target": "lib_sync_env_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/sync-env.sh",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "lib_sync_env",
+      "target": "lib_sync_env_sync_env_to_hermes",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L170",
+      "source_location": "L175",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_file_contains",
@@ -2663,7 +2881,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_file_exists",
@@ -2673,7 +2891,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L179",
+      "source_location": "L184",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_file_not_contains",
@@ -2683,7 +2901,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L208",
+      "source_location": "L213",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_file_not_exists",
@@ -2693,7 +2911,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L187",
+      "source_location": "L192",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_json_valid",
@@ -2703,7 +2921,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L215",
+      "source_location": "L220",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_success",
@@ -2713,7 +2931,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L194",
+      "source_location": "L199",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_assert_yaml_valid",
@@ -2733,7 +2951,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L222",
+      "source_location": "L227",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_run_generate",
@@ -2743,7 +2961,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L153",
+      "source_location": "L158",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_seed_all_configs",
@@ -2753,7 +2971,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L159",
+      "source_location": "L164",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_seed_empty_configs",
@@ -2763,7 +2981,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L145",
+      "source_location": "L150",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_seed_env_file",
@@ -2773,7 +2991,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L88",
+      "source_location": "L93",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_seed_hermes_config",
@@ -2783,7 +3001,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L102",
+      "source_location": "L107",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_seed_opencode_config",
@@ -2803,7 +3021,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L31",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_start_mock_llm",
@@ -2813,7 +3031,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L79",
+      "source_location": "L84",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_stop_mock_llm",
@@ -2823,7 +3041,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L23",
+      "source_location": "L28",
       "weight": 1.0,
       "source": "tests_e2e_test_helper_common",
       "target": "tests_e2e_test_helper_common_teardown",
@@ -2833,7 +3051,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L24",
+      "source_location": "L29",
       "weight": 1.0,
       "context": "call",
       "source": "tests_e2e_test_helper_common_teardown",
@@ -2844,7 +3062,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L154",
+      "source_location": "L159",
       "weight": 1.0,
       "context": "call",
       "source": "tests_e2e_test_helper_common_seed_all_configs",
@@ -2855,7 +3073,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L155",
+      "source_location": "L160",
       "weight": 1.0,
       "context": "call",
       "source": "tests_e2e_test_helper_common_seed_all_configs",
@@ -2866,11 +3084,31 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/e2e/test_helper/common.bash",
-      "source_location": "L156",
+      "source_location": "L161",
       "weight": 1.0,
       "context": "call",
       "source": "tests_e2e_test_helper_common_seed_all_configs",
       "target": "tests_e2e_test_helper_common_seed_env_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/mock-llm-server.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "tests_mock_llm_server",
+      "target": "tests_mock_llm_server_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "tests_run",
+      "target": "tests_run_sh__entry",
       "confidence_score": 1.0
     },
     {
@@ -3217,7 +3455,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L228",
+      "source_location": "L237",
       "weight": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
       "target": "prd_10_documentation_and_testing_gaps",
@@ -3227,10 +3465,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L245",
+      "source_location": "L262",
       "weight": 1.0,
       "source": "prd_prd_hermes_opencode_host_config_generator",
-      "target": "prd_11_ci_cd_pipeline_phase_4",
+      "target": "prd_11_multi_provider_model_routing_phase_1_5_bridge_gap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L321",
+      "weight": 1.0,
+      "source": "prd_prd_hermes_opencode_host_config_generator",
+      "target": "prd_12_ci_cd_pipeline_phase_4_in_progress",
       "confidence_score": 1.0
     },
     {
@@ -3420,54 +3668,54 @@
       "source_location": "L169",
       "weight": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68",
+      "target": "prd_9_3_port_details_opencode_zen_api_key_from_pr_68_ported",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L188",
+      "source_location": "L189",
       "weight": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68",
+      "target": "prd_9_4_port_details_per_delegation_model_routing_from_pr_68_ported",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L203",
+      "source_location": "L206",
       "weight": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66",
+      "target": "prd_9_5_port_details_auth_json_or_guard_contract_from_pr_66_ported",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L212",
+      "source_location": "L217",
       "weight": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_6_test_additions",
+      "target": "prd_9_6_test_additions_ported",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L220",
+      "source_location": "L227",
       "weight": 1.0,
       "source": "prd_9_cross_repo_gap_bridge_host_docker_reference",
-      "target": "prd_9_7_documentation_updates",
+      "target": "prd_9_7_documentation_updates_ported",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L230",
+      "source_location": "L239",
       "weight": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
       "target": "prd_10_1_missing_docs_phase_2_items",
@@ -3477,20 +3725,80 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L235",
+      "source_location": "L244",
       "weight": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
-      "target": "prd_10_2_missing_tests_phase_2_items",
+      "target": "prd_10_2_test_coverage_phase_2_items",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "PRD.md",
-      "source_location": "L240",
+      "source_location": "L257",
       "weight": 1.0,
       "source": "prd_10_documentation_and_testing_gaps",
       "target": "prd_10_3_knowledge_layer_phase_3_items",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L264",
+      "weight": 1.0,
+      "source": "prd_11_multi_provider_model_routing_phase_1_5_bridge_gap",
+      "target": "prd_11_1_problem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "source": "prd_11_multi_provider_model_routing_phase_1_5_bridge_gap",
+      "target": "prd_11_2_requirements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L293",
+      "weight": 1.0,
+      "source": "prd_11_multi_provider_model_routing_phase_1_5_bridge_gap",
+      "target": "prd_11_3_gap_matrix_intended_vs_implemented",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L306",
+      "weight": 1.0,
+      "source": "prd_11_multi_provider_model_routing_phase_1_5_bridge_gap",
+      "target": "prd_11_4_acceptance_criteria",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L323",
+      "weight": 1.0,
+      "source": "prd_12_ci_cd_pipeline_phase_4_in_progress",
+      "target": "prd_12_1_files_added",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PRD.md",
+      "source_location": "L331",
+      "weight": 1.0,
+      "source": "prd_12_ci_cd_pipeline_phase_4_in_progress",
+      "target": "prd_12_2_ci_design",
       "confidence_score": 1.0
     },
     {
@@ -3527,7 +3835,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L86",
+      "source_location": "L97",
       "weight": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
       "target": "readme_edge_cases_handled",
@@ -3547,7 +3855,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L98",
+      "source_location": "L109",
       "weight": 1.0,
       "source": "readme_hermes_opencode_host_config_generator",
       "target": "readme_file_layout",
@@ -3767,7 +4075,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L278",
+      "source_location": "L394",
       "weight": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
       "target": "docs_02_config_generation_resolution",
@@ -3777,7 +4085,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L284",
+      "source_location": "L400",
       "weight": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
       "target": "docs_02_config_generation_verdict",
@@ -3787,7 +4095,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L233",
+      "source_location": "L349",
       "weight": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
       "target": "docs_02_config_generation_verification",
@@ -3807,7 +4115,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L272",
+      "source_location": "L388",
       "weight": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
       "target": "docs_02_config_generation_what_fails",
@@ -3817,7 +4125,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L263",
+      "source_location": "L379",
       "weight": 1.0,
       "source": "docs_02_config_generation_02_config_generation",
       "target": "docs_02_config_generation_what_works",
@@ -3837,7 +4145,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L98",
+      "source_location": "L214",
       "weight": 1.0,
       "source": "docs_02_config_generation_how",
       "target": "docs_02_config_generation_config_hermes_sh_overlay",
@@ -3847,7 +4155,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L31",
+      "source_location": "L147",
       "weight": 1.0,
       "source": "docs_02_config_generation_how",
       "target": "docs_02_config_generation_config_opencode_sh_merge_strategy",
@@ -3867,7 +4175,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L204",
+      "source_location": "L320",
       "weight": 1.0,
       "source": "docs_02_config_generation_how",
       "target": "docs_02_config_generation_env_auth_sh_credential_staging",
@@ -3877,7 +4185,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L152",
+      "source_location": "L268",
       "weight": 1.0,
       "source": "docs_02_config_generation_how",
       "target": "docs_02_config_generation_environment_gated_config_blocks",
@@ -3887,7 +4195,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L213",
+      "source_location": "L329",
       "weight": 1.0,
       "source": "docs_02_config_generation_how",
       "target": "docs_02_config_generation_environment_variable_reference",
@@ -3897,10 +4205,40 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/02-config-generation.md",
-      "source_location": "L221",
+      "source_location": "L337",
       "weight": 1.0,
       "source": "docs_02_config_generation_how",
       "target": "docs_02_config_generation_fallback_chain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_multi_provider_opencode_model_routing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_portable_env_sourcing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/02-config-generation.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "docs_02_config_generation_how",
+      "target": "docs_02_config_generation_section_based_env_sync_sync_env_sh",
       "confidence_score": 1.0
     },
     {
@@ -4615,5 +4953,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "07fd08a1697e52b2903803d21e9bb8cb4e445016"
+  "built_at_commit": "5da3d11eedbe894b2c9e32bff3db5d2e8bef3707"
 }
