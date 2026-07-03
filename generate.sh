@@ -10,10 +10,12 @@
 # applies the staging files in a separate step.
 #
 # Usage:
-#   bash generate.sh             # full run: discover + generate all staging
-#   bash generate.sh --dry-run   # same, plus validation assertions + live-file
-#                                # checksum verification (no writes outside staging)
-#   bash generate.sh --help      # show this help
+#   bash generate.sh                # full run: discover + generate all staging
+#   bash generate.sh --dry-run      # same, plus validation assertions + live-file
+#                                   # checksum verification (no writes outside staging)
+#   bash generate.sh --apply        # generate staging, then copy to live paths (with .bak)
+#   bash generate.sh --apply --dry-run  # generate staging, validate, show apply plan
+#   bash generate.sh --help         # show this help
 #
 # Strict requirement: OpenCode defaults to opencode/deepseek-v4-flash-free
 # (free Zen model) so Hermes->OpenCode delegation burns no paid quota.
@@ -26,9 +28,11 @@ LIB_DIR="${SCRIPT_DIR}/lib"
 
 # --- Parse args --------------------------------------------------------------
 DRY_RUN=false
+APPLY=false
 for arg in "$@"; do
     case "$arg" in
         --dry-run) DRY_RUN=true ;;
+        --apply) APPLY=true ;;
         --help|-h)
             grep '^#' "$0" | sed 's/^# \?//'
             exit 0
@@ -49,6 +53,14 @@ source "${LIB_DIR}/constants.sh"
 # ~/.hermes/.env. The repo's .env is the single source of truth for config
 # generation. 2>/dev/null so the script works when .env is absent.
 source "${SCRIPT_DIR}/.env" 2>/dev/null || true
+
+# Export key variables so Python subprocesses (via os.environ.get) can see them.
+# Without explicit export, `source .env` creates shell variables only (the .env
+# file uses `KEY=value` not `export KEY=value`), which Python cannot access.
+export OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_AGENT_MODEL
+export OPENCODE_FALLBACK_MODEL OPENAI_DEFAULT_MODEL HERMES_DEFAULT_MODEL
+export HERMES_YOLO_MODE HERMES_GOAL_MAX_TURNS HERMES_DELEGATION_MAX_ITERATIONS
+export HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER HERMES_COMPRESSION_THRESHOLD
 # shellcheck source=lib/model-discovery.sh
 source "${LIB_DIR}/model-discovery.sh"
 # shellcheck source=lib/config-opencode.sh
@@ -60,7 +72,15 @@ source "${LIB_DIR}/env-auth.sh"
 
 echo "============================================================"
 echo " Hermes x OpenCode host config generator"
-echo " Mode: $([ "$DRY_RUN" = true ] && echo 'DRY-RUN (staging + validation)' || echo 'GENERATE (staging only)')"
+if [ "$APPLY" = true ] && [ "$DRY_RUN" = true ]; then
+    echo " Mode: APPLY-DRY-RUN (staging + validate + show plan)"
+elif [ "$APPLY" = true ]; then
+    echo " Mode: APPLY (staging + copy to live)"
+elif [ "$DRY_RUN" = true ]; then
+    echo " Mode: DRY-RUN (staging + validation)"
+else
+    echo " Mode: GENERATE (staging only)"
+fi
 echo " OpenAI:   ${OPENAI_BASE_URL}"
 echo " OpenCode model: ${OPENCODE_DEFAULT_MODEL}"
 echo "============================================================"
@@ -100,7 +120,7 @@ verify_live_checksums() {
     fi
 }
 
-if [ "$DRY_RUN" = true ]; then
+if [ "$DRY_RUN" = true ] && [ "$APPLY" = false ]; then
     snapshot_live_checksums
 fi
 
@@ -124,7 +144,7 @@ echo
 
 # --- Phase 4: auth.json staging ---------------------------------------------
 echo "-- Generating auth.json staging..."
-generate_auth_staging
+generate_auth_staging "${SCRIPT_DIR}/.env"
 echo
 
 # --- Validation --------------------------------------------------------------
@@ -219,8 +239,8 @@ for blk in $_preserve_blocks; do
     fi
 done
 
-# DRY-RUN: verify no live files changed
-if [ "$DRY_RUN" = true ]; then
+# DRY-RUN: verify no live files changed (skip when --apply, since apply modifies live files)
+if [ "$DRY_RUN" = true ] && [ "$APPLY" = false ]; then
     _dc_err=0
     while IFS='=' read -r f expected; do
         [ -z "$f" ] && continue
@@ -239,15 +259,101 @@ if [ "$DRY_RUN" = true ]; then
     fi
 fi
 
+# --- Apply: copy staging → live (with backups) ------------------------------
+if [ "$APPLY" = true ]; then
+    echo ""
+    echo "============================================================"
+    echo " APPLY"
+    echo "============================================================"
+
+    # Define staging→live mapping as parallel arrays
+    _staging_sources=("${STAGING_OPENCODE}" "${STAGING_HERMES_OVERLAY}" "${STAGING_AUTH}")
+    _live_dests=("${OPENCODE_CONFIG}" "${CONFIG}" "${OPENCODE_AUTH}")
+    _apply_labels=("OpenCode config" "Hermes overlay" "OpenCode auth")
+
+    if [ "$DRY_RUN" = true ]; then
+        # --- DRY-RUN mode: validate staging files and report plan ---
+        echo ""
+        echo ">> Apply dry-run: validating staging files and showing plan..."
+        echo ""
+        _apply_fail=0
+        for i in 0 1 2; do
+            src="${_staging_sources[$i]}"
+            dst="${_live_dests[$i]}"
+            label="${_apply_labels[$i]}"
+
+            if [ ! -f "$src" ]; then
+                echo "  [SKIP] $label: staging file not found ($src)"
+                _apply_fail=1
+                continue
+            fi
+
+            # Validate format
+            case "$src" in
+                *.jsonc|*.json)
+                    if python3 -m json.tool "$src" >/dev/null 2>&1; then
+                        echo "  [OK] $label: valid JSON ($(wc -c < "$src") bytes)"
+                    else
+                        echo "  [ERR] $label: invalid JSON ($src)"
+                        _apply_fail=1
+                    fi
+                    ;;
+                *.yaml|*.yml)
+                    if python3 -c "import yaml; yaml.safe_load(open('$src'))" 2>/dev/null; then
+                        echo "  [OK] $label: valid YAML ($(wc -c < "$src") bytes)"
+                    else
+                        echo "  [ERR] $label: invalid YAML ($src)"
+                        _apply_fail=1
+                    fi
+                    ;;
+            esac
+
+            # Show what would happen
+            if [ -f "$dst" ]; then
+                echo "  -> Would backup: $dst → ${dst}.bak"
+            fi
+            echo "  -> Would apply: $src → $dst"
+        done
+        if [ "$_apply_fail" -eq 1 ]; then
+            echo ""
+            echo "!! APPLY DRY-RUN FAILED: fix issues above before running --apply" >&2
+            FAIL=$((FAIL + 1))
+        else
+            echo ""
+            echo ">> Apply dry-run passed: all staging files valid"
+        fi
+    else
+        # --- REAL apply: copy with backups ---
+        for i in 0 1 2; do
+            src="${_staging_sources[$i]}"
+            dst="${_live_dests[$i]}"
+            label="${_apply_labels[$i]}"
+
+            if [ ! -f "$src" ]; then
+                echo "  [SKIP] $label: staging file not found ($src)"
+                continue
+            fi
+
+            # Backup existing live file
+            if [ -f "$dst" ]; then
+                cp "$dst" "${dst}.bak"
+                echo "  Backed up: $dst → ${dst}.bak"
+            fi
+
+            # Ensure destination directory exists
+            mkdir -p "$(dirname "$dst")"
+
+            # Copy staging → live
+            cp "$src" "$dst"
+            echo "  Applied: $src → $dst"
+        done
+    fi
+fi
+
 echo
 echo "============================================================"
 echo " RESULT: ${PASS} passed, ${FAIL} failed"
 echo " Staging dir: ${STAGING_DIR}"
 echo "============================================================"
-if [ -f "${STAGING_DIFF}" ]; then
-    echo
-    echo "--- OpenCode merge summary ---"
-    cat "${STAGING_DIFF}"
-fi
 
 [ "$FAIL" -eq 0 ]

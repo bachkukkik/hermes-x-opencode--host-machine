@@ -40,7 +40,9 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
 | Live config strategy | OVERWRITE from scratch | MERGE — preserve existing blocks |
 | Paths | `/home/hermeswebui/` (container) | `$HOME/.hermes/`, `$HOME/.config/opencode/` |
 | Network | `host.docker.internal:4000` | `localhost:4000` |
-| Safety guarantee | Configs rebuilt cleanly | Staging-only; checksum snapshot proves zero mutation |
+│ **apply** (optional)        │ Copy staging → live with .bak backups │ bash generate.sh --apply          │
+│ **apply --dry-run**         │ Preview apply without writing         │ bash generate.sh --apply --dry-run │
+│ **Safety guarantee**        │ Configs rebuilt cleanly               │ Staging-only (`--apply` = explicit opt-in); checksum snapshot proves zero mutation in dry-run mode |
 
 ### File layout
 

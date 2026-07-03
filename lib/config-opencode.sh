@@ -212,6 +212,8 @@ _small_model = os.environ.get("OPENCODE_SMALL_MODEL", "").strip()
 if not _small_model:
     _small_model = os.environ.get("OPENCODE_DEFAULT_MODEL", "").strip()
 existing["small_model"] = _small_model if _small_model else default_model
+# Allow OPENCODE_AGENT_MODEL to override agent sub-models, fall back to default_model
+_agent_model = os.environ.get("OPENCODE_AGENT_MODEL", "").strip()
 
 # (b.1) agent.build.model + agent.plan.model -> FREE Zen model. The live config
 # may pin a PAID model here (e.g. litellm/zai/glm-5.1); without overriding these
@@ -232,8 +234,8 @@ if not isinstance(agent_plan, dict):
     agent["plan"] = agent_plan
 agent_build_model_before = agent_build.get("model")
 agent_plan_model_before = agent_plan.get("model")
-agent_build["model"] = default_model
-agent_plan["model"] = default_model
+agent_build["model"] = _agent_model if _agent_model else default_model
+agent_plan["model"] = _agent_model if _agent_model else default_model
 
 # (c)+(d) provider.litellm — refresh models map + credentials
 ll = provider.setdefault("litellm", {})
@@ -346,7 +348,7 @@ if len(added) > 30:
     lines.append("  ... and %d more" % (len(added) - 30))
 lines.append("")
 preserved_blocks = []
-for key in ("permission", "plugin", "server", "experimental"):
+for key in ("permission", "plugin"):
     if key in existing:
         preserved_blocks.append(key)
 lines.append("Preserved blocks: %s" % ", ".join(preserved_blocks))
@@ -354,8 +356,10 @@ lines.append("Preserved blocks: %s" % ", ".join(preserved_blocks))
 # free Zen model (see above); all other agent sub-block fields (mode,
 # description, etc.) are kept untouched.
 if "agent" in existing:
+    agent_model_src = _agent_model if _agent_model else default_model
+    agent_model_label = "OPENCODE_AGENT_MODEL (%s)" % agent_model_src if _agent_model else "default_model (%s)" % default_model
     lines.append("agent block: preserved (other fields) + model overridden -> %s"
-                 % default_model)
+                 % agent_model_label)
 summary = "\n".join(lines)
 with open(diff_path, "w") as f:
     f.write(summary + "\n")

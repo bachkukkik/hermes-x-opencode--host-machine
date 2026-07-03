@@ -12,18 +12,21 @@
 generate_auth_staging() {
     mkdir -p "$(dirname "$STAGING_AUTH")"
 
-    local env_file="${HERMES_ENV}"
+    local hermes_env="${HERMES_ENV}"
+    local repo_env="${1:-}"
     local config_file="${CONFIG}"
     local staging="${STAGING_AUTH}"
 
-    python3 - "$env_file" "$config_file" "$staging" << 'PYEOF'
+    python3 - "$hermes_env" "$repo_env" "$config_file" "$staging" << 'PYEOF'
 import sys, os, re, json, yaml
 
-env_path, config_path, out_path = sys.argv[1], sys.argv[2], sys.argv[3]
+hermes_env_path, repo_env_path, config_path, out_path = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
 
-# --- Read OPENCODE_ZEN_API_KEY from .env (EC2: in-process, never shell var) ------
+# --- Read OPENCODE_ZEN_API_KEY from .env files (EC2: in-process, never shell var) ------
 def read_env_file(path):
     vals = {}
+    if not path:
+        return vals
     try:
         with open(path) as f:
             for line in f:
@@ -38,9 +41,13 @@ def read_env_file(path):
         pass
     return vals
 
-env_vals = read_env_file(env_path)
-opencode_key = env_vals.get("OPENCODE_ZEN_API_KEY", "")
-openai_key = env_vals.get("OPENAI_API_KEY", "")
+# Read repo .env first, then ~/.hermes/.env as override (hermes can supplement repo)
+repo_vals = read_env_file(repo_env_path)
+hermes_vals = read_env_file(hermes_env_path)
+
+# Hermes .env overrides repo .env (explicit host config wins)
+opencode_key = repo_vals.get("OPENCODE_ZEN_API_KEY", "") or hermes_vals.get("OPENCODE_ZEN_API_KEY", "")
+openai_key = repo_vals.get("OPENAI_API_KEY", "") or hermes_vals.get("OPENAI_API_KEY", "")
 
 # --- Read litellm key from config.yaml as fallback for OPENAI_API_KEY --------
 if not openai_key:
@@ -83,13 +90,13 @@ with open(out_path, "w") as f:
 lines = [
     "auth.json staging summary",
     "=" * 40,
-    "OPENCODE_ZEN_API_KEY   -> %s" % ("found in .env (opencode provider seeded)" if opencode_key else "NOT FOUND in .env"),
-    "OPENAI_API_KEY        -> %s" % ("found (litellm provider seeded)" if openai_key else "resolved from config.yaml (litellm provider seeded)" if openai_key else "NOT FOUND"),
+    "OPENCODE_ZEN_API_KEY   -> %s" % ("found (opencode provider seeded)" if opencode_key else "NOT FOUND (repo .env or ~/.hermes/.env)"),
+    "OPENAI_API_KEY        -> %s" % ("found (litellm provider seeded)" if openai_key else "NOT FOUND (repo .env, ~/.hermes/.env, or config.yaml)"),
     "",
     "ACTION REQUIRED for opencode/deepseek-v4-flash-free (free Zen model):",
     "  The opencode provider block uses {env:OPENCODE_ZEN_API_KEY}. You must",
-    "  export OPENCODE_ZEN_API_KEY in your environment or add it to ~/.hermes/.env:",
-    "    echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> ~/.hermes/.env",
+    "  add OPENCODE_ZEN_API_KEY to the repo's .env file or to ~/.hermes/.env:",
+    "    echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> .env",
     "",
     "Staging auth.json written to: %s" % out_path,
 ]
