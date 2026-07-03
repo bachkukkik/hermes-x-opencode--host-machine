@@ -84,6 +84,14 @@ cp "${SCRIPT_DIR}/lib/"*.sh    "${DEST}/lib/"
 # (Silent skip if .env does not exist — user may configure later.)
 cp "${SCRIPT_DIR}/.env"        "${DEST}/.env" 2>/dev/null || true
 
+# Sync managed section from repo .env → ~/.hermes/.env
+# (preserves Hermes-auto-generated entries outside the managed section)
+# shellcheck source=lib/sync-env.sh
+source "${SCRIPT_DIR}/lib/sync-env.sh" 2>/dev/null || true
+if declare -f sync_env_to_hermes >/dev/null 2>&1; then
+    sync_env_to_hermes "${SCRIPT_DIR}/.env"
+fi
+
 chmod +x "${DEST}/generate.sh"
 
 echo "== Deployed files:"
