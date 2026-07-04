@@ -299,6 +299,17 @@ for mid in discovered:
         }
         added.append(mid)
 
+# (f) plugin array — set defaults for fresh installs, append fallback when configured
+plugins = existing.get("plugin")
+if not plugins or not isinstance(plugins, list):
+    existing["plugin"] = [
+        "@tarquinen/opencode-dcp@latest",
+        "@franlol/opencode-md-table-formatter@latest",
+        "cc-safety-net",
+    ]
+if fallback_chain and "opencode-runtime-fallback" not in existing["plugin"]:
+    existing["plugin"].append("opencode-runtime-fallback")
+
 # --- Write staging (strict JSON — json.tool compatible) --------------------
 with open(out_path, "w") as f:
     json.dump(existing, f, indent=2)
