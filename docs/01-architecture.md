@@ -60,6 +60,7 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
     ├── opencode.jsonc
     ├── config-hermes-overlay.yaml
     ├── auth.json
+    ├── export-env.sh              # sourceable env export helper (for opencode delegation)
     ├── discovered-models.txt
     └── opencode-merge-summary.txt
 ```

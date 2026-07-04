@@ -384,3 +384,49 @@ Files to modify:
 - Agent sub-models (build, plan) share the same override — no need for per-sub-block granularity
 - No new bats tests are required for this phase (covered by existing dry-run verification + manual grep checks)
 - The preserved blocks summary preference (permission, plugin only) is cosmetic — "server" and "experimental" blocks remain fully functional in generated config
+
+## 14. Shell Env Export Bridge (Phase 1.6 — delegation runtime gap)
+
+### Problem
+
+`opencode.jsonc` uses `{env:OPENAI_API_KEY}` references that resolve from the
+interactive shell environment at runtime. The generator's export bridge
+(commit ce9083e) exports `OPENCODE_*/HERMES_*` vars but OMITS
+`OPENAI_API_KEY` and `OPENAI_BASE_URL`. Result: `opencode run` fails with
+"Authentication Error, No api key passed in" in any shell that hasn't
+manually sourced `~/.hermes/.env`.
+
+### Root cause
+
+Two gaps:
+1. Export bridge omission: `generate.sh` lines 60-63 don't include the two
+   OpenAI vars that opencode's `{env:...}` resolution depends on.
+2. No sourceable artifact: even with the bridge fixed, the generator runs in
+   a subshell — its exports don't persist to the user's interactive shell.
+
+### Solution
+
+1. Add `OPENAI_API_KEY OPENAI_BASE_URL` to the export bridge in `generate.sh`.
+2. Generate `staging/export-env.sh` — a sourceable script that exports all
+   managed env vars. `--apply` deploys it to `~/.hermes/host-config-gen/`.
+3. Document: `source ~/.hermes/host-config-gen/export-env.sh` before
+   `opencode run`.
+
+### Acceptance criteria
+
+- AC-EXP1: `generate.sh --dry-run` writes `staging/export-env.sh` containing
+  `export OPENAI_API_KEY=` and `export OPENAI_BASE_URL=`
+- AC-EXP2: `generate.sh --apply` copies `export-env.sh` to the deployed
+  directory
+- AC-EXP3: Export bridge in `generate.sh` includes `OPENAI_API_KEY` and
+  `OPENAI_BASE_URL`
+- AC-EXP4: After sourcing export-env.sh, `opencode run "test"` succeeds
+  without auth errors
+- AC-EXP5: New bats test `08-export-env.bats` passes
+- AC-EXP6: Existing tests 01-07 still pass
+
+### Out of scope
+
+- Modifying `~/.bashrc` (too invasive; user sources the helper manually)
+- Managing `~/.config/opencode/settings.json` (manual workaround, not a
+  generator-managed file per AGENTS.md)

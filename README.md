@@ -65,6 +65,17 @@ quota**. The credential is `OPENCODE_ZEN_API_KEY` (already in `~/.hermes/.env`).
 The `{env:OPENCODE_ZEN_API_KEY}` ref in `opencode.jsonc` must resolve to the same
 value — export it or add it to `.env`.
 
+## Shell env export for delegation
+
+`opencode run` resolves `{env:OPENAI_API_KEY}` and `{env:OPENAI_BASE_URL}` from
+the shell environment at startup. The generator produces a sourceable
+`export-env.sh` in staging (deployed to `~/.hermes/host-config-gen/export-env.sh`
+by `--apply`) that exports all managed env vars with expanded values. Before
+running opencode, `source ~/.hermes/host-config-gen/export-env.sh` to make the
+API key and model selections visible to the opencode process. Add this to your
+shell startup (`~/.bashrc`, `~/.zshrc`) for a persistent setup — the generator
+does not modify your shell config automatically.
+
 ## Environment variables
 
 | Variable | Purpose | Default |
