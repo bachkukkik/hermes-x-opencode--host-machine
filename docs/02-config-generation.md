@@ -120,6 +120,20 @@ source ~/.hermes/host-config-gen/export-env.sh
 
 This is required because `opencode.jsonc` uses `{env:OPENAI_API_KEY}` references that resolve from the shell, not from `auth.json` alone.
 
+### Zen API key validation (validate-zen.sh)
+
+`lib/validate-zen.sh` provides `validate_zen_key()`, which validates `OPENCODE_ZEN_API_KEY` against the Zen API (`https://opencode.ai/zen/v1/models`). `generate.sh` sources it (lines 209-211) and calls `validate_zen_key || true` at the end of the generation pipeline.
+
+The function is **non-fatal** — it always returns 0, logging a warning if the key is unset or the API call fails. This ensures generation succeeds regardless of key status; users see a warning at the end of output when credentials need attention.
+
+**Verification:**
+
+```bash
+bash -c 'source lib/validate-zen.sh; validate_zen_key'
+```
+
+**Cross-reference:** PRD §15 GA-03 — validate-zen ported to host.
+
 ### --apply flag (staging → live deployment)
 
 The `--apply` flag copies staging output to live config paths with automatic `.bak` backups:

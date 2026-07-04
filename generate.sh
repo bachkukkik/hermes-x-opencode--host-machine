@@ -15,6 +15,8 @@
 #                                   # checksum verification (no writes outside staging)
 #   bash generate.sh --apply        # generate staging, then copy to live paths (with .bak)
 #   bash generate.sh --apply --dry-run  # generate staging, validate, show apply plan
+#   bash generate.sh --apply --shell-integration  # apply + source export-env.sh from ~/.bashrc
+#   bash generate.sh --apply --remove-shell-integration  # remove the rc-file block
 #   bash generate.sh --help         # show this help
 #
 # Strict requirement: OpenCode defaults to opencode/deepseek-v4-flash-free
@@ -29,10 +31,14 @@ LIB_DIR="${SCRIPT_DIR}/lib"
 # --- Parse args --------------------------------------------------------------
 DRY_RUN=false
 APPLY=false
+SHELL_INTEGRATION=false
+REMOVE_SHELL_INTEGRATION=false
 for arg in "$@"; do
     case "$arg" in
         --dry-run) DRY_RUN=true ;;
         --apply) APPLY=true ;;
+        --shell-integration) SHELL_INTEGRATION=true ;;
+        --remove-shell-integration) REMOVE_SHELL_INTEGRATION=true ;;
         --help|-h)
             grep '^#' "$0" | sed 's/^# \?//'
             exit 0
@@ -43,6 +49,20 @@ for arg in "$@"; do
             ;;
     esac
 done
+
+# --- Validate shell-integration flags ----------------------------------------
+if [ "$SHELL_INTEGRATION" = true ] && [ "$REMOVE_SHELL_INTEGRATION" = true ]; then
+    echo "--shell-integration and --remove-shell-integration are mutually exclusive." >&2
+    exit 1
+fi
+if [ "$SHELL_INTEGRATION" = true ] && [ "$APPLY" = false ]; then
+    echo "--shell-integration requires --apply (use: generate.sh --apply --shell-integration)" >&2
+    exit 1
+fi
+if [ "$REMOVE_SHELL_INTEGRATION" = true ] && [ "$APPLY" = false ]; then
+    echo "--remove-shell-integration requires --apply" >&2
+    exit 1
+fi
 
 # --- Source lib modules ------------------------------------------------------
 # shellcheck source=lib/constants.sh
@@ -124,6 +144,15 @@ verify_live_checksums() {
     fi
 }
 
+# --- rc-file detection helper ------------------------------------------------
+_detect_rc_file() {
+    case "$(basename "$SHELL")" in
+        bash) echo "$HOME/.bashrc" ;;
+        zsh)  echo "$HOME/.zshrc" ;;
+        *)    echo "" ;;
+    esac
+}
+
 if [ "$DRY_RUN" = true ] && [ "$APPLY" = false ]; then
     snapshot_live_checksums
 fi
@@ -155,7 +184,7 @@ export OPENCODE_ZEN_API_KEY="${OPENCODE_ZEN_API_KEY:-}"
 export OPENAI_DEFAULT_MODEL="${OPENAI_DEFAULT_MODEL:-}"
 export HERMES_DEFAULT_MODEL="${HERMES_DEFAULT_MODEL:-}"
 EXPORT_EOF
-chmod +x "${STAGING_DIR}/export-env.sh"
+chmod 600 "${STAGING_DIR}/export-env.sh"
 
 # --- Phase 1: Model discovery ------------------------------------------------
 discover_models
@@ -174,6 +203,12 @@ echo
 # --- Phase 4: auth.json staging ---------------------------------------------
 echo "-- Generating auth.json staging..."
 generate_auth_staging "${SCRIPT_DIR}/.env"
+echo
+
+# --- Zen API key validation --------------------------------------------------
+# shellcheck source=lib/validate-zen.sh
+source "${LIB_DIR}/validate-zen.sh"
+validate_zen_key || true
 echo
 
 # --- Validation --------------------------------------------------------------
@@ -351,6 +386,29 @@ if [ "$APPLY" = true ]; then
             echo ""
             echo ">> Apply dry-run passed: all staging files valid"
         fi
+
+        # --- Shell integration dry-run plan ---
+        if [ "$SHELL_INTEGRATION" = true ]; then
+            _rc="$(_detect_rc_file)"
+            if [ -z "$_rc" ]; then
+                echo "  [ERR] Unsupported shell: $SHELL (only bash and zsh are supported)" >&2
+                FAIL=$((FAIL + 1))
+            elif [ -f "$_rc" ] && grep -qF '# >>> hermes host-config-gen env bridge (managed, do not edit) >>>' "$_rc" 2>/dev/null; then
+                echo "  [OK] Shell integration already present in $_rc"
+            else
+                echo "  -> Would add shell integration to $_rc"
+            fi
+        elif [ "$REMOVE_SHELL_INTEGRATION" = true ]; then
+            _rc="$(_detect_rc_file)"
+            if [ -z "$_rc" ]; then
+                echo "  [ERR] Unsupported shell: $SHELL (only bash and zsh are supported)" >&2
+                FAIL=$((FAIL + 1))
+            elif [ -f "$_rc" ] && grep -qF '# >>> hermes host-config-gen env bridge (managed, do not edit) >>>' "$_rc" 2>/dev/null; then
+                echo "  -> Would remove shell integration from $_rc"
+            else
+                echo "  [OK] No shell integration block found in $_rc"
+            fi
+        fi
     else
         # --- REAL apply: copy with backups ---
         for i in 0 1 2 3; do
@@ -376,6 +434,39 @@ if [ "$APPLY" = true ]; then
             cp "$src" "$dst"
             echo "  Applied: $src → $dst"
         done
+
+        # --- Shell integration: add guarded source block to rc file ---
+        if [ "$SHELL_INTEGRATION" = true ]; then
+            _rc="$(_detect_rc_file)"
+            if [ -z "$_rc" ]; then
+                echo "  [ERR] Unsupported shell: $SHELL (only bash and zsh are supported)" >&2
+                FAIL=$((FAIL + 1))
+            elif [ -f "$_rc" ] && grep -qF '# >>> hermes host-config-gen env bridge (managed, do not edit) >>>' "$_rc" 2>/dev/null; then
+                echo "  [OK] Shell integration already present in $_rc"
+            else
+                {
+                    echo ""
+                    echo "# >>> hermes host-config-gen env bridge (managed, do not edit) >>>"
+                    echo "[ -f \"\$HOME/.hermes/host-config-gen/export-env.sh\" ] && source \"\$HOME/.hermes/host-config-gen/export-env.sh\""
+                    echo "# <<< hermes host-config-gen env bridge <<<"
+                } >> "$_rc"
+                echo "  Added shell integration to $_rc"
+            fi
+        fi
+
+        # --- Shell integration: remove guarded block from rc file ---
+        if [ "$REMOVE_SHELL_INTEGRATION" = true ]; then
+            _rc="$(_detect_rc_file)"
+            if [ -z "$_rc" ]; then
+                echo "  [ERR] Unsupported shell: $SHELL (only bash and zsh are supported)" >&2
+                FAIL=$((FAIL + 1))
+            elif [ -f "$_rc" ] && grep -qF '# >>> hermes host-config-gen env bridge (managed, do not edit) >>>' "$_rc" 2>/dev/null; then
+                sed -i '/^# >>> hermes host-config-gen env bridge (managed, do not edit) >>>/,/^# <<< hermes host-config-gen env bridge <<<$/d' "$_rc"
+                echo "  Removed shell integration from $_rc"
+            else
+                echo "  [OK] No shell integration block found in $_rc"
+            fi
+        fi
     fi
 fi
 

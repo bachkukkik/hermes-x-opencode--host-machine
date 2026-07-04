@@ -46,6 +46,19 @@ bash ~/.hermes/host-config-gen/generate.sh --apply
 bash ~/.hermes/host-config-gen/generate.sh --apply --dry-run
 ```
 
+### In-repo usage (development)
+
+For development and iteration, run `generate.sh` directly from the repo root instead of the installed path. The two-step workflow loads environment variables then invokes the generator:
+
+```bash
+# From the repo root:
+source .env
+bash generate.sh --dry-run                              # preview
+bash generate.sh --apply --shell-integration           # deploy + wire rc file
+```
+
+> **Note:** `generate.sh` automatically sources `${SCRIPT_DIR}/.env`, but `.env` uses bare `KEY=value` (no `export`), so variables remain shell-local unless you source `.env` with export intent or source `export-env.sh` afterward. Running `source .env` from the repo root mimics the installed path's behavior.
+
 ## Applying configs
 
 The `--apply` flag copies staging output to live paths with automatic
@@ -72,9 +85,45 @@ the shell environment at startup. The generator produces a sourceable
 `export-env.sh` in staging (deployed to `~/.hermes/host-config-gen/export-env.sh`
 by `--apply`) that exports all managed env vars with expanded values. Before
 running opencode, `source ~/.hermes/host-config-gen/export-env.sh` to make the
-API key and model selections visible to the opencode process. Add this to your
-shell startup (`~/.bashrc`, `~/.zshrc`) for a persistent setup — the generator
-does not modify your shell config automatically.
+API key and model selections visible to the opencode process.
+
+### Opt-in shell integration (auto-source)
+
+Use `--shell-integration` (requires `--apply`) to automatically source
+`export-env.sh` from your shell rc file — no manual sourcing needed after
+every shell restart.
+
+```bash
+# One-time setup: deploy configs + add source line to ~/.bashrc (or ~/.zshrc)
+bash ~/.hermes/host-config-gen/generate.sh --apply --shell-integration
+```
+
+This appends a guarded sentinel block to your rc file:
+
+```bash
+# >>> hermes host-config-gen env bridge (managed, do not edit) >>>
+[ -f "$HOME/.hermes/host-config-gen/export-env.sh" ] && source "$HOME/.hermes/host-config-gen/export-env.sh"
+# <<< hermes host-config-gen env bridge <<<
+```
+
+The block is **idempotent** — re-running the command does not duplicate the
+block. The guard (`[ -f ... ]`) ensures no errors if the helper file is missing.
+
+### Rollback
+
+```bash
+# Remove the sentinel block from your rc file
+bash ~/.hermes/host-config-gen/generate.sh --apply --remove-shell-integration
+```
+
+This surgically removes only the managed block without touching the rest of
+your rc file.
+
+### Supported shells
+
+Only **bash** and **zsh** are supported (`$SHELL` detection). Other shells
+produce an error message. The block is auditable and plain-text — review the
+sentinel markers after every operation.
 
 ## Environment variables
 

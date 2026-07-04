@@ -4,6 +4,7 @@ staging/
 # Environment secrets
 .env
 .envrc
+.hermes/plans/
 
 # Python artifacts
 __pycache__/

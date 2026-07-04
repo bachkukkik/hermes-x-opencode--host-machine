@@ -127,6 +127,28 @@ bash ~/.hermes/host-config-gen/generate.sh --apply --dry-run
 | `staging/config-hermes-overlay.yaml` | `~/.hermes/config.yaml` |
 | `staging/auth.json` | `~/.local/share/opencode/auth.json` |
 
+### Shell integration (--shell-integration)
+
+Appends a guarded sentinel block to `~/.bashrc` (or `~/.zshrc`) that sources `export-env.sh` on every shell startup:
+
+```bash
+# >>> hermes host-config-gen env bridge (managed, do not edit) >>>
+[ -f "$HOME/.hermes/host-config-gen/export-env.sh" ] && source "$HOME/.hermes/host-config-gen/export-env.sh"
+# <<< hermes host-config-gen env bridge <<<
+```
+
+**Usage:**
+
+```bash
+# Installed path:
+bash ~/.hermes/host-config-gen/generate.sh --apply --shell-integration
+
+# In-repo (development):
+source .env && bash generate.sh --apply --shell-integration
+```
+
+**Idempotency:** Re-running does not duplicate the block. **Rollback:** `--apply --remove-shell-integration` removes it cleanly; no-op if absent. **Verification:** `grep -n 'hermes host-config-gen' ~/.bashrc` to audit.
+
 ### bats e2e tests
 
 Planned for Phase 2. The test structure follows the Docker reference:

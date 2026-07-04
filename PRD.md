@@ -430,3 +430,203 @@ Two gaps:
 - Modifying `~/.bashrc` (too invasive; user sources the helper manually)
 - Managing `~/.config/opencode/settings.json` (manual workaround, not a
   generator-managed file per AGENTS.md)
+
+## 15. Cross-Repo Gap Bridge (Docker reference audit)
+
+### 15.1 Problem
+
+The host config generator was modeled after the Docker stack's config-generation
+pipeline. A systematic audit (2026-07-04, Docker HEAD `8f9f52a`, host HEAD
+`8125b8c`) identified gaps where the Docker reference has features not yet
+ported to the host generator.
+
+### 15.2 Gap Matrix
+
+| Gap ID | Severity | Docker Feature (PR) | Host Status | Action |
+|--------|----------|-------------------|-------------|--------|
+| GA-01 | HIGH | Plugin array generation in config-opencode.sh | MISSING — fresh installs get no plugins | PORT (Wave 1) |
+| GA-02 | LOW | `_resolve_provider_prefix()` / `_strip_provider_prefix()` | Simpler direct-write approach, functionally equivalent | SKIP — Karpathy simplicity |
+| GA-03 | MEDIUM | `validate_opencode_zen_key()` | PORTED (`lib/validate-zen.sh`, sourced by generate.sh) | CROSS-REF docs — code exists, doc coverage TBD |
+| GA-04 | SKIP | `service-dashboard.sh` + dashboard service | Docker service lifecycle | SKIP |
+| GA-05 | SKIP | `profile-righthand-man.sh` | Docker profile seeding | SKIP |
+| GA-06 | SKIP | `seed-volumes.sh` | Docker volume seeding | SKIP |
+| GA-07 | LOW | `symlink-cleanup.sh` | MISSING | PORT (low priority) |
+
+### 15.3 Port Details: Plugin Array Generation (GA-01)
+
+**Scope:** Add plugin array generation to `lib/config-opencode.sh` so fresh
+installs (no existing opencode.jsonc) receive the default plugins:
+- `@tarquinen/opencode-dcp@latest`
+- `@franlol/opencode-md-table-formatter@latest`
+- `cc-safety-net`
+- `opencode-runtime-fallback` (only when `OPENCODE_FALLBACK_MODEL` is set)
+
+**Success criteria:**
+- `generate.sh --dry-run` with empty live config produces `staging/opencode.jsonc` containing `"plugin": [...]`
+- Fallback plugin present only when `OPENCODE_FALLBACK_MODEL` is set
+- Existing plugins in live config are preserved (MERGE behavior unchanged)
+- All bats tests pass
+
+### 15.4 Security Fix: export-env.sh permissions
+
+**Scope:** Change `chmod +x` to `chmod 600` for `staging/export-env.sh`
+to restrict access to files containing literal API keys.
+
+**Success criteria:**
+- `stat -c '%a' staging/export-env.sh` returns `600`
+- File remains sourceable by owner's shell
+
+### 15.5 Assumptions
+
+- Plugin list matches the Docker reference's current set (3 base + 1 conditional)
+- Plugin names are stable — if Docker updates plugin names, host should follow
+- `chmod 600` is sufficient (owner read/write only; no execute needed for sourcing)
+
+## 16. Opt-In Shell Integration (Phase 1.7 — `--shell-integration` flag)
+
+### 16.1 Problem
+
+The shell env export bridge (§14) generates and deploys `export-env.sh`, but the
+file is only effective if the user manually sources it before every `opencode`
+invocation. In practice users open a fresh shell, run `opencode .`, and hit
+`Authentication Error, No api key passed in` — the Layer 3 failure documented in
+`references/host-opencode-run-debugging.md`. The staging-only guarantee (§14
+out-of-scope: "Modifying ~/.bashrc — too invasive") leaves no durable path.
+
+### 16.2 Solution
+
+Add an **opt-in** `--shell-integration` flag to `generate.sh`, valid only with
+`--apply`. When set, after deploying `export-env.sh`, the generator appends a
+single **guarded, idempotent, removable** source line to the user's shell rc
+file (`~/.bashrc` for bash, `~/.zshrc` for zsh). The line is wrapped in sentinel
+markers so re-runs do not duplicate it and a future `--remove-shell-integration`
+can delete the block cleanly.
+
+### 16.3 Behavior
+
+- `generate.sh --apply` — unchanged; deploys config + export-env.sh, does NOT
+  touch shell rc.
+- `generate.sh --apply --shell-integration` — after apply, appends the guarded
+  block to the detected rc file. Prints the exact file path and line added.
+- `generate.sh --apply --shell-integration` re-run — detects existing block via
+  sentinel markers, skips (no duplicate).
+- `generate.sh --apply --remove-shell-integration` — removes the guarded block
+  if present, exits 0 if absent (idempotent).
+- `--shell-integration` without `--apply` — error and exit 1 (shell integration
+  is meaningless without deploying export-env.sh first).
+- Rc file selection: `$SHELL`-aware — bash → `~/.bashrc`, zsh → `~/.zshrc`,
+  other → error with explicit "unsupported shell" message.
+
+### 16.4 Guarded block format
+
+```
+# >>> hermes host-config-gen env bridge (managed, do not edit) >>>
+[ -f "$HOME/.hermes/host-config-gen/export-env.sh" ] && source "$HOME/.hermes/host-config-gen/export-env.sh"
+# <<< hermes host-config-gen env bridge <<<
+```
+
+### 16.5 Acceptance criteria
+
+- AC-SI1: `generate.sh --apply --shell-integration` exits 0 and appends exactly
+  one guarded block to the user's rc file
+- AC-SI2: Re-running `generate.sh --apply --shell-integration` does NOT produce
+  a duplicate block (idempotent)
+- AC-SI3: `generate.sh --apply --remove-shell-integration` removes the block
+  cleanly; re-run exits 0 (block absent = no-op)
+- AC-SI4: `--shell-integration` without `--apply` exits non-zero with a clear
+  error message
+- AC-SI5: After integration, a fresh interactive shell (or `bash -i -c`) has
+  `OPENAI_API_KEY` exported (len > 0)
+- AC-SI6: Dry-run mode (`--apply --dry-run --shell-integration`) reports what
+  would be added without modifying the rc file
+- AC-SI7: New bats test `09-shell-integration.bats` covers AC-SI1 through
+  AC-SI4 using a temp HOME
+- AC-SI8: All existing tests (01-08) still pass
+- AC-SI9: README updated with `--shell-integration` usage and the
+  `--remove-shell-integration` rollback path
+- AC-SI10: `bash -n generate.sh` passes after every change
+
+### 16.6 Out of scope
+
+- Editing rc files silently (the flag is explicit and opt-in)
+- Supporting fish, nushell, or non-POSIX shells (bash/zsh only for now)
+- Integrating with `~/.profile` or `~/.bash_profile` (bash interactive shells
+  source `~/.bashrc`; non-interactive shells are out of scope)
+- Migrating the double-prefix default model (`litellm/opencode/...`) — tracked
+  separately; not an auth blocker
+
+### 16.7 Security
+
+- The rc file edit adds only a guarded `source` line referencing the deployed
+  `export-env.sh` — no secrets inlined in the rc file
+- `export-env.sh` remains `chmod 600` (§15.4)
+- The sentinel markers make the change auditable: `grep -n 'hermes host-config-gen' ~/.bashrc`
+
+## 17. Installation & Deployment Documentation (Phase 2 — docs parity)
+
+### 17.1 Problem
+
+The two-tier deployment model (repo → `~/.hermes/host-config-gen/`) is a core
+architectural decision, but no dedicated document explains it. The pieces are
+scattered across docs/02 (the .env portability subsection), docs/01 (the
+deployed file layout tree), and README (usage examples that assume the
+installed path). A user following the docs cannot answer: "What does
+install.sh actually do?", "When must I redeploy?", or "Why did my lib/ edit
+not take effect?" — the last being the **stale-deployed-copy pitfall** that
+produces silently-wrong output (no error, just old behavior).
+
+### 17.2 Solution
+
+Create a dedicated `docs/07-installation-deployment.md` following the existing
+8-section coding-agents-docs-guideline template (What / Why / How / Verification
+/ What Works / What Fails / Resolution / Verdict). Add it to the docs/README.md
+index. Do NOT duplicate docs/02's .env portability section — cross-reference it.
+
+### 17.3 Content scope
+
+The new doc must cover:
+
+1. **Two-tier model** — repo (git-tracked, source of truth) vs. deployed copy
+   (`~/.hermes/host-config-gen/`, flat `cp` by install.sh). Diagram showing the
+   relationship.
+2. **install.sh operation** — what files it copies (generate.sh, README.md,
+   lib/*.sh, .env), the `DEST` constant, prerequisite checks, `--no-run` flag,
+   and the post-install dry-run validation.
+3. **The `--no-run` flag** — install without running the generator; the standard
+   pre-verification recipe: `install.sh --no-run && generate.sh --dry-run`.
+4. **sync-env.sh** — the managed-section .env sync (brief; cross-ref docs/02 for
+   the full managed-marker mechanics).
+5. **Stale-deployed-copy pitfall** (What Fails section) — when only lib/ files
+   change (not generate.sh), a naive diff passes but the deployed lib/ is stale.
+   Symptom: no error, new feature simply absent from output. Fix: always
+   redeploy via `install.sh --no-run` before verification.
+6. **In-repo vs. installed-path workflows** — both are valid; in-repo for
+   development, installed-path for production. Cross-ref the README "In-repo
+   usage" subsection.
+7. **Verification commands** — `diff generate.sh ~/.hermes/host-config-gen/generate.sh`,
+   `install.sh --no-run` recipe, confirming deployed copy matches repo after edit.
+
+### 17.4 Acceptance criteria
+
+- AC-DOC1: `docs/07-installation-deployment.md` exists and follows the 8-section
+  template (What/Why/How/Verification/What Works/What Fails/Resolution/Verdict)
+- AC-DOC2: The stale-deployed-copy pitfall is documented with its symptom
+  ("silently-wrong output, no error") and fix (`install.sh --no-run` recipe)
+- AC-DOC3: The two-tier model is shown as a diagram (ASCII or mermaid) with the
+  repo→deployed copy→live paths relationship
+- AC-DOC4: `docs/README.md` index table is updated with row 07
+- AC-DOC5: The doc cross-references docs/02 (for .env portability) and docs/01
+  (for file layout) rather than duplicating their content
+- AC-DOC6: install.sh's `--no-run` flag and the `install.sh --no-run &&
+  generate.sh --dry-run` verification recipe are documented
+- AC-DOC7: No other files are modified (no PRD/generate.sh/test changes)
+- AC-DOC8: Markdown is well-formed (code fences balanced, tables valid)
+
+### 17.5 Out of scope
+
+- Rewriting docs/02's .env portability section (cross-ref only)
+- Rewriting docs/01's file layout (cross-ref only)
+- Adding a `--force` or `--diff` flag to install.sh (documentation only, no
+  code changes to install.sh in this phase)
+- Docker-stack installation (docs are host-only; Docker is the reference, not
+  the subject)
