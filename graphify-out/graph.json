@@ -60,8 +60,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "bridge-gap-plan.md",
-      "id": "hermes_plans_bridge_gap_plan",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan"
     },
     {
       "label": "Cross-Repo Bridge Gap Implementation Plan",
@@ -71,8 +71,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "cross-repo bridge gap implementation plan",
-      "id": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_cross_repo_bridge_gap_implementation_plan"
     },
     {
       "label": "HARD Gate: PLAN-1 Output",
@@ -82,8 +82,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "hard gate: plan-1 output",
-      "id": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_hard_gate_plan_1_output"
     },
     {
       "label": "Scope",
@@ -93,8 +93,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "scope",
-      "id": "hermes_plans_bridge_gap_plan_scope",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_scope"
     },
     {
       "label": "Changes Summary",
@@ -104,8 +104,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "changes summary",
-      "id": "hermes_plans_bridge_gap_plan_changes_summary",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_changes_summary"
     },
     {
       "label": "Feature 1: OPENCODE_ZEN_API_KEY \u2192 OPENCODE_ZEN_API_KEY rename (PR #68)",
@@ -115,8 +115,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "feature 1: opencode_zen_api_key \u2192 opencode_zen_api_key rename (pr #68)",
-      "id": "hermes_plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_feature_1_opencode_zen_api_key_opencode_zen_api_key_rename_pr_68"
     },
     {
       "label": "Feature 2: Per-delegation model routing (PR #68)",
@@ -126,8 +126,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "feature 2: per-delegation model routing (pr #68)",
-      "id": "hermes_plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_feature_2_per_delegation_model_routing_pr_68"
     },
     {
       "label": "Feature 3: auth.json OR guard contract (PR #66)",
@@ -137,8 +137,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "feature 3: auth.json or guard contract (pr #66)",
-      "id": "hermes_plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_feature_3_auth_json_or_guard_contract_pr_66"
     },
     {
       "label": "Tests (new files)",
@@ -148,8 +148,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "tests (new files)",
-      "id": "hermes_plans_bridge_gap_plan_tests_new_files",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_tests_new_files"
     },
     {
       "label": "Docs (content updates)",
@@ -159,8 +159,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "docs (content updates)",
-      "id": "hermes_plans_bridge_gap_plan_docs_content_updates",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_docs_content_updates"
     },
     {
       "label": "Assumptions",
@@ -170,8 +170,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "assumptions",
-      "id": "hermes_plans_bridge_gap_plan_assumptions",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_assumptions"
     },
     {
       "label": "Success Criteria",
@@ -181,8 +181,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "success criteria",
-      "id": "hermes_plans_bridge_gap_plan_success_criteria",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_success_criteria"
     },
     {
       "label": "PR Breakdown",
@@ -192,8 +192,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "pr breakdown",
-      "id": "hermes_plans_bridge_gap_plan_pr_breakdown",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_pr_breakdown"
     },
     {
       "label": "Wave Decomposition",
@@ -203,8 +203,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "wave decomposition",
-      "id": "hermes_plans_bridge_gap_plan_wave_decomposition",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_wave_decomposition"
     },
     {
       "label": "Wave 1: Code changes (3 independent subagents)",
@@ -214,8 +214,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "wave 1: code changes (3 independent subagents)",
-      "id": "hermes_plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_wave_1_code_changes_3_independent_subagents"
     },
     {
       "label": "Wave 2: Tests (3 independent subagents)",
@@ -225,8 +225,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "wave 2: tests (3 independent subagents)",
-      "id": "hermes_plans_bridge_gap_plan_wave_2_tests_3_independent_subagents",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_wave_2_tests_3_independent_subagents"
     },
     {
       "label": "Wave 3: Docs (3 independent subagents)",
@@ -236,8 +236,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "wave 3: docs (3 independent subagents)",
-      "id": "hermes_plans_bridge_gap_plan_wave_3_docs_3_independent_subagents",
-      "community_name": "Community 2"
+      "community_name": "Community 2",
+      "id": "hermes_plans_bridge_gap_plan_wave_3_docs_3_independent_subagents"
     },
     {
       "label": "pr-breakdown.md",
@@ -247,8 +247,8 @@
       "_origin": "ast",
       "community": 7,
       "norm_label": "pr-breakdown.md",
-      "id": "hermes_plans_pr_breakdown",
-      "community_name": "Community 7"
+      "community_name": "Community 7",
+      "id": "hermes_plans_pr_breakdown"
     },
     {
       "label": "PR Breakdown \u2014 Host Config Generator Gap Bridge",
@@ -258,8 +258,8 @@
       "_origin": "ast",
       "community": 7,
       "norm_label": "pr breakdown \u2014 host config generator gap bridge",
-      "id": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge",
-      "community_name": "Community 7"
+      "community_name": "Community 7",
+      "id": "hermes_plans_pr_breakdown_pr_breakdown_host_config_generator_gap_bridge"
     },
     {
       "label": "Multi-PR Decomposition",
@@ -269,8 +269,8 @@
       "_origin": "ast",
       "community": 7,
       "norm_label": "multi-pr decomposition",
-      "id": "hermes_plans_pr_breakdown_multi_pr_decomposition",
-      "community_name": "Community 7"
+      "community_name": "Community 7",
+      "id": "hermes_plans_pr_breakdown_multi_pr_decomposition"
     },
     {
       "label": "Provisioning Strategy",
@@ -280,8 +280,8 @@
       "_origin": "ast",
       "community": 7,
       "norm_label": "provisioning strategy",
-      "id": "hermes_plans_pr_breakdown_provisioning_strategy",
-      "community_name": "Community 7"
+      "community_name": "Community 7",
+      "id": "hermes_plans_pr_breakdown_provisioning_strategy"
     },
     {
       "label": "Verification Chain",
@@ -291,8 +291,8 @@
       "_origin": "ast",
       "community": 7,
       "norm_label": "verification chain",
-      "id": "hermes_plans_pr_breakdown_verification_chain",
-      "community_name": "Community 7"
+      "community_name": "Community 7",
+      "id": "hermes_plans_pr_breakdown_verification_chain"
     },
     {
       "label": "README.md",
@@ -302,8 +302,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "readme.md",
-      "id": "readme",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme"
     },
     {
       "label": "Hermes \u00d7 OpenCode Host Config Generator",
@@ -313,8 +313,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "hermes \u00d7 opencode host config generator",
-      "id": "readme_hermes_opencode_host_config_generator",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_hermes_opencode_host_config_generator"
     },
     {
       "label": "Origin / Related",
@@ -324,8 +324,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "origin / related",
-      "id": "readme_origin_related",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_origin_related"
     },
     {
       "label": "What it does",
@@ -335,8 +335,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "what it does",
-      "id": "readme_what_it_does",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_what_it_does"
     },
     {
       "label": "Usage",
@@ -346,8 +346,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "usage",
-      "id": "readme_usage",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_usage"
     },
     {
       "label": "Applying configs",
@@ -357,8 +357,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "applying configs",
-      "id": "readme_applying_configs",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_applying_configs"
     },
     {
       "label": "Strict requirement: free Zen model",
@@ -368,8 +368,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "strict requirement: free zen model",
-      "id": "readme_strict_requirement_free_zen_model",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_strict_requirement_free_zen_model"
     },
     {
       "label": "Environment variables",
@@ -379,8 +379,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "environment variables",
-      "id": "readme_environment_variables",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_environment_variables"
     },
     {
       "label": "Edge cases handled",
@@ -390,8 +390,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "edge cases handled",
-      "id": "readme_edge_cases_handled",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_edge_cases_handled"
     },
     {
       "label": "File layout",
@@ -401,8 +401,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "file layout",
-      "id": "readme_file_layout",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "readme_file_layout"
     },
     {
       "label": "README.md",
@@ -412,8 +412,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "readme.md",
-      "id": "docs_readme",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "docs_readme"
     },
     {
       "label": "Architecture Documentation",
@@ -423,8 +423,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "architecture documentation",
-      "id": "docs_readme_architecture_documentation",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "docs_readme_architecture_documentation"
     },
     {
       "label": "Document Index",
@@ -434,8 +434,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "document index",
-      "id": "docs_readme_document_index",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "docs_readme_document_index"
     },
     {
       "label": "Related Documents",
@@ -445,8 +445,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "related documents",
-      "id": "docs_readme_related_documents",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "docs_readme_related_documents"
     },
     {
       "label": "Document Conventions",
@@ -456,8 +456,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "document conventions",
-      "id": "docs_readme_document_conventions",
-      "community_name": "Community 3"
+      "community_name": "Community 3",
+      "id": "docs_readme_document_conventions"
     },
     {
       "label": "generate.sh",
@@ -471,8 +471,8 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "generate.sh",
-      "id": "generate",
-      "community_name": "Community 6"
+      "community_name": "Community 6",
+      "id": "generate"
     },
     {
       "label": "generate.sh script",
@@ -486,8 +486,8 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "generate.sh script",
-      "id": "generate_sh__entry",
-      "community_name": "Community 6"
+      "community_name": "Community 6",
+      "id": "generate_sh__entry"
     },
     {
       "label": "snapshot_live_checksums()",
@@ -501,8 +501,8 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "snapshot_live_checksums()",
-      "id": "generate_snapshot_live_checksums",
-      "community_name": "Community 6"
+      "community_name": "Community 6",
+      "id": "generate_snapshot_live_checksums"
     },
     {
       "label": "verify_live_checksums()",
@@ -516,8 +516,8 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "verify_live_checksums()",
-      "id": "generate_verify_live_checksums",
-      "community_name": "Community 6"
+      "community_name": "Community 6",
+      "id": "generate_verify_live_checksums"
     },
     {
       "label": "_pass()",
@@ -531,8 +531,8 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "_pass()",
-      "id": "generate_pass",
-      "community_name": "Community 6"
+      "community_name": "Community 6",
+      "id": "generate_pass"
     },
     {
       "label": "_fail()",
@@ -546,8 +546,8 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "_fail()",
-      "id": "generate_fail",
-      "community_name": "Community 6"
+      "community_name": "Community 6",
+      "id": "generate_fail"
     },
     {
       "label": "install.sh",
@@ -561,8 +561,8 @@
       "_origin": "ast",
       "community": 12,
       "norm_label": "install.sh",
-      "id": "install",
-      "community_name": "Community 12"
+      "community_name": "Community 12",
+      "id": "install"
     },
     {
       "label": "install.sh script",
@@ -576,8 +576,8 @@
       "_origin": "ast",
       "community": 12,
       "norm_label": "install.sh script",
-      "id": "install_sh__entry",
-      "community_name": "Community 12"
+      "community_name": "Community 12",
+      "id": "install_sh__entry"
     },
     {
       "label": "check_cmd()",
@@ -591,8 +591,8 @@
       "_origin": "ast",
       "community": 12,
       "norm_label": "check_cmd()",
-      "id": "install_check_cmd",
-      "community_name": "Community 12"
+      "community_name": "Community 12",
+      "id": "install_check_cmd"
     },
     {
       "label": "config-hermes.sh",
@@ -606,8 +606,8 @@
       "_origin": "ast",
       "community": 9,
       "norm_label": "config-hermes.sh",
-      "id": "lib_config_hermes",
-      "community_name": "Community 9"
+      "community_name": "Community 9",
+      "id": "lib_config_hermes"
     },
     {
       "label": "config-hermes.sh script",
@@ -621,8 +621,8 @@
       "_origin": "ast",
       "community": 9,
       "norm_label": "config-hermes.sh script",
-      "id": "lib_config_hermes_sh__entry",
-      "community_name": "Community 9"
+      "community_name": "Community 9",
+      "id": "lib_config_hermes_sh__entry"
     },
     {
       "label": "resolve_ctx_len()",
@@ -636,8 +636,8 @@
       "_origin": "ast",
       "community": 9,
       "norm_label": "resolve_ctx_len()",
-      "id": "lib_config_hermes_resolve_ctx_len",
-      "community_name": "Community 9"
+      "community_name": "Community 9",
+      "id": "lib_config_hermes_resolve_ctx_len"
     },
     {
       "label": "generate_hermes_overlay()",
@@ -651,8 +651,8 @@
       "_origin": "ast",
       "community": 9,
       "norm_label": "generate_hermes_overlay()",
-      "id": "lib_config_hermes_generate_hermes_overlay",
-      "community_name": "Community 9"
+      "community_name": "Community 9",
+      "id": "lib_config_hermes_generate_hermes_overlay"
     },
     {
       "label": "config-opencode.sh",
@@ -666,8 +666,8 @@
       "_origin": "ast",
       "community": 10,
       "norm_label": "config-opencode.sh",
-      "id": "lib_config_opencode",
-      "community_name": "Community 10"
+      "community_name": "Community 10",
+      "id": "lib_config_opencode"
     },
     {
       "label": "config-opencode.sh script",
@@ -681,8 +681,8 @@
       "_origin": "ast",
       "community": 10,
       "norm_label": "config-opencode.sh script",
-      "id": "lib_config_opencode_sh__entry",
-      "community_name": "Community 10"
+      "community_name": "Community 10",
+      "id": "lib_config_opencode_sh__entry"
     },
     {
       "label": "_oc_get_limits()",
@@ -696,8 +696,8 @@
       "_origin": "ast",
       "community": 10,
       "norm_label": "_oc_get_limits()",
-      "id": "lib_config_opencode_oc_get_limits",
-      "community_name": "Community 10"
+      "community_name": "Community 10",
+      "id": "lib_config_opencode_oc_get_limits"
     },
     {
       "label": "generate_opencode_staging()",
@@ -711,8 +711,8 @@
       "_origin": "ast",
       "community": 10,
       "norm_label": "generate_opencode_staging()",
-      "id": "lib_config_opencode_generate_opencode_staging",
-      "community_name": "Community 10"
+      "community_name": "Community 10",
+      "id": "lib_config_opencode_generate_opencode_staging"
     },
     {
       "label": "constants.sh",
@@ -726,8 +726,8 @@
       "_origin": "ast",
       "community": 13,
       "norm_label": "constants.sh",
-      "id": "lib_constants",
-      "community_name": "Community 13"
+      "community_name": "Community 13",
+      "id": "lib_constants"
     },
     {
       "label": "constants.sh script",
@@ -741,8 +741,8 @@
       "_origin": "ast",
       "community": 13,
       "norm_label": "constants.sh script",
-      "id": "lib_constants_sh__entry",
-      "community_name": "Community 13"
+      "community_name": "Community 13",
+      "id": "lib_constants_sh__entry"
     },
     {
       "label": "HERMES_HOME",
@@ -756,8 +756,8 @@
       "_origin": "ast",
       "community": 13,
       "norm_label": "hermes_home",
-      "id": "lib_constants_hermes_home",
-      "community_name": "Community 13"
+      "community_name": "Community 13",
+      "id": "lib_constants_hermes_home"
     },
     {
       "label": "env-auth.sh",
@@ -771,8 +771,8 @@
       "_origin": "ast",
       "community": 15,
       "norm_label": "env-auth.sh",
-      "id": "lib_env_auth",
-      "community_name": "Community 15"
+      "community_name": "Community 15",
+      "id": "lib_env_auth"
     },
     {
       "label": "env-auth.sh script",
@@ -786,8 +786,8 @@
       "_origin": "ast",
       "community": 15,
       "norm_label": "env-auth.sh script",
-      "id": "lib_env_auth_sh__entry",
-      "community_name": "Community 15"
+      "community_name": "Community 15",
+      "id": "lib_env_auth_sh__entry"
     },
     {
       "label": "generate_auth_staging()",
@@ -801,8 +801,8 @@
       "_origin": "ast",
       "community": 15,
       "norm_label": "generate_auth_staging()",
-      "id": "lib_env_auth_generate_auth_staging",
-      "community_name": "Community 15"
+      "community_name": "Community 15",
+      "id": "lib_env_auth_generate_auth_staging"
     },
     {
       "label": "model-discovery.sh",
@@ -816,8 +816,8 @@
       "_origin": "ast",
       "community": 16,
       "norm_label": "model-discovery.sh",
-      "id": "lib_model_discovery",
-      "community_name": "Community 16"
+      "community_name": "Community 16",
+      "id": "lib_model_discovery"
     },
     {
       "label": "model-discovery.sh script",
@@ -831,8 +831,8 @@
       "_origin": "ast",
       "community": 16,
       "norm_label": "model-discovery.sh script",
-      "id": "lib_model_discovery_sh__entry",
-      "community_name": "Community 16"
+      "community_name": "Community 16",
+      "id": "lib_model_discovery_sh__entry"
     },
     {
       "label": "discover_models()",
@@ -846,8 +846,8 @@
       "_origin": "ast",
       "community": 16,
       "norm_label": "discover_models()",
-      "id": "lib_model_discovery_discover_models",
-      "community_name": "Community 16"
+      "community_name": "Community 16",
+      "id": "lib_model_discovery_discover_models"
     },
     {
       "label": "sync-env.sh",
@@ -861,8 +861,8 @@
       "_origin": "ast",
       "community": 17,
       "norm_label": "sync-env.sh",
-      "id": "lib_sync_env",
-      "community_name": "Community 17"
+      "community_name": "Community 17",
+      "id": "lib_sync_env"
     },
     {
       "label": "sync-env.sh script",
@@ -876,8 +876,8 @@
       "_origin": "ast",
       "community": 17,
       "norm_label": "sync-env.sh script",
-      "id": "lib_sync_env_sh__entry",
-      "community_name": "Community 17"
+      "community_name": "Community 17",
+      "id": "lib_sync_env_sh__entry"
     },
     {
       "label": "sync_env_to_hermes()",
@@ -891,8 +891,8 @@
       "_origin": "ast",
       "community": 17,
       "norm_label": "sync_env_to_hermes()",
-      "id": "lib_sync_env_sync_env_to_hermes",
-      "community_name": "Community 17"
+      "community_name": "Community 17",
+      "id": "lib_sync_env_sync_env_to_hermes"
     },
     {
       "label": "common.bash",
@@ -906,8 +906,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "common.bash",
-      "id": "tests_e2e_test_helper_common",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common"
     },
     {
       "label": "common.bash script",
@@ -921,8 +921,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "common.bash script",
-      "id": "tests_e2e_test_helper_common_bash__entry",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_bash__entry"
     },
     {
       "label": "setup()",
@@ -936,8 +936,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "setup()",
-      "id": "tests_e2e_test_helper_common_setup",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_setup"
     },
     {
       "label": "teardown()",
@@ -951,8 +951,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "teardown()",
-      "id": "tests_e2e_test_helper_common_teardown",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_teardown"
     },
     {
       "label": "start_mock_llm()",
@@ -966,8 +966,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "start_mock_llm()",
-      "id": "tests_e2e_test_helper_common_start_mock_llm",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_start_mock_llm"
     },
     {
       "label": "stop_mock_llm()",
@@ -981,8 +981,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "stop_mock_llm()",
-      "id": "tests_e2e_test_helper_common_stop_mock_llm",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_stop_mock_llm"
     },
     {
       "label": "seed_hermes_config()",
@@ -996,8 +996,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "seed_hermes_config()",
-      "id": "tests_e2e_test_helper_common_seed_hermes_config",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_seed_hermes_config"
     },
     {
       "label": "seed_opencode_config()",
@@ -1011,8 +1011,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "seed_opencode_config()",
-      "id": "tests_e2e_test_helper_common_seed_opencode_config",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_seed_opencode_config"
     },
     {
       "label": "seed_env_file()",
@@ -1026,8 +1026,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "seed_env_file()",
-      "id": "tests_e2e_test_helper_common_seed_env_file",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_seed_env_file"
     },
     {
       "label": "seed_all_configs()",
@@ -1041,8 +1041,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "seed_all_configs()",
-      "id": "tests_e2e_test_helper_common_seed_all_configs",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_seed_all_configs"
     },
     {
       "label": "seed_empty_configs()",
@@ -1056,8 +1056,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "seed_empty_configs()",
-      "id": "tests_e2e_test_helper_common_seed_empty_configs",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_seed_empty_configs"
     },
     {
       "label": "assert_file_contains()",
@@ -1071,8 +1071,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_file_contains()",
-      "id": "tests_e2e_test_helper_common_assert_file_contains",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_file_contains"
     },
     {
       "label": "assert_file_not_contains()",
@@ -1086,8 +1086,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_file_not_contains()",
-      "id": "tests_e2e_test_helper_common_assert_file_not_contains",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_file_not_contains"
     },
     {
       "label": "assert_json_valid()",
@@ -1101,8 +1101,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_json_valid()",
-      "id": "tests_e2e_test_helper_common_assert_json_valid",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_json_valid"
     },
     {
       "label": "assert_yaml_valid()",
@@ -1116,8 +1116,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_yaml_valid()",
-      "id": "tests_e2e_test_helper_common_assert_yaml_valid",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_yaml_valid"
     },
     {
       "label": "assert_file_exists()",
@@ -1131,8 +1131,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_file_exists()",
-      "id": "tests_e2e_test_helper_common_assert_file_exists",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_file_exists"
     },
     {
       "label": "assert_file_not_exists()",
@@ -1146,8 +1146,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_file_not_exists()",
-      "id": "tests_e2e_test_helper_common_assert_file_not_exists",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_file_not_exists"
     },
     {
       "label": "assert_success()",
@@ -1161,8 +1161,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "assert_success()",
-      "id": "tests_e2e_test_helper_common_assert_success",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_assert_success"
     },
     {
       "label": "run_generate()",
@@ -1176,8 +1176,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "run_generate()",
-      "id": "tests_e2e_test_helper_common_run_generate",
-      "community_name": "Community 1"
+      "community_name": "Community 1",
+      "id": "tests_e2e_test_helper_common_run_generate"
     },
     {
       "label": "mock-llm-server.sh",
@@ -1191,8 +1191,8 @@
       "_origin": "ast",
       "community": 11,
       "norm_label": "mock-llm-server.sh",
-      "id": "tests_mock_llm_server",
-      "community_name": "Community 11"
+      "community_name": "Community 11",
+      "id": "tests_mock_llm_server"
     },
     {
       "label": "mock-llm-server.sh script",
@@ -1206,8 +1206,8 @@
       "_origin": "ast",
       "community": 11,
       "norm_label": "mock-llm-server.sh script",
-      "id": "tests_mock_llm_server_sh__entry",
-      "community_name": "Community 11"
+      "community_name": "Community 11",
+      "id": "tests_mock_llm_server_sh__entry"
     },
     {
       "label": "start_mock_llm()",
@@ -1221,8 +1221,8 @@
       "_origin": "ast",
       "community": 11,
       "norm_label": "start_mock_llm()",
-      "id": "tests_mock_llm_server_start_mock_llm",
-      "community_name": "Community 11"
+      "community_name": "Community 11",
+      "id": "tests_mock_llm_server_start_mock_llm"
     },
     {
       "label": "stop_mock_llm()",
@@ -1236,8 +1236,8 @@
       "_origin": "ast",
       "community": 11,
       "norm_label": "stop_mock_llm()",
-      "id": "tests_mock_llm_server_stop_mock_llm",
-      "community_name": "Community 11"
+      "community_name": "Community 11",
+      "id": "tests_mock_llm_server_stop_mock_llm"
     },
     {
       "label": "run.sh",
@@ -1251,8 +1251,8 @@
       "_origin": "ast",
       "community": 20,
       "norm_label": "run.sh",
-      "id": "tests_run",
-      "community_name": "Community 20"
+      "community_name": "Community 20",
+      "id": "tests_run"
     },
     {
       "label": "run.sh script",
@@ -1266,8 +1266,8 @@
       "_origin": "ast",
       "community": 20,
       "norm_label": "run.sh script",
-      "id": "tests_run_sh__entry",
-      "community_name": "Community 20"
+      "community_name": "Community 20",
+      "id": "tests_run_sh__entry"
     },
     {
       "label": "Main Orchator Script",
@@ -1280,8 +1280,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "main orchator script",
-      "id": "agents_generate_sh",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "agents_generate_sh"
     },
     {
       "label": "Deployment Script",
@@ -1294,8 +1294,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "deployment script",
-      "id": "agents_install_sh",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "agents_install_sh"
     },
     {
       "label": "Host Paths and Defaults Library",
@@ -1308,8 +1308,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "host paths and defaults library",
-      "id": "lib_constants_sh",
-      "community_name": "Community 14"
+      "community_name": "Community 14",
+      "id": "lib_constants_sh"
     },
     {
       "label": "LiteLLM Model Discovery Library",
@@ -1322,8 +1322,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "litellm model discovery library",
-      "id": "lib_model_discovery_sh",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "lib_model_discovery_sh"
     },
     {
       "label": "OpenCode Config Merge Generator",
@@ -1336,8 +1336,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "opencode config merge generator",
-      "id": "lib_config_opencode_sh",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "lib_config_opencode_sh"
     },
     {
       "label": "Hermes Config Overlay Generator",
@@ -1350,8 +1350,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "hermes config overlay generator",
-      "id": "lib_config_hermes_sh",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "lib_config_hermes_sh"
     },
     {
       "label": "Credential Resolution Library",
@@ -1364,8 +1364,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "credential resolution library",
-      "id": "lib_env_auth_sh",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "lib_env_auth_sh"
     },
     {
       "label": "Merged OpenCode Config Output",
@@ -1378,8 +1378,8 @@
       "contributor": null,
       "community": 26,
       "norm_label": "merged opencode config output",
-      "id": "staging_opencode_jsonc",
-      "community_name": "Community 26"
+      "community_name": "Community 26",
+      "id": "staging_opencode_jsonc"
     },
     {
       "label": "Merged Hermes Config Output",
@@ -1392,8 +1392,8 @@
       "contributor": null,
       "community": 24,
       "norm_label": "merged hermes config output",
-      "id": "staging_config_hermes_overlay_yaml",
-      "community_name": "Community 24"
+      "community_name": "Community 24",
+      "id": "staging_config_hermes_overlay_yaml"
     },
     {
       "label": "OpenCode Credential Store Output",
@@ -1406,8 +1406,8 @@
       "contributor": null,
       "community": 23,
       "norm_label": "opencode credential store output",
-      "id": "staging_auth_json",
-      "community_name": "13. Agent Model Override \u2014 .env-Driven Independent Routing"
+      "community_name": "13. Agent Model Override \u2014 .env-Driven Independent Routing",
+      "id": "staging_auth_json"
     },
     {
       "label": "Raw Discovered Model List",
@@ -1420,8 +1420,8 @@
       "contributor": null,
       "community": 25,
       "norm_label": "raw discovered model list",
-      "id": "staging_discovered_models_txt",
-      "community_name": "Community 25"
+      "community_name": "Community 25",
+      "id": "staging_discovered_models_txt"
     },
     {
       "label": "OpenCode Zen Free-Tier Credential",
@@ -1434,8 +1434,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "opencode zen free-tier credential",
-      "id": "open_code_zen_api_key",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "open_code_zen_api_key"
     },
     {
       "label": "LiteLLM Proxy Credential",
@@ -1448,8 +1448,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "litellm proxy credential",
-      "id": "openai_api_key",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "openai_api_key"
     },
     {
       "label": "OpenAI-Compatible Endpoint URL",
@@ -1462,8 +1462,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "openai-compatible endpoint url",
-      "id": "openai_base_url",
-      "community_name": "Community 14"
+      "community_name": "Community 14",
+      "id": "openai_base_url"
     },
     {
       "label": "Default OpenCode Model",
@@ -1476,8 +1476,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "default opencode model",
-      "id": "open_code_default_model",
-      "community_name": "Community 14"
+      "community_name": "Community 14",
+      "id": "open_code_default_model"
     },
     {
       "label": "Default Hermes Model",
@@ -1490,8 +1490,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "default hermes model",
-      "id": "hermes_default_model",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "hermes_default_model"
     },
     {
       "label": "Config Preservation Strategy",
@@ -1504,8 +1504,8 @@
       "contributor": null,
       "community": 19,
       "norm_label": "config preservation strategy",
-      "id": "merge_mode",
-      "community_name": "Community 19"
+      "community_name": "Community 19",
+      "id": "merge_mode"
     },
     {
       "label": "Four-Phase Config Generation Flow",
@@ -1518,8 +1518,8 @@
       "contributor": null,
       "community": 19,
       "norm_label": "four-phase config generation flow",
-      "id": "staging_pipeline",
-      "community_name": "Community 19"
+      "community_name": "Community 19",
+      "id": "staging_pipeline"
     },
     {
       "label": "Hermes and OpenCode Task Routing",
@@ -1532,8 +1532,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "hermes and opencode task routing",
-      "id": "cross_agent_delegation",
-      "community_name": "Community 8"
+      "community_name": "Community 8",
+      "id": "cross_agent_delegation"
     },
     {
       "label": "Cross-Agent Skill Provisioning",
@@ -1546,8 +1546,8 @@
       "contributor": null,
       "community": 22,
       "norm_label": "cross-agent skill provisioning",
-      "id": "skill_installation",
-      "community_name": "run.sh"
+      "community_name": "run.sh",
+      "id": "skill_installation"
     },
     {
       "label": "Multi-Layer Safety and Validation",
@@ -1560,8 +1560,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "multi-layer safety and validation",
-      "id": "verification_layers",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "verification_layers"
     },
     {
       "label": "End-to-End Test Suite",
@@ -1574,8 +1574,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "end-to-end test suite",
-      "id": "bats_tests",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "bats_tests"
     },
     {
       "label": "Knowledge Graph Generation Capability",
@@ -1588,8 +1588,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "knowledge graph generation capability",
-      "id": "graphify",
-      "community_name": "Community 18"
+      "community_name": "Community 18",
+      "id": "graphify"
     },
     {
       "label": "Personal Knowledge Base Capability",
@@ -1602,8 +1602,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "personal knowledge base capability",
-      "id": "llm_wiki",
-      "community_name": "Community 18"
+      "community_name": "Community 18",
+      "id": "llm_wiki"
     },
     {
       "label": "Reference Docker Stack Repository",
@@ -1616,8 +1616,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "reference docker stack repository",
-      "id": "hermes_x_opencode",
-      "community_name": "Community 8"
+      "community_name": "Community 8",
+      "id": "hermes_x_opencode"
     },
     {
       "label": "Hermes AI Agent Platform",
@@ -1630,8 +1630,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "hermes ai agent platform",
-      "id": "hermes_agent",
-      "community_name": "Community 8"
+      "community_name": "Community 8",
+      "id": "hermes_agent"
     },
     {
       "label": "OpenCode CLI Coding Agent",
@@ -1644,8 +1644,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "opencode cli coding agent",
-      "id": "opencode_cli",
-      "community_name": "Community 8"
+      "community_name": "Community 8",
+      "id": "opencode_cli"
     },
     {
       "label": "LiteLLM Model Aggregation Proxy",
@@ -1658,8 +1658,8 @@
       "contributor": null,
       "community": 4,
       "norm_label": "litellm model aggregation proxy",
-      "id": "litellm_proxy",
-      "community_name": "Community 4"
+      "community_name": "Community 4",
+      "id": "litellm_proxy"
     },
     {
       "label": "Hermes x OpenCode Host Config Generator",
@@ -1672,8 +1672,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "hermes x opencode host config generator",
-      "id": "prd_project",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_project"
     },
     {
       "label": "Hermes Agent",
@@ -1686,8 +1686,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "hermes agent",
-      "id": "prd_hermes_agent",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_hermes_agent"
     },
     {
       "label": "OpenCode CLI",
@@ -1700,8 +1700,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "opencode cli",
-      "id": "prd_opencode_cli",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_opencode_cli"
     },
     {
       "label": "LiteLLM Proxy",
@@ -1714,8 +1714,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "litellm proxy",
-      "id": "prd_litellm_proxy",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_litellm_proxy"
     },
     {
       "label": "hermes-x-opencode Docker Stack",
@@ -1728,8 +1728,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "hermes-x-opencode docker stack",
-      "id": "prd_docker_stack",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_docker_stack"
     },
     {
       "label": "generate.sh",
@@ -1742,8 +1742,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "generate.sh",
-      "id": "prd_generate_sh",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_generate_sh"
     },
     {
       "label": "lib/constants.sh",
@@ -1756,8 +1756,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "lib/constants.sh",
-      "id": "prd_lib_constants_sh",
-      "community_name": "mock-llm-server.sh"
+      "community_name": "mock-llm-server.sh",
+      "id": "prd_lib_constants_sh"
     },
     {
       "label": "lib/model-discovery.sh",
@@ -1770,8 +1770,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "lib/model-discovery.sh",
-      "id": "prd_lib_model_discovery_sh",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_lib_model_discovery_sh"
     },
     {
       "label": "lib/config-opencode.sh",
@@ -1784,8 +1784,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "lib/config-opencode.sh",
-      "id": "prd_lib_config_opencode_sh",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_lib_config_opencode_sh"
     },
     {
       "label": "lib/config-hermes.sh",
@@ -1798,8 +1798,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "lib/config-hermes.sh",
-      "id": "prd_lib_config_hermes_sh",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_lib_config_hermes_sh"
     },
     {
       "label": "lib/env-auth.sh",
@@ -1812,8 +1812,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "lib/env-auth.sh",
-      "id": "prd_lib_env_auth_sh",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_lib_env_auth_sh"
     },
     {
       "label": "staging/",
@@ -1826,8 +1826,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "staging/",
-      "id": "prd_staging_dir",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_staging_dir"
     },
     {
       "label": "opencode.jsonc",
@@ -1840,8 +1840,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "opencode.jsonc",
-      "id": "prd_opencode_jsonc",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_opencode_jsonc"
     },
     {
       "label": "config-hermes-overlay.yaml",
@@ -1854,8 +1854,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "config-hermes-overlay.yaml",
-      "id": "prd_config_hermes_overlay_yaml",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_config_hermes_overlay_yaml"
     },
     {
       "label": "auth.json",
@@ -1868,8 +1868,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "auth.json",
-      "id": "prd_auth_json",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_auth_json"
     },
     {
       "label": "OPENAI_API_KEY",
@@ -1882,8 +1882,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "openai_api_key",
-      "id": "prd_openai_api_key",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_openai_api_key"
     },
     {
       "label": "OPENAI_BASE_URL",
@@ -1896,8 +1896,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "openai_base_url",
-      "id": "prd_openai_base_url",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_openai_base_url"
     },
     {
       "label": "OPENAI_DEFAULT_MODEL",
@@ -1910,8 +1910,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "openai_default_model",
-      "id": "prd_openai_default_model",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "prd_openai_default_model"
     },
     {
       "label": "HERMES_DEFAULT_MODEL",
@@ -1924,8 +1924,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "hermes_default_model",
-      "id": "prd_hermes_default_model",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_hermes_default_model"
     },
     {
       "label": "OPENCODE_DEFAULT_MODEL",
@@ -1938,8 +1938,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "opencode_default_model",
-      "id": "prd_opencode_default_model",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_opencode_default_model"
     },
     {
       "label": "OPENCODE_SMALL_MODEL",
@@ -1952,8 +1952,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "opencode_small_model",
-      "id": "prd_opencode_small_model",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_opencode_small_model"
     },
     {
       "label": "OPENCODE_FALLBACK_MODEL",
@@ -1966,8 +1966,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "opencode_fallback_model",
-      "id": "prd_opencode_fallback_model",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_opencode_fallback_model"
     },
     {
       "label": "OPENCODE_ZEN_API_KEY",
@@ -1980,8 +1980,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "opencode_zen_api_key",
-      "id": "prd_opencode_zen_api_key",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_opencode_zen_api_key"
     },
     {
       "label": "HERMES_DELEGATION_MODEL",
@@ -1994,8 +1994,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "hermes_delegation_model",
-      "id": "prd_hermes_delegation_model",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_hermes_delegation_model"
     },
     {
       "label": "HERMES_DELEGATION_PROVIDER",
@@ -2008,8 +2008,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "hermes_delegation_provider",
-      "id": "prd_hermes_delegation_provider",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_hermes_delegation_provider"
     },
     {
       "label": "MERGE Mode",
@@ -2022,8 +2022,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "merge mode",
-      "id": "prd_merge_mode",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_merge_mode"
     },
     {
       "label": "export-env.sh",
@@ -2036,8 +2036,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "export-env.sh",
-      "id": "prd_export_env_sh",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "prd_export_env_sh"
     },
     {
       "label": "E2E CI Pipeline",
@@ -2050,8 +2050,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "e2e ci pipeline",
-      "id": "_github_workflows_e2e_ci_pipeline",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "_github_workflows_e2e_ci_pipeline"
     },
     {
       "label": "Staging Pipeline Architecture",
@@ -2064,8 +2064,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "staging pipeline architecture",
-      "id": "docs_01_architecture_staging_pipeline",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "docs_01_architecture_staging_pipeline"
     },
     {
       "label": "Config Generation MERGE Strategy",
@@ -2078,8 +2078,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "config generation merge strategy",
-      "id": "docs_02_config_generation_merge_strategy",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "docs_02_config_generation_merge_strategy"
     },
     {
       "label": "Model Discovery Filter Pipeline",
@@ -2092,8 +2092,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "model discovery filter pipeline",
-      "id": "docs_03_model_discovery_filter_pipeline",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "docs_03_model_discovery_filter_pipeline"
     },
     {
       "label": "Cross-Agent Skill Sharing",
@@ -2106,8 +2106,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "cross-agent skill sharing",
-      "id": "docs_04_skill_installation_cross_agent_sharing",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "docs_04_skill_installation_cross_agent_sharing"
     },
     {
       "label": "Cross-Agent Delegation Flow",
@@ -2120,8 +2120,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "cross-agent delegation flow",
-      "id": "docs_05_cross_agent_delegation_delegation_flow",
-      "community_name": "Community 5"
+      "community_name": "Community 5",
+      "id": "docs_05_cross_agent_delegation_delegation_flow"
     },
     {
       "label": "Verification Checksum Snapshot",
@@ -2134,8 +2134,8 @@
       "contributor": null,
       "community": 0,
       "norm_label": "verification checksum snapshot",
-      "id": "docs_06_verification_checksum_snapshot",
-      "community_name": "Community 0"
+      "community_name": "Community 0",
+      "id": "docs_06_verification_checksum_snapshot"
     }
   ],
   "links": [
@@ -2346,8 +2346,8 @@
       "source_location": "L18",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "docs_readme",
-      "target": "readme"
+      "source": "readme",
+      "target": "docs_readme"
     },
     {
       "relation": "contains",
@@ -2932,8 +2932,8 @@
       "weight": 1.0,
       "context": "call",
       "confidence_score": 1.0,
-      "source": "tests_e2e_test_helper_common_seed_all_configs",
-      "target": "tests_e2e_test_helper_common_seed_hermes_config"
+      "source": "tests_e2e_test_helper_common_seed_hermes_config",
+      "target": "tests_e2e_test_helper_common_seed_all_configs"
     },
     {
       "relation": "calls",
@@ -2943,8 +2943,8 @@
       "weight": 1.0,
       "context": "call",
       "confidence_score": 1.0,
-      "source": "tests_e2e_test_helper_common_seed_all_configs",
-      "target": "tests_e2e_test_helper_common_seed_opencode_config"
+      "source": "tests_e2e_test_helper_common_seed_opencode_config",
+      "target": "tests_e2e_test_helper_common_seed_all_configs"
     },
     {
       "relation": "calls",
@@ -2954,8 +2954,8 @@
       "weight": 1.0,
       "context": "call",
       "confidence_score": 1.0,
-      "source": "tests_e2e_test_helper_common_seed_all_configs",
-      "target": "tests_e2e_test_helper_common_seed_env_file"
+      "source": "tests_e2e_test_helper_common_seed_env_file",
+      "target": "tests_e2e_test_helper_common_seed_all_configs"
     },
     {
       "relation": "contains",
@@ -3055,8 +3055,8 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "agents_install_sh",
-      "target": "agents_generate_sh"
+      "source": "agents_generate_sh",
+      "target": "agents_install_sh"
     },
     {
       "relation": "references",
@@ -3065,8 +3065,8 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "bats_tests",
-      "target": "agents_generate_sh"
+      "source": "agents_generate_sh",
+      "target": "bats_tests"
     },
     {
       "relation": "references",
@@ -3135,8 +3135,8 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "staging_pipeline",
-      "target": "merge_mode"
+      "source": "merge_mode",
+      "target": "staging_pipeline"
     },
     {
       "relation": "conceptually_related_to",
@@ -3235,8 +3235,8 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_04_skill_installation_cross_agent_sharing",
-      "target": "prd_hermes_agent"
+      "source": "prd_hermes_agent",
+      "target": "docs_04_skill_installation_cross_agent_sharing"
     },
     {
       "relation": "conceptually_related_to",
@@ -3245,8 +3245,8 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_05_cross_agent_delegation_delegation_flow",
-      "target": "prd_hermes_agent"
+      "source": "prd_hermes_agent",
+      "target": "docs_05_cross_agent_delegation_delegation_flow"
     },
     {
       "relation": "conceptually_related_to",
@@ -3255,8 +3255,8 @@
       "source_file": "docs/04-skill-installation.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_04_skill_installation_cross_agent_sharing",
-      "target": "prd_opencode_cli"
+      "source": "prd_opencode_cli",
+      "target": "docs_04_skill_installation_cross_agent_sharing"
     },
     {
       "relation": "conceptually_related_to",
@@ -3265,8 +3265,8 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_05_cross_agent_delegation_delegation_flow",
-      "target": "prd_opencode_cli"
+      "source": "prd_opencode_cli",
+      "target": "docs_05_cross_agent_delegation_delegation_flow"
     },
     {
       "relation": "conceptually_related_to",
@@ -3275,8 +3275,8 @@
       "source_file": "docs/05-cross-agent-delegation.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_05_cross_agent_delegation_delegation_flow",
-      "target": "prd_litellm_proxy"
+      "source": "prd_litellm_proxy",
+      "target": "docs_05_cross_agent_delegation_delegation_flow"
     },
     {
       "relation": "references",
@@ -3285,8 +3285,8 @@
       "source_file": "PRD.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "prd_lib_model_discovery_sh",
-      "target": "prd_litellm_proxy"
+      "source": "prd_litellm_proxy",
+      "target": "prd_lib_model_discovery_sh"
     },
     {
       "relation": "references",
@@ -3295,8 +3295,8 @@
       "source_file": ".github/workflows/e2e.yml",
       "source_location": null,
       "weight": 1.0,
-      "source": "_github_workflows_e2e_ci_pipeline",
-      "target": "prd_generate_sh"
+      "source": "prd_generate_sh",
+      "target": "_github_workflows_e2e_ci_pipeline"
     },
     {
       "relation": "conceptually_related_to",
@@ -3305,8 +3305,8 @@
       "source_file": "docs/01-architecture.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_01_architecture_staging_pipeline",
-      "target": "prd_generate_sh"
+      "source": "prd_generate_sh",
+      "target": "docs_01_architecture_staging_pipeline"
     },
     {
       "relation": "conceptually_related_to",
@@ -3315,8 +3315,8 @@
       "source_file": "docs/06-verification.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_06_verification_checksum_snapshot",
-      "target": "prd_generate_sh"
+      "source": "prd_generate_sh",
+      "target": "docs_06_verification_checksum_snapshot"
     },
     {
       "relation": "references",
@@ -3385,8 +3385,8 @@
       "source_file": "docs/03-model-discovery.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_03_model_discovery_filter_pipeline",
-      "target": "prd_lib_model_discovery_sh"
+      "source": "prd_lib_model_discovery_sh",
+      "target": "docs_03_model_discovery_filter_pipeline"
     },
     {
       "relation": "references",
@@ -3415,8 +3415,8 @@
       "source_file": "docs/02-config-generation.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_02_config_generation_merge_strategy",
-      "target": "prd_lib_config_opencode_sh"
+      "source": "prd_lib_config_opencode_sh",
+      "target": "docs_02_config_generation_merge_strategy"
     },
     {
       "relation": "implements",
@@ -3565,8 +3565,8 @@
       "source_file": "docs/06-verification.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_06_verification_checksum_snapshot",
-      "target": "prd_staging_dir"
+      "source": "prd_staging_dir",
+      "target": "docs_06_verification_checksum_snapshot"
     },
     {
       "relation": "shares_data_with",
@@ -3615,8 +3615,8 @@
       "source_file": "docs/01-architecture.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_01_architecture_staging_pipeline",
-      "target": "prd_merge_mode"
+      "source": "prd_merge_mode",
+      "target": "docs_01_architecture_staging_pipeline"
     }
   ],
   "hyperedges": [
@@ -3667,5 +3667,5 @@
       "source_file": "docs/05-cross-agent-delegation.md"
     }
   ],
-  "built_at_commit": "ce9083e6b2f9f73d7eaa72bd89e6ff42d8b9fe55"
+  "built_at_commit": "8149e0d346581ce97779373f43e74e335b4fc14e"
 }

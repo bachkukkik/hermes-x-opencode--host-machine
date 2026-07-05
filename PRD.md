@@ -294,11 +294,11 @@ and bare model IDs. The generator must handle ALL combinations without assuming 
 
 | Gap ID | Intended (upstream/doc) | Implemented (host) | Impact | Severity |
 |--------|------------------------|-------------------|--------|----------|
-| G-01 | Upstream `_strip_provider_prefix` on default+small model | Host sets `existing["model"] = default_model` without stripping | If user sets `OPENCODE_DEFAULT_MODEL=llama_cpp/qwen3.6-27b`, top-level model gets double-prefix `llama_cpp/llama_cpp/...` in provider block — **actually safe** because the host writes the raw model ID (already prefixed) directly to the top-level field, and the provider routing resolves it. NO bug here — the host's approach is simpler and correct. | Low (cosmetic) |
+| G-01 | All model fields (default, small, agent, fallback) should carry explicit provider prefixes | Host wrote raw `OPENCODE_DEFAULT_MODEL` directly — bare ids had no explicit routing | Bare model ids (no `opencode/`, `litellm/`, or `llama_cpp/` prefix) were written as-is, leaving provider routing implicit and inconsistent with the fallback chain (which did partial resolution). Fixed by `normalize_model()`: explicit prefixes pass through unchanged; bare ids get a credentialed prefix (`litellm/` if OPENAI creds present, else `opencode/`). | Medium (resolved) |
 | G-02 | Upstream resolves provider prefix PER model (default, small, fallback) independently | Host resolves fallback per-entry but treats default model as-is | When `OPENCODE_DEFAULT_MODEL=opencode/deepseek-v4-flash-free`, host writes this directly — correct. When `llama_cpp/...`, host also writes directly — correct. **No gap** for top-level model fields. | None |
 | G-03 | Upstream `generate_opencode_config` writes direct config (OVERWRITE mode) | Host `generate_opencode_staging` MERGE mode | Architectural difference by design (staging-only safety). No gap to bridge. | None |
 | G-04 | Upstream `.env.example` documents multi-provider fallback chains with examples | Host `.env.example` shows only single-model fallback | User cannot discover the multi-model fallback feature | Medium |
-| G-05 | Upstream config-opencode.sh has `_strip_provider_prefix` + `_resolve_provider_prefix` for model fields | Host lacks explicit strip/resolve for `OPENCODE_DEFAULT_MODEL` in `model`/`small_model` fields | The host writes raw prefixed model IDs directly, which works because OpenCode reads the prefix from the model string. **No functional bug** — but the upstream's explicit resolution is safer for edge cases. | Low |
+| G-05 | (merged into G-01 — same root cause) | Resolved by `normalize_model()` | Gap closed by `normalize_model()` — a single function (not the two-function `_strip`/`_resolve` approach from the Docker reference). The host extension recognizes `llama_cpp/` as a third explicit prefix because the host creates a `provider.llama_cpp` block. See `.hermes/plans/provider-prefix-resolution.md`. | Resolved |
 | G-06 | Upstream `OPENCODE_SECURITY_MODE` env var controls permission blocks | Host has no security mode concept (staging-only, doesn't generate permission blocks) | N/A for host (host uses MERGE mode, preserves existing permission block) | None |
 | G-07 | Upstream seeds auth.json for both user and root | Host stages auth.json only | By design (host never writes to live paths). No gap. | None |
 | G-08 | Uncommitted changes in PRD/generate.sh/config-opencode.sh/common.bash not committed | Working tree dirty | Code review/PR cannot proceed | High |
@@ -312,8 +312,8 @@ and bare model IDs. The generator must handle ALL combinations without assuming 
 | AC42 | `OPENCODE_DEFAULT_MODEL=litellm/deepseek/deepseek-v4-pro` routes through litellm provider | Check provider block presence |
 | AC43 | `OPENCODE_SMALL_MODEL` independent of `OPENCODE_DEFAULT_MODEL` — both can differ | Set both to different providers, verify both fields |
 | AC44 | `OPENCODE_FALLBACK_MODEL=z.ai/glm-5.2,llama_cpp/qwen3.6-27b` produces correct multi-provider chain | Check opencode-fallback.jsonc |
-| AC45 | `.env.example` documents multi-provider usage with examples (opencode/litellm/llama_cpp) | Read .env.example |
-| AC46 | All uncommitted changes committed to feature branch | `git status` clean after commit |
+| AC45 | Bare model id (no provider prefix) + OPENAI creds present resolves to `litellm/` prefix | Set `OPENCODE_DEFAULT_MODEL=deepseek-v4-flash-free` with mock creds, check staging model field |
+| AC46 | Bare model id + no OPENAI creds resolves to `opencode/` (Zen fallback) | Same bare id with creds unset, check staging model field |
 | AC47 | `bash generate.sh --dry-run` passes ALL validations with real .env | Run dry-run, check exit code 0 |
 | AC48 | Generated configs produce callable LLM settings (model actually routes) | `opencode run` smoke test with generated config |
 | AC49 | Generated Hermes overlay routes correctly with `hermes` CLI | Config validation |
@@ -444,13 +444,13 @@ ported to the host generator.
 
 | Gap ID | Severity | Docker Feature (PR) | Host Status | Action |
 |--------|----------|-------------------|-------------|--------|
-| GA-01 | HIGH | Plugin array generation in config-opencode.sh | MISSING — fresh installs get no plugins | PORT (Wave 1) |
+| GA-01 | HIGH | Plugin array generation in config-opencode.sh | PORTED — 24-plugin-generation.bats covers 2 test cases | PORTED ✓ |
 | GA-02 | LOW | `_resolve_provider_prefix()` / `_strip_provider_prefix()` | Simpler direct-write approach, functionally equivalent | SKIP — Karpathy simplicity |
 | GA-03 | MEDIUM | `validate_opencode_zen_key()` | PORTED (`lib/validate-zen.sh`, sourced by generate.sh) | CROSS-REF docs — code exists, doc coverage TBD |
 | GA-04 | SKIP | `service-dashboard.sh` + dashboard service | Docker service lifecycle | SKIP |
 | GA-05 | SKIP | `profile-righthand-man.sh` | Docker profile seeding | SKIP |
 | GA-06 | SKIP | `seed-volumes.sh` | Docker volume seeding | SKIP |
-| GA-07 | LOW | `symlink-cleanup.sh` | MISSING | PORT (low priority) |
+| GA-07 | LOW | `symlink-cleanup.sh` | PORTED | PORTED ✓ |
 
 ### 15.3 Port Details: Plugin Array Generation (GA-01)
 

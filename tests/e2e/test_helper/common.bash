@@ -42,6 +42,7 @@ start_mock_llm() {
     fi
     MOCK_PORT="$port"
     export OPENAI_BASE_URL="http://localhost:${port}"
+    export OPENAI_API_KEY="sk-mock-test-key"
     local models_json="["
     local first=true
     for mid in "${model_ids[@]}"; do

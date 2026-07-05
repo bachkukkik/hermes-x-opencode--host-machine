@@ -22,7 +22,15 @@
 #       credentials/baseURL as litellm, and a separate models map for
 #       llama_cpp/* models (without this, OpenCode throws ProviderModelNotFoundError)
 #   (f) everything else untouched
-
+#
+# PROVIDER PREFIX ROUTING (single source of truth):
+# All provider prefix logic lives inside the PYEOF Python block:
+#   - PROVIDER_PREFIXES constant defines recognized prefixes
+#   - normalize_model_id() handles ALL model field routing
+#   - PROVIDER_BLOCKS data structure drives provider block generation
+# Adding a new provider: add its prefix to PROVIDER_PREFIXES + its block
+# config to PROVIDER_BLOCKS. No bash-side changes.
+#
 # get_limits heuristics (ported verbatim from Docker config-opencode.sh).
 _oc_get_limits() { :; }  # implemented in python below for fidelity
 
@@ -33,20 +41,71 @@ generate_opencode_staging() {
 
     local live_cfg="${OPENCODE_CONFIG}"
     local staging="${STAGING_OPENCODE}"
-    local default_model="${OPENCODE_DEFAULT_MODEL}"
+    # RAW env values — Python normalizes them via normalize_model_id()
+    local default_model="${OPENCODE_DEFAULT_MODEL:-deepseek-v4-flash-free}"
+    local small_model="${OPENCODE_SMALL_MODEL:-${OPENCODE_DEFAULT_MODEL:-deepseek-v4-flash-free}}"
+    local agent_model="${OPENCODE_AGENT_MODEL:-${OPENCODE_DEFAULT_MODEL:-deepseek-v4-flash-free}}"
     local base_url="${OPENAI_BASE_URL}"
     local diff_file="${STAGING_DIFF}"
     local models_file="${STAGING_MODELS}"
 
     python3 - \
         "$live_cfg" "$staging" "$default_model" "$base_url" "$diff_file" \
-        "$models_file" << 'PYEOF'
+        "$models_file" "$small_model" "$agent_model" << 'PYEOF'
 import sys, json, re, os
 
-live_path, out_path, default_model, base_url, diff_path, models_file = (
+live_path, out_path, default_model, base_url, diff_path, models_file, small_model, agent_model = (
     sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
-    sys.argv[6],
+    sys.argv[6], sys.argv[7], sys.argv[8],
 )
+
+# --- Single source of truth for provider routing ---------------------------
+PROVIDER_PREFIXES = ("opencode/", "litellm/", "llama_cpp/")
+
+def normalize_model_id(mid):
+    """Return canonical 'provider/model' form.
+    Explicit recognized prefixes pass through unchanged.
+    Bare ids get litellm/ if OPENAI creds present, else opencode/."""
+    for pfx in PROVIDER_PREFIXES:
+        if mid.startswith(pfx):
+            return mid
+    if os.environ.get("OPENAI_BASE_URL") and os.environ.get("OPENAI_API_KEY"):
+        return "litellm/" + mid
+    return "opencode/" + mid
+
+# --- Provider block config (data-driven) -----------------------------------
+# Each entry describes how to generate a provider block in opencode.jsonc.
+#   options:     dict of options to set (merged into existing)
+#   npm:         optional npm package name
+#   filter:      optional function selecting which discovered models go into
+#                the provider's models map (absent = no models map)
+#   strip_prefix: optional prefix to strip when keying models map entries
+PROVIDER_BLOCKS = {
+    "opencode": {
+        "options": {"apiKey": "{env:OPENCODE_ZEN_API_KEY}"},
+    },
+    "litellm": {
+        "npm": "@ai-sdk/openai-compatible",
+        "options": {
+            "apiKey": "{env:OPENAI_API_KEY}",
+            "baseURL": base_url,
+        },
+        # ALL discovered models go into litellm's models map
+        "filter": lambda mid: True,
+    },
+    "llama_cpp": {
+        "npm": "@ai-sdk/openai-compatible",
+        "options": {
+            "apiKey": "{env:OPENAI_API_KEY}",
+            "baseURL": base_url,
+            "timeout": 600000,
+            "setCacheKey": True,
+        },
+        # Only llama_cpp/* discovered models go into this map
+        "filter": lambda mid: mid.startswith("llama_cpp/"),
+        "strip_prefix": "llama_cpp/",
+    },
+}
 
 # --- Tolerant JSONC input parser -------------------------------------------
 # String-aware: walks char-by-char so // inside quoted strings (e.g. https://)
@@ -102,7 +161,7 @@ def load_jsonc(path):
         pass
     # String-aware comment stripping (preserves // inside quoted strings)
     stripped = _strip_jsonc_comments(text)
-    stripped = re.sub(r',\s*([}\]])', r'\1', stripped)  # trailing commas
+    stripped = re.sub(r',\s*([}\\]])', r'\1', stripped)  # trailing commas
     return json.loads(stripped)
 
 existing = {}
@@ -176,50 +235,14 @@ if fallback_raw:
         fb = entry.strip()
         if not fb:
             continue
-        # Resolve provider prefix
-        if fb.startswith("opencode/"):
-            fb_full = fb
-        elif fb.startswith("litellm/"):
-            fb_full = fb
-        elif fb.startswith("llama_cpp/"):
-            # llama_cpp/* models have their own provider block now
-            fb_full = fb
-        else:
-            # Bare model -> prefix with litellm/ (proxy is available)
-            fb_full = "litellm/" + fb
-        fallback_chain.append(fb_full)
+        fallback_chain.append(normalize_model_id(fb))
 
 # --- Apply the merge (only target keys) -------------------------------------
-# (a) provider.opencode — free Zen auth
-provider = existing.setdefault("provider", {})
-if not isinstance(provider, dict):
-    provider = {}
-    existing["provider"] = provider
-oc = provider.setdefault("opencode", {})
-if not isinstance(oc, dict):
-    oc = {}
-    provider["opencode"] = oc
-oc_opts = oc.setdefault("options", {})
-if not isinstance(oc_opts, dict):
-    oc_opts = {}
-    oc["options"] = oc_opts
-oc_opts["apiKey"] = "{env:OPENCODE_ZEN_API_KEY}"
+# Normalize all model fields using the single source-of-truth function
+existing["model"] = normalize_model_id(default_model)
+existing["small_model"] = normalize_model_id(small_model)
 
-# (b) top-level model + small_model -> default model (saves paid quota)
-existing["model"] = default_model
-# Allow OPENCODE_SMALL_MODEL to override small_model, fall back to OPENCODE_DEFAULT_MODEL
-_small_model = os.environ.get("OPENCODE_SMALL_MODEL", "").strip()
-if not _small_model:
-    _small_model = os.environ.get("OPENCODE_DEFAULT_MODEL", "").strip()
-existing["small_model"] = _small_model if _small_model else default_model
-# Allow OPENCODE_AGENT_MODEL to override agent sub-models, fall back to default_model
-_agent_model = os.environ.get("OPENCODE_AGENT_MODEL", "").strip()
-
-# (b.1) agent.build.model + agent.plan.model -> FREE Zen model. The live config
-# may pin a PAID model here (e.g. litellm/zai/glm-5.1); without overriding these
-# sub-models the top-level switch is defeated. Other agent sub-block fields
-# (mode, description, etc.) are preserved untouched. Blocks created minimally
-# if absent so we never clobber a hand-tuned agent block.
+# Agent build + plan model
 agent = existing.setdefault("agent", {})
 if not isinstance(agent, dict):
     agent = {}
@@ -234,72 +257,57 @@ if not isinstance(agent_plan, dict):
     agent["plan"] = agent_plan
 agent_build_model_before = agent_build.get("model")
 agent_plan_model_before = agent_plan.get("model")
-agent_build["model"] = _agent_model if _agent_model else default_model
-agent_plan["model"] = _agent_model if _agent_model else default_model
+_agent_model = normalize_model_id(agent_model)
+agent_build["model"] = _agent_model
+agent_plan["model"] = _agent_model
 
-# (c)+(d) provider.litellm — refresh models map + credentials
-ll = provider.setdefault("litellm", {})
-if not isinstance(ll, dict):
-    ll = {}
-    provider["litellm"] = ll
-ll_opts = ll.setdefault("options", {})
-if not isinstance(ll_opts, dict):
-    ll_opts = {}
-    ll["options"] = ll_opts
-ll_opts["apiKey"] = "{env:OPENAI_API_KEY}"
-ll_opts["baseURL"] = base_url
-
-models_map = ll.setdefault("models", {})
-if not isinstance(models_map, dict):
-    models_map = {}
-    ll["models"] = models_map
-
-# (e) provider.llama_cpp — route llama_cpp/* models through the same LiteLLM
-#     proxy. Models like llama_cpp/qwen3.6-27b-q4_k_m are served via wildcard
-#     routing in LiteLLM (not listed by /v1/models but routable). Without this
-#     block, opencode resolves "llama_cpp/xxx" -> looks for provider.llama_cpp,
-#     finds none, and throws ProviderModelNotFoundError.
-lc = provider.setdefault("llama_cpp", {})
-if not isinstance(lc, dict):
-    lc = {}
-    provider["llama_cpp"] = lc
-lc["npm"] = "@ai-sdk/openai-compatible"
-lc_opts = lc.setdefault("options", {})
-if not isinstance(lc_opts, dict):
-    lc_opts = {}
-    lc["options"] = lc_opts
-lc_opts["apiKey"] = "{env:OPENAI_API_KEY}"
-lc_opts["baseURL"] = base_url
-lc_opts["timeout"] = 600000
-lc_opts["setCacheKey"] = True
-# Populate models map with discovered llama_cpp/* models
-lc_models_map = lc.setdefault("models", {})
-if not isinstance(lc_models_map, dict):
-    lc_models_map = {}
-    lc["models"] = lc_models_map
-lc_added = []
-for mid in discovered:
-    if mid.startswith("llama_cpp/"):
-        bare = mid[len("llama_cpp/"):]
-        if bare not in lc_models_map:
-            ctx, out = get_limits(mid)
-            lc_models_map[bare] = {
-                "name": mid,
-                "limit": {"context": ctx, "output": out},
-            }
-            lc_added.append(bare)
-
+# --- Generate provider blocks (data-driven from PROVIDER_BLOCKS) ------------
 added = []
-for mid in discovered:
-    if mid not in models_map:
-        ctx, out = get_limits(mid)
-        models_map[mid] = {
-            "name": mid,
-            "limit": {"context": ctx, "output": out},
-        }
-        added.append(mid)
+lc_added = []
+provider = existing.setdefault("provider", {})
+if not isinstance(provider, dict):
+    provider = {}
+    existing["provider"] = provider
 
-# (f) plugin array — set defaults for fresh installs, append fallback when configured
+for name, cfg in PROVIDER_BLOCKS.items():
+    pentry = provider.setdefault(name, {})
+    if not isinstance(pentry, dict):
+        pentry = {}
+        provider[name] = pentry
+    # npm package (optional — only litellm and llama_cpp have one)
+    if "npm" in cfg:
+        pentry["npm"] = cfg["npm"]
+    # options dict (merge into existing)
+    opts = pentry.setdefault("options", {})
+    if not isinstance(opts, dict):
+        opts = {}
+        pentry["options"] = opts
+    for k, v in cfg.get("options", {}).items():
+        opts[k] = v
+    # models map (optional — only providers with a filter get one)
+    if "filter" in cfg:
+        mm = pentry.setdefault("models", {})
+        if not isinstance(mm, dict):
+            mm = {}
+            pentry["models"] = mm
+        for mid in discovered:
+            if not cfg["filter"](mid):
+                continue
+            key = mid
+            if "strip_prefix" in cfg and mid.startswith(cfg["strip_prefix"]):
+                key = mid[len(cfg["strip_prefix"]):]
+            if key not in mm:
+                ctx, out = get_limits(mid)
+                mm[key] = {
+                    "name": mid,
+                    "limit": {"context": ctx, "output": out},
+                }
+                if name == "llama_cpp":
+                    lc_added.append(key)
+                else:
+                    added.append(mid)
+
+# --- Plugin array ------------------------------------------------------------
 plugins = existing.get("plugin")
 if not plugins or not isinstance(plugins, list):
     existing["plugin"] = [
@@ -323,7 +331,7 @@ if fallback_chain:
         ff.write("\n")
 
 # --- Emit diff/merge summary -----------------------------------------------
-total_models = len(models_map)
+total_models = len(provider.get("litellm", {}).get("models", {}))
 existing_count = total_models - len(added)
 lines = []
 lines.append("OpenCode merge summary")
@@ -332,9 +340,9 @@ lines.append("top-level model       -> %s" % existing.get("model"))
 lines.append("top-level small_model -> %s" % existing.get("small_model"))
 lines.append("agent.build.model     -> %s" % agent_build.get("model"))
 lines.append("agent.plan.model      -> %s" % agent_plan.get("model"))
-if agent_build_model_before and agent_build_model_before != default_model:
+if agent_build_model_before and agent_build_model_before != existing.get("model"):
     lines.append("  (was agent.build.model = %s)" % agent_build_model_before)
-if agent_plan_model_before and agent_plan_model_before != default_model:
+if agent_plan_model_before and agent_plan_model_before != existing.get("model"):
     lines.append("  (was agent.plan.model = %s)" % agent_plan_model_before)
 lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_ZEN_API_KEY})")
 lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
@@ -342,7 +350,7 @@ lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
 lines.append("litellm.models total  -> %d (%d preserved + %d newly added)"
              % (total_models, existing_count, len(added)))
 # llama_cpp provider summary
-lc_total = len(lc_models_map)
+lc_total = len(provider.get("llama_cpp", {}).get("models", {}))
 lc_existing_count = lc_total - len(lc_added)
 lines.append("provider.llama_cpp    -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
              % base_url)
@@ -364,13 +372,11 @@ for key in ("permission", "plugin"):
         preserved_blocks.append(key)
 lines.append("Preserved blocks: %s" % ", ".join(preserved_blocks))
 # agent block is PARTIALLY preserved: its model fields are overridden to the
-# free Zen model (see above); all other agent sub-block fields (mode,
-# description, etc.) are kept untouched.
+# normalized model; all other agent sub-block fields (mode, description, etc.)
+# are kept untouched.
 if "agent" in existing:
-    agent_model_src = _agent_model if _agent_model else default_model
-    agent_model_label = "OPENCODE_AGENT_MODEL (%s)" % agent_model_src if _agent_model else "default_model (%s)" % default_model
     lines.append("agent block: preserved (other fields) + model overridden -> %s"
-                 % agent_model_label)
+                 % _agent_model)
 summary = "\n".join(lines)
 with open(diff_path, "w") as f:
     f.write(summary + "\n")

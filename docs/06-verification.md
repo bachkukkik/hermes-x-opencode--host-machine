@@ -196,22 +196,25 @@ bash generate.sh --dry-run
 
 # Expected output:
 #   [PASS] bash -n generate.sh
-#   [PASS] bash -n constants.sh
-#   [PASS] bash -n model-discovery.sh
-#   [PASS] bash -n config-opencode.sh
 #   [PASS] bash -n config-hermes.sh
+#   [PASS] bash -n config-opencode.sh
+#   [PASS] bash -n constants.sh
 #   [PASS] bash -n env-auth.sh
+#   [PASS] bash -n model-discovery.sh
+#   [PASS] bash -n sync-env.sh
+#   [PASS] bash -n validate-zen.sh
 #   [PASS] staging/opencode.jsonc valid JSON
 #   [PASS] staging/config-hermes-overlay.yaml valid YAML
 #   [PASS] opencode.jsonc has provider.opencode ({env:OPENCODE_ZEN_API_KEY})
-#   [PASS] opencode.jsonc model = $OPENCODE_DEFAULT_MODEL
+#   [PASS] opencode.jsonc model field present (= <model>)
 #   [PASS] Hermes overlay custom_providers has N models
 #   [PASS] opencode.jsonc preserves 'permission' block
 #   [PASS] opencode.jsonc preserves 'plugin' block
 #   [PASS] opencode.jsonc preserves 'agent' block
 #   [PASS] opencode.jsonc preserves 'server' block
+#   [PASS] opencode.jsonc preserves 'experimental' block
 #   [PASS] no live config files modified
-#   RESULT: 16 passed, 0 failed
+# RESULT: 19 passed, 0 failed
 
 # Manual checksum verification (outside --dry-run)
 sha256sum ~/.hermes/config.yaml ~/.config/opencode/opencode.jsonc > /tmp/pre
