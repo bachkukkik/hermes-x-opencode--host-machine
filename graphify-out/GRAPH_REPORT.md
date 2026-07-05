@@ -1,17 +1,13 @@
-# Graph Report - .  (2026-07-04)
+# Graph Report - .  (2026-07-05)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 25 files · ~25,491 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
 - 153 nodes · 147 edges · 27 communities (10 shown, 17 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `ce9083e6`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Community 0|Community 0]]
@@ -35,9 +31,9 @@
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
-- [[_COMMUNITY_mock-llm-server.sh|mock-llm-server.sh]]
-- [[_COMMUNITY_run.sh|run.sh]]
-- [[_COMMUNITY_13. Agent Model Override — .env-Driven Independent Routing|13. Agent Model Override — .env-Driven Independent Routing]]
+- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
 - [[_COMMUNITY_Community 26|Community 26]]
@@ -55,16 +51,16 @@
 10. `Wave Decomposition` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `E2E CI Pipeline` --references--> `generate.sh`  [EXTRACTED]
-  .github/workflows/e2e.yml → PRD.md
-- `Staging Pipeline Architecture` --conceptually_related_to--> `generate.sh`  [EXTRACTED]
-  docs/01-architecture.md → PRD.md
-- `Verification Checksum Snapshot` --conceptually_related_to--> `generate.sh`  [EXTRACTED]
-  docs/06-verification.md → PRD.md
-- `Model Discovery Filter Pipeline` --conceptually_related_to--> `lib/model-discovery.sh`  [EXTRACTED]
-  docs/03-model-discovery.md → PRD.md
-- `Config Generation MERGE Strategy` --conceptually_related_to--> `lib/config-opencode.sh`  [EXTRACTED]
-  docs/02-config-generation.md → PRD.md
+- `generate.sh` --references--> `E2E CI Pipeline`  [EXTRACTED]
+  PRD.md → .github/workflows/e2e.yml
+- `generate.sh` --conceptually_related_to--> `Staging Pipeline Architecture`  [EXTRACTED]
+  PRD.md → docs/01-architecture.md
+- `generate.sh` --conceptually_related_to--> `Verification Checksum Snapshot`  [EXTRACTED]
+  PRD.md → docs/06-verification.md
+- `lib/model-discovery.sh` --conceptually_related_to--> `Model Discovery Filter Pipeline`  [EXTRACTED]
+  PRD.md → docs/03-model-discovery.md
+- `lib/config-opencode.sh` --conceptually_related_to--> `Config Generation MERGE Strategy`  [EXTRACTED]
+  PRD.md → docs/02-config-generation.md
 
 ## Import Cycles
 - None detected.
@@ -120,21 +116,3 @@ Nodes (3): Host Paths and Defaults Library, Default OpenCode Model, OpenAI-Compa
 - **67 isolated node(s):** `Scope`, `Feature 1: OPENCODE_ZEN_API_KEY → OPENCODE_ZEN_API_KEY rename (PR #68)`, `Feature 2: Per-delegation model routing (PR #68)`, `Feature 3: auth.json OR guard contract (PR #66)`, `Tests (new files)` (+62 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
-
-## Suggested Questions
-_Questions this graph is uniquely positioned to answer:_
-
-- **Why does `generate.sh` connect `Community 0` to `Community 5`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `lib/model-discovery.sh` connect `Community 5` to `Community 0`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **What connects `Scope`, `Feature 1: OPENCODE_ZEN_API_KEY → OPENCODE_ZEN_API_KEY rename (PR #68)`, `Feature 2: Per-delegation model routing (PR #68)` to the rest of the system?**
-  _67 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.12554112554112554 - nodes in this community are weakly interconnected._
-- **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.1286549707602339 - nodes in this community are weakly interconnected._
-- **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

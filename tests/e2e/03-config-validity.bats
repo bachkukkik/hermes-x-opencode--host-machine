@@ -38,7 +38,10 @@ load test_helper/common
 
     # Verify the top-level model matches the configured default
     # (OPENCODE_DEFAULT_MODEL was unset in setup() — test must provide its own)
-    expected_model="mock-model"
+    # Use an explicitly-prefixed model id so normalize_model_id() passes it
+    # through unchanged — the test verifies field override, not prefix routing
+    # (prefix routing is covered by AC40-AC46 in 23-multi-provider-model.bats).
+    expected_model="litellm/mock-model"
     OPENCODE_DEFAULT_MODEL="${expected_model}" run_generate
     [ "$status" -eq 0 ]
     python3 -c "
@@ -57,7 +60,7 @@ print(f'OK: model + small_model = {expected}')
 
     local staging="${GEN_DIR}/staging/opencode.jsonc"
 
-    expected_model="mock-model"
+    expected_model="litellm/mock-model"
     OPENCODE_DEFAULT_MODEL="${expected_model}" run_generate
     [ "$status" -eq 0 ]
     python3 -c "

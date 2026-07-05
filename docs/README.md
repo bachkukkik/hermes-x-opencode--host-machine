@@ -14,6 +14,28 @@ Comprehensive technical documentation for the Hermes × OpenCode Host Config Gen
 | 06 | [Verification](06-verification.md) | Four-layer verification design, --dry-run checksum snapshot, bash -n / JSON / YAML validation, content assertions, bats e2e test plan, --apply flag for live deployment |
 | 07 | [Installation & Deployment](07-installation-deployment.md) | Two-tier model (repo → deployed copy), install.sh operation, --no-run flag, stale-deployed-copy pitfall, redeploy recipe |
 
+## Test Suite
+
+15 test files (98 tests total) covering acceptance criteria (AC) and gap analysis (GA) items:
+
+| Test file | Tests | AC/GA Coverage |
+|-----------|-------|----------------|
+| `tests/e2e/01-install.bats` | install.sh deployment, prerequisites | AC-INST1-3 |
+| `tests/e2e/02-generate.bats` | generate.sh output, exit codes | AC-GEN1-5 |
+| `tests/e2e/03-config-validity.bats` | JSON/YAML validity, model fields, resolve_ctx_len, env-gated blocks | AC-VAL1-8 |
+| `tests/e2e/04-model-discovery.bats` | Model fetch, filter, wildcard, EC1 fallback | AC-MD1-5 |
+| `tests/e2e/05-merge-safety.bats` | MERGE mode preservation, dry-run checksum safety | AC-MERGE1-4 |
+| `tests/e2e/06-fallback-chain.bats` | Fallback chain generation and formatting | AC-FB1-4 |
+| `tests/e2e/07-apply-flag.bats` | --apply flag, staging→live with .bak backups | AC-APP1-4 |
+| `tests/e2e/08-export-env.bats` | export-env.sh generation (AC-EXP1-3) | AC-EXP1-3 |
+| `tests/e2e/09-shell-integration.bats` | --shell-integration flag (AC-SI1-4) | AC-SI1-4 |
+| `tests/e2e/20-zen-api-key.bats` | OPENCODE_ZEN_API_KEY (AC34) | AC34 |
+| `tests/e2e/21-delegation-model.bats` | delegation.model/provider (AC35) | AC35 |
+| `tests/e2e/22-ctx-pin-and-credentials.bats` | Quantized GGUF ctx pin, auth.json OR guard (CTX1-3, CRED1-3) | CTX1-3, CRED1-3 |
+| `tests/e2e/23-multi-provider-model.bats` | Multi-provider routing (AC40-46) | AC40-46 |
+| `tests/e2e/24-plugin-generation.bats` | Fresh-install plugin generation (GA-01) | GA-01 |
+| `tests/e2e/25-validate-zen.bats` | validate_zen_key validation (AC-ZEN1-2) | AC-ZEN1-2 |
+
 ## Related Documents
 
 - [README.md](../README.md) — Project overview, usage, and quick start
