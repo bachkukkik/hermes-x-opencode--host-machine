@@ -92,14 +92,19 @@ lines = [
     "=" * 40,
     "OPENCODE_ZEN_API_KEY   -> %s" % ("found (opencode provider seeded)" if opencode_key else "NOT FOUND (repo .env or ~/.hermes/.env)"),
     "OPENAI_API_KEY        -> %s" % ("found (litellm provider seeded)" if openai_key else "NOT FOUND (repo .env, ~/.hermes/.env, or config.yaml)"),
-    "",
-    "ACTION REQUIRED for opencode/deepseek-v4-flash-free (free Zen model):",
-    "  The opencode provider block uses {env:OPENCODE_ZEN_API_KEY}. You must",
-    "  add OPENCODE_ZEN_API_KEY to the repo's .env file or to ~/.hermes/.env:",
-    "    echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> .env",
+]
+if not opencode_key:
+    lines.extend([
+        "",
+        "ACTION REQUIRED for opencode/deepseek-v4-flash-free (free Zen model):",
+        "  The opencode provider block uses {env:OPENCODE_ZEN_API_KEY}. You must",
+        "  add OPENCODE_ZEN_API_KEY to the repo's .env file or to ~/.hermes/.env:",
+        "    echo 'OPENCODE_ZEN_API_KEY=<your-zen-key>' >> .env",
+    ])
+lines.extend([
     "",
     "Staging auth.json written to: %s" % out_path,
-]
+])
 print("\n".join(lines))
 PYEOF
 }

@@ -73,6 +73,10 @@ source "${LIB_DIR}/constants.sh"
 # ~/.hermes/.env. The repo's .env is the single source of truth for config
 # generation. 2>/dev/null so the script works when .env is absent.
 source "${SCRIPT_DIR}/.env" 2>/dev/null || true
+# Re-apply OPENAI_BASE_URL default + trailing-slash strip after .env source,
+# because an empty OPENAI_BASE_URL= in .env would clobber the constants.sh default.
+OPENAI_BASE_URL="${OPENAI_BASE_URL:-http://localhost:4000}"
+OPENAI_BASE_URL="${OPENAI_BASE_URL%/}"
 
 # Export OPENAI_API_KEY and OPENAI_BASE_URL too so {env:OPENAI_API_KEY} in
 # opencode.jsonc resolves from the subshell environment when opencode runs.

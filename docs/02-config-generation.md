@@ -386,6 +386,8 @@ Seeds `auth.json` with two providers:
 | `opencode` (Zen) | `OPENCODE_ZEN_API_KEY` from `~/.hermes/.env` | None — must be present |
 | `litellm` (proxy) | `OPENAI_API_KEY` from `~/.hermes/.env` | `model.api_key` from `config.yaml` |
 
+- **Conditional ACTION REQUIRED:** The guidance block for the free Zen model prints ONLY when `OPENCODE_ZEN_API_KEY` is not found in `.env` or `~/.hermes/.env`. When the key is present, the block is suppressed — no spurious warnings.
+
 ### Environment variable reference
 
 | Variable | Purpose | Set in | Referenced by |
@@ -393,6 +395,8 @@ Seeds `auth.json` with two providers:
 | `OPENCODE_ZEN_API_KEY` | OpenCode Zen free-tier credential | `~/.hermes/.env` | `env-auth.sh` (read in-process)<br>OpenCode runtime via `{env:OPENCODE_ZEN_API_KEY}` |
 | `OPENAI_API_KEY` | LiteLLM proxy credential | `~/.hermes/.env` or `config.yaml` `model.api_key` | `{env:OPENAI_API_KEY}` in opencode.jsonc |
 | `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL | Shell env (default `http://localhost:4000`) | All modules |
+
+> **Note:** An empty value in `.env` (e.g. `OPENAI_BASE_URL=`) is handled — `generate.sh` re-applies the default after sourcing `.env`, so the empty string does not propagate downstream.
 
 ### Fallback chain
 
