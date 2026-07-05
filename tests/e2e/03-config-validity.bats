@@ -132,6 +132,33 @@ print(f'OK: {ok}/{len(models)} models have context_length > 1000')
     assert_json_valid "${GEN_DIR}/staging/auth.json"
 }
 
+@test "AC47: empty OPENAI_BASE_URL in .env does not clobber default" {
+    seed_all_configs
+    start_mock_llm 14047 "mock-model" "zai/glm-5.2" "openai/gpt-4o"
+
+    # Write .env at GEN_DIR with empty OPENAI_BASE_URL — simulates the bug
+    # scenario where .env sets OPENAI_BASE_URL= (empty), which would clobber
+    # the constants.sh default without the fix on generate.sh lines 78-79.
+    cat > "${GEN_DIR}/.env" << 'ENVEOF'
+OPENCODE_ZEN_API_KEY=sk-zen...-abc
+OPENAI_API_KEY=sk-tes...2345
+OPENAI_BASE_URL=
+ENVEOF
+
+    run_generate --dry-run
+    [ "$status" -eq 0 ]
+
+    local staging="${GEN_DIR}/staging/opencode.jsonc"
+    python3 -c "
+import json
+c = json.load(open('${staging}'))
+base_url = c.get('provider', {}).get('litellm', {}).get('options', {}).get('baseURL', '')
+assert base_url == 'http://localhost:4000', \
+    f'provider.litellm.options.baseURL={base_url!r}, expected http://localhost:4000'
+print(f'OK: provider.litellm.options.baseURL = {base_url}')
+"
+}
+
 # --- resolve_ctx_len() tests -------------------------------------------------
 
 @test "resolve_ctx_len: known families return correct context lengths" {

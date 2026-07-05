@@ -64,3 +64,43 @@ print('OK: auth.json opencode provider seeded')
     gen_output=$(bash "${GEN_DIR}/generate.sh" --dry-run 2>&1 || true)
     echo "$gen_output" | grep -q "OPENCODE_ZEN_API_KEY"
 }
+
+@test "AC48a: ACTION REQUIRED not printed when OPENCODE_ZEN_API_KEY is set" {
+    seed_all_configs
+    start_mock_llm 14048 "mock-model" "zai/glm-5.2" "openai/gpt-4o"
+
+    run_generate --dry-run
+    [ "$status" -eq 0 ]
+
+    # When the key IS present in ~/.hermes/.env, env-auth.sh should NOT print
+    # the "ACTION REQUIRED" block (gated by `if not opencode_key:` at line 96).
+    [[ "$output" != *"ACTION REQUIRED"* ]] || {
+        echo "Expected no 'ACTION REQUIRED' in output when key is set" >&2
+        echo "--- output excerpt ---" >&2
+        echo "$output" | grep -i "ACTION REQUIRED\|auth.json staging" >&2 || true
+        false
+    }
+}
+
+@test "AC48b: ACTION REQUIRED printed when OPENCODE_ZEN_API_KEY is missing" {
+    seed_hermes_config
+    seed_opencode_config
+    # Write ~/.hermes/.env WITHOUT OPENCODE_ZEN_API_KEY
+    cat > "${FAKE_HOME}/.hermes/.env" << 'ENVEOF'
+OPENAI_API_KEY=sk-tes...2345
+ENVEOF
+
+    start_mock_llm 14049 "mock-model" "zai/glm-5.2" "openai/gpt-4o"
+
+    run_generate --dry-run
+    [ "$status" -eq 0 ]
+
+    # When the key is NOT present, env-auth.sh MUST print "ACTION REQUIRED"
+    # with guidance for adding OPENCODE_ZEN_API_KEY.
+    [[ "$output" == *"ACTION REQUIRED"* ]] || {
+        echo "Expected 'ACTION REQUIRED' in output when key is missing" >&2
+        echo "--- output excerpt ---" >&2
+        echo "$output" | grep -i "ACTION REQUIRED\|auth.json staging\|OPENCODE_ZEN_API_KEY" >&2 || true
+        false
+    }
+}
