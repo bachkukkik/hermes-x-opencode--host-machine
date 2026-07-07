@@ -17,7 +17,7 @@ OPENCODE_USER_HOME="${HOME}"
 
 # --- Generator / staging paths ----------------------------------------------
 GEN_DIR="${HERMES_HOME}/host-config-gen"
-LIB_DIR="${GEN_DIR}/lib"
+LIB_DIR="${LIB_DIR:-${GEN_DIR}/lib}"
 STAGING_DIR="${GEN_DIR}/staging"
 STAGING_OPENCODE="${STAGING_DIR}/opencode.jsonc"
 STAGING_HERMES_OVERLAY="${STAGING_DIR}/config-hermes-overlay.yaml"

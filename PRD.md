@@ -630,3 +630,56 @@ The new doc must cover:
   code changes to install.sh in this phase)
 - Docker-stack installation (docs are host-only; Docker is the reference, not
   the subject)
+
+## 18. In-Repo Execution Fix (Phase 2.1)
+
+### 18.1 Problem
+
+Running `bash generate.sh` directly from the repo root on a fresh machine (no
+`install.sh` yet) fails with:
+
+```
+generate.sh: line 93: /root/.hermes/host-config-gen/lib/model-discovery.sh: No such file or directory
+```
+
+**Root cause:** `generate.sh` sets `LIB_DIR="${SCRIPT_DIR}/lib"` (repo path) on
+line 29, then sources `constants.sh` on line 69. `constants.sh` line 20
+unconditionally overwrites `LIB_DIR` to `${GEN_DIR}/lib` (`~/.hermes/host-config-gen/lib`),
+the installed path. All subsequent `source` calls resolve from the installed path,
+which doesn't exist until `install.sh` is run.
+
+### 18.2 Fix
+
+**File:** `lib/constants.sh`, line 20
+
+**Change:** Unconditional assignment → parameter expansion with default:
+
+```diff
+-LIB_DIR="${GEN_DIR}/lib"
++LIB_DIR="${LIB_DIR:-${GEN_DIR}/lib}"
+```
+
+The `:-` expansion preserves a pre-set `LIB_DIR` (set by `generate.sh` before
+sourcing) and falls back to `${GEN_DIR}/lib` only when unset. This handles all
+three execution contexts:
+
+| Context | generate.sh pre-sets LIB_DIR | constants.sh behavior |
+|---------|------------------------------|----------------------|
+| In-repo (`bash generate.sh`) | `<repo>/lib/` | Preserves `<repo>/lib/` |
+| Installed (`bash ~/.hermes/.../generate.sh`) | `~/.hermes/host-config-gen/lib/` | Preserves installed path |
+| `constants.sh` sourced standalone | unset | Defaults to installed path |
+
+### 18.3 Verification
+
+Both paths pass all 19 validation checks:
+
+- `install.sh --no-run && bash ~/.hermes/host-config-gen/generate.sh --dry-run` — 19/19 passed
+- `bash generate.sh --dry-run` (in-repo, no install.sh) — 19/19 passed
+
+### 18.4 Success criteria
+
+- SC-FIX1: `bash generate.sh --dry-run` from repo root on fresh machine succeeds
+- SC-FIX2: Installed-path workflow unchanged (regression-free)
+- SC-FIX3: `bash -n lib/constants.sh` passes
+- SC-FIX4: All bats tests pass with the change
+- SC-FIX5: Staging output identical between in-repo and installed-path runs

@@ -86,20 +86,19 @@ bash install.sh --no-run && bash ~/.hermes/host-config-gen/generate.sh --dry-run
 - **Stale-deployed-copy pitfall:** Editing only `lib/*.sh` (not `generate.sh`) leaves the deployed `lib/` stale. A naive `diff generate.sh` passes because the entrypoint is unchanged, but verification runs against the old `lib/` code. **Symptom:** Silently-wrong output — no error, the new feature is simply absent from staging output. **Root cause:** `lib/` files are deployed independently from `generate.sh`; a diff of only the entrypoint misses the stale library. **Fix:** Always run `install.sh --no-run` before `generate.sh --dry-run` when any `lib/` file changed. The redeploy is fast (<1s for shell scripts).
 - **Forgetting `--no-run` in CI:** The default `install.sh` runs the generator, which may fail in environments without a reachable LiteLLM endpoint. Use `--no-run` for deploy-only CI steps.
 - **Editing deployed copy directly:** Changes to `~/.hermes/host-config-gen/` are lost on the next `install.sh`. Always edit in the repo and redeploy.
-- **LIB_DIR override (constants.sh):** Even when running `bash generate.sh` from the repo directory, `constants.sh` sets `LIB_DIR="${GEN_DIR}/lib"` (the installed path), so all `lib/*.sh` modules load from the deployed copy, not the repo. This means in-repo iteration only works for `generate.sh` itself; any `lib/` change requires `install.sh --no-run` before verification, regardless of where `generate.sh` is invoked from.
+- **LIB_DIR resolution (constants.sh):** When running `bash generate.sh` from the repo directory, `constants.sh` uses `LIB_DIR="${LIB_DIR:-${GEN_DIR}/lib}"` (parameter expansion), so `lib/` modules load from the repo's `lib/` directory by default. In-repo iteration of `lib/*.sh` changes works directly — run `bash generate.sh --dry-run` without installing first. The deployed copy's `lib/` is only used when `LIB_DIR` is pre-set by `install.sh`, which exports it before calling the generator.
 
 ## Resolution
 
-The canonical recipe for any change is:
+The canonical workflows for iteration are:
 
-```
-edit repo → install.sh --no-run → generate.sh --dry-run → review staging → generate.sh --apply
-```
+**In-repo (lib/ or generate.sh changes):** `edit repo → generate.sh --dry-run → review staging → generate.sh --apply`  
+**Deployed (production):** `edit repo → install.sh --no-run → generate.sh --dry-run → review staging → generate.sh --apply`
 
-- **For stale-deployed-copy:** Before running any verification step after editing `lib/`, always run `bash install.sh --no-run` first. This ensures the deployed copy reflects all repo changes.
+- **For stale-deployed-copy (deployed workflow):** When running the deployed copy after editing `lib/`, run `bash install.sh --no-run` first to redeploy. This ensures the deployed copy reflects all repo changes. For in-repo iteration, no install step is needed — `bash generate.sh` directly sources the repo's `lib/`.
 - **For CI deployment:** Pass `--no-run` to `install.sh` to perform a deploy-only step without requiring a live LiteLLM endpoint.
 - **For accidental deployed-copy edits:** Re-run `install.sh` from the repo to restore the deployed copy to its source-of-truth state. Any changes made directly in `~/.hermes/host-config-gen/` are discarded.
 
 ## Verdict
 
-The two-tier model trades a small cognitive load — remembering to redeploy — for clean separation of versioned source and runtime. The stale-deployed-copy pitfall is the one trap; the `install.sh --no-run` recipe eliminates it.
+The two-tier model trades a small cognitive load — remembering to redeploy for deployed-copy runs — for clean separation of versioned source and runtime. In-repo iteration removes the stale-deployed-copy pitfall for development; the `install.sh --no-run` recipe addresses it for the deployed workflow.
