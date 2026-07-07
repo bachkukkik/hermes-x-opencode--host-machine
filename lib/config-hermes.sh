@@ -179,6 +179,10 @@ if not replaced:
     merged_cps.append(new_litellm_entry)
 cfg["custom_providers"] = merged_cps
 
+# Point provider at the generated litellm custom provider so Hermes
+# actually uses the custom_providers block we just built.
+cfg["provider"] = "custom:litellm"
+
 # --- Ensure model.default + model.name are set to the default model ---------
 model_sec = cfg.setdefault("model", {})
 if not isinstance(model_sec, dict):
