@@ -484,7 +484,7 @@ if [ "$APPLY" = true ]; then
         fi
         # --- Sync managed .env section to ~/.hermes/.env ---
         # shellcheck source=lib/sync-env.sh
-        sync_env_to_hermes "${SCRIPT_DIR}/.env"
+        sync_env_to_hermes "${SCRIPT_DIR}/.env" || true
     fi
 fi
 
