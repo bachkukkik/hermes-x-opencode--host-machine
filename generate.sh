@@ -97,6 +97,8 @@ source "${LIB_DIR}/config-opencode.sh"
 source "${LIB_DIR}/config-hermes.sh"
 # shellcheck source=lib/env-auth.sh
 source "${LIB_DIR}/env-auth.sh"
+# shellcheck source=lib/sync-env.sh
+source "${LIB_DIR}/sync-env.sh"
 
 echo "============================================================"
 echo " Hermes x OpenCode host config generator"
@@ -480,6 +482,9 @@ if [ "$APPLY" = true ]; then
                 echo "  [OK] No shell integration block found in $_rc"
             fi
         fi
+        # --- Sync managed .env section to ~/.hermes/.env ---
+        # shellcheck source=lib/sync-env.sh
+        sync_env_to_hermes "${SCRIPT_DIR}/.env" || true
     fi
 fi
 
