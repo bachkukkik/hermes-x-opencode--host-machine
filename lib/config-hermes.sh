@@ -161,9 +161,11 @@ new_litellm_entry = {
     "models": models_map,
 }
 # Carry forward the existing inline key so the overlay is immediately
-# functional. (key_env hardening is a documented optional step.)
+# functional, or fall back to reading OPENAI_API_KEY from the environment.
 if existing_api_key:
     new_litellm_entry["api_key"] = existing_api_key
+else:
+    new_litellm_entry["key_env"] = "OPENAI_API_KEY"
 
 # Merge into the existing custom_providers list: replace any entry named
 # "litellm", otherwise append. Preserve all OTHER custom provider entries.
@@ -255,7 +257,7 @@ summary_lines = [
     "=" * 40,
     "custom_providers.litellm  -> replaced" if replaced else "custom_providers.litellm  -> appended",
     "models listed            -> %d" % len(models_map),
-    "api_key                  -> carried from existing config (%s)" % ("present" if existing_api_key else "MISSING"),
+    "api_key                  -> carried from existing config (%s)" % ("present" if existing_api_key else "key_env: OPENAI_API_KEY"),
     "model.default            -> %s" % model_sec.get("default"),
     "model.name               -> %s" % model_sec.get("name"),
     "other custom_providers   -> %d preserved" % (len(merged_cps) - 1),
