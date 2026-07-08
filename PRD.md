@@ -683,3 +683,62 @@ Both paths pass all 19 validation checks:
 - SC-FIX3: `bash -n lib/constants.sh` passes
 - SC-FIX4: All bats tests pass with the change
 - SC-FIX5: Staging output identical between in-repo and installed-path runs
+
+## 19. DEFAULT_CONTEXT_LENGTHS + Agents A1 Pin Table (Phase 2.2)
+
+### 19.1 Problem
+
+The host config generators (`config-hermes.sh` `resolve_ctx_len()` and
+`config-opencode.sh` `get_limits()`) have no entries for the
+`llama_cpp/agents-a1-mtp-apex-i-balanced` model (native 262,144 context per
+GGUF metadata). The `resolve_ctx_len()` returns empty (agent self-resolves),
+and the agent's own `DEFAULT_CONTEXT_LENGTHS` table substring-matches
+`"llama" → 131,072` inside `"llama_cpp/agents-a1-..."` — wrong value.
+
+Separately, the default-model fallback context length is hardcoded `200000`
+in `config-hermes.sh`. There is no env-var mechanism to configure it.
+
+### 19.2 Root cause
+
+| Layer | Why | Current | Fix |
+|-------|-----|---------|-----|
+| Agent runtime `DEFAULT_CONTEXT_LENGTHS` | `"llama": 131072` matches inside `llama_cpp/...` (prefix not stripped) | 131,072 | Per-model `context_length` in config.yaml (done in prior session) |
+| Host `config-hermes.sh` `resolve_ctx_len()` | No agents-a1 entries | Empty → self-resolve | Pin table entries: 262,144 |
+| Host `config-opencode.sh` `get_limits()` | Falls to generic `llama_cpp → 200000` | 200,000 (wrong) | Specific entries: 262,144 |
+| Hardcoded 200000 default-model fallback | Not configurable via env | 200,000 | `DEFAULT_CONTEXT_LENGTHS` env var |
+
+### 19.3 Fix
+
+**Files changed:**
+
+- **`.env.example`**: Added `DEFAULT_CONTEXT_LENGTHS=200000` env var with documentation
+- **`lib/constants.sh`**: Export `DEFAULT_CONTEXT_LENGTHS="${DEFAULT_CONTEXT_LENGTHS:-200000}"`
+- **`lib/config-hermes.sh`** `resolve_ctx_len()` (bash + Python): Added `*agents-a1-mtp-apex*` → 262,144 and `*agents-a1-q4*` → 262,144 entries. Replaced hardcoded `200000` on line 152 with `int(os.environ.get("DEFAULT_CONTEXT_LENGTHS", "200000"))`.
+- **`lib/config-opencode.sh`** `get_limits()`: Added `agents-a1-mtp-apex` → 262,144, 32,768 and `agents-a1-q4` → 262,144, 32,768 before the `qwen3.6-27b` check in the `llama_cpp` branch.
+- **`docs/02-config-generation.md`**: Updated `resolve_ctx_len` table + `DEFAULT_CONTEXT_LENGTHS` documentation
+- **`tests/e2e/03-config-validity.bats`**: Added `resolve_ctx_len` tests for agents-a1 models
+
+### 19.4 Design principle (karpathy §6 — Single Source of Truth)
+
+The `DEFAULT_CONTEXT_LENGTHS` env var becomes the single configurable fallback.
+Previously the value `200000` appeared as a hardcoded integer in the Python
+heredoc inside `config-hermes.sh`. Adding an entry that needed a different
+default would have required editing the script. Now it reads from the env.
+
+The agents-a1 pin table entries use the longest-match-first ordering principle
+already established by `qwen3.6-27b+q4` (specific quantized variant before
+family wildcard). `*agents-a1-mtp-apex*` is checked before any broader
+`llama` or generic catch-all.
+
+### 19.5 Success criteria
+
+- SC-DCL1: `grep -c 'DEFAULT_CONTEXT_LENGTHS' .env.example` → ≥ 1
+- SC-DCL2: `grep -c 'DEFAULT_CONTEXT_LENGTHS' lib/constants.sh` → ≥ 1
+- SC-DCL3: `resolve_ctx_len "llama_cpp/agents-a1-mtp-apex-i-balanced"` → `262144`
+- SC-DCL4: `resolve_ctx_len "llama_cpp/agents-a1-q4_k_m"` → `262144`
+- SC-DCL5: `get_limits("llama_cpp/agents-a1-mtp-apex-i-balanced")` → `(262144, 32768)`
+- SC-DCL6: `bash -n` passes on all shell files
+- SC-DCL7: `bash generate.sh --dry-run` passes all internal validation checks
+- SC-DCL8: `bats tests/e2e/03-config-validity.bats` — all resolve_ctx_len tests pass
+- SC-DCL9: Staging `config-hermes-overlay.yaml` contains `context_length: 262144` for agents-a1 models
+- SC-DCL10: Default model fallback uses `DEFAULT_CONTEXT_LENGTHS` value, not hardcoded 200000

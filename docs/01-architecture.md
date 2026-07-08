@@ -29,7 +29,7 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
 
 1. **Phase 1 — Model discovery:** Queries the LiteLLM proxy, filters non-chat models, deduplicates, and falls back to `OPENAI_DEFAULT_MODEL` when unreachable.
 2. **Phase 2 — OpenCode config merge:** Deep-merges discovered models into the existing `opencode.jsonc`, preserving hand-tuned blocks. Creates `provider.opencode`, `provider.litellm`, and `provider.llama_cpp` provider blocks.
-3. **Phase 3 — Hermes config overlay:** Builds a Form B `custom_providers` entry with a static models map, carries forward the existing live config, and sets top-level `provider: custom:litellm` to route the active model through it.
+3. **Phase 3 — Hermes config overlay:** Builds a Form B `custom_providers` entry with a static models map, carries forward the existing live config, and sets `model.provider: custom:litellm` to route the active model through it. It also mirrors the models map and credential into a legacy `providers.litellm` block that the model-switch path reads first.
 4. **Phase 4 — Auth staging:** Resolves credentials in-process and seeds `auth.json`.
 
 ### MERGE mode vs. Docker OVERWRITE

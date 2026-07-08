@@ -276,7 +276,7 @@ The OpenCode config generator does NOT replace the live file. It reads the exist
 
 The Hermes overlay generator emits a **Form B** `custom_providers` entry — a static `models:` map that lists every discovered model with pre-computed context lengths. This avoids Hermes probing the LiteLLM endpoint at runtime.
 
-Context length resolution uses a `resolve_ctx_len()` function (bash + equivalent Python in the heredoc) with a longest-match-first pin table covering **13 model families**. The call pattern is:
+Context length resolution uses a `resolve_ctx_len()` function (bash + equivalent Python in the heredoc) with a longest-match-first pin table covering **15 model families**. The call pattern is:
 
 ```bash
 resolve_ctx_len() {
@@ -297,6 +297,8 @@ resolve_ctx_len() {
         *minimax-m3*)        echo 1000000 ;;
         *qwen3.6-27b*q4*)    echo 262144  ;;  # quantized GGUF
         *qwen3.6*)           echo 1048576 ;;
+        *agents-a1-mtp-apex*) echo 262144  ;;  # Agents A1 MTP (262K native ctx)
+        *agents-a1-q4*)      echo 262144  ;;  # Agents A1 q4_k_m (same arch)
         *)                   echo ""      ;;  # unknown → {}
     esac
 }
@@ -319,10 +321,18 @@ resolve_ctx_len() {
 | `*minimax-m3*` | 1,000,000 | MiniMax M3 maximum context |
 | `*qwen3.6-27b*q4*` | 262,144 | Quantized GGUF real context (not family 1M) |
 | `*qwen3.6*` | 1,048,576 | Qwen 3.6 full context |
+| `*agents-a1-mtp-apex*` | 262,144 | Agents A1 MTP — 262K native context (qwen35moe arch) |
+| `*agents-a1-q4*` | 262,144 | Agents A1 q4_k_m — same architecture |
 | (unknown, non-default) | `{}` (empty mapping) | Agent self-resolves via `DEFAULT_CONTEXT_LENGTHS` / `models.dev` / endpoint probe |
-| (unknown, IS default model) | 200,000 | Fallback: guarantees overlay has ≥1 explicit `context_length` entry so the active model gets a sane window |
+| (unknown, IS default model) | `$DEFAULT_CONTEXT_LENGTHS` (default 200,000) | Fallback: guarantees overlay has ≥1 explicit `context_length` entry so the active model gets a sane window |
 
-The existing inline `api_key` is carried forward from the live config; when none exists the entry falls back to `key_env: OPENAI_API_KEY` so Hermes resolves the key from the environment. Other `custom_providers` entries are preserved. The generator also sets a top-level `provider: custom:litellm` key so Hermes routes its active model through the generated `custom_providers` entry.
+The existing inline `api_key` is carried forward from the live config; when none exists the entry falls back to `key_env: OPENAI_API_KEY` so Hermes resolves the key from the environment. Other `custom_providers` entries are preserved. The generator sets `model.provider: custom:litellm` (nested under `model:`, **not** top-level) so Hermes routes its active model through the generated entry; any stale top-level `provider:` key is removed, because a top-level value confuses the model switch.
+
+#### Legacy `providers.litellm` block (dual-write) and the credential requirement
+
+Hermes resolves an active model's provider through **two** config surfaces, and its runtime (`_get_named_custom_provider()`) scans the top-level **`providers:` dict FIRST**, only falling through to `custom_providers:` on a miss. The model-switch path likewise reads context from the legacy `providers:` dict. So the generator dual-writes a legacy `providers.litellm` block alongside the Form B `custom_providers` entry, mirroring the same `models:` context-length map.
+
+Critically, that legacy block **must also carry a credential** (`api_key` or `key_env: OPENAI_API_KEY`, mirroring the `custom_providers` logic). A credential-less `providers.litellm` block *shadows* the good `custom_providers` entry — Hermes resolves the key to the placeholder `"no-key-required"`, and the LiteLLM proxy rejects the request with `HTTP 401: LiteLLM Virtual Key expected... start with 'sk-'`. The generator's overlay summary prints a `providers.litellm cred` line so this is observable; the `legacy providers.litellm block carries a credential (401 regression)` e2e test guards it.
 
 **Model consistency guarantee:** `model.default` and `model.name` are ALWAYS set to the same value. If `HERMES_DEFAULT_MODEL` is set, both are set to that value. Otherwise, both are set to `OPENAI_DEFAULT_MODEL`. Stale values from the live config are never preserved — this prevents drift where the two fields could silently point to different models.
 

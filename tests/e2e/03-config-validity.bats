@@ -205,6 +205,13 @@ print(f'OK: provider.litellm.options.baseURL = {base_url}')
     [ "$(resolve_ctx_len "openai/qwen3.6-32b")" = "1048576" ]
 }
 
+@test "resolve_ctx_len: agents-a1 models return 262144" {
+    source "${REPO_DIR}/lib/config-hermes.sh"
+
+    [ "$(resolve_ctx_len "llama_cpp/agents-a1-mtp-apex-i-balanced")" = "262144" ]
+    [ "$(resolve_ctx_len "llama_cpp/agents-a1-q4_k_m")" = "262144" ]
+}
+
 @test "resolve_ctx_len: case-insensitive matching" {
     source "${REPO_DIR}/lib/config-hermes.sh"
 
@@ -213,7 +220,7 @@ print(f'OK: provider.litellm.options.baseURL = {base_url}')
     [ "$(resolve_ctx_len "GEMINI/2.0-FLASH")" = "1048576" ]
 }
 
-@test "PROV1: Hermes overlay sets top-level provider custom:litellm" {
+@test "PROV1: Hermes overlay sets model.provider custom:litellm (not top-level)" {
     seed_all_configs
     start_mock_llm 14033 "zai/glm-5.2" "openai/gpt-4o"
     run_generate
@@ -223,7 +230,10 @@ print(f'OK: provider.litellm.options.baseURL = {base_url}')
     python3 -c "
 import yaml
 c = yaml.safe_load(open('${overlay}'))
-assert c.get('provider') == 'custom:litellm', f\"provider={c.get('provider')!r}\"
+# Hermes reads model.provider for routing; a stale top-level provider confuses
+# the model switch, so the generator sets model.provider and removes top-level.
+assert c.get('model', {}).get('provider') == 'custom:litellm', f\"model.provider={c.get('model', {}).get('provider')!r}\"
+assert 'provider' not in c, f\"stale top-level provider present: {c.get('provider')!r}\"
 "
 }
 
@@ -241,6 +251,29 @@ litellm = [cp for cp in c['custom_providers'] if cp.get('name')=='litellm'][0]
 assert litellm.get('api_key'), litellm
 assert 'key_env' not in litellm
 assert litellm.get('base_url') == os.environ['OPENAI_BASE_URL'] or litellm.get('base_url').startswith('http')
+"
+}
+
+@test "legacy providers.litellm block carries a credential (401 regression)" {
+    # REGRESSION: Hermes' _get_named_custom_provider() scans the `providers:`
+    # dict FIRST and only falls through to `custom_providers:` on a miss. A
+    # credential-less legacy providers.litellm block shadows the good
+    # custom_providers entry -> "no-key-required" -> HTTP 401 at runtime.
+    # The legacy block MUST carry api_key or key_env.
+    seed_all_configs
+    start_mock_llm 14039 "zai/glm-5.2" "openai/gpt-4o"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+prov = c.get('providers', {}).get('litellm', {})
+assert prov, 'providers.litellm block missing'
+cred = str(prov.get('api_key', '') or '').strip() or str(prov.get('key_env', '') or '').strip()
+assert cred, f'providers.litellm has no api_key/key_env -> 401 no-key-required: {prov}'
+print(f'OK: providers.litellm credential present ({\"api_key\" if prov.get(\"api_key\") else \"key_env=\"+prov.get(\"key_env\")})')
 "
 }
 
@@ -311,6 +344,29 @@ entry = lc_models['qwen3.6-27b-q4_k_m']
 assert entry.get('name') == 'llama_cpp/qwen3.6-27b-q4_k_m', f'name wrong: {entry.get(\"name\")}'
 assert entry.get('limit', {}).get('context') == 262144, f'context wrong: {entry.get(\"limit\")}'
 print(f'OK: {len(lc_models)} llama_cpp model(s) with correct limits')
+"
+}
+
+@test "provider.llama_cpp Agents A1 models get 262144/32768 limits" {
+    # config-opencode.sh get_limits() has a dedicated agents-a1 branch (262K
+    # native context, qwen35moe arch). Distinct from the hermes-side
+    # resolve_ctx_len() pin — this guards the OpenCode generator's own table.
+    seed_all_configs
+    start_mock_llm 14040 "zai/glm-5.2" "llama_cpp/agents-a1-mtp-apex-i-balanced" "llama_cpp/agents-a1-q4_k_m"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local staging="${GEN_DIR}/staging/opencode.jsonc"
+    python3 -c "
+import json
+c = json.load(open('${staging}'))
+lc = c.get('provider', {}).get('llama_cpp', {}).get('models', {})
+for key in ('agents-a1-mtp-apex-i-balanced', 'agents-a1-q4_k_m'):
+    assert key in lc, f'{key} not in llama_cpp.models: {list(lc.keys())}'
+    lim = lc[key].get('limit', {})
+    assert lim.get('context') == 262144, f'{key} context={lim.get(\"context\")}, expected 262144'
+    assert lim.get('output') == 32768, f'{key} output={lim.get(\"output\")}, expected 32768'
+print('OK: Agents A1 models get 262144/32768')
 "
 }
 
