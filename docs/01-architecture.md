@@ -29,7 +29,7 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
 
 1. **Phase 1 — Model discovery:** Queries the LiteLLM proxy, filters non-chat models, deduplicates, and falls back to `OPENAI_DEFAULT_MODEL` when unreachable.
 2. **Phase 2 — OpenCode config merge:** Deep-merges discovered models into the existing `opencode.jsonc`, preserving hand-tuned blocks. Creates `provider.opencode`, `provider.litellm`, and `provider.llama_cpp` provider blocks.
-3. **Phase 3 — Hermes config overlay:** Builds a Form B `custom_providers` entry with a static models map and carries forward the existing live config.
+3. **Phase 3 — Hermes config overlay:** Builds a Form B `custom_providers` entry with a static models map, carries forward the existing live config, and sets top-level `provider: custom:litellm` to route the active model through it.
 4. **Phase 4 — Auth staging:** Resolves credentials in-process and seeds `auth.json`.
 
 ### MERGE mode vs. Docker OVERWRITE
@@ -40,9 +40,9 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
 | Live config strategy | OVERWRITE from scratch | MERGE — preserve existing blocks |
 | Paths | `/home/hermeswebui/` (container) | `$HOME/.hermes/`, `$HOME/.config/opencode/` |
 | Network | `localhost:4000` | `localhost:4000` |
-│ **apply** (optional)        │ Copy staging → live with .bak backups │ bash generate.sh --apply          │
-│ **apply --dry-run**         │ Preview apply without writing         │ bash generate.sh --apply --dry-run │
-│ **Safety guarantee**        │ Configs rebuilt cleanly               │ Staging-only (`--apply` = explicit opt-in); checksum snapshot proves zero mutation in dry-run mode |
+| **apply** (optional)        | Copy staging → live with .bak backups | bash generate.sh --apply          |
+| **apply --dry-run**         | Preview apply without writing         | bash generate.sh --apply --dry-run |
+| **Safety guarantee**        | Configs rebuilt cleanly               | Staging-only (`--apply` = explicit opt-in); checksum snapshot proves zero mutation in dry-run mode |
 
 ### File layout
 
@@ -55,9 +55,12 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
 │   ├── model-discovery.sh         # LiteLLM /v1/models discovery + filter
 │   ├── config-opencode.sh         # opencode.jsonc MERGE generator
 │   ├── config-hermes.sh           # Hermes config.yaml overlay generator
-│   └── env-auth.sh                # env resolution + auth.json staging
+│   ├── env-auth.sh                # env resolution + auth.json staging
+│   ├── sync-env.sh                # syncs repo .env managed block into ~/.hermes/.env
+│   └── validate-zen.sh            # validates OPENCODE_ZEN_API_KEY presence
 └── staging/                       # output (gitignored)
     ├── opencode.jsonc
+    ├── opencode-fallback.jsonc    # generated when fallback chain is set
     ├── config-hermes-overlay.yaml
     ├── auth.json
     ├── export-env.sh              # sourceable env export helper (for opencode delegation)

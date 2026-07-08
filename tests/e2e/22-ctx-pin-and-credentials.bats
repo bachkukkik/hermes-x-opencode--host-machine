@@ -94,3 +94,38 @@ assert auth == {}, f'Expected empty auth.json when no keys, got: {auth}'
 print('OK: auth.json empty when no provider keys available (valid state)')
 "
 }
+
+@test "CRED4: Hermes overlay key_env fallback on litellm custom_provider when no inline api_key exists" {
+    # Create config.yaml without inline api_key
+    cat > "${FAKE_HOME}/.hermes/config.yaml" << 'YAML_EOF'
+provider: custom:litellm
+model:
+  name: zai/glm-5.2
+  default: zai/glm-5.2
+custom_providers:
+  - name: litellm
+    base_url: http://localhost:4000
+YAML_EOF
+
+    # Create .env without OPENAI_API_KEY
+    cat > "${FAKE_HOME}/.hermes/.env" << 'ENVEOF'
+OPENCODE_ZEN_API_KEY=sk-zen...-abc
+ENVEOF
+
+    seed_opencode_config
+    start_mock_llm 14063 "zai/glm-5.2" "openai/gpt-4o"
+    
+    # Ensure OPENAI_API_KEY is not in env of run_generate
+    unset OPENAI_API_KEY
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+litellm = [cp for cp in c['custom_providers'] if cp.get('name')=='litellm'][0]
+assert litellm.get('key_env') == 'OPENAI_API_KEY', litellm
+assert 'api_key' not in litellm, 'api_key must be absent on key_env path'
+"
+}

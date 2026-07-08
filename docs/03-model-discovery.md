@@ -43,9 +43,16 @@ api_key = m.get("api_key", "").strip()
 # Fallback: custom_providers[].api_key
 if not api_key:
     for cp in (data.get("custom_providers") or []):
-        if isinstance(cp, dict) and cp["api_key"].strip():
+        if isinstance(cp, dict) and cp.get("api_key", "").strip():
             api_key = cp["api_key"].strip()
             break
+# Third fallback: custom_providers[].key_env resolved from environment
+if not api_key:
+    for cp in (data.get("custom_providers") or []):
+        if isinstance(cp, dict) and cp.get("key_env", "").strip():
+            api_key = os.environ.get(cp["key_env"].strip(), "").strip()
+            if api_key:
+                break
 
 # HTTP request happens inside the same Python process
 req = urllib.request.Request(url, headers={"Authorization": "Bearer " + api_key})

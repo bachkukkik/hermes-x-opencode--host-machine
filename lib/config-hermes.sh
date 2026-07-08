@@ -11,7 +11,7 @@
 #                      models so Hermes doesn't need to probe the endpoint.
 # We emit Form B (the Docker "copycat" form). The existing inline api_key is
 # read in-process and carried forward so the overlay is functional on apply;
-# key_env hardening is documented in README.md as an optional step.
+# key_env hardening automatically falls back to OPENAI_API_KEY when no inline api_key exists.
 
 # Resolve a model's context length from a small pin table of well-known model
 # families (substring match, longest/most-specific pattern first). Echoes the

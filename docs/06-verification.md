@@ -23,7 +23,7 @@ Layer 1: Static checks
 Layer 2: Content assertions
 ├── provider.opencode with {env:OPENCODE_ZEN_API_KEY} present
 ├── model = $OPENCODE_DEFAULT_MODEL (dynamic)
-├── custom_providers has >1 model entries
+├── custom_providers has >=1 model entries
 └── Preserved blocks (permission, plugin, agent, server) present
 
 Layer 3: Safety proof (--dry-run only)
@@ -83,7 +83,7 @@ python3 -c "import yaml; yaml.safe_load(open('staging/config-hermes-overlay.yaml
 |------|-------|---------|
 | TC1 | bash -n on all scripts | `bash -n "$script"` per file |
 | TC2 | provider.opencode present | `grep -q '"apiKey": "{env:OPENCODE_ZEN_API_KEY}"' staging/opencode.jsonc` |
-| TC3 | custom_providers models count > 1 | `grep -c 'context_length' staging/config-hermes-overlay.yaml` |
+| TC3 | custom_providers models count >= 1 | `grep -c 'context_length' staging/config-hermes-overlay.yaml` |
 | TC4 | opencode.jsonc valid JSON | `python3 -m json.tool staging/opencode.jsonc` |
 | TC5 | Hermes overlay valid YAML | `python3 -c "import yaml; yaml.safe_load(...)"` |
 | TC6 | OPENCODE_DEFAULT_MODEL as default | `grep -q "$OPENCODE_DEFAULT_MODEL" staging/opencode.jsonc` |
@@ -183,7 +183,7 @@ Planned for Phase 2. The test structure follows the Docker reference:
 
 The auth.json staging follows an **OR guard contract**: the litellm credential seeds when `OPENAI_API_KEY` is set in `~/.hermes/.env` **OR** falls back to the inline `api_key` in `~/.hermes/config.yaml`. Both opencode and litellm providers are independent — an empty `auth.json` is a valid state when the user has not configured either provider yet.
 
-The opencode (Zen) credential seeds from `OPENCODE_ZEN_API_KEY` in `~/.hermes/.env` with no fallback — it must be explicitly configured. This naming aligns with the official Hermes agent convention (hermes config, hermes doctor, opencode-zen provider plugin).
+The opencode (Zen) credential seeds from repo `.env` first, then `~/.hermes/.env` — it must be explicitly configured in either file. This naming aligns with the official Hermes agent convention (hermes config, hermes doctor, opencode-zen provider plugin).
 
 This contract prevents regression where both providers silently fail to seed. The test suite (CRED1-CRED3 in `tests/e2e/22-ctx-pin-and-credentials.bats`) enforces this invariant.
 
