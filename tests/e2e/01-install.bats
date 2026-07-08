@@ -72,3 +72,37 @@ load test_helper/common
     run bash "${REPO_DIR}/install.sh" --bogus-flag
     [ "$status" -ne 0 ]
 }
+
+# --- sync-default-model.py --------------------------------------------------
+
+@test "sync-default-model.py rewrites OPENAI_DEFAULT_MODEL from live config model.default" {
+    # HOME=FAKE_HOME, so the script reads the seeded ~/.hermes/config.yaml.
+    seed_hermes_config   # model.default: zai/glm-5.2
+    local target="${TEST_TMP}/target.env"
+    printf 'OPENAI_API_KEY=sk-x\nOPENAI_DEFAULT_MODEL=stale/old-model\n' > "${target}"
+
+    run python3 "${REPO_DIR}/lib/sync-default-model.py" "${target}"
+    [ "$status" -eq 0 ]
+
+    assert_file_contains "${target}" "OPENAI_DEFAULT_MODEL=zai/glm-5.2"
+    assert_file_not_contains "${target}" "stale/old-model"
+    # Unrelated lines are preserved
+    assert_file_contains "${target}" "OPENAI_API_KEY=sk-x"
+}
+
+@test "sync-default-model.py leaves file unchanged when no OPENAI_DEFAULT_MODEL line" {
+    seed_hermes_config
+    local target="${TEST_TMP}/target.env"
+    printf 'OPENAI_API_KEY=sk-x\n' > "${target}"
+    local before; before="$(cat "${target}")"
+
+    run python3 "${REPO_DIR}/lib/sync-default-model.py" "${target}"
+    [ "$status" -eq 0 ]
+
+    [ "$(cat "${target}")" = "${before}" ]
+}
+
+@test "sync-default-model.py exits 0 on a missing target file" {
+    run python3 "${REPO_DIR}/lib/sync-default-model.py" "${TEST_TMP}/does-not-exist.env"
+    [ "$status" -eq 0 ]
+}

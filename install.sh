@@ -84,6 +84,14 @@ cp "${SCRIPT_DIR}/lib/"*.sh    "${DEST}/lib/"
 # (Silent skip if .env does not exist — user may configure later.)
 cp "${SCRIPT_DIR}/.env"        "${DEST}/.env" 2>/dev/null || true
 
+# Sync OPENAI_DEFAULT_MODEL in .env from live config or environment.
+# Precedence: HERMES_DEFAULT_MODEL env > live config.yaml model.default.
+# Updates both the installed copy and the repo source.
+if [ -f "${DEST}/.env" ]; then
+    python3 "${SCRIPT_DIR}/lib/sync-default-model.py" "${DEST}/.env"
+    [ -f "${SCRIPT_DIR}/.env" ] && python3 "${SCRIPT_DIR}/lib/sync-default-model.py" "${SCRIPT_DIR}/.env"
+fi
+
 # Sync managed section from repo .env → ~/.hermes/.env
 # (preserves Hermes-auto-generated entries outside the managed section)
 # shellcheck source=lib/sync-env.sh

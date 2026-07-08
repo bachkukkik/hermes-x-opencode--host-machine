@@ -47,3 +47,10 @@ OPENCODE_SMALL_MODEL="${OPENCODE_SMALL_MODEL:-${OPENCODE_DEFAULT_MODEL}}"
 # Environment variable names referenced by {env:VAR} in opencode.jsonc.
 OPENCODE_API_KEY_ENV="OPENCODE_ZEN_API_KEY"
 OPENAI_API_KEY_ENV="OPENAI_API_KEY"
+
+# --- Context-length fallback (used by config generators) --------------------
+# When a model isn't in the generator's pin table and IS the default model,
+# this value is used as its explicit context_length. The hermes-agent also
+# self-resolves unknown models at runtime via its own DEFAULT_CONTEXT_LENGTHS
+# table / models.dev / endpoint probe.
+DEFAULT_CONTEXT_LENGTHS="${DEFAULT_CONTEXT_LENGTHS:-200000}"

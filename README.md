@@ -24,7 +24,7 @@ build scripts) lives at <https://github.com/bachkukkik/hermes-x-opencode>.
      build/plan, server, experimental)
 3. **Hermes config overlay** — generates a `custom_providers` entry with a
    static `models:` map (Form B schema) listing all discovered models.
-   - Sets top-level `provider: custom:litellm` so Hermes uses the generated custom provider for its active model.
+   - Sets `model.provider: custom:litellm` (nested) so Hermes uses the generated custom provider for its active model, and mirrors the models map + credential into a legacy `providers.litellm` block (which the model-switch path reads first).
 4. **auth.json staging** — seeds OpenCode credential store with both provider
    keys.
 

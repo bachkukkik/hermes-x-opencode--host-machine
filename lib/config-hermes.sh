@@ -45,6 +45,8 @@ resolve_ctx_len() {
         *minimax-m3*)        echo 1000000 ;;
         *qwen3.6-27b*q4*)    echo 262144  ;;  # quantized GGUF: 262144 real ctx, not family 1M
         *qwen3.6*)           echo 1048576 ;;
+        *agents-a1-mtp-apex*) echo 262144  ;;  # Agents A1 MTP (new) — 262K native ctx
+        *agents-a1-q4*)      echo 262144  ;;  # Agents A1 q4_k_m (new) — same architecture
         *)                   echo ""      ;;  # unknown -> omit, agent self-resolves
     esac
 }
@@ -137,6 +139,10 @@ def resolve_ctx_len(model_id):
         return 262144       # quantized GGUF: 262144 real ctx, not family 1M
     if 'qwen3.6' in m:
         return 1048576
+    if 'agents-a1-mtp-apex' in m:
+        return 262144       # Agents A1 MTP (new) — 262K native ctx
+    if 'agents-a1-q4' in m:
+        return 262144       # Agents A1 q4_k_m (new) — same architecture
     return None             # unknown -> omit, agent self-resolves
 
 # --- Build the merged custom_providers entry (Form B: models map) -----------
@@ -149,7 +155,8 @@ for mid in discovered:
     elif mid == default_model:
         # Default model ALWAYS gets an explicit context_length so the overlay
         # has >=1 entry and the active model has a sane window.
-        models_map[mid] = {"context_length": 200000}
+        default_ctx = int(os.environ.get("DEFAULT_CONTEXT_LENGTHS", "200000"))
+        models_map[mid] = {"context_length": default_ctx}
     else:
         # Unknown family -> emit empty mapping so hermes-agent self-resolves
         # context length at runtime (its own table / models.dev / endpoint probe).
@@ -181,15 +188,61 @@ if not replaced:
     merged_cps.append(new_litellm_entry)
 cfg["custom_providers"] = merged_cps
 
-# Point provider at the generated litellm custom provider so Hermes
-# actually uses the custom_providers block we just built.
-cfg["provider"] = "custom:litellm"
+# --- Also populate legacy providers.litellm block --------------------------
+# The hermes model-switch command resolves context from the legacy providers
+# dict (old format with api: key), NOT from custom_providers. Populate both
+# blocks with the same context_length values so model switch and runtime
+# agent agree. See PRD §19.
+providers_sec = cfg.setdefault("providers", {})
+if not isinstance(providers_sec, dict):
+    providers_sec = {}
+    cfg["providers"] = providers_sec
+litellm_prov = providers_sec.setdefault("litellm", {})
+if not isinstance(litellm_prov, dict):
+    litellm_prov = {}
+    providers_sec["litellm"] = litellm_prov
+# Preserve existing api/name keys; update models map
+litellm_prov.setdefault("api", base_url)
+litellm_prov.setdefault("name", "litellm")
+# Seed the credential on the legacy providers.litellm block too. Hermes'
+# _get_named_custom_provider() scans the `providers:` dict FIRST and only
+# falls through to `custom_providers:` on a miss — so a credential-less
+# legacy entry SHADOWS the good custom_providers entry, resolving to
+# "no-key-required" -> HTTP 401. Mirror the custom_providers logic: carry the
+# existing inline key forward, else key_env: OPENAI_API_KEY. Only seed when
+# neither is already present so a hand-set credential is preserved.
+if not (str(litellm_prov.get("api_key", "") or "").strip()
+        or str(litellm_prov.get("key_env", "") or "").strip()):
+    if existing_api_key:
+        litellm_prov["api_key"] = existing_api_key
+    else:
+        litellm_prov["key_env"] = "OPENAI_API_KEY"
+prov_models = litellm_prov.setdefault("models", {})
+if not isinstance(prov_models, dict):
+    prov_models = {}
+    litellm_prov["models"] = prov_models
+# Merge context_length from custom_providers models into providers.litellm.models
+for mid, mval in models_map.items():
+    if isinstance(mval, dict) and "context_length" in mval:
+        prov_models.setdefault(mid, {})["context_length"] = mval["context_length"]
+    elif mid == default_model:
+        default_ctx = int(os.environ.get("DEFAULT_CONTEXT_LENGTHS", "200000"))
+        prov_models.setdefault(mid, {})["context_length"] = default_ctx
 
 # --- Ensure model.default + model.name are set to the default model ---------
 model_sec = cfg.setdefault("model", {})
 if not isinstance(model_sec, dict):
     model_sec = {}
     cfg["model"] = model_sec
+# Point provider at the generated litellm custom provider so Hermes
+# actually uses the custom_providers block we just built.
+# Must be under model.provider (nested), not top-level cfg.provider.
+# Hermes reads model.provider for provider routing and context resolution;
+# the top-level provider key is for legacy use only.
+model_sec["provider"] = "custom:litellm"
+# Remove any stale top-level provider key (set by previous generator runs).
+# Hermes reads model.provider; a top-level provider confuses the model switch.
+cfg.pop("provider", None)
 # Allow HERMES_DEFAULT_MODEL to override the default model
 hermes_default = os.environ.get("HERMES_DEFAULT_MODEL", "").strip()
 if hermes_default:
@@ -258,6 +311,7 @@ summary_lines = [
     "custom_providers.litellm  -> replaced" if replaced else "custom_providers.litellm  -> appended",
     "models listed            -> %d" % len(models_map),
     "api_key                  -> carried from existing config (%s)" % ("present" if existing_api_key else "key_env: OPENAI_API_KEY"),
+    "providers.litellm cred   -> %s" % ("api_key" if litellm_prov.get("api_key") else ("key_env: %s" % litellm_prov.get("key_env")) if litellm_prov.get("key_env") else "MISSING (401 risk)"),
     "model.default            -> %s" % model_sec.get("default"),
     "model.name               -> %s" % model_sec.get("name"),
     "other custom_providers   -> %d preserved" % (len(merged_cps) - 1),

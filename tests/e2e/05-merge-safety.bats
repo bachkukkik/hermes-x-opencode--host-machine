@@ -125,6 +125,41 @@ print('OK: existing models preserved, new models union-merged')
 "
 }
 
+@test "rediscovered model with stale context is refreshed to computed limits" {
+    # config-opencode.sh update-existing logic: when a model is rediscovered
+    # AND its computed limits differ from what's stored, the entry is refreshed.
+    # Guards the new "else: update existing entry" branch (vs. only-add-if-absent).
+    seed_all_configs
+    # Inject a llama_cpp model pinned at a STALE context (200000) into the seeded
+    # config (which already has the permission/plugin/agent blocks the generator
+    # validates for preservation).
+    python3 -c "
+import json
+p = '${FAKE_HOME}/.config/opencode/opencode.jsonc'
+c = json.load(open(p))
+c['provider']['llama_cpp'] = {
+    'npm': '@ai-sdk/openai-compatible',
+    'options': {'apiKey': '{env:OPENAI_API_KEY}', 'baseURL': 'http://localhost:4000/v1'},
+    'models': {'qwen3.6-27b-q4_k_m': {'name': 'llama_cpp/qwen3.6-27b-q4_k_m', 'limit': {'context': 200000, 'output': 8192}}},
+}
+json.dump(c, open(p, 'w'), indent=2)
+"
+    start_mock_llm 14070 "zai/glm-5.2" "llama_cpp/qwen3.6-27b-q4_k_m"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local staging="${GEN_DIR}/staging/opencode.jsonc"
+    python3 -c "
+import json
+c = json.load(open('${staging}'))
+m = c['provider']['llama_cpp']['models']['qwen3.6-27b-q4_k_m']['limit']
+# Stale 200000/8192 must be refreshed to the pinned 262144/32768
+assert m['context'] == 262144, f'stale context not refreshed: {m}'
+assert m['output'] == 32768, f'stale output not refreshed: {m}'
+print('OK: rediscovered model refreshed to computed limits')
+"
+}
+
 @test "dry-run snapshot proves no live config files modified" {
     seed_all_configs
 

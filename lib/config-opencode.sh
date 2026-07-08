@@ -208,6 +208,11 @@ def get_limits(model_id):
     if 'glm' in name:
         return 128000, 8192
     if 'llama_cpp' in model_id:
+        # Agents A1 models have 256K native context (qwen35moe arch)
+        if 'agents-a1-mtp-apex' in name:
+            return 262144, 32768
+        if 'agents-a1-q4' in name:
+            return 262144, 32768
         # Quantized qwen3.6-27b GGUF has 256K real context, not the 200K default
         if 'qwen3.6-27b' in name:
             return 262144, 32768
@@ -296,16 +301,25 @@ for name, cfg in PROVIDER_BLOCKS.items():
             key = mid
             if "strip_prefix" in cfg and mid.startswith(cfg["strip_prefix"]):
                 key = mid[len(cfg["strip_prefix"]):]
+            ctx, out = get_limits(mid)
             if key not in mm:
-                ctx, out = get_limits(mid)
                 mm[key] = {
                     "name": mid,
                     "limit": {"context": ctx, "output": out},
                 }
-                if name == "llama_cpp":
-                    lc_added.append(key)
-                else:
-                    added.append(mid)
+            else:
+                # Update existing entry when computed context differs from stored
+                entry = mm[key]
+                if isinstance(entry, dict):
+                    old_limit = entry.get("limit", {}) if isinstance(entry.get("limit"), dict) else {}
+                    old_ctx = old_limit.get("context", 0)
+                    old_out = old_limit.get("output", 0)
+                    if old_ctx != ctx or old_out != out:
+                        entry["limit"] = {"context": ctx, "output": out}
+            if name == "llama_cpp":
+                lc_added.append(key)
+            else:
+                added.append(mid)
 
 # --- Plugin array ------------------------------------------------------------
 plugins = existing.get("plugin")
