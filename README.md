@@ -24,6 +24,7 @@ build scripts) lives at <https://github.com/bachkukkik/hermes-x-opencode>.
      build/plan, server, experimental)
 3. **Hermes config overlay** — generates a `custom_providers` entry with a
    static `models:` map (Form B schema) listing all discovered models.
+   - Sets top-level `provider: custom:litellm` so Hermes uses the generated custom provider for its active model.
 4. **auth.json staging** — seeds OpenCode credential store with both provider
    keys.
 
@@ -134,6 +135,7 @@ sentinel markers after every operation.
 | `OPENAI_DEFAULT_MODEL` | Fallback model when LiteLLM unreachable; controls model.default/model.name | zai/glm-5.2 |
 | `HERMES_DEFAULT_MODEL` | Override for Hermes active model (overrides OPENAI_DEFAULT_MODEL) | unset |
 | `OPENCODE_DEFAULT_MODEL` | Free Zen model for OpenCode delegation tasks | opencode/deepseek-v4-flash-free |
+| `OPENCODE_AGENT_MODEL` | Agent build/plan model for OpenCode subagents | same as OPENCODE_DEFAULT_MODEL |
 | `OPENCODE_SMALL_MODEL` | Small model for lightweight OpenCode tasks | same as OPENCODE_DEFAULT_MODEL |
 | `OPENCODE_FALLBACK_MODEL` | Comma-separated ordered fallback chain for opencode-runtime-fallback plugin | unset |
 | `OPENCODE_ZEN_API_KEY` | OpenCode Zen free models credential + {env:OPENCODE_ZEN_API_KEY} resolution | required (in ~/.hermes/.env) |
@@ -167,9 +169,12 @@ sentinel markers after every operation.
 │   ├── model-discovery.sh         # LiteLLM /v1/models discovery + filter
 │   ├── config-opencode.sh         # opencode.jsonc MERGE generator
 │   ├── config-hermes.sh           # Hermes config.yaml overlay generator
-│   └── env-auth.sh                # env resolution + auth.json staging
+│   ├── env-auth.sh                # env resolution + auth.json staging
+│   ├── sync-env.sh                # syncs repo .env managed block into ~/.hermes/.env
+│   └── validate-zen.sh            # validates OPENCODE_ZEN_API_KEY presence
 └── staging/                       # output (gitignored — review before apply)
     ├── opencode.jsonc             # merged OpenCode config
+    ├── opencode-fallback.jsonc    # generated fallback OpenCode config
     ├── config-hermes-overlay.yaml # merged Hermes config
     ├── auth.json                  # OpenCode credential store
     └── opencode-merge-summary.txt # diff summary

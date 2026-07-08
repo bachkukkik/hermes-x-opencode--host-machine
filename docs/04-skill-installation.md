@@ -39,6 +39,9 @@ Each skill is a directory containing a `SKILL.md` file with YAML frontmatter and
 
 ### install-skills.sh pattern
 
+> [!NOTE]
+> **PLANNED / NOT YET IMPLEMENTED:** The `install-skills.sh` script and the automated clone/symlink flow documented below are currently planned/aspirational. Only `install.sh` exists in the repository at this time.
+
 The host-level install script follows the Docker reference pattern:
 
 ```bash

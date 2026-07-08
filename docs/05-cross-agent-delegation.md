@@ -67,7 +67,7 @@ OpenCode can query Hermes Agent via the `hermes` terminal tool, which calls the 
 }
 ```
 
-When OpenCode needs capabilities outside its scope (web search, browser automation, cron scheduling), it shells out to `hermes`, which processes the request through the LiteLLM proxy using its configured `OPENAI_DEFAULT_MODEL` (`zai/glm-5.2` — paid).
+When OpenCode needs capabilities outside its scope (web search, browser automation, cron scheduling), it shells out to `hermes`, which processes the request through the LiteLLM proxy using its configured `HERMES_DEFAULT_MODEL` (`deepseek/deepseek-v4-pro` — paid).
 
 ### Model selection for delegation
 

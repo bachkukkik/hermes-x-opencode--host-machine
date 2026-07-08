@@ -178,3 +178,34 @@ print('OK: existing models preserved, new models union-merged')
     # Fresh files should be there
     assert_file_exists "${GEN_DIR}/staging/opencode.jsonc"
 }
+
+@test "MERGE mode preserves other custom providers and does not duplicate litellm" {
+    # Seed a config.yaml with multiple custom providers including litellm and anthropic-direct
+    cat > "${FAKE_HOME}/.hermes/config.yaml" << 'YAML_EOF'
+provider: custom:litellm
+model:
+  name: zai/glm-5.2
+  default: zai/glm-5.2
+custom_providers:
+  - name: litellm
+    base_url: http://localhost:4000
+    api_key: sk-tes...2345
+  - name: anthropic-direct
+    base_url: https://api.anthropic.com
+    api_key: sk-ant-somekey
+YAML_EOF
+
+    seed_opencode_config
+    start_mock_llm 14069 "zai/glm-5.2" "openai/gpt-4o"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+names = [cp.get('name') for cp in c['custom_providers']]
+assert names.count('litellm') == 1, f'litellm duplicated/dropped: {names}'
+assert 'anthropic-direct' in names, f'other provider dropped: {names}'
+"
+}

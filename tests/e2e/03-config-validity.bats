@@ -213,6 +213,61 @@ print(f'OK: provider.litellm.options.baseURL = {base_url}')
     [ "$(resolve_ctx_len "GEMINI/2.0-FLASH")" = "1048576" ]
 }
 
+@test "PROV1: Hermes overlay sets top-level provider custom:litellm" {
+    seed_all_configs
+    start_mock_llm 14033 "zai/glm-5.2" "openai/gpt-4o"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+assert c.get('provider') == 'custom:litellm', f\"provider={c.get('provider')!r}\"
+"
+}
+
+@test "Hermes overlay carries inline key forward and sets base_url" {
+    seed_all_configs
+    start_mock_llm 14034 "zai/glm-5.2" "openai/gpt-4o"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+    python3 -c "
+import yaml, os
+c = yaml.safe_load(open('${overlay}'))
+litellm = [cp for cp in c['custom_providers'] if cp.get('name')=='litellm'][0]
+assert litellm.get('api_key'), litellm
+assert 'key_env' not in litellm
+assert litellm.get('base_url') == os.environ['OPENAI_BASE_URL'] or litellm.get('base_url').startswith('http')
+"
+}
+
+@test "Hermes default model name/default fields logic and HERMES_DEFAULT_MODEL override" {
+    seed_all_configs
+    start_mock_llm 14038 "zai/glm-5.2" "openai/gpt-4o"
+    
+    # default run:
+    run_generate
+    [ "$status" -eq 0 ]
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+assert c['model']['default'] == c['model']['name'], f\"default={c['model']['default']}, name={c['model']['name']}\"
+"
+
+    # with HERMES_DEFAULT_MODEL override:
+    HERMES_DEFAULT_MODEL="openai/gpt-4o" run_generate
+    [ "$status" -eq 0 ]
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+assert c['model']['default'] == 'openai/gpt-4o' and c['model']['name'] == 'openai/gpt-4o', f\"default={c['model']['default']}, name={c['model']['name']}\"
+"
+}
+
 # --- provider.llama_cpp tests ------------------------------------------------
 
 @test "staging/opencode.jsonc has provider.llama_cpp with correct options" {

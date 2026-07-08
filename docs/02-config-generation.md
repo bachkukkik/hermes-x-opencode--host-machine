@@ -30,11 +30,12 @@ The single source of truth for all filesystem paths and defaults:
 
 ### Multi-provider OPENCODE_*_MODEL routing
 
-Three environment variables control which model OpenCode uses, and each accepts an optional provider prefix that routes the request through the correct auth block:
+Four environment variables control which model OpenCode uses, and each accepts an optional provider prefix that routes the request through the correct auth block:
 
 | Variable | Purpose | Default |
 |----------|---------|---------|
-| `OPENCODE_DEFAULT_MODEL` | Top-level `model`, `small_model`, and agent sub-block models | `opencode/deepseek-v4-flash-free` |
+| `OPENCODE_DEFAULT_MODEL` | Top-level `model` and `small_model` | `opencode/deepseek-v4-flash-free` |
+| `OPENCODE_AGENT_MODEL` | Agent sub-block models (`agent.build.model` and `agent.plan.model`). Falls back to `OPENCODE_DEFAULT_MODEL` if unset | Same as `OPENCODE_DEFAULT_MODEL` |
 | `OPENCODE_SMALL_MODEL` | Lightweight tasks (summarization, formatting). Falls back to `OPENCODE_DEFAULT_MODEL` if unset | Same as `OPENCODE_DEFAULT_MODEL` |
 | `OPENCODE_FALLBACK_MODEL` | Comma-separated chain tried in order when default/small fail. Bare models (no prefix) auto-get `litellm/` | *(unset)* |
 
@@ -321,7 +322,7 @@ resolve_ctx_len() {
 | (unknown, non-default) | `{}` (empty mapping) | Agent self-resolves via `DEFAULT_CONTEXT_LENGTHS` / `models.dev` / endpoint probe |
 | (unknown, IS default model) | 200,000 | Fallback: guarantees overlay has ≥1 explicit `context_length` entry so the active model gets a sane window |
 
-The existing `api_key` is carried forward from the live config. Other `custom_providers` entries are preserved.
+The existing inline `api_key` is carried forward from the live config; when none exists the entry falls back to `key_env: OPENAI_API_KEY` so Hermes resolves the key from the environment. Other `custom_providers` entries are preserved. The generator also sets a top-level `provider: custom:litellm` key so Hermes routes its active model through the generated `custom_providers` entry.
 
 **Model consistency guarantee:** `model.default` and `model.name` are ALWAYS set to the same value. If `HERMES_DEFAULT_MODEL` is set, both are set to that value. Otherwise, both are set to `OPENAI_DEFAULT_MODEL`. Stale values from the live config are never preserved — this prevents drift where the two fields could silently point to different models.
 
@@ -383,8 +384,8 @@ Seeds `auth.json` with two providers:
 
 | Provider | Key source | Fallback |
 |----------|-----------|----------|
-| `opencode` (Zen) | `OPENCODE_ZEN_API_KEY` from `~/.hermes/.env` | None — must be present |
-| `litellm` (proxy) | `OPENAI_API_KEY` from `~/.hermes/.env` | `model.api_key` from `config.yaml` |
+| `opencode` (Zen) | `OPENCODE_ZEN_API_KEY` from repo `.env`, then `~/.hermes/.env` | None — must be present |
+| `litellm` (proxy) | `OPENAI_API_KEY` from repo `.env`, then `~/.hermes/.env` | `model.api_key` from `config.yaml` |
 
 - **Conditional ACTION REQUIRED:** The guidance block for the free Zen model prints ONLY when `OPENCODE_ZEN_API_KEY` is not found in `.env` or `~/.hermes/.env`. When the key is present, the block is suppressed — no spurious warnings.
 
@@ -431,7 +432,7 @@ import yaml
 cfg = yaml.safe_load(open('staging/config-hermes-overlay.yaml'))
 cp = [c for c in cfg.get('custom_providers',[]) if c.get('name')=='litellm']
 assert cp, 'litellm provider missing'
-assert len(cp[0].get('models',{})) > 1, 'no models in map'
+assert len(cp[0].get('models',{})) >= 1, 'no models in map'
 print(f'Models: {len(cp[0][\"models\"])}')
 "
 
