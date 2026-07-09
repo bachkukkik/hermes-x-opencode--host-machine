@@ -84,9 +84,10 @@ assert c['model'] == 'litellm/deepseek/deepseek-v4-pro', f'wrong model: {c[\"mod
 assert c['small_model'] == 'litellm/deepseek/deepseek-v4-pro', f'wrong small_model'
 assert c['agent']['build']['model'] == 'litellm/deepseek/deepseek-v4-pro'
 assert c['agent']['plan']['model'] == 'litellm/deepseek/deepseek-v4-pro'
-# Must have litellm provider block with correct auth
-assert c['provider']['litellm']['options']['apiKey'] == '{env:OPENAI_API_KEY}'
-print('OK: litellm model field correct, uses litellm auth')
+# litellm apiKey is inlined with the literal key at generation time when
+# OPENAI_API_KEY is set (start_mock_llm exports sk-mock-test-key)
+assert c['provider']['litellm']['options']['apiKey'] == 'sk-mock-test-key', f\"apiKey wrong: {c['provider']['litellm']['options']['apiKey']}\"
+print('OK: litellm model field correct, uses inlined litellm key')
 "
 }
 
@@ -198,6 +199,8 @@ import json
 c = json.load(open('${staging}'))
 assert c['model'] == 'opencode/deepseek-v4-flash-free', f'wrong model: {c[\"model\"]} — bare id should resolve to opencode/ when no OPENAI creds'
 assert c['small_model'] == 'opencode/deepseek-v4-flash-free', f'wrong small_model: {c[\"small_model\"]}'
+# With no OPENAI_API_KEY, litellm apiKey falls back to the {env:} placeholder
+assert c['provider']['litellm']['options']['apiKey'] == '{env:OPENAI_API_KEY}', f\"apiKey should fall back to placeholder: {c['provider']['litellm']['options']['apiKey']}\"
 print('OK: bare id + no creds -> opencode/ prefix applied (Zen fallback)')
 "
 }

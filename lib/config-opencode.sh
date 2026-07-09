@@ -73,6 +73,13 @@ def normalize_model_id(mid):
         return "litellm/" + mid
     return "opencode/" + mid
 
+# Resolve the OpenAI/LiteLLM credential at GENERATION time. When OPENAI_API_KEY
+# is present in the generator's environment (generate.sh sources .env and exports
+# it), inline the literal key into opencode.jsonc so opencode works in any
+# shell/dir with no runtime env dependency. If it's absent, fall back to the
+# "{env:OPENAI_API_KEY}" placeholder (original contract) so generation still works.
+_openai_key = os.environ.get("OPENAI_API_KEY") or "{env:OPENAI_API_KEY}"
+
 # --- Provider block config (data-driven) -----------------------------------
 # Each entry describes how to generate a provider block in opencode.jsonc.
 #   options:     dict of options to set (merged into existing)
@@ -87,7 +94,7 @@ PROVIDER_BLOCKS = {
     "litellm": {
         "npm": "@ai-sdk/openai-compatible",
         "options": {
-            "apiKey": "{env:OPENAI_API_KEY}",
+            "apiKey": _openai_key,
             "baseURL": base_url,
         },
         # ALL discovered models go into litellm's models map
@@ -96,7 +103,7 @@ PROVIDER_BLOCKS = {
     "llama_cpp": {
         "npm": "@ai-sdk/openai-compatible",
         "options": {
-            "apiKey": "{env:OPENAI_API_KEY}",
+            "apiKey": _openai_key,
             "baseURL": base_url,
             "timeout": 600000,
             "setCacheKey": True,
@@ -364,16 +371,17 @@ if agent_build_model_before and agent_build_model_before != existing.get("model"
     lines.append("  (was agent.build.model = %s)" % agent_build_model_before)
 if agent_plan_model_before and agent_plan_model_before != existing.get("model"):
     lines.append("  (was agent.plan.model = %s)" % agent_plan_model_before)
+_key_desc = "<inlined literal>" if os.environ.get("OPENAI_API_KEY") else "{env:OPENAI_API_KEY}"
 lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_ZEN_API_KEY})")
-lines.append("provider.litellm      -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
-             % base_url)
+lines.append("provider.litellm      -> apiKey=%s, baseURL=%s"
+             % (_key_desc, base_url))
 lines.append("litellm.models total  -> %d (%d preserved + %d newly added)"
              % (total_models, existing_count, len(added)))
 # llama_cpp provider summary
 lc_total = len(provider.get("llama_cpp", {}).get("models", {}))
 lc_existing_count = lc_total - len(lc_added)
-lines.append("provider.llama_cpp    -> apiKey={env:OPENAI_API_KEY}, baseURL=%s"
-             % base_url)
+lines.append("provider.llama_cpp    -> apiKey=%s, baseURL=%s"
+             % (_key_desc, base_url))
 lines.append("llama_cpp.models total-> %d (%d preserved + %d newly added)"
              % (lc_total, lc_existing_count, len(lc_added)))
 if fallback_chain:
