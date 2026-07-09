@@ -201,6 +201,12 @@ def get_limits(model_id):
         if re.search(r'claude-3\.7|claude-[45]', name):
             return 200000, 16384
         return 200000, 4096
+    if 'deepseek-v4' in name:
+        # DeepSeek V4 family (v4-pro / v4-flash, incl. opencode-go/*) is 1M
+        # context — matches resolve_ctx_len() in config-hermes.sh. Without this
+        # it falls through to the generic 128K deepseek branch below and OpenCode
+        # caps the window at 128K.
+        return 1000000, 65536
     if 'deepseek' in name:
         return 128000, 8192
     if 'glm-5.2' in name:
