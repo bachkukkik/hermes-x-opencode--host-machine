@@ -145,6 +145,7 @@ sentinel markers after every operation.
 | `HERMES_DELEGATION_PROVIDER` | Provider for delegated subagent conversations | unset (inherits parent) |
 | `HERMES_GOAL_MAX_TURNS` | Max turns for goal-mode tasks | 50 |
 | `HERMES_COMPRESSION_THRESHOLD` | Context compression threshold (0.0-1.0) | unset |
+| `OPENCODE_COMPRESSION_THRESHOLD` | DCP compress point as fraction of each model's context window; written to managed `dcp.jsonc` as `compress.maxContextLimit: "<pct>%"` | 0.76 |
 
 ## Edge cases handled
 
