@@ -87,6 +87,7 @@ export OPENAI_API_KEY OPENAI_BASE_URL
 # file uses `KEY=value` not `export KEY=value`), which Python cannot access.
 export OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_AGENT_MODEL
 export OPENCODE_FALLBACK_MODEL OPENAI_DEFAULT_MODEL HERMES_DEFAULT_MODEL
+export OPENCODE_COMPRESSION_THRESHOLD
 export HERMES_YOLO_MODE HERMES_GOAL_MAX_TURNS HERMES_DELEGATION_MAX_ITERATIONS
 export HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER HERMES_COMPRESSION_THRESHOLD
 # shellcheck source=lib/model-discovery.sh
@@ -119,7 +120,7 @@ echo
 # --- DRY-RUN: snapshot live file checksums (prove no mutation) --------------
 LIVE_CHECKSUMS=""
 snapshot_live_checksums() {
-    local files=("${CONFIG}" "${OPENCODE_CONFIG}" "${HERMES_ENV}" "${OPENCODE_AUTH}")
+    local files=("${CONFIG}" "${OPENCODE_CONFIG}" "${HERMES_ENV}" "${OPENCODE_AUTH}" "${OPENCODE_DCP_CONFIG}")
     LIVE_CHECKSUMS=""
     for f in "${files[@]}"; do
         if [ -f "$f" ]; then
@@ -201,6 +202,11 @@ echo "-- Generating OpenCode staging (MERGE mode)..."
 generate_opencode_staging
 echo
 
+# --- Phase 2b: DCP (dynamic context pruning) config ------------------------
+echo "-- Generating DCP config staging (compress thresholds)..."
+generate_dcp_staging
+echo
+
 # --- Phase 3: Hermes config overlay (custom_providers models map) -----------
 echo "-- Generating Hermes config overlay..."
 generate_hermes_overlay
@@ -248,6 +254,18 @@ if python3 -c "import yaml; yaml.safe_load(open('${STAGING_HERMES_OVERLAY}'))" 2
     _pass "staging/config-hermes-overlay.yaml valid YAML"
 else
     _fail "staging/config-hermes-overlay.yaml valid YAML"
+fi
+
+# TC4b: staging dcp.jsonc is valid JSON and pins a percentage maxContextLimit
+if python3 -m json.tool "${STAGING_DCP}" >/dev/null 2>&1; then
+    _pass "staging/dcp.jsonc valid JSON"
+else
+    _fail "staging/dcp.jsonc valid JSON"
+fi
+if grep -qE '"maxContextLimit": *"[0-9]+%"' "${STAGING_DCP}" 2>/dev/null; then
+    _pass "dcp.jsonc compress.maxContextLimit is a percentage of model context"
+else
+    _fail "dcp.jsonc compress.maxContextLimit is a percentage of model context"
 fi
 
 # TC2a: opencode.jsonc has provider.opencode with Zen key (grep-based)
@@ -346,9 +364,9 @@ if [ "$APPLY" = true ]; then
     echo "============================================================"
 
     # Define staging→live mapping as parallel arrays
-    _staging_sources=("${STAGING_OPENCODE}" "${STAGING_HERMES_OVERLAY}" "${STAGING_AUTH}" "${STAGING_DIR}/export-env.sh")
-    _live_dests=("${OPENCODE_CONFIG}" "${CONFIG}" "${OPENCODE_AUTH}" "${GEN_DIR}/export-env.sh")
-    _apply_labels=("OpenCode config" "Hermes overlay" "OpenCode auth" "Shell env export helper")
+    _staging_sources=("${STAGING_OPENCODE}" "${STAGING_HERMES_OVERLAY}" "${STAGING_AUTH}" "${STAGING_DIR}/export-env.sh" "${STAGING_DCP}")
+    _live_dests=("${OPENCODE_CONFIG}" "${CONFIG}" "${OPENCODE_AUTH}" "${GEN_DIR}/export-env.sh" "${OPENCODE_DCP_CONFIG}")
+    _apply_labels=("OpenCode config" "Hermes overlay" "OpenCode auth" "Shell env export helper" "DCP config")
 
     if [ "$DRY_RUN" = true ]; then
         # --- DRY-RUN mode: validate staging files and report plan ---
@@ -356,7 +374,7 @@ if [ "$APPLY" = true ]; then
         echo ">> Apply dry-run: validating staging files and showing plan..."
         echo ""
         _apply_fail=0
-        for i in 0 1 2 3; do
+        for i in "${!_staging_sources[@]}"; do
             src="${_staging_sources[$i]}"
             dst="${_live_dests[$i]}"
             label="${_apply_labels[$i]}"
@@ -426,7 +444,7 @@ if [ "$APPLY" = true ]; then
         fi
     else
         # --- REAL apply: copy with backups ---
-        for i in 0 1 2 3; do
+        for i in "${!_staging_sources[@]}"; do
             src="${_staging_sources[$i]}"
             dst="${_live_dests[$i]}"
             label="${_apply_labels[$i]}"
