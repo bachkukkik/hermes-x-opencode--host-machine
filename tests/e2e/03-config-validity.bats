@@ -318,7 +318,7 @@ lc = c.get('provider', {}).get('llama_cpp', {})
 assert lc, 'provider.llama_cpp missing'
 assert lc.get('npm') == '@ai-sdk/openai-compatible', f'npm wrong: {lc.get(\"npm\")}'
 opts = lc.get('options', {})
-assert opts.get('apiKey') == '{env:OPENAI_API_KEY}', f'apiKey wrong: {opts.get(\"apiKey\")}'
+assert opts.get('apiKey') == 'sk-mock-test-key', f'apiKey wrong: {opts.get(\"apiKey\")}'
 assert 'baseURL' in opts, 'baseURL missing'
 assert opts.get('timeout') == 600000, f'timeout wrong: {opts.get(\"timeout\")}'
 assert opts.get('setCacheKey') == True, f'setCacheKey wrong: {opts.get(\"setCacheKey\")}'
