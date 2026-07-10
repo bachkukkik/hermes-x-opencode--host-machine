@@ -255,6 +255,24 @@ else:
     model_sec["default"] = default_model
     model_sec["name"] = default_model
 
+# --- model.max_tokens: OUTPUT cap (when HERMES_MAX_TOKENS is set) ------------
+# This is the OUTPUT-token ceiling Hermes sends per request (NOT the context
+# window — that's context_length in the models map above). Left unset, Hermes
+# sends no max_tokens and the upstream proxy/provider applies its own small
+# default, which truncates long responses (finish_reason='length') — e.g. a
+# delegation subagent emitting one large JSON payload gets its tool-call args
+# cut off mid-stream. Subagents inherit the parent's max_tokens (delegation has
+# no separate output-cap knob), so baking model.max_tokens here raises the cap
+# for the main agent AND its subagents. cli.py reads model.max_tokens (env
+# HERMES_MAX_TOKENS wins at runtime). Value must stay below the model's context
+# window; if a provider rejects it as too large, lower it.
+_max_tokens = os.environ.get("HERMES_MAX_TOKENS", "").strip()
+if _max_tokens:
+    try:
+        model_sec["max_tokens"] = int(_max_tokens)
+    except ValueError:
+        pass
+
 # --- Optional config blocks (env-gated) --------------------------------------
 # approvals.mode: off  (when HERMES_YOLO_MODE=1)
 if os.environ.get("HERMES_YOLO_MODE") == "1":
@@ -314,6 +332,7 @@ summary_lines = [
     "providers.litellm cred   -> %s" % ("api_key" if litellm_prov.get("api_key") else ("key_env: %s" % litellm_prov.get("key_env")) if litellm_prov.get("key_env") else "MISSING (401 risk)"),
     "model.default            -> %s" % model_sec.get("default"),
     "model.name               -> %s" % model_sec.get("name"),
+    "model.max_tokens         -> %s" % (model_sec.get("max_tokens") if "max_tokens" in model_sec else "unset (provider default)"),
     "other custom_providers   -> %d preserved" % (len(merged_cps) - 1),
     "",
     "NOTE: This is a STAGING overlay. Other config sections (agent, tools,",
