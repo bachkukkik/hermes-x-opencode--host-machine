@@ -74,6 +74,23 @@ if [ "$MISSING" -ne 0 ]; then
     exit 1
 fi
 
+# --- Cleanup legacy shell-integration artifacts ------------------------------
+# The removed --shell-integration feature exported secrets machine-wide via a
+# sourced export-env.sh wired into ~/.bashrc/~/.zshrc. Credentials are now
+# inlined into the generated config files, so purge any leftovers from older
+# installs. All secrets live in config files (opencode.jsonc, auth.json,
+# config.yaml), never in the shell environment.
+echo "== Purging legacy shell-integration artifacts (if any) ..."
+rm -f "${DEST}/export-env.sh" "${DEST}/export-env.sh.bak" \
+      "${DEST}/staging/export-env.sh" 2>/dev/null || true
+for _rc in "${HOME}/.bashrc" "${HOME}/.zshrc" "${HOME}/.profile" "${HOME}/.bash_profile"; do
+    if [ -f "$_rc" ] && grep -qF '# >>> hermes host-config-gen env bridge (managed, do not edit) >>>' "$_rc" 2>/dev/null; then
+        cp "$_rc" "${_rc}.bak"
+        sed -i '/^# >>> hermes host-config-gen env bridge (managed, do not edit) >>>/,/^# <<< hermes host-config-gen env bridge <<<$/d' "$_rc"
+        echo "  Removed legacy env bridge from $_rc (backup: ${_rc}.bak)"
+    fi
+done
+
 # --- Deploy ------------------------------------------------------------------
 mkdir -p "${DEST}/lib"
 

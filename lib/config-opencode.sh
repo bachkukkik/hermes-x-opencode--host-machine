@@ -80,6 +80,13 @@ def normalize_model_id(mid):
 # "{env:OPENAI_API_KEY}" placeholder (original contract) so generation still works.
 _openai_key = os.environ.get("OPENAI_API_KEY") or "{env:OPENAI_API_KEY}"
 
+# Resolve the OpenCode Zen credential at GENERATION time, same contract as
+# _openai_key above. Inlining the literal key means opencode runs in ANY shell
+# or directory with no runtime env dependency (and no ~/.bashrc env bridge that
+# would leak secrets machine-wide). Falls back to the "{env:OPENCODE_ZEN_API_KEY}"
+# placeholder when the key is absent, so generation still succeeds.
+_opencode_zen_key = os.environ.get("OPENCODE_ZEN_API_KEY") or "{env:OPENCODE_ZEN_API_KEY}"
+
 # --- Provider block config (data-driven) -----------------------------------
 # Each entry describes how to generate a provider block in opencode.jsonc.
 #   options:     dict of options to set (merged into existing)
@@ -89,7 +96,7 @@ _openai_key = os.environ.get("OPENAI_API_KEY") or "{env:OPENAI_API_KEY}"
 #   strip_prefix: optional prefix to strip when keying models map entries
 PROVIDER_BLOCKS = {
     "opencode": {
-        "options": {"apiKey": "{env:OPENCODE_ZEN_API_KEY}"},
+        "options": {"apiKey": _opencode_zen_key},
     },
     "litellm": {
         "npm": "@ai-sdk/openai-compatible",
@@ -372,7 +379,8 @@ if agent_build_model_before and agent_build_model_before != existing.get("model"
 if agent_plan_model_before and agent_plan_model_before != existing.get("model"):
     lines.append("  (was agent.plan.model = %s)" % agent_plan_model_before)
 _key_desc = "<inlined literal>" if os.environ.get("OPENAI_API_KEY") else "{env:OPENAI_API_KEY}"
-lines.append("provider.opencode     -> present (apiKey={env:OPENCODE_ZEN_API_KEY})")
+_zen_desc = "<inlined literal>" if os.environ.get("OPENCODE_ZEN_API_KEY") else "{env:OPENCODE_ZEN_API_KEY}"
+lines.append("provider.opencode     -> present (apiKey=%s)" % _zen_desc)
 lines.append("provider.litellm      -> apiKey=%s, baseURL=%s"
              % (_key_desc, base_url))
 lines.append("litellm.models total  -> %d (%d preserved + %d newly added)"

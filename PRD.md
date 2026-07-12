@@ -387,6 +387,16 @@ Files to modify:
 
 ## 14. Shell Env Export Bridge (Phase 1.6 — delegation runtime gap)
 
+> **⚠️ SUPERSEDED (removed).** The `export-env.sh` bridge described here was
+> removed. It exported credentials into the shell environment, which — once
+> wired into an rc file via `--shell-integration` (§16) — leaked secrets
+> machine-wide and collided with other repos' `.env` files. It is replaced by
+> **generation-time credential inlining**: `generate.sh` reads the credentials
+> from `.env` in-process and bakes their literal values into the generated
+> config files (`opencode.jsonc`, `auth.json`, `config.yaml`). opencode and
+> hermes now run from any directory with no environment variables set, so no
+> shell export helper is needed. Retained below for historical context.
+
 ### Problem
 
 `opencode.jsonc` uses `{env:OPENAI_API_KEY}` references that resolve from the
@@ -483,6 +493,16 @@ to restrict access to files containing literal API keys.
 - `chmod 600` is sufficient (owner read/write only; no execute needed for sourcing)
 
 ## 16. Opt-In Shell Integration (Phase 1.7 — `--shell-integration` flag)
+
+> **⚠️ SUPERSEDED (removed).** The `--shell-integration` / `--remove-shell-integration`
+> flags and the rc-file "env bridge" block were removed. Sourcing `export-env.sh`
+> from `~/.bashrc`/`~/.zshrc` exported the credentials into **every** shell on the
+> machine, polluting the environment of unrelated repos (e.g. overriding their
+> `.env` values) and leaking secrets. The replacement is generation-time
+> credential inlining (see the §14 banner): all secrets live in the generated
+> config files, so opencode/hermes work anywhere with a clean environment and
+> this repo never touches your shell rc files. `install.sh` purges any legacy
+> env-bridge block and `export-env.sh` on upgrade. Retained below for history.
 
 ### 16.1 Problem
 

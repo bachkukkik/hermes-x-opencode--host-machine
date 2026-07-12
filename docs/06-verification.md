@@ -127,27 +127,25 @@ bash ~/.hermes/host-config-gen/generate.sh --apply --dry-run
 | `staging/config-hermes-overlay.yaml` | `~/.hermes/config.yaml` |
 | `staging/auth.json` | `~/.local/share/opencode/auth.json` |
 
-### Shell integration (--shell-integration)
+### Credential inlining (no shell integration)
 
-Appends a guarded sentinel block to `~/.bashrc` (or `~/.zshrc`) that sources `export-env.sh` on every shell startup:
+Credentials are inlined into the generated config files at generation time, so
+`opencode` and `hermes` run from any directory with **no environment variables
+set**. There is no `export-env.sh` and no rc-file integration.
 
-```bash
-# >>> hermes host-config-gen env bridge (managed, do not edit) >>>
-[ -f "$HOME/.hermes/host-config-gen/export-env.sh" ] && source "$HOME/.hermes/host-config-gen/export-env.sh"
-# <<< hermes host-config-gen env bridge <<<
-```
-
-**Usage:**
+**Verification:** confirm the Zen key is inlined (not an `{env:...}` placeholder)
+and that opencode resolves it with a clean environment:
 
 ```bash
-# Installed path:
-bash ~/.hermes/host-config-gen/generate.sh --apply --shell-integration
+# apiKey should be the literal key, not "{env:OPENCODE_ZEN_API_KEY}"
+grep -A2 '"opencode"' ~/.config/opencode/opencode.jsonc | grep apiKey
 
-# In-repo (development):
-source .env && bash generate.sh --apply --shell-integration
+# opencode must work with no relevant env vars exported:
+env -u OPENAI_API_KEY -u OPENCODE_ZEN_API_KEY -u OPENAI_BASE_URL opencode run --model opencode/deepseek-v4-flash-free "say hi"
 ```
 
-**Idempotency:** Re-running does not duplicate the block. **Rollback:** `--apply --remove-shell-integration` removes it cleanly; no-op if absent. **Verification:** `grep -n 'hermes host-config-gen' ~/.bashrc` to audit.
+**No pollution:** `grep -n 'hermes host-config-gen' ~/.bashrc ~/.zshrc` must
+return nothing. `install.sh` purges any legacy env-bridge block on upgrade.
 
 ### bats e2e tests
 

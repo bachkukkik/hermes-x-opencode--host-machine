@@ -27,8 +27,6 @@ Comprehensive technical documentation for the Hermes × OpenCode Host Config Gen
 | `tests/e2e/05-merge-safety.bats` | MERGE mode preservation, dry-run checksum safety | AC-MERGE1-4 |
 | `tests/e2e/06-fallback-chain.bats` | Fallback chain generation and formatting | AC-FB1-4 |
 | `tests/e2e/07-apply-flag.bats` | --apply flag, staging→live with .bak backups | AC-APP1-4 |
-| `tests/e2e/08-export-env.bats` | export-env.sh generation (AC-EXP1-3) | AC-EXP1-3 |
-| `tests/e2e/09-shell-integration.bats` | --shell-integration flag (AC-SI1-4) | AC-SI1-4 |
 | `tests/e2e/20-zen-api-key.bats` | OPENCODE_ZEN_API_KEY (AC34) | AC34 |
 | `tests/e2e/21-delegation-model.bats` | delegation.model/provider (AC35) | AC35 |
 | `tests/e2e/22-ctx-pin-and-credentials.bats` | Quantized GGUF ctx pin, auth.json OR guard (CTX1-3, CRED1-3) | CTX1-3, CRED1-3 |

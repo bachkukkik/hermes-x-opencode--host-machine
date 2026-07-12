@@ -15,11 +15,16 @@ setup() {
     GEN_DIR="${FAKE_HOME}/.hermes/host-config-gen"
     export GEN_DIR
     mkdir -p "${GEN_DIR}/lib"
-    # Clean environment — prevent repo .env from leaking test defaults
+    # Clean environment — prevent repo .env / the developer's shell from leaking
+    # test defaults. Credentials are inlined into config at generation time, so a
+    # leaked OPENAI_API_KEY/OPENCODE_ZEN_API_KEY would turn a placeholder-expecting
+    # assertion into an inlined literal. Tests that need a key set it themselves
+    # (start_mock_llm, or an explicit `export` in the test body).
     unset HERMES_YOLO_MODE HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER
     unset HERMES_GOAL_MAX_TURNS HERMES_COMPRESSION_THRESHOLD
-    unset OPENAI_DEFAULT_MODEL OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_FALLBACK_MODEL
+    unset OPENAI_DEFAULT_MODEL OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_FALLBACK_MODEL OPENCODE_AGENT_MODEL
     unset HERMES_DELEGATION_MAX_ITERATIONS
+    unset OPENAI_API_KEY OPENAI_BASE_URL OPENCODE_ZEN_API_KEY
     cp "${REPO_DIR}/generate.sh" "${GEN_DIR}/"
     cp "${REPO_DIR}/lib/"*.sh     "${GEN_DIR}/lib/"
     chmod +x "${GEN_DIR}/generate.sh"

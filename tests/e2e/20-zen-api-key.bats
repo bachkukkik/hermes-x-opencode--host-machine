@@ -9,30 +9,41 @@
 
 load test_helper/common
 
-@test "AC34a: staging/opencode.jsonc uses {env:OPENCODE_ZEN_API_KEY}" {
+@test "AC34a: staging/opencode.jsonc inlines OPENCODE_ZEN_API_KEY literal when set" {
     seed_all_configs
+    # Credentials are inlined at generation time so opencode runs anywhere with
+    # no runtime env dependency (and no machine-wide env bridge that leaks keys).
+    export OPENCODE_ZEN_API_KEY="sk-zen-test-literal-xyz"
     start_mock_llm 14040 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
     run_generate
     [ "$status" -eq 0 ]
 
-    assert_file_contains "${GEN_DIR}/staging/opencode.jsonc" "\"apiKey\": \"{env:OPENCODE_ZEN_API_KEY}\""
-}
-
-@test "AC34b: staging/opencode.jsonc does NOT contain old {env:OPENCODE_API_KEY} (without ZEN)" {
-    seed_all_configs
-    start_mock_llm 14041 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
-    run_generate
-    [ "$status" -eq 0 ]
-
-    # Verify the exact old pattern {env:OPENCODE_API_KEY} is not present (as a distinct token, not substring).
-    # The correct pattern is {env:OPENCODE_ZEN_API_KEY}.
     python3 -c "
 import json
 c = json.load(open('${GEN_DIR}/staging/opencode.jsonc'))
 api_key = c.get('provider',{}).get('opencode',{}).get('options',{}).get('apiKey','')
-assert api_key == '{env:OPENCODE_ZEN_API_KEY}', f'Wrong apiKey: {api_key}'
+assert api_key == 'sk-zen-test-literal-xyz', f'Expected inlined literal, got: {api_key}'
+print('OK: OPENCODE_ZEN_API_KEY inlined as literal (no {env:} placeholder)')
+"
+}
+
+@test "AC34b: staging/opencode.jsonc falls back to {env:OPENCODE_ZEN_API_KEY} when key unset" {
+    seed_all_configs
+    # With no key in the generator environment, generation still succeeds and
+    # writes the {env:OPENCODE_ZEN_API_KEY} placeholder (original contract).
+    unset OPENCODE_ZEN_API_KEY
+    start_mock_llm 14041 "mock-model" "zai/glm-5.2" "openai/gpt-4o" "anthropic/claude-sonnet-4.6"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    python3 -c "
+import json
+c = json.load(open('${GEN_DIR}/staging/opencode.jsonc'))
+api_key = c.get('provider',{}).get('opencode',{}).get('options',{}).get('apiKey','')
+assert api_key == '{env:OPENCODE_ZEN_API_KEY}', f'Wrong fallback apiKey: {api_key}'
+# Old OPENCODE_API_KEY name (without ZEN) must not appear.
 assert 'OPENCODE_API_KEY' not in api_key.replace('OPENCODE_ZEN_API_KEY',''), f'Old name leaked: {api_key}'
-print('OK: only OPENCODE_ZEN_API_KEY present in opencode provider')
+print('OK: falls back to {env:OPENCODE_ZEN_API_KEY} placeholder')
 "
 }
 

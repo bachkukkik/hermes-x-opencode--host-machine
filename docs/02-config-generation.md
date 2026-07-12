@@ -103,23 +103,24 @@ source "${SCRIPT_DIR}/.env" 2>/dev/null || true
 export OPENAI_API_KEY OPENAI_BASE_URL
 export OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_AGENT_MODEL
 export OPENCODE_FALLBACK_MODEL OPENAI_DEFAULT_MODEL HERMES_DEFAULT_MODEL
+export OPENCODE_ZEN_API_KEY
 export HERMES_YOLO_MODE HERMES_GOAL_MAX_TURNS HERMES_DELEGATION_MAX_ITERATIONS
 export HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER HERMES_COMPRESSION_THRESHOLD
 ```
 
-The `export` statements promote the shell variables to environment variables so Python's `os.environ.get()` sees the correct values. This is why `.env` changes take effect without needing `export` inside the `.env` file itself.
+The `export` statements promote the shell variables to environment variables so Python's `os.environ.get()` sees the correct values **within the generator process only**. This is why `.env` changes take effect without needing `export` inside the `.env` file itself.
 
-#### Sourceable export-env.sh (for opencode delegation)
+#### Credential inlining (no shell export at runtime)
 
-The export bridge above only applies within the generator's own process tree. But `opencode run` resolves `{env:OPENAI_API_KEY}` from the **interactive shell** environment — a shell where the generator never ran. To bridge this, the generator writes `staging/export-env.sh`: a sourceable script with all managed env vars baked in (values expanded at generation time from the sourced `.env`).
+`opencode run` needs the API keys, but resolving them from the interactive
+shell would require exporting secrets into that shell — which leaks them
+machine-wide. Instead, the generator inlines the **literal** credential values
+into the config files at generation time:
 
-`--apply` deploys it to `~/.hermes/host-config-gen/export-env.sh`. Before running opencode in a fresh shell:
+- `OPENAI_API_KEY` → `opencode.jsonc` (`provider.litellm`/`llama_cpp`) + `auth.json` (`litellm`)
+- `OPENCODE_ZEN_API_KEY` → `opencode.jsonc` (`provider.opencode`) + `auth.json` (`opencode`)
 
-```bash
-source ~/.hermes/host-config-gen/export-env.sh
-```
-
-This is required because `opencode.jsonc` uses `{env:OPENAI_API_KEY}` references that resolve from the shell, not from `auth.json` alone.
+`config-opencode.sh` reads `os.environ.get("OPENAI_API_KEY")` / `os.environ.get("OPENCODE_ZEN_API_KEY")` at generation time and writes the literal value (falling back to the `{env:...}` placeholder only if unset). opencode therefore runs in any fresh shell with **no environment variables set**, so there is no `export-env.sh` and no rc-file integration.
 
 ### Zen API key validation (validate-zen.sh)
 
@@ -150,7 +151,7 @@ The `--apply` flag copies staging output to live config paths with automatic `.b
 - `~/.config/opencode/opencode.jsonc.bak`
 - `~/.hermes/config.yaml.bak`
 - `~/.local/share/opencode/auth.json.bak`
-- `~/.hermes/host-config-gen/export-env.sh` (new file — no backup needed; regenerated each run)
+- `~/.config/opencode/dcp.jsonc.bak`
 
 The apply step is an explicit opt-in — the default (no flags) remains staging-only per the safety guarantee.
 
