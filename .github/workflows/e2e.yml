@@ -17,7 +17,8 @@ jobs:
       - name: Install bats and Python dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y bats
-          pip3 install --user pyyaml
+          # Install system-wide so it's importable when tests override HOME
+          sudo pip3 install pyyaml --break-system-packages
 
       - name: Create .env fixture
         run: |
