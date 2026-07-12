@@ -49,16 +49,15 @@ bash ~/.hermes/host-config-gen/generate.sh --apply --dry-run
 
 ### In-repo usage (development)
 
-For development and iteration, run `generate.sh` directly from the repo root instead of the installed path. The two-step workflow loads environment variables then invokes the generator:
+For development and iteration, run `generate.sh` directly from the repo root instead of the installed path:
 
 ```bash
 # From the repo root:
-source .env
-bash generate.sh --dry-run                              # preview
-bash generate.sh --apply --shell-integration           # deploy + wire rc file
+bash generate.sh --dry-run     # preview
+bash generate.sh --apply       # deploy to live paths (with .bak backups)
 ```
 
-> **Note:** `generate.sh` automatically sources `${SCRIPT_DIR}/.env`, but `.env` uses bare `KEY=value` (no `export`), so variables remain shell-local unless you source `.env` with export intent or source `export-env.sh` afterward. Running `source .env` from the repo root mimics the installed path's behavior.
+> **Note:** `generate.sh` sources `${SCRIPT_DIR}/.env` internally, so you do **not** need to `source .env` in your shell first. All credentials from `.env` are read at generation time and inlined into the generated config files — nothing is exported into your shell environment.
 
 ## Applying configs
 
@@ -75,56 +74,29 @@ The `--apply` flag copies staging output to live paths with automatic
 
 OpenCode defaults to `opencode/deepseek-v4-flash-free` so that Hermes can
 delegate coding tasks via the `opencode` skill **without burning paid token
-quota**. The credential is `OPENCODE_ZEN_API_KEY` (already in `~/.hermes/.env`).
-The `{env:OPENCODE_ZEN_API_KEY}` ref in `opencode.jsonc` must resolve to the same
-value — export it or add it to `.env`.
+quota**. The credential is `OPENCODE_ZEN_API_KEY` (in the repo `.env` or
+`~/.hermes/.env`). Its literal value is **inlined** into `opencode.jsonc` and
+seeded into `auth.json` at generation time, so opencode resolves it with no
+environment variable set.
 
-## Shell env export for delegation
+## Credentials are inlined — no shell environment, no pollution
 
-`opencode run` resolves `{env:OPENAI_API_KEY}` and `{env:OPENAI_BASE_URL}` from
-the shell environment at startup. The generator produces a sourceable
-`export-env.sh` in staging (deployed to `~/.hermes/host-config-gen/export-env.sh`
-by `--apply`) that exports all managed env vars with expanded values. Before
-running opencode, `source ~/.hermes/host-config-gen/export-env.sh` to make the
-API key and model selections visible to the opencode process.
+`opencode` and `hermes` run from **any directory with no environment variables
+set**. At generation time the generator reads the credentials from `.env`
+(in-process) and bakes their literal values into the generated config files:
 
-### Opt-in shell integration (auto-source)
+| Credential | Inlined into |
+|---|---|
+| `OPENAI_API_KEY` | `opencode.jsonc` (`provider.litellm`/`llama_cpp`), `auth.json` (`litellm`), `config.yaml` |
+| `OPENCODE_ZEN_API_KEY` | `opencode.jsonc` (`provider.opencode`), `auth.json` (`opencode`) |
 
-Use `--shell-integration` (requires `--apply`) to automatically source
-`export-env.sh` from your shell rc file — no manual sourcing needed after
-every shell restart.
+Because nothing is exported into your shell, this repo **never mutates your
+`~/.bashrc`/`~/.zshrc` and never leaks secrets into other repos' environments**.
+There is no `export-env.sh` and no shell/rc-file integration.
 
-```bash
-# One-time setup: deploy configs + add source line to ~/.bashrc (or ~/.zshrc)
-bash ~/.hermes/host-config-gen/generate.sh --apply --shell-integration
-```
-
-This appends a guarded sentinel block to your rc file:
-
-```bash
-# >>> hermes host-config-gen env bridge (managed, do not edit) >>>
-[ -f "$HOME/.hermes/host-config-gen/export-env.sh" ] && source "$HOME/.hermes/host-config-gen/export-env.sh"
-# <<< hermes host-config-gen env bridge <<<
-```
-
-The block is **idempotent** — re-running the command does not duplicate the
-block. The guard (`[ -f ... ]`) ensures no errors if the helper file is missing.
-
-### Rollback
-
-```bash
-# Remove the sentinel block from your rc file
-bash ~/.hermes/host-config-gen/generate.sh --apply --remove-shell-integration
-```
-
-This surgically removes only the managed block without touching the rest of
-your rc file.
-
-### Supported shells
-
-Only **bash** and **zsh** are supported (`$SHELL` detection). Other shells
-produce an error message. The block is auditable and plain-text — review the
-sentinel markers after every operation.
+> **Upgrading from an older version?** Run `bash install.sh` — it purges the
+> legacy `export-env.sh` helper and removes any `hermes host-config-gen env
+> bridge` block previously added to your rc files (backing them up first).
 
 ## Environment variables
 

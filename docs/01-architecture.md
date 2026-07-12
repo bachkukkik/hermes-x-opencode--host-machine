@@ -63,7 +63,7 @@ The orchestrator (`generate.sh`) runs four phases sequentially:
     ├── opencode-fallback.jsonc    # generated when fallback chain is set
     ├── config-hermes-overlay.yaml
     ├── auth.json
-    ├── export-env.sh              # sourceable env export helper (for opencode delegation)
+    ├── dcp.jsonc                  # dynamic context pruning thresholds
     ├── discovered-models.txt
     └── opencode-merge-summary.txt
 ```
