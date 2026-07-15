@@ -24,6 +24,9 @@ setup() {
     unset HERMES_GOAL_MAX_TURNS HERMES_COMPRESSION_THRESHOLD
     unset OPENAI_DEFAULT_MODEL OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_FALLBACK_MODEL OPENCODE_AGENT_MODEL
     unset HERMES_DELEGATION_MAX_ITERATIONS
+    # Let constants.sh defaults govern these (262144 / 200 / yolo-on) unless a
+    # test sets them explicitly; otherwise the developer's shell could leak.
+    unset HERMES_MAX_TOKENS HERMES_AGENT_MAX_TURNS
     unset OPENAI_API_KEY OPENAI_BASE_URL OPENCODE_ZEN_API_KEY
     cp "${REPO_DIR}/generate.sh" "${GEN_DIR}/"
     cp "${REPO_DIR}/lib/"*.sh     "${GEN_DIR}/lib/"

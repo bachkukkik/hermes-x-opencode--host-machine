@@ -210,33 +210,40 @@ def get_limits(model_id):
     if 'gpt-5' in name:
         return 128000, 16384
     if re.search(r'/o[134]', name) or re.search(r'-o[134]', name):
-        return 200000, 100000
+        return 262144, 100000
     if re.search(r'claude-[34]', name):
         if re.search(r'claude-3\.7|claude-[45]', name):
-            return 200000, 16384
-        return 200000, 4096
-    if 'deepseek-v4' in name:
-        # DeepSeek V4 family (v4-pro / v4-flash, incl. opencode-go/*) is 1M
-        # context — matches resolve_ctx_len() in config-hermes.sh. Without this
-        # it falls through to the generic 128K deepseek branch below and OpenCode
-        # caps the window at 128K.
-        return 1000000, 65536
-    if 'deepseek' in name:
-        return 128000, 8192
-    if 'glm-5.2' in name:
-        return 1048576, 131072
-    if 'glm' in name:
-        return 128000, 8192
+            return 262144, 16384
+        return 262144, 4096
     if 'llama_cpp' in model_id:
         # Agents A1 models have 256K native context (qwen35moe arch)
         if 'agents-a1-mtp-apex' in name:
             return 262144, 32768
         if 'agents-a1-q4' in name:
             return 262144, 32768
-        # Quantized qwen3.6-27b GGUF has 256K real context, not the 200K default
-        if 'qwen3.6-27b' in name:
-            return 262144, 32768
-        return 200000, 32768
+        return 262144, 32768
+    if 'deepseek-v4' in name:
+        # DeepSeek V4 family (v4-pro / v4-flash, incl. opencode-go/*) is 1M
+        # context — matches resolve_ctx_len() in config-hermes.sh. Without this
+        # it falls through to the generic 128K deepseek branch below and OpenCode
+        # caps the window at 128K.
+        return 1000000, 65536
+    if 'kimi' in name:
+        return 262144, 8192
+    if 'minimax-m3' in name:
+        return 1000000, 8192
+    if 'mimo-v2.5' in name:
+        return 1048576, 8192
+    if 'nemotron' in name:
+        return 131072, 8192
+    if 'qwen3.6' in name:
+        return 1048576, 8192
+    if 'deepseek' in name:
+        return 128000, 8192
+    if 'glm-5.2' in name:
+        return 1048576, 131072
+    if 'glm' in name:
+        return 128000, 8192
     if 'gemini' in name:
         return 1048576, 65536
     return 128000, 8192

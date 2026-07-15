@@ -762,3 +762,92 @@ family wildcard). `*agents-a1-mtp-apex*` is checked before any broader
 - SC-DCL8: `bats tests/e2e/03-config-validity.bats` — all resolve_ctx_len tests pass
 - SC-DCL9: Staging `config-hermes-overlay.yaml` contains `context_length: 262144` for agents-a1 models
 - SC-DCL10: Default model fallback uses `DEFAULT_CONTEXT_LENGTHS` value, not hardcoded 200000
+
+## 20. `get_limits()` Parity Bridge (Phase 2.3 — Docker reference drift)
+
+### 20.1 Problem
+
+`config-opencode.sh` `get_limits()` carries the header comment *"verbatim port of
+Docker reference"*, but the host copy was extracted before the reference table was
+updated (reference PRs #75/#76) and never re-synced. Two drift classes resulted:
+
+1. **Silent context narrowing** — the `o[134]` reasoning family, all `claude-[34]`
+   families, and the generic `llama_cpp` default returned `200000` context where the
+   reference returns `262144`. OpenCode capped these windows ~62K below their real size.
+2. **Missing model families** — `kimi`, `minimax-m3`, `mimo-v2.5`, `nemotron`, and the
+   general (non-GGUF) `qwen3.6` branch were absent, so those models fell through to the
+   generic `128000` fallback. This also broke the invariant documented in the DCP notes
+   that `get_limits()` (OpenCode side) and `resolve_ctx_len()` (Hermes side) stay in
+   lockstep — `resolve_ctx_len` already pinned `minimax-m3 → 1000000` and `qwen3.6 →
+   1048576`, but `get_limits` did not.
+
+### 20.2 Fix
+
+**Files changed:**
+
+- **`lib/config-opencode.sh`** `get_limits()`: Re-synced the if-chain to the Docker
+  reference verbatim — bumped `o[134]`/`claude-[34]`/`llama_cpp`-default context to
+  `262144`, and added `kimi` (262144, 8192), `minimax-m3` (1000000, 8192), `mimo-v2.5`
+  (1048576, 8192), `nemotron` (131072, 8192), and general `qwen3.6` (1048576, 8192)
+  branches. The redundant `qwen3.6-27b` GGUF special-case inside the `llama_cpp` branch
+  was dropped — the branch default is now `262144`, so quantized qwen3.6-27b resolves to
+  the same value it did before.
+- **`tests/e2e/22-ctx-pin-and-credentials.bats`**: Added **CTX4**, which extracts the
+  `get_limits` function from the shell script and asserts 14 load-bearing rows
+  (opencode-go/free-tier families, o-series, claude, GGUF, agents-a1). Regression guard
+  against the table narrowing again.
+
+### 20.3 Success criteria
+
+- SC-GL1: `get_limits("litellm/o3")` → `(262144, 100000)`
+- SC-GL2: `get_limits("opencode-go/minimax-m3")` → `(1000000, 8192)`
+- SC-GL3: `get_limits("opencode-go/kimi-k2.6")` → `(262144, 8192)`
+- SC-GL4: `get_limits("llama_cpp/qwen3.6-27b-q4_k_m")` → `(262144, 32768)` (unchanged)
+- SC-GL5: `bash -n lib/config-opencode.sh` passes
+- SC-GL6: `bats tests/e2e/22-ctx-pin-and-credentials.bats` — CTX4 passes, full suite green
+
+## 21. Agent Autonomy + Output-Cap Defaults Parity (Phase 2.4)
+
+### 21.1 Problem
+
+Three Hermes autonomy/output knobs diverged from the Docker reference, leaving
+host-generated `config.yaml` weaker than the container out of the box:
+
+1. **`agent.max_turns` never emitted** — the reference always writes
+   `agent.max_turns` (the main tool-calling loop cap that prints *"Reached maximum
+   iterations (N)"*), overriding the built-in **90**. The host never wrote it, so
+   long autonomous runs truncated at 90 regardless of `HERMES_GOAL_MAX_TURNS` /
+   `HERMES_DELEGATION_MAX_ITERATIONS` (which cap *different* loops).
+2. **`HERMES_MAX_TOKENS` default missing** — reference defaults `262144` in
+   `constants.sh`; host only emitted `model.max_tokens` when the var was explicitly
+   set (and shipped `.env.example` at `200000`), so a default install got the
+   provider's small cap and truncated long responses (`finish_reason='length'`).
+3. **`HERMES_YOLO_MODE` default OFF + narrow match** — reference defaults **on**
+   and accepts `1|true|yes|on`; host defaulted **off** and matched only the exact
+   string `"1"`.
+
+### 21.2 Fix
+
+- **`lib/constants.sh`**: added `HERMES_AGENT_MAX_TURNS` (200), `HERMES_MAX_TOKENS`
+  (262144), and `HERMES_YOLO_MODE` (1) defaults, mirroring the reference values.
+- **`generate.sh`**: added `HERMES_AGENT_MAX_TURNS` to the Python-subprocess export list.
+- **`lib/config-hermes.sh`**: always emits `agent.max_turns`, merged into any live
+  `agent` section so sibling `agent.*` keys are preserved (overlay-safe). Broadened
+  the yolo check to `1|true|yes|on` with default on. `model.max_tokens` now flows
+  from the constants default. Summary note updated (the `agent` section is no longer
+  "carried forward unchanged" — only `agent.max_turns` is set).
+- **`.env.example`**: `HERMES_MAX_TOKENS` `200000 → 262144`; added
+  `HERMES_AGENT_MAX_TURNS=200` with the reference's explanatory comment.
+- **Tests**: `27-max-tokens.bats` AC36b now asserts the `262144` default;
+  `03-config-validity.bats` yolo tests flipped to default-on (unset → `approvals.mode:off`,
+  `HERMES_YOLO_MODE=0` → no block) and gained AC-AGT1/2/3 covering `agent.max_turns`
+  default, override, and sibling-preserving merge. `test_helper/common.bash` unsets the
+  two new vars so constants defaults govern deterministically.
+
+### 21.3 Success criteria
+
+- SC-AUT1: unset `HERMES_AGENT_MAX_TURNS` → `agent.max_turns: 200`
+- SC-AUT2: `HERMES_AGENT_MAX_TURNS=500` → `agent.max_turns: 500`, sibling `agent.*` keys preserved
+- SC-AUT3: unset `HERMES_MAX_TOKENS` → `model.max_tokens: 262144`
+- SC-AUT4: unset `HERMES_YOLO_MODE` → `approvals.mode: off`; `HERMES_YOLO_MODE=0` → no approvals block
+- SC-AUT5: `bash -n` passes; full `bats` suite green

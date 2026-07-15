@@ -65,3 +65,25 @@ OPENAI_API_KEY_ENV="OPENAI_API_KEY"
 # self-resolves unknown models at runtime via its own DEFAULT_CONTEXT_LENGTHS
 # table / models.dev / endpoint probe.
 DEFAULT_CONTEXT_LENGTHS="${DEFAULT_CONTEXT_LENGTHS:-200000}"
+
+# --- Hermes agent autonomy + output cap (baked into config.yaml) ------------
+# Values mirror the Docker reference so host and container behave identically.
+#
+# Main agent tool-calling loop budget → config.yaml `agent.max_turns`. This is
+# the loop that prints "Reached maximum iterations (N)"; DISTINCT from
+# HERMES_GOAL_MAX_TURNS (/goal cross-turn budget) and
+# HERMES_DELEGATION_MAX_ITERATIONS (per-subagent cap). The agent's built-in
+# default is 90; raised to 200 so long autonomous runs don't truncate mid-task.
+HERMES_AGENT_MAX_TURNS="${HERMES_AGENT_MAX_TURNS:-200}"
+
+# OUTPUT-token cap baked into config.yaml as model.max_tokens (response-length
+# ceiling, NOT the context window). Defaults to 262144 so long responses and
+# delegation subagents (which inherit the parent max_tokens) aren't truncated by
+# a small upstream proxy/provider default (finish_reason='length'). Integer;
+# must stay below the model's context window — lower it if a provider rejects it.
+HERMES_MAX_TOKENS="${HERMES_MAX_TOKENS:-262144}"
+
+# Approval mode: yolo (approvals off) by default, matching the Docker reference.
+# Accepts 1|true|yes|on to enable; set HERMES_YOLO_MODE=0 to keep Hermes'
+# interactive approval prompts.
+HERMES_YOLO_MODE="${HERMES_YOLO_MODE:-1}"
