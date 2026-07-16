@@ -348,7 +348,7 @@ Beyond the `custom_providers` overlay, `config-hermes.sh` emits optional YAML bl
 | `HERMES_DELEGATION_MODEL` | *(unset)* | `delegation:\n  model: <model_id>` | Only when set. Routes subagent conversations to a different model (typically cheaper/faster) than the parent. |
 | `HERMES_DELEGATION_PROVIDER` | *(unset)* | `delegation:\n  provider: <provider_name>` | Only when set alongside `HERMES_DELEGATION_MODEL`. Routes subagents to a different provider. If only model is set, subagents inherit the parent's provider. |
 | `HERMES_GOAL_MAX_TURNS` | `50` | `goals:\n  max_turns: <N>` | Caps how many turns a goal-driven task may run. Always present (default 50). |
-| `HERMES_COMPRESSION_THRESHOLD` | *(unset)* | `context_compression:\n  threshold: <float>` | Only when set to a parseable float. Triggers context compression when token usage exceeds this fraction (0.0–1.0). |
+| `HERMES_COMPRESSION_THRESHOLD` | *(unset)* | `compression:\n  threshold: <float>` | Only when set to a parseable float. Triggers context compression when token usage exceeds this fraction (0.0–1.0). |
 
 **Block generation logic (Python, inside `generate_hermes_overlay` heredoc):**
 
@@ -375,18 +375,18 @@ _delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
 if _delegation_provider:
     cfg["delegation"]["provider"] = _delegation_provider
 
-# context_compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
+# compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
 if _compression_threshold:
     try:
-        cfg.setdefault("context_compression", {})["threshold"] = float(_compression_threshold)
+        cfg.setdefault("compression", {})["threshold"] = float(_compression_threshold)
     except ValueError:
         pass
 ```
 
 Key behaviors:
 - **YOLO is the only conditional block.** `goals.max_turns` and `delegation.max_iterations` are always present with effective defaults of 50, regardless of YOLO mode.
-- **Compression is opt-in.** `context_compression.threshold` is only written when `HERMES_COMPRESSION_THRESHOLD` is set to a valid float; otherwise the key is absent and Hermes uses its internal default.
+- **Compression is opt-in.** `compression.threshold` is only written when `HERMES_COMPRESSION_THRESHOLD` is set to a valid float; otherwise the key is absent and Hermes uses its internal default.
 - **All blocks co-exist** with `custom_providers` and `model` in the same staging overlay.
 
 ### env-auth.sh credential staging
