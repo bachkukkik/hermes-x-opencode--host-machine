@@ -532,7 +532,7 @@ print('OK: agent.max_turns merged, siblings preserved')
 "
 }
 
-@test "HERMES_COMPRESSION_THRESHOLD=0.8 emits context_compression.threshold" {
+@test "HERMES_COMPRESSION_THRESHOLD=0.8 emits compression.threshold" {
     seed_all_configs
     start_mock_llm 14032 "zai/glm-5.2" "openai/gpt-4o"
 
@@ -544,9 +544,11 @@ print('OK: agent.max_turns merged, siblings preserved')
     python3 -c "
 import yaml
 c = yaml.safe_load(open('${overlay}'))
-cc = c.get('context_compression', {})
+cc = c.get('compression', {})
 threshold = cc.get('threshold')
-assert threshold == 0.8, f'Expected context_compression.threshold=0.8, got: {threshold}'
-print('OK: context_compression.threshold=0.8')
+assert threshold == 0.8, f'Expected compression.threshold=0.8, got: {threshold}'
+# Verify stale context_compression key has been removed
+assert c.get('context_compression') is None, f'Stale context_compression key still present: {c.get(\"context_compression\")}'
+print('OK: compression.threshold=0.8')
 "
 }
