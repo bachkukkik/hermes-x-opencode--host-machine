@@ -309,13 +309,15 @@ _delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
 if _delegation_provider:
     cfg["delegation"]["provider"] = _delegation_provider
 
-# context_compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
+# compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
 if _compression_threshold:
     try:
-        cfg.setdefault("context_compression", {})["threshold"] = float(_compression_threshold)
+        cfg.setdefault("compression", {})["threshold"] = float(_compression_threshold)
     except ValueError:
         pass
+# Remove stale key written by earlier versions of this generator
+cfg.pop("context_compression", None)
 
 # skills.external_dirs  (if optional-skills dir exists)
 _optional_skills_dir = os.path.expanduser("~/.hermes/hermes-agent/optional-skills")

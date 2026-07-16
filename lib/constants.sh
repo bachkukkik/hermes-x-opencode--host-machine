@@ -87,3 +87,20 @@ HERMES_MAX_TOKENS="${HERMES_MAX_TOKENS:-262144}"
 # Accepts 1|true|yes|on to enable; set HERMES_YOLO_MODE=0 to keep Hermes'
 # interactive approval prompts.
 HERMES_YOLO_MODE="${HERMES_YOLO_MODE:-1}"
+
+# --- Stale-lib detection ----------------------------------------------------
+# Checks whether installed lib files match the repo source. Sourced by
+# generate.sh after loading lib modules. Prints a warning when stale.
+# Returns 0 (synced), 1 (stale), or 2 (no installed lib).
+check_stale_lib() {
+    local installed_lib="${HOME}/.hermes/host-config-gen/lib"
+    local names=("config-hermes.sh" "constants.sh")
+    local repo_hash installed_hash f
+    [ -d "$installed_lib" ] || return 2
+    for f in "${names[@]}"; do
+        repo_hash=$(sha256sum "${LIB_DIR}/${f}" 2>/dev/null | cut -d' ' -f1) || return 2
+        installed_hash=$(sha256sum "${installed_lib}/${f}" 2>/dev/null | cut -d' ' -f1) || return 2
+        [ "$repo_hash" = "$installed_hash" ] || return 1
+    done
+    return 0
+}

@@ -89,6 +89,13 @@ source "${LIB_DIR}/env-auth.sh"
 # shellcheck source=lib/sync-env.sh
 source "${LIB_DIR}/sync-env.sh"
 
+# Warn when installed lib files are stale (repo copy is source of truth)
+if ! check_stale_lib; then
+    echo "⚠️  Installed lib files at ~/.hermes/host-config-gen/lib/ are stale."
+    echo "   Run 'bash install.sh' to sync repo changes."
+    echo
+fi
+
 echo "============================================================"
 echo " Hermes x OpenCode host config generator"
 if [ "$APPLY" = true ] && [ "$DRY_RUN" = true ]; then
