@@ -28,7 +28,10 @@ print('OK: model.max_tokens=32000')
 "
 }
 
-@test "AC36b: Unset HERMES_MAX_TOKENS does NOT emit model.max_tokens" {
+@test "AC36b: Unset HERMES_MAX_TOKENS emits the constants.sh default 262144" {
+    # Parity with the Docker reference: HERMES_MAX_TOKENS defaults to 262144 in
+    # constants.sh, so an unset var still bakes model.max_tokens (prevents
+    # provider-default truncation out of the box).
     seed_all_configs
     start_mock_llm 14061 "zai/glm-5.2" "openai/gpt-4o"
 
@@ -41,8 +44,9 @@ print('OK: model.max_tokens=32000')
 import yaml
 c = yaml.safe_load(open('${overlay}'))
 m = c.get('model', {})
-assert 'max_tokens' not in m, f'model.max_tokens should be absent when unset, got: {m.get(\"max_tokens\")!r}'
-print('OK: model.max_tokens absent when unset')
+assert m.get('max_tokens') == 262144, f'Expected default model.max_tokens=262144, got: {m.get(\"max_tokens\")!r}'
+assert isinstance(m.get('max_tokens'), int), 'max_tokens must be an int, not a string'
+print('OK: model.max_tokens defaults to 262144')
 "
 }
 

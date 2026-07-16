@@ -32,6 +32,46 @@ load test_helper/common
     [ "$(resolve_ctx_len "llama_cpp/qwen3.6-27b")" = "1048576" ]
 }
 
+# --- CTX4: get_limits() pin table (opencode side, parity with reference) -----
+
+@test "CTX4: get_limits pins opencode-go/free-tier families and matches resolve_ctx_len" {
+    # get_limits() in config-opencode.sh is the OpenCode-side context/output pin
+    # table; it must stay in lockstep with resolve_ctx_len() in config-hermes.sh
+    # (two divergent heuristics for the same models). This asserts the load-bearing
+    # rows so the table cannot silently narrow again (regression guard for the
+    # 200000->262144 drift and the missing kimi/minimax/mimo/nemotron/qwen3.6
+    # families). Extracts the get_limits function from the shell script and unit-
+    # tests it directly (no live generation needed).
+    python3 -c "
+import sys
+with open('${REPO_DIR}/lib/config-opencode.sh') as f:
+    content = f.read()
+start = content.index('def get_limits(model_id):')
+end = content.index('\n\n', start)
+exec('import re\n' + content[start:end])
+tests = [
+    ('opencode-go/deepseek-v4-pro',     (1000000, 65536)),
+    ('opencode/deepseek-v4-flash-free',  (1000000, 65536)),
+    ('opencode-go/kimi-k2.6',            (262144, 8192)),
+    ('opencode-go/minimax-m3',           (1000000, 8192)),
+    ('opencode/mimo-v2.5-free',          (1048576, 8192)),
+    ('opencode/nemotron-3-ultra-free',   (131072, 8192)),
+    ('opencode/qwen3.6-plus-free',       (1048576, 8192)),
+    ('opencode-go/glm-5.2',              (1048576, 131072)),
+    ('litellm/o3',                       (262144, 100000)),
+    ('anthropic/claude-3.7-sonnet',      (262144, 16384)),
+    ('anthropic/claude-3-opus',          (262144, 4096)),
+    ('llama_cpp/qwen3.6-27b-q4_k_m',     (262144, 32768)),
+    ('llama_cpp/agents-a1-mtp-apex-i-balanced', (262144, 32768)),
+    ('llama_cpp/agents-a1-q4_k_m',       (262144, 32768)),
+]
+for mid, expected in tests:
+    result = get_limits(mid)
+    assert result == expected, f'FAIL: {mid} -> {result} (expected {expected})'
+print(f'OK: {len(tests)}/{len(tests)} get_limits rows pinned')
+"
+}
+
 # --- CRED tests (auth.json OR guard contract from PR #66) --------------------
 
 @test "CRED1: auth.json seeds litellm from OPENAI_API_KEY in .env" {

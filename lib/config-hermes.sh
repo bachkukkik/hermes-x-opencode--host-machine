@@ -273,10 +273,23 @@ if _max_tokens:
     except ValueError:
         pass
 
-# --- Optional config blocks (env-gated) --------------------------------------
-# approvals.mode: off  (when HERMES_YOLO_MODE=1)
-if os.environ.get("HERMES_YOLO_MODE") == "1":
+# --- Config blocks -----------------------------------------------------------
+# approvals.mode: off  (yolo default ON, matching the Docker reference; accepts
+# 1|true|yes|on. Set HERMES_YOLO_MODE=0 to keep interactive approval prompts.)
+_yolo = os.environ.get("HERMES_YOLO_MODE", "1").strip().lower()
+if _yolo in ("1", "true", "yes", "on"):
     cfg["approvals"] = {"mode": "off"}
+
+# agent.max_turns  (default 200) — the main tool-calling loop cap that prints
+# "Reached maximum iterations (N)", overriding the agent's built-in 90. Merged
+# into any live agent section so sibling agent.* keys are preserved. DISTINCT
+# from goals.max_turns (/goal) and delegation.max_iterations (subagents).
+_agent_max_turns = int(os.environ.get("HERMES_AGENT_MAX_TURNS", "200"))
+agent_sec = cfg.setdefault("agent", {})
+if not isinstance(agent_sec, dict):
+    agent_sec = {}
+    cfg["agent"] = agent_sec
+agent_sec["max_turns"] = _agent_max_turns
 
 # goals.max_turns  (default 50)
 goal_max_turns = int(os.environ.get("HERMES_GOAL_MAX_TURNS", "50"))
@@ -296,13 +309,15 @@ _delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
 if _delegation_provider:
     cfg["delegation"]["provider"] = _delegation_provider
 
-# context_compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
+# compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
 if _compression_threshold:
     try:
-        cfg.setdefault("context_compression", {})["threshold"] = float(_compression_threshold)
+        cfg.setdefault("compression", {})["threshold"] = float(_compression_threshold)
     except ValueError:
         pass
+# Remove stale key written by earlier versions of this generator
+cfg.pop("context_compression", None)
 
 # skills.external_dirs  (if optional-skills dir exists)
 _optional_skills_dir = os.path.expanduser("~/.hermes/hermes-agent/optional-skills")
@@ -333,10 +348,12 @@ summary_lines = [
     "model.default            -> %s" % model_sec.get("default"),
     "model.name               -> %s" % model_sec.get("name"),
     "model.max_tokens         -> %s" % (model_sec.get("max_tokens") if "max_tokens" in model_sec else "unset (provider default)"),
+    "agent.max_turns          -> %s" % cfg.get("agent", {}).get("max_turns"),
     "other custom_providers   -> %d preserved" % (len(merged_cps) - 1),
     "",
-    "NOTE: This is a STAGING overlay. Other config sections (agent, tools,",
-    "platforms, etc.) are carried forward unchanged from the live config.",
+    "NOTE: This is a STAGING overlay. Sibling agent.* keys and other config",
+    "sections (tools, platforms, etc.) are carried forward unchanged from the",
+    "live config; only agent.max_turns is set here.",
 ]
 summary = "\n".join(summary_lines)
 print(summary)

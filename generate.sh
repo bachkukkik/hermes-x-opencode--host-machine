@@ -77,7 +77,7 @@ export OPENCODE_FALLBACK_MODEL OPENAI_DEFAULT_MODEL HERMES_DEFAULT_MODEL
 export OPENCODE_COMPRESSION_THRESHOLD
 export HERMES_YOLO_MODE HERMES_GOAL_MAX_TURNS HERMES_DELEGATION_MAX_ITERATIONS
 export HERMES_DELEGATION_MODEL HERMES_DELEGATION_PROVIDER HERMES_COMPRESSION_THRESHOLD
-export HERMES_MAX_TOKENS
+export HERMES_MAX_TOKENS HERMES_AGENT_MAX_TURNS
 # shellcheck source=lib/model-discovery.sh
 source "${LIB_DIR}/model-discovery.sh"
 # shellcheck source=lib/config-opencode.sh
@@ -88,6 +88,13 @@ source "${LIB_DIR}/config-hermes.sh"
 source "${LIB_DIR}/env-auth.sh"
 # shellcheck source=lib/sync-env.sh
 source "${LIB_DIR}/sync-env.sh"
+
+# Warn when installed lib files are stale (repo copy is source of truth)
+if ! check_stale_lib; then
+    echo "⚠️  Installed lib files at ~/.hermes/host-config-gen/lib/ are stale."
+    echo "   Run 'bash install.sh' to sync repo changes."
+    echo
+fi
 
 echo "============================================================"
 echo " Hermes x OpenCode host config generator"

@@ -403,11 +403,11 @@ print('OK: approvals.mode=off present')
 "
 }
 
-@test "HERMES_YOLO_MODE unset does NOT emit approvals block" {
+@test "HERMES_YOLO_MODE unset defaults to approvals.mode:off (yolo on, upstream parity)" {
     seed_all_configs
     start_mock_llm 14030 "zai/glm-5.2" "openai/gpt-4o"
 
-    # No YOLO env var set
+    # No YOLO env var set -> constants.sh default is 1 (on)
     run_generate
     [ "$status" -eq 0 ]
 
@@ -416,9 +416,27 @@ print('OK: approvals.mode=off present')
     python3 -c "
 import yaml
 c = yaml.safe_load(open('${overlay}'))
+approvals = c.get('approvals', {})
+assert approvals.get('mode') == 'off', f'Expected default approvals.mode=off, got: {approvals}'
+print('OK: approvals.mode=off by default (yolo on)')
+"
+}
+
+@test "HERMES_YOLO_MODE=0 does NOT emit approvals block" {
+    seed_all_configs
+    start_mock_llm 14032 "zai/glm-5.2" "openai/gpt-4o"
+
+    HERMES_YOLO_MODE=0 run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
 assert 'approvals' not in c or c.get('approvals') is None, \
-    f'Expected no approvals block when YOLO unset, got: {c.get(\"approvals\")}'
-print('OK: no approvals block when YOLO unset')
+    f'Expected no approvals block when YOLO=0, got: {c.get(\"approvals\")}'
+print('OK: no approvals block when YOLO=0')
 "
 }
 
@@ -442,7 +460,79 @@ print('OK: goals.max_turns=50 and delegation.max_iterations=50 present (defaults
 "
 }
 
-@test "HERMES_COMPRESSION_THRESHOLD=0.8 emits context_compression.threshold" {
+# --- HERMES_AGENT_MAX_TURNS tests (agent.max_turns, upstream parity) ---------
+
+@test "AC-AGT1: agent.max_turns defaults to 200 when HERMES_AGENT_MAX_TURNS unset" {
+    seed_all_configs
+    start_mock_llm 14033 "zai/glm-5.2" "openai/gpt-4o"
+
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+a = c.get('agent', {})
+assert a.get('max_turns') == 200, f'Expected agent.max_turns=200 default, got: {a}'
+assert isinstance(a.get('max_turns'), int), 'agent.max_turns must be an int'
+print('OK: agent.max_turns=200 (default)')
+"
+}
+
+@test "AC-AGT2: HERMES_AGENT_MAX_TURNS override is emitted as agent.max_turns" {
+    seed_all_configs
+    start_mock_llm 14034 "zai/glm-5.2" "openai/gpt-4o"
+
+    HERMES_AGENT_MAX_TURNS=500 run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+a = c.get('agent', {})
+assert a.get('max_turns') == 500, f'Expected agent.max_turns=500, got: {a}'
+print('OK: agent.max_turns=500 (override)')
+"
+}
+
+@test "AC-AGT3: agent.max_turns merges without clobbering sibling agent.* keys" {
+    # The overlay must preserve any hand-tuned agent section (e.g. agent.name)
+    # while setting only max_turns.
+    cat > "${FAKE_HOME}/.hermes/config.yaml" << 'YAML_EOF'
+provider: custom:litellm
+model:
+  name: zai/glm-5.2
+  default: zai/glm-5.2
+agent:
+  name: hermes
+  some_existing_key: keepme
+custom_providers:
+  - name: litellm
+    base_url: http://localhost:4000
+    api_key: sk-test
+YAML_EOF
+    seed_opencode_config
+    start_mock_llm 14035 "zai/glm-5.2" "openai/gpt-4o"
+    run_generate
+    [ "$status" -eq 0 ]
+
+    local overlay="${GEN_DIR}/staging/config-hermes-overlay.yaml"
+
+    python3 -c "
+import yaml
+c = yaml.safe_load(open('${overlay}'))
+a = c.get('agent', {})
+assert a.get('max_turns') == 200, f'Expected agent.max_turns=200, got: {a}'
+assert a.get('some_existing_key') == 'keepme', f'Sibling agent.* key clobbered: {a}'
+print('OK: agent.max_turns merged, siblings preserved')
+"
+}
+
+@test "HERMES_COMPRESSION_THRESHOLD=0.8 emits compression.threshold" {
     seed_all_configs
     start_mock_llm 14032 "zai/glm-5.2" "openai/gpt-4o"
 
@@ -454,9 +544,11 @@ print('OK: goals.max_turns=50 and delegation.max_iterations=50 present (defaults
     python3 -c "
 import yaml
 c = yaml.safe_load(open('${overlay}'))
-cc = c.get('context_compression', {})
+cc = c.get('compression', {})
 threshold = cc.get('threshold')
-assert threshold == 0.8, f'Expected context_compression.threshold=0.8, got: {threshold}'
-print('OK: context_compression.threshold=0.8')
+assert threshold == 0.8, f'Expected compression.threshold=0.8, got: {threshold}'
+# Verify stale context_compression key has been removed
+assert c.get('context_compression') is None, f'Stale context_compression key still present: {c.get(\"context_compression\")}'
+print('OK: compression.threshold=0.8')
 "
 }
