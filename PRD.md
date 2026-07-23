@@ -234,6 +234,75 @@ regression where both opencode and litellm providers are silently empty.
 | `docs/03-model-discovery.md` | Add quantized GGUF ctx pin subsection |
 | `docs/06-verification.md` | Add credential resolution docs paragraph |
 
+### 9.8 Port Details: PR #85 — Web Search, Logging, Image Gen, Override Models, Ctx Values
+
+**Scope:** Port 5 categories of changes from upstream PR #85 (vanilla-open-design bridge):
+
+1. **Web search backend + lazy installs** — `HERMES_WEB_SEARCH_BACKEND` (default `ddgs`), `HERMES_WEB_EXTRACT_BACKEND`, `HERMES_ALLOW_LAZY_INSTALLS` added to `constants.sh`, `.env.example`, and `config-hermes.sh` overlay generation.
+2. **Logging + image_gen blocks** — `logging.level: DEBUG`, `logging.max_size_mb: 5`, `logging.backup_count: 3` and `image_gen` (openai `gpt-image-2`) written to the Hermes overlay unconditionally.
+3. **Security block** — `security.allow_lazy_installs` written to the Hermes overlay.
+4. **Override model discovery** — `model-discovery.sh` ensures `HERMES_DEFAULT_MODEL`, `OPENCODE_DEFAULT_MODEL`, and `OPENCODE_SMALL_MODEL` are present in the discovered model list.
+5. **Context length sync** — `config-opencode.sh get_limits()` o[134]/claude[34] → 200000, llama_cpp default → 200000, added qwen3.6 branch at 262144.
+6. **GH_TOKEN** — `GH_TOKEN` (accepting `GITHUB_TOKEN` alias) added to `constants.sh` and `.env.example`.
+
+**Changes:**
+| File | Change |
+|------|--------|
+| `lib/model-discovery.sh` | Add override model ensure loop for HERMES_DEFAULT_MODEL, OPENCODE_DEFAULT_MODEL, OPENCODE_SMALL_MODEL |
+| `lib/constants.sh` | Add GH_TOKEN, HERMES_WEB_SEARCH_BACKEND, HERMES_WEB_EXTRACT_BACKEND, HERMES_ALLOW_LAZY_INSTALLS |
+| `lib/config-opencode.sh` | Sync get_limits() o[134]→200k, claude→200k, llama_cpp default→200k, add qwen3.6 branch at 262k |
+| `lib/config-hermes.sh` | Add web, security, logging, image_gen blocks to overlay generation |
+| `.env.example` | Add GH_TOKEN, HERMES_WEB_SEARCH_BACKEND, HERMES_WEB_EXTRACT_BACKEND, HERMES_ALLOW_LAZY_INSTALLS |
+
+**Success criteria:**
+- `bash -n` on all shell files passes
+- `bash generate.sh --dry-run` passes all validation checks
+- `bats tests/` all pass
+- Staging opencode.jsonc has correct context limits (200k for o/claude, 262k for qwen3.6/agents-a1)
+- Staging Hermes overlay contains web, security, logging, image_gen blocks
+- Discovered models list includes HERMES_DEFAULT_MODEL, OPENCODE_DEFAULT_MODEL, OPENCODE_SMALL_MODEL
+
+### 9.9 Port Completion: PR #85 Full Alignment (small-model tier, always-on defaults)
+
+**Scope:** A gap analysis against the upstream config-gen lib
+(`volumes_hermes_opencode/build/scripts/lib/`) surfaced three residual gaps
+after the initial §9.8 port. These are bridged here to complete "total
+alignment" of config-generation behavior:
+
+1. **`OPENAI_SMALL_MODEL` fallback tier** — upstream chains
+   `OPENCODE_SMALL_MODEL → OPENAI_SMALL_MODEL → default`. A previously had no
+   `OPENAI_SMALL_MODEL`. Added as a first-class constant and resolved in
+   `generate.sh` **after `.env`** (mirroring the `OPENAI_BASE_URL` precedent) so
+   a `.env`-only proxy-wide small model is honored. A's ultimate fallback stays
+   `OPENCODE_DEFAULT_MODEL` (Zen-first), diverging from upstream's
+   `OPENAI_DEFAULT_MODEL` — intentional, matches A's free-Zen requirement.
+2. **`HERMES_COMPRESSION_THRESHOLD` default 0.76** — upstream always bakes the
+   `compression:` block; A previously emitted it only when the var was set. Now
+   defaulted in `constants.sh` so a stock install always emits
+   `compression.threshold: 0.76` (parity).
+3. **`OPENAI_IMAGE_MODEL` first-class constant** — previously only a hardcoded
+   Python fallback; declared in `constants.sh` + `.env.example` for
+   single-source-of-truth consistency.
+
+**Changes:**
+| File | Change |
+|------|--------|
+| `lib/constants.sh` | Add `OPENAI_SMALL_MODEL` (empty), `OPENAI_IMAGE_MODEL` (gpt-image-2), `HERMES_COMPRESSION_THRESHOLD` (0.76); make `OPENCODE_SMALL_MODEL` a post-`.env` passthrough |
+| `generate.sh` | Resolve `OPENCODE_SMALL_MODEL` chain after `.env`; export `OPENAI_SMALL_MODEL`, `OPENAI_IMAGE_MODEL` |
+| `lib/config-opencode.sh` | Add `OPENAI_SMALL_MODEL` tier to the `small_model` fallback |
+| `lib/config-hermes.sh` | Comment update — compression now always emitted |
+| `.env.example` | Document `OPENAI_SMALL_MODEL`, `OPENAI_IMAGE_MODEL`, `HERMES_COMPRESSION_THRESHOLD` default |
+| `tests/e2e/28-overlay-blocks-and-small-model.bats` | 10 new tests: compression default/override, web/security/logging/image_gen blocks, small-model tier precedence, GH_TOKEN alias |
+| `docs/02-config-generation.md`, `docs/03-model-discovery.md` | Refresh env-gated block table + snippet (YOLO default-on, agent.max_turns, max_tokens, web/security/logging/image_gen, compression-always); document override-model seeding + small-model chain |
+
+**Intentional NON-ports (A deliberately ahead / diverged; not regressions):**
+- **Delegation block is unconditional in A** (upstream gates it on `HERMES_YOLO_MODE`). A's unconditional emission is PRD-backed and covered by
+  `03-config-validity.bats` — kept as-is.
+- **`OPENAI_CONTEXT_LENGTH` → `DEFAULT_CONTEXT_LENGTHS`** rename (per §19) — not reverted.
+- **Legacy `providers.litellm` credential dual-write** (401-shadow fix) and **`OPENCODE_AGENT_MODEL` / `provider.llama_cpp`** support are A-only enhancements absent upstream.
+
+**Success criteria:** `bash -n` clean · `generate.sh --dry-run` 19/19 PASS · `bats tests/` 127/127 · overlay emits compression/web/security/logging/image_gen on a stock install · `OPENAI_SMALL_MODEL` feeds `small_model` when `OPENCODE_SMALL_MODEL` unset.
+
 ## 10. Documentation and Testing Gaps
 
 ### 10.1 Missing Docs (Phase 2 items)

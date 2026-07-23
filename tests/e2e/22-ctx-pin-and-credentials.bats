@@ -58,12 +58,14 @@ tests = [
     ('opencode/nemotron-3-ultra-free',   (131072, 8192)),
     ('opencode/qwen3.6-plus-free',       (1048576, 8192)),
     ('opencode-go/glm-5.2',              (1048576, 131072)),
-    ('litellm/o3',                       (262144, 100000)),
-    ('anthropic/claude-3.7-sonnet',      (262144, 16384)),
-    ('anthropic/claude-3-opus',          (262144, 4096)),
+    ('litellm/o3',                       (200000, 100000)),
+    ('anthropic/claude-3.7-sonnet',      (200000, 16384)),
+    ('anthropic/claude-3-opus',          (200000, 4096)),
     ('llama_cpp/qwen3.6-27b-q4_k_m',     (262144, 32768)),
+    ('llama_cpp/qwen3.6-27b-fp16',       (262144, 32768)),
     ('llama_cpp/agents-a1-mtp-apex-i-balanced', (262144, 32768)),
     ('llama_cpp/agents-a1-q4_k_m',       (262144, 32768)),
+    ('llama_cpp/llama-3.3-70b-q4_k_m',   (200000, 32768)),
 ]
 for mid, expected in tests:
     result = get_limits(mid)

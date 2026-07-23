@@ -343,50 +343,82 @@ Beyond the `custom_providers` overlay, `config-hermes.sh` emits optional YAML bl
 
 | Env var | Default | Writes to config.yaml | Effect |
 |---------|---------|-----------------------|--------|
-| `HERMES_YOLO_MODE` | *(off)* | `approvals:\n  mode: off` | Only when set to `"1"`. Skips the manual approval prompt before dangerous shell commands — equivalent to launching Hermes with `--yolo`. |
+| `HERMES_YOLO_MODE` | `1` *(on)* | `approvals:\n  mode: off` | Written when the value matches `1\|true\|yes\|on` (case-insensitive) — the default. Skips the manual approval prompt before dangerous shell commands — equivalent to launching Hermes with `--yolo`. Set `HERMES_YOLO_MODE=0` to keep interactive prompts. |
+| `HERMES_AGENT_MAX_TURNS` | `200` | `agent:\n  max_turns: <N>` | Always present. The main tool-calling loop cap (overrides the agent's built-in 90). Merged into any live `agent:` section so sibling keys are preserved. Distinct from `goals.max_turns` and `delegation.max_iterations`. |
+| `HERMES_MAX_TOKENS` | `262144` | `model:\n  max_tokens: <N>` | Always present (default baked in constants.sh). OUTPUT-token ceiling per request — prevents provider-default truncation of long responses; subagents inherit it. Non-integer values are ignored. |
 | `HERMES_DELEGATION_MAX_ITERATIONS` | `50` | `delegation:\n  max_iterations: <N>` | Caps how many iterations a `delegate_task` subagent loop may run. Always present (default 50). |
 | `HERMES_DELEGATION_MODEL` | *(unset)* | `delegation:\n  model: <model_id>` | Only when set. Routes subagent conversations to a different model (typically cheaper/faster) than the parent. |
 | `HERMES_DELEGATION_PROVIDER` | *(unset)* | `delegation:\n  provider: <provider_name>` | Only when set alongside `HERMES_DELEGATION_MODEL`. Routes subagents to a different provider. If only model is set, subagents inherit the parent's provider. |
 | `HERMES_GOAL_MAX_TURNS` | `50` | `goals:\n  max_turns: <N>` | Caps how many turns a goal-driven task may run. Always present (default 50). |
-| `HERMES_COMPRESSION_THRESHOLD` | *(unset)* | `compression:\n  threshold: <float>` | Only when set to a parseable float. Triggers context compression when token usage exceeds this fraction (0.0–1.0). |
+| `HERMES_COMPRESSION_THRESHOLD` | `0.76` | `compression:\n  threshold: <float>` | Always present (default baked in constants.sh, parity with the upstream Docker reference). Triggers Hermes context compression when token usage exceeds this fraction (0.0–1.0). Non-float values are ignored. |
+| `HERMES_WEB_SEARCH_BACKEND` | `ddgs` | `web:\n  search_backend: <name>` | Always present. Web-search backend for Hermes' web toolset (`ddgs` is keyless, search-only). Backends are lazy-installed on first use. |
+| `HERMES_WEB_EXTRACT_BACKEND` | *(unset)* | `web:\n  extract_backend: <name>` | Only when set. URL-content extraction backend; when unset, auto/lazy extraction is used. |
+| `HERMES_ALLOW_LAZY_INSTALLS` | `true` | `security:\n  allow_lazy_installs: <bool>` | Always present. Allows Hermes to lazy-install optional tooling deps (e.g. the `ddgs` package) on first use. Accepts `1\|true\|yes\|on`. |
+| `OPENAI_IMAGE_MODEL` | `gpt-image-2` | `image_gen:\n  provider: openai\n  model: <name>` | Always present. Image-generation model for the Hermes `image_gen` block (openai provider). |
+| *(none — static)* | — | `logging:\n  level: DEBUG\n  max_size_mb: 5\n  backup_count: 3` | Always present. Rotating debug log configuration matching the upstream Docker reference. |
 
 **Block generation logic (Python, inside `generate_hermes_overlay` heredoc):**
 
 ```python
-# approvals.mode: off  (when HERMES_YOLO_MODE=1)
-if os.environ.get("HERMES_YOLO_MODE") == "1":
+# model.max_tokens: OUTPUT cap (default 262144 baked in constants.sh)
+_max_tokens = os.environ.get("HERMES_MAX_TOKENS", "").strip()
+if _max_tokens:
+    try:
+        model_sec["max_tokens"] = int(_max_tokens)
+    except ValueError:
+        pass
+
+# approvals.mode: off  (yolo default ON; accepts 1|true|yes|on)
+_yolo = os.environ.get("HERMES_YOLO_MODE", "1").strip().lower()
+if _yolo in ("1", "true", "yes", "on"):
     cfg["approvals"] = {"mode": "off"}
 
+# agent.max_turns  (default 200) — merged into any live agent section
+_agent_max_turns = int(os.environ.get("HERMES_AGENT_MAX_TURNS", "200"))
+cfg.setdefault("agent", {})["max_turns"] = _agent_max_turns
+
 # goals.max_turns  (default 50)
-goal_max_turns = int(os.environ.get("HERMES_GOAL_MAX_TURNS", "50"))
-cfg["goals"] = {"max_turns": goal_max_turns}
+cfg["goals"] = {"max_turns": int(os.environ.get("HERMES_GOAL_MAX_TURNS", "50"))}
 
-# delegation.max_iterations  (default 50)
-deleg_max_iter = int(os.environ.get("HERMES_DELEGATION_MAX_ITERATIONS", "50"))
-cfg["delegation"] = {"max_iterations": deleg_max_iter}
-
-# delegation.model  (when HERMES_DELEGATION_MODEL is set)
+# delegation.max_iterations  (default 50) + optional model/provider
+cfg["delegation"] = {"max_iterations": int(os.environ.get("HERMES_DELEGATION_MAX_ITERATIONS", "50"))}
 _delegation_model = os.environ.get("HERMES_DELEGATION_MODEL", "").strip()
 if _delegation_model:
     cfg["delegation"]["model"] = _delegation_model
-
-# delegation.provider  (when HERMES_DELEGATION_PROVIDER is set)
 _delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
 if _delegation_provider:
     cfg["delegation"]["provider"] = _delegation_provider
 
-# compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
+# compression.threshold  (default 0.76 baked in constants.sh — always emitted)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
 if _compression_threshold:
     try:
         cfg.setdefault("compression", {})["threshold"] = float(_compression_threshold)
     except ValueError:
         pass
+
+# web.search_backend (default ddgs) + optional extract_backend
+cfg.setdefault("web", {})["search_backend"] = os.environ.get("HERMES_WEB_SEARCH_BACKEND", "ddgs")
+_web_extract = os.environ.get("HERMES_WEB_EXTRACT_BACKEND", "").strip()
+if _web_extract:
+    cfg["web"]["extract_backend"] = _web_extract
+
+# security.allow_lazy_installs (default true)
+_lazy = os.environ.get("HERMES_ALLOW_LAZY_INSTALLS", "true").strip().lower()
+cfg.setdefault("security", {})["allow_lazy_installs"] = _lazy in ("1", "true", "yes", "on")
+
+# logging (static: DEBUG / 5MB / 3 backups)
+cfg["logging"] = {"level": "DEBUG", "max_size_mb": 5, "backup_count": 3}
+
+# image_gen (openai provider with OPENAI_IMAGE_MODEL, default gpt-image-2)
+_image_model = os.environ.get("OPENAI_IMAGE_MODEL", "gpt-image-2").strip()
+if _image_model:
+    cfg["image_gen"] = {"provider": "openai", "model": _image_model}
 ```
 
 Key behaviors:
-- **YOLO is the only conditional block.** `goals.max_turns` and `delegation.max_iterations` are always present with effective defaults of 50, regardless of YOLO mode.
-- **Compression is opt-in.** `compression.threshold` is only written when `HERMES_COMPRESSION_THRESHOLD` is set to a valid float; otherwise the key is absent and Hermes uses its internal default.
+- **YOLO defaults ON** (matching the upstream Docker reference) and accepts `1|true|yes|on`. Set `HERMES_YOLO_MODE=0` to keep interactive approval prompts. `agent.max_turns` (200), `goals.max_turns` (50) and `delegation.max_iterations` (50) are always present with baked defaults regardless of YOLO mode.
+- **Compression, web, security, logging, image_gen, and max_tokens are always emitted** because their defaults are baked in `constants.sh` (or static). This is parity with the upstream Docker reference, which writes these unconditionally. `HERMES_WEB_EXTRACT_BACKEND`, `HERMES_DELEGATION_MODEL`, and `HERMES_DELEGATION_PROVIDER` remain opt-in (written only when set).
 - **All blocks co-exist** with `custom_providers` and `model` in the same staging overlay.
 
 ### env-auth.sh credential staging
@@ -407,8 +439,10 @@ Seeds `auth.json` with two providers:
 | `OPENCODE_ZEN_API_KEY` | OpenCode Zen free-tier credential | `~/.hermes/.env` | `env-auth.sh` (read in-process)<br>OpenCode runtime via `{env:OPENCODE_ZEN_API_KEY}` |
 | `OPENAI_API_KEY` | LiteLLM proxy credential | `~/.hermes/.env` or `config.yaml` `model.api_key` | `{env:OPENAI_API_KEY}` in opencode.jsonc |
 | `OPENAI_BASE_URL` | OpenAI-compatible endpoint URL | Shell env (default `http://localhost:4000`) | All modules |
+| `OPENAI_SMALL_MODEL` | Proxy-wide small-model default (fallback tier) | `.env` / shell env | `generate.sh` resolves the `OPENCODE_SMALL_MODEL → OPENAI_SMALL_MODEL → OPENCODE_DEFAULT_MODEL` chain after `.env`; `config-opencode.sh` `small_model` field |
+| `GH_TOKEN` | GitHub CLI / git auth token (accepts `GITHUB_TOKEN` alias) | `.env` / shell env | `constants.sh` (exported for git ops and the `yeet` PR flow) |
 
-> **Note:** An empty value in `.env` (e.g. `OPENAI_BASE_URL=`) is handled — `generate.sh` re-applies the default after sourcing `.env`, so the empty string does not propagate downstream.
+> **Note:** An empty value in `.env` (e.g. `OPENAI_BASE_URL=`) is handled — `generate.sh` re-applies the default after sourcing `.env`, so the empty string does not propagate downstream. The `OPENCODE_SMALL_MODEL` chain is likewise resolved *after* `.env` is sourced, so a `.env`-only `OPENAI_SMALL_MODEL` is honored.
 
 ### Fallback chain
 
