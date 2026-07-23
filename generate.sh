@@ -63,6 +63,11 @@ source "${SCRIPT_DIR}/.env" 2>/dev/null || true
 OPENAI_BASE_URL="${OPENAI_BASE_URL:-http://localhost:4000}"
 OPENAI_BASE_URL="${OPENAI_BASE_URL%/}"
 
+# Resolve the OPENCODE_SMALL_MODEL chain AFTER .env so a proxy-wide
+# OPENAI_SMALL_MODEL (or a .env-set value) is honored. Chain:
+# OPENCODE_SMALL_MODEL -> OPENAI_SMALL_MODEL -> OPENCODE_DEFAULT_MODEL (Zen-first).
+OPENCODE_SMALL_MODEL="${OPENCODE_SMALL_MODEL:-${OPENAI_SMALL_MODEL:-${OPENCODE_DEFAULT_MODEL}}}"
+
 # Export the credentials so config generation can inline the literal keys into
 # opencode.jsonc at GENERATION time (config-opencode.sh reads them via
 # os.environ.get). Inlining means opencode runs anywhere with no runtime env
@@ -73,6 +78,7 @@ export OPENAI_API_KEY OPENAI_BASE_URL OPENCODE_ZEN_API_KEY
 # Without explicit export, `source .env` creates shell variables only (the .env
 # file uses `KEY=value` not `export KEY=value`), which Python cannot access.
 export OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL OPENCODE_AGENT_MODEL
+export OPENAI_SMALL_MODEL OPENAI_IMAGE_MODEL
 export OPENCODE_FALLBACK_MODEL OPENAI_DEFAULT_MODEL HERMES_DEFAULT_MODEL
 export OPENCODE_COMPRESSION_THRESHOLD
 export HERMES_YOLO_MODE HERMES_GOAL_MAX_TURNS HERMES_DELEGATION_MAX_ITERATIONS

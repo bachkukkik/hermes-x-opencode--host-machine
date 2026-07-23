@@ -19,11 +19,12 @@ discover_models() {
 
     # Everything (key read + HTTP + filter) happens inside one python process
     # so the api_key is never exposed as a shell variable.
+    local extra_models="${HERMES_DEFAULT_MODEL:-} ${OPENCODE_DEFAULT_MODEL:-} ${OPENCODE_SMALL_MODEL:-}"
     local result
-    result=$(python3 - "$config_path" "$base_url" "$default_model" << 'PYEOF'
+    result=$(python3 - "$config_path" "$base_url" "$default_model" "$extra_models" << 'PYEOF'
 import sys, json, os, re, urllib.request
 
-config_path, base_url, default_model = sys.argv[1], sys.argv[2], sys.argv[3]
+config_path, base_url, default_model, extra_models_raw = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
 
 try:
     import yaml
@@ -100,6 +101,14 @@ if not filtered:
     filtered = [default_model]
 elif not any(m.lower() == default_model.lower() for m in filtered):
     filtered.insert(0, default_model)
+
+# Ensure override models are present in the discovered list
+for _extra in extra_models_raw.split():
+    _extra = _extra.strip()
+    if not _extra:
+        continue
+    if not any(m.lower() == _extra.lower() for m in filtered):
+        filtered.insert(0, _extra)
 
 sys.stdout.write("\n".join(filtered))
 PYEOF

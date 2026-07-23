@@ -309,7 +309,8 @@ _delegation_provider = os.environ.get("HERMES_DELEGATION_PROVIDER", "").strip()
 if _delegation_provider:
     cfg["delegation"]["provider"] = _delegation_provider
 
-# compression.threshold  (when HERMES_COMPRESSION_THRESHOLD is set)
+# compression.threshold  (always emitted; constants.sh defaults it to 0.76 —
+# parity with the upstream Docker reference which bakes it unconditionally)
 _compression_threshold = os.environ.get("HERMES_COMPRESSION_THRESHOLD", "").strip()
 if _compression_threshold:
     try:
@@ -333,6 +334,29 @@ if os.path.isdir(_optional_skills_dir):
     if _optional_skills_dir not in ext_dirs:
         ext_dirs.append(_optional_skills_dir)
 
+# --- web.search_backend (default ddgs) + optional extract_backend ------------
+cfg.setdefault("web", {})["search_backend"] = os.environ.get("HERMES_WEB_SEARCH_BACKEND", "ddgs")
+_web_extract = os.environ.get("HERMES_WEB_EXTRACT_BACKEND", "").strip()
+if _web_extract:
+    cfg["web"]["extract_backend"] = _web_extract
+
+# --- security.allow_lazy_installs (default true) -----------------------------
+_lazy = os.environ.get("HERMES_ALLOW_LAZY_INSTALLS", "true").strip().lower()
+cfg.setdefault("security", {})["allow_lazy_installs"] = _lazy in ("1", "true", "yes", "on")
+
+# --- logging block (DEBUG level, 5MB rotation, 3 backups) --------------------
+cfg.setdefault("logging", {})
+cfg["logging"]["level"] = "DEBUG"
+cfg["logging"]["max_size_mb"] = 5
+cfg["logging"]["backup_count"] = 3
+
+# --- image_gen block (openai provider with OPENAI_IMAGE_MODEL) ----------------
+_image_model = os.environ.get("OPENAI_IMAGE_MODEL", "gpt-image-2").strip()
+if _image_model:
+    cfg.setdefault("image_gen", {})
+    cfg["image_gen"]["provider"] = "openai"
+    cfg["image_gen"]["model"] = _image_model
+
 # --- Write staging overlay (valid YAML) --------------------------------------
 with open(out_path, "w") as f:
     yaml.dump(cfg, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
@@ -350,6 +374,11 @@ summary_lines = [
     "model.max_tokens         -> %s" % (model_sec.get("max_tokens") if "max_tokens" in model_sec else "unset (provider default)"),
     "agent.max_turns          -> %s" % cfg.get("agent", {}).get("max_turns"),
     "other custom_providers   -> %d preserved" % (len(merged_cps) - 1),
+    "",
+    "web.search_backend      -> %s" % cfg.get("web", {}).get("search_backend"),
+    "security.allow_lazy_installs -> %s" % cfg.get("security", {}).get("allow_lazy_installs"),
+    "logging                  -> DEBUG (5MB/3 backups)",
+    "image_gen                -> openai/%s" % cfg.get("image_gen", {}).get("model", "N/A"),
     "",
     "NOTE: This is a STAGING overlay. Sibling agent.* keys and other config",
     "sections (tools, platforms, etc.) are carried forward unchanged from the",

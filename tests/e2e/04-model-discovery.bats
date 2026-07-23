@@ -150,5 +150,7 @@ print('OK: anthropic/* filtered out')
     local models_file="${GEN_DIR}/staging/discovered-models.txt"
     local first_line
     first_line=$(head -1 "$models_file")
-    [ "$first_line" = "zai/glm-5.2" ]
+    # OPENCODE_DEFAULT_MODEL (defaults to opencode/deepseek-v4-flash-free via
+    # constants.sh) is now prepended by the override model ensure loop.
+    [ "$first_line" = "opencode/deepseek-v4-flash-free" ]
 }

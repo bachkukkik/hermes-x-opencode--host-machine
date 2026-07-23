@@ -92,6 +92,30 @@ elif not any(m.lower() == default_model.lower() for m in filtered):
 
 The default model (`zai/glm-5.2`) is always present in the final list, either as the sole entry (when LiteLLM is unreachable) or prepended to the discovered list.
 
+### Override-model seeding (PR #85)
+
+After the fallback logic, the discovery pipeline ensures that any explicitly
+configured override models are present in the list, so fine-grained overrides
+always resolve even when the proxy does not advertise them:
+
+```python
+# Ensure override models are present in the discovered list
+for _extra in extra_models_raw.split():   # HERMES_DEFAULT_MODEL OPENCODE_DEFAULT_MODEL OPENCODE_SMALL_MODEL
+    _extra = _extra.strip()
+    if not _extra:
+        continue
+    if not any(m.lower() == _extra.lower() for m in filtered):
+        filtered.insert(0, _extra)
+```
+
+`extra_models_raw` is passed from `discover_models()` as
+`"${HERMES_DEFAULT_MODEL:-} ${OPENCODE_DEFAULT_MODEL:-} ${OPENCODE_SMALL_MODEL:-}"`.
+The comparison is case-insensitive (a strict improvement over the Docker
+reference). `OPENCODE_SMALL_MODEL` is itself the resolved value of the
+`OPENCODE_SMALL_MODEL → OPENAI_SMALL_MODEL → OPENCODE_DEFAULT_MODEL` chain
+(resolved in `generate.sh` after `.env`), so a proxy-wide `OPENAI_SMALL_MODEL`
+default is seeded here too.
+
 ### Output format
 
 Discovered models are written to `staging/discovered-models.txt` as a newline-separated list and stored in the shell variable `DISCOVERED_MODELS`. Downstream generators read from the file to avoid stdin/heredoc conflicts (the `python3 -` heredoc consumes stdin, so piped data cannot be received simultaneously).
